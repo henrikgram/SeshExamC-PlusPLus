@@ -12,7 +12,7 @@ GameObject::~GameObject()
 
 }
 
-void GameObject::Update(Time timePerFrame)
+void GameObject::Update(Time * timePerFrame)
 {
 	
 }

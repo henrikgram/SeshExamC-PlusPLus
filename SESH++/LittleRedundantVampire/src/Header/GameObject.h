@@ -9,7 +9,7 @@ public:
 	GameObject(Texture texture);
 	~GameObject();
 
-	void Update(Time timePerFrame);
+	void Update(Time * timePerFrame);
 	void LoadContent();
 
 private:

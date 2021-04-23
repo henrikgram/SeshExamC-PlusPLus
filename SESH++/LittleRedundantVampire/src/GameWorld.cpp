@@ -9,7 +9,8 @@ GameObject gameObject;
 
 void LoadContent();
 
-void Update(Time timePerFrame)
+// TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
+void Update(Time * timePerFrame)
 {
     gameObject.Update(timePerFrame);
 }
@@ -72,7 +73,7 @@ int main()
         {
             timeSinceLastUpdate -= timePerFrame;
             sprite.move(Vector2f(0, 0.1f * timePerFrame.asMilliseconds()));
-            Update(timePerFrame);
+            Update(&timePerFrame);
         }   
 
         //TODO: sprite er en kopi, fix, pointer.
