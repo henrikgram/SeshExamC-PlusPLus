@@ -145,10 +145,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Asset.cpp" />
     <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Header\GameObject.h" />
     <ClInclude Include="src\Header\Asset.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
