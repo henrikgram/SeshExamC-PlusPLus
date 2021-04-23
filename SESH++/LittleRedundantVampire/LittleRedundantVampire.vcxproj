@@ -145,7 +145,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Asset.cpp" />
     <ClCompile Include="src\GameWorld.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Header\Asset.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
