@@ -150,6 +150,7 @@
     <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Enum\TextureTag.h" />
     <ClInclude Include="src\Header\GameObject.h" />
     <ClInclude Include="src\Header\Asset.h" />
   </ItemGroup>

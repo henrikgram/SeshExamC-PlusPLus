@@ -1,35 +1,66 @@
 #include <iostream>
+#include <vector>
 #include <SFML/graphics.hpp>
+
 #include "Header/GameObject.h"
+#include "Header/Asset.h"
 using namespace std;
 using namespace sf;
 
 RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
-GameObject gameObject;
+//GameObject gameObject; 
 
-void LoadContent();
+//TODO: check if heap or stack
+vector<GameObject> gameObjects;
+vector<GameObject>::iterator it;
+
+Asset asset;
+
+void Initialize()
+{
+    Texture* texture = new Texture;
+
+    texture = asset.GetTexture(TextureTag::Ozzy);
+
+    GameObject gameObject = GameObject(texture);
+
+    gameObjects.push_back(gameObject);
+}
+
+void LoadContent()
+{  
+    asset.LoadTextures();
+}
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
 void Update(Time * timePerFrame)
 {
-    gameObject.Update(timePerFrame);
+    //iterates through the gameObjects and calls update
+    for (it = gameObjects.begin(); it < gameObjects.end(); it++)
+    {
+        it->Update(timePerFrame);
+    }
+
 }
 
-void Initialize()
-{
 
-}
 
 /// <summary>
 /// Method for drawing all sprites into the game.
 /// </summary>
 /// <param name="sprite"></param>
-void Draw(Sprite sprite)
+void Draw()
 {
     // Clears the window.
     window.clear();
     // Draws the sprite(s).
-    window.draw(sprite);
+
+      //iterates through the gameObjects and calls update
+    for (it = gameObjects.begin(); it < gameObjects.end(); it++)
+    {
+        window.draw(it->GetSprite());
+    }
+   
     // Displays everything in the window.
     window.display();
 }
@@ -40,10 +71,9 @@ void Draw(Sprite sprite)
 /// <returns></returns>
 int main()
 {
-    Sprite sprite;
-    Texture texture;
-    texture.loadFromFile("Asset_2/VampireOzzyStill.png");
-    sprite.setTexture(texture);
+    LoadContent();
+    Initialize();
+
 
     // Used for fixed update. TimePerFrame needs to be set to the amount of frames you want it to run with.
     Time timePerFrame = seconds(1.f / 60.f);
@@ -72,12 +102,12 @@ int main()
         while (timeSinceLastUpdate > timePerFrame)
         {
             timeSinceLastUpdate -= timePerFrame;
-            sprite.move(Vector2f(0, 0.1f * timePerFrame.asMilliseconds()));
+            //sprite.move(Vector2f(0, 0.1f * timePerFrame.asMilliseconds()));
             Update(&timePerFrame);
         }   
 
         //TODO: sprite er en kopi, fix, pointer.
-        Draw(sprite);
+        Draw();
     }
 
     return 0;
