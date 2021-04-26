@@ -24,10 +24,7 @@
     <ClCompile Include="src\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
+    <ClCompile Include="src\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,13 +38,10 @@
     <ClInclude Include="src\Enum\TextureTag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Header\SpriteRenderer.h">
+    <ClInclude Include="src\Enum\Tag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Header\Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Enum\Tag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

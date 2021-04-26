@@ -1,5 +1,4 @@
 #include "Header/GameObject.h"
-
 using namespace sf;
 using namespace std;
 
@@ -19,7 +18,7 @@ GameObject::~GameObject()
 
 }
 
-void GameObject::Update(Time * timePerFrame)
+void GameObject::Update(Time* timePerFrame)
 {
 
 }
@@ -34,15 +33,15 @@ void GameObject::Start()
 
 }
 
-void GameObject::AddComponent(Component& component)
-{
-	components.insert(make_pair(&component.ToEnum(), &component));
-}
+//void GameObject::AddComponent(Component& component)
+//{
+//	//components.insert(make_pair(&component.ToEnum(), &component));
+//}
 
-Component* GameObject::GetComponent(Tag tag)
-{
-	return nullptr;
-}
+//Component* GameObject::GetComponent(Tag tag)
+//{
+//	return nullptr;
+//}
 
 void GameObject::Destroy()
 {

@@ -1,54 +1,5 @@
 ﻿  Component.cpp
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(14,16): error C2065: 'Tag': undeclared identifier
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(14,21): error C2065: 'Component': undeclared identifier
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(14,32): error C2059: syntax error: '>'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(23,20): error C2061: syntax error: identifier 'Component'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(24,12): error C2143: syntax error: missing ';' before '*'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(24,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(24,35): error C2238: unexpected token(s) preceding ';'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(21,14): error C3646: 'ToEnum': unknown override specifier
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(21,21): error C2059: syntax error: ')'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(21,22): error C2238: unexpected token(s) preceding ';'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\Component.cpp(4,16): error C2039: 'ToEnum': is not a member of 'Component'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(7): message : see declaration of 'Component'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\Component.cpp(4,22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\Component.cpp(4,22): error C2146: syntax error: missing ';' before identifier 'ToEnum'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\Component.cpp(5,1): error C2143: syntax error: missing ';' before '{'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\Component.cpp(5,1): error C2447: '{': missing function header (old-style formal list?)
   GameObject.cpp
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(10,13): error C2143: syntax error: missing ';' before '*'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(10,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(10,25): error C2238: unexpected token(s) preceding ';'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(21,14): error C3646: 'ToEnum': unknown override specifier
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(21,21): error C2059: syntax error: ')'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(21,22): error C2238: unexpected token(s) preceding ';'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(14,16): error C2065: 'Tag': undeclared identifier
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(14,2): error C2923: 'std::unordered_map': 'Tag' is not a valid template type argument for parameter '_Kty'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(14,2): error C2976: 'std::unordered_map': too few template arguments
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\unordered_map(69): message : see declaration of 'std::unordered_map'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(24,27): error C2061: syntax error: identifier 'Tag'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameObject.cpp(7,1): error C2512: 'std::unordered_map': no appropriate default constructor available
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\unordered_map(69,1): message : see declaration of 'std::unordered_map'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameObject.cpp(13,1): error C2512: 'std::unordered_map': no appropriate default constructor available
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\unordered_map(69,1): message : see declaration of 'std::unordered_map'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameObject.cpp(39,41): error C2039: 'ToEnum': is not a member of 'Component'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(7): message : see declaration of 'Component'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameObject.cpp(39,20): error C2672: 'make_pair': no matching overloaded function found
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameObject.cpp(39,12): error C2663: 'std::_Hash<_Traits>::insert': 5 overloads have no legal conversion for 'this' pointer
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameObject.cpp(42,37): error C2065: 'Tag': undeclared identifier
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameObject.cpp(42,41): error C2146: syntax error: missing ')' before identifier 'tag'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameObject.cpp(43,1): error C2143: syntax error: missing ';' before '{'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameObject.cpp(43,1): error C2447: '{': missing function header (old-style formal list?)
   GameWorld.cpp
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(10,13): error C2143: syntax error: missing ';' before '*'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(10,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(10,25): error C2238: unexpected token(s) preceding ';'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(21,14): error C3646: 'ToEnum': unknown override specifier
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(21,21): error C2059: syntax error: ')'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\Component.h(21,22): error C2238: unexpected token(s) preceding ';'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(14,16): error C2065: 'Tag': undeclared identifier
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(14,2): error C2923: 'std::unordered_map': 'Tag' is not a valid template type argument for parameter '_Kty'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(14,2): error C2976: 'std::unordered_map': too few template arguments
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\unordered_map(69): message : see declaration of 'std::unordered_map'
-C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(24,27): error C2061: syntax error: identifier 'Tag'
   Generating Code...
+  LittleRedundantVampire.vcxproj -> C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLusBackupSigneCursed\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
