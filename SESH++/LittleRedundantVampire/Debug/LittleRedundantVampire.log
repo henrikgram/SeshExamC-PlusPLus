@@ -1,5 +1,7 @@
 ﻿  Component.cpp
-  GameObject.cpp
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLusBackupSigneCursed\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(15,21): error C2065: 'Component': undeclared identifier
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLusBackupSigneCursed\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(15,2): error C2923: 'std::unordered_map': 'Component' is not a valid template type argument for parameter '_Ty'
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLusBackupSigneCursed\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Header\GameObject.h(15,2): error C2976: 'std::unordered_map': too few template arguments
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29910\include\unordered_map(69): message : see declaration of 'std::unordered_map'
   GameWorld.cpp
   Generating Code...
-  LittleRedundantVampire.vcxproj -> C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLusBackupSigneCursed\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

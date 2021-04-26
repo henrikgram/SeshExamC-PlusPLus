@@ -1,13 +1,18 @@
 #pragma once
 #include <SFML/graphics.hpp>
 #include <iostream>
+#include <unordered_map>
+
+#include "Component.h"
+#include "../Enum/Tag.h"
+
 using namespace sf;
 using namespace std;
 
-class GameObject
+class GameObject 
 {
 public:
-	//unordered_map<Tag, Component> components;
+	unordered_map<Tag, Component> components;
 
 	GameObject(Texture* texture);
 	GameObject();
