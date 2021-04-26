@@ -1,4 +1,5 @@
 #include "Header/GameObject.h"
+
 using namespace sf;
 using namespace std;
 
@@ -20,12 +21,31 @@ GameObject::~GameObject()
 
 void GameObject::Update(Time * timePerFrame)
 {
-	//cout << "UPDATING \n";
+
 }
 
-void GameObject::LoadContent()
+void GameObject::Awake()
 {
 
+}
+
+void GameObject::Start()
+{
+
+}
+
+void GameObject::AddComponent(Component& component)
+{
+	components.insert(make_pair(&component.ToEnum(), &component));
+}
+
+Component* GameObject::GetComponent(Tag tag)
+{
+	return nullptr;
+}
+
+void GameObject::Destroy()
+{
 }
 
 //TODO: check if correct reference?

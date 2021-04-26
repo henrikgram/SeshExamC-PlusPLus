@@ -1,5 +1,5 @@
-#ifndef ELEMENT_H
-#define ELEMENT_H
+#ifndef TEXTURETAG_H
+#define TEXTURETAG_H
 
 enum class TextureTag { Ozzy };
 
