@@ -45,6 +45,15 @@ void Player::Update(float deltaTime)
 	//Start en walk cycle.
 	else
 	{
+		//Vi udregner hypotenusen af bevægelsesretningen.
+		float movementVectorLength = sqrt(movement.x * movement.x + movement.y * movement.y);
+
+		//Vi normaliserer retningen ift til hypotenusens længde.
+		movement.x /= movementVectorLength;
+		movement.y /= movementVectorLength;
+
+		
+
 		moving = true;
 
 		//Højre
@@ -90,4 +99,7 @@ void Player::Normalize(Vector2f& movement)
 	//Vi normaliserer retningen ift til hypotenusens længde.
 	movement.x /= movementVectorLength;
 	movement.y /= movementVectorLength;
+
+	movement.x *= speed;
+	movement.y *= speed;
 }

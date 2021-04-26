@@ -14,7 +14,7 @@ int main()
     playerTexture.loadFromFile("OzzySheet.png");
 
     //Vi implementerer vores Animation-klasse, så vi kan animere vores player.
-    Player player(&playerTexture, Vector2u(4, 3), 0.13f, 300.0f);
+    Player player(&playerTexture, Vector2u(4, 3), 0.13f, 0.5f);
 
     //Vores deltaTime er den tid der er gået siden sidste update.
     float deltaTime = 0.0f;
