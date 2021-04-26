@@ -30,16 +30,24 @@ public:
 	/// <param name="window">Det vindue som vi skal render sprite i.</param>
 	void Draw(RenderWindow& window);
 
+	/// <summary>
+	/// Sørger for at spilleren ikke går hurtigere, når de går skråt.
+	/// </summary>e.
+	/// <param name="movement">Spillerens vector til at bestemme bevægelsesretning.</param>
+	void Normalize(Vector2f& movement);
+
 private:
-	//Spillerns rectangle
+	//Spillerns rectangle.
 	RectangleShape body;
-	//Spillerens animation-instans
+	//Spillerens animation-instans.
 	Animation animation;
-	//Hvilken række i spritesheet der skal animeres
+	//Hvilken række i spritesheet der skal animeres.
 	unsigned int row;
-	//spillerens bevægelseshastighed
+	//Spillerens bevægelseshastighed.
 	float speed;
-	//om spilleren vender mod højre
+	//Om spilleren vender mod højre.
 	bool faceRight;
+	//Om spilleren står stille.
+	bool moving;
 };
 

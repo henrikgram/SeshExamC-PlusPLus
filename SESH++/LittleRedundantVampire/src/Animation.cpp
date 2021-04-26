@@ -20,7 +20,7 @@ Animation::~Animation()
 {
 }
 
-void Animation::Update(int row, float deltaTime, bool faceRight)
+void Animation::Update(int row, float deltaTime, bool faceRight, bool moving)
 {
 	//Vi definerer hvilken række og kolonne der skal cycles igennem.
 	currentImage.y = row;
@@ -32,28 +32,48 @@ void Animation::Update(int row, float deltaTime, bool faceRight)
 	{
 		//I stedet for at sætter totalTime=0 gør vi således, da det giver en mere smooth animation.
 		totalTime -= switchTime;
-		//Sørger for at næste cycle skifter til det næste billede i rækken.
-		currentImage.x++;
 
-		//Her sørger vi for, at vi ikke overstiger den egentlige mængde af billeder i rækken.
-		if (currentImage.x >= imageCount.x)
+		//Når vi ikke bevæger os, skal der altid bare hvis den første sprite i vores række.
+		if (!moving)
 		{
 			currentImage.x = 0;
 		}
+		//Hvis vi bevæger os, skal den cycle igennem kolonnen.
+		else if (moving)
+		{
+			//Sørger for at næste cycle skifter til det næste billede i rækken.
+			currentImage.x++;
+
+			//Her sørger vi for, at vi ikke overstiger den egentlige mængde af billeder i rækken.
+			if (currentImage.x >= imageCount.x)
+			{
+				currentImage.x = 0;
+			}
+		}
 	}
 
+	//Vi udregner hvor toppen på vores sprite ligger, baseret på y-aksen (rækken) og sprite-højden.
+	//F.eks. (top = 0 * 20 = 0).
 	textureRect.top = currentImage.y * textureRect.height;
 
+	//Hvordan vi definerer venstre side og spillerens bredde, hvis vi vender mod højre
+	//Standard-retningen.
 	if (faceRight)
 	{
-		//Det her fatter jeg sgu ikke 100%.
+		//Vi udregner hvor venstre side vores sprite ligger, baseret på x-aksen (kolonnen) og sprite-bredden.
+		//F.eks. (left = 1 * 20 = 20).
 		textureRect.left = currentImage.x * textureRect.width;
+		//Standard bredden er altid lige med den normale bredde.
 		textureRect.width = abs(textureRect.width);
 	}
+	//Her flipper vi spriten når spilleren vender mod venstre.
 	else
 	{
-		//Det her fatter jeg sgu ikke 100%.
+		//Vi udregner hvor venstre side vores sprite ligger, baseret på x-aksen (kolonnen) og sprite-bredden.
+		//Ved at lægge 1 til x-aksen, kan vi forskyde hvor den venstre side ligger, og således flip den.
+		//F.eks. (left = 1 * 20 = 20).
 		textureRect.left = (currentImage.x + 1) * abs(textureRect.width);
+		//Her skal bredden være den negative version af standard-bredden, for at vi kan flippe vores sprite.
 		textureRect.width = -abs(textureRect.width);
 	}
 }

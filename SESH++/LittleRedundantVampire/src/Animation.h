@@ -17,7 +17,7 @@ public:
 	//Update skal køre hvert gameloop. Her kører animations-logikken.
 	//row = den række i dit sprite sheet som skal cycles igennem.
 	//deltaTime = den tid der er gået siden sidste Update.
-	void Update(int row, float deltaTime, bool faceRight);
+	void Update(int row, float deltaTime, bool faceRight, bool moving);
 
 public:
 	//Rectangle for vores texture.

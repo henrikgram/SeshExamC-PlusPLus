@@ -7,6 +7,7 @@ Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float sp
 	this->speed = speed;
 	row = 0;
 	faceRight = true;
+	moving = false;
 
 	//Definer størrelsen af én sprite fra sheet.
     body.setSize(Vector2f(texture->getSize().x / 4, texture->getSize().y / 3));
@@ -38,12 +39,14 @@ void Player::Update(float deltaTime)
 	//Her indstiller man idle animation når du står stille.
 	if (movement.x == 0.0f && movement.y == 0.0f)
 	{
-		//Her skal man bruge den række som er idle animation.
-		row = 0;
+		//Bruges til at sørge for, at den rigtige sprite tegnes når vi står stille.
+		moving = false;
 	}
 	//Start en walk cycle.
 	else
 	{
+		moving = true;
+
 		//Højre
 		if (movement.x > 0.0f)
 		{
@@ -66,15 +69,25 @@ void Player::Update(float deltaTime)
 		{
 			row = 2;
 		}
-
-		//Vi kan nu opdatere og tegne.
-		animation.Update(row, deltaTime, faceRight);
-		body.setTextureRect(animation.textureRect);
-		body.move(movement);
 	}
+
+	//Vi kan nu opdatere og tegne.
+	animation.Update(row, deltaTime, faceRight, moving);
+	body.setTextureRect(animation.textureRect);
+	body.move(movement);
 }
 
 void Player::Draw(RenderWindow& window)
 {
 	window.draw(body);
+}
+
+void Player::Normalize(Vector2f& movement)
+{
+	//Vi udregner hypotenusen af bevægelsesretningen.
+	float movementVectorLength = sqrt(movement.x * movement.x + movement.y * movement.y);
+
+	//Vi normaliserer retningen ift til hypotenusens længde.
+	movement.x /= movementVectorLength;
+	movement.y /= movementVectorLength;
 }
