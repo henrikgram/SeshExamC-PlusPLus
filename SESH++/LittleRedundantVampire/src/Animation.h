@@ -2,26 +2,45 @@
 #include <SFML\Graphics.hpp>
 using namespace sf;
 
+//Guide til animation af sprite sheet.
+//https://www.youtube.com/watch?v=Aa8bXSq5LDE&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=10
+
+//Guide til at animere ift. bevægelse.
+//https://www.youtube.com/watch?v=kAZVbPF6N4Q&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=11
+
+
 class Animation
 {
 public:
-	//Constructor til Animation.
-	//texture = den texture (sprite sheet) som skal animere3s.
-	//imageCount = hvor mange billeder der skal cycles imellem (rækker og kolonner).
-	//switchTime = hvor lang tid der skal gå imellem hvert skift af image.
+	/// <summary>
+	/// Constructor til Animation.
+	/// </summary>
+	/// <param name="texture">Den texture (sprite sheet) som skal animeres.</param>
+	/// <param name="imageCount">Hvor mange billeder der skal cycles imellem (rækker og kolonner).</param>
+	/// <param name="switchTime">Hvor lang tid der skal gå imellem hvert skift af image.</param>
 	Animation(Texture* texture, Vector2u imageCount, float switchTime);
 
-	//Destructor til Animation.
+	/// <summary>
+	/// Destructor til Animation.
+	/// </summary>
 	~Animation();
 
-	//Update skal køre hvert gameloop. Her kører animations-logikken.
-	//row = den række i dit sprite sheet som skal cycles igennem.
-	//deltaTime = den tid der er gået siden sidste Update.
+	//
+	//row = d
+	//deltaTime = d
+
+	/// <summary>
+	/// Update skal køre hvert gameloop. Her kører animations-logikken.
+	/// </summary>
+	/// <param name="row">Den række i dit sprite sheet som skal cycles igennem.</param>
+	/// <param name="deltaTime">Den tid der er gået siden sidste Update.</param>
+	/// <param name="faceRight">Om spilleren vender mod højre.</param>
+	/// <param name="moving">Om spilleren står stille.</param>
 	void Update(int row, float deltaTime, bool faceRight, bool moving);
 
 public:
 	//Rectangle for vores texture.
-	IntRect textureRect;
+	IntRect TextureRect;
 
 private: 
 	//Hvor mange billeder der skal cycles igennem.

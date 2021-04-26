@@ -3,6 +3,15 @@
 #include "Animation.h"
 using namespace sf;
 
+//Guide til textures.
+//https://www.youtube.com/watch?v=jJYHVQbZIfw&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=8
+
+//Guide til sprite sheets.
+//https://www.youtube.com/watch?v=-mcnW_6QpYA&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=9
+
+//Guide til at animere ift. bevægelse.
+//https://www.youtube.com/watch?v=kAZVbPF6N4Q&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=11
+
 
 class Player
 {
@@ -16,6 +25,9 @@ public:
 	/// <param name="speed">Hvor hurtigt Player bevæger sig</param>
 	Player(Texture* texture, Vector2u imageCount, float switchTime, float speed);
 
+	/// <summary>
+	/// Destructor til Player
+	/// </summary>
 	~Player();
 
 	/// <summary>
@@ -36,15 +48,25 @@ public:
 	/// <param name="movement">Spillerens vector til at bestemme bevægelsesretning.</param>
 	void Normalize(Vector2f& movement);
 
+	/// <summary>
+	/// Returnerer spillerens position.
+	/// </summary>
+	/// <returns>Spillerens position.</returns>
+	Vector2f GetPosition() { return body.getPosition(); }
+
 private:
 	//Spillerns rectangle.
 	RectangleShape body;
+
 	//Spillerens animation-instans.
 	Animation animation;
+
 	//Hvilken række i spritesheet der skal animeres.
 	unsigned int row;
+
 	//Spillerens bevægelseshastighed.
 	float speed;
+
 	//Om spilleren vender mod højre.
 	bool faceRight;
 	//Om spilleren står stille.

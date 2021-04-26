@@ -1,5 +1,6 @@
 #include "Player.h"
 
+
 Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float speed) : 
 	//Her opretter vi en animation med de parametre som er gældende for Player.
 	animation(texture, imageCount, switchTime)
@@ -11,6 +12,7 @@ Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float sp
 
 	//Definer størrelsen af én sprite fra sheet.
     body.setSize(Vector2f(texture->getSize().x / 4, texture->getSize().y / 3));
+	body.setOrigin(body.getSize() / 2.0f);
     body.setPosition(100.0f, 100.0f);
     //Vi sætter player-variablens til at have vores texture.
     body.setTexture(texture);
@@ -19,6 +21,7 @@ Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float sp
 Player::~Player()
 {
 }
+
 
 void Player::Update(float deltaTime)
 {
@@ -73,7 +76,7 @@ void Player::Update(float deltaTime)
 
 	//Vi kan nu opdatere og tegne.
 	animation.Update(row, deltaTime, faceRight, moving);
-	body.setTextureRect(animation.textureRect);
+	body.setTextureRect(animation.TextureRect);
 	body.move(movement);
 }
 

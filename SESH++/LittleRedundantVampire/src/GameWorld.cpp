@@ -4,9 +4,26 @@
 #include "Player.h"
 using namespace sf;
 
+static const float VIEW_HEIGHT = 1024.0f;
+
+
+/// <summary>
+/// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
+/// Sørger for at det view scaler med vinduets størrelse. Forhindrer stretching af sprites og lignende.
+/// </summary>
+/// <param name="window">Spilvinduet.</param>
+/// <param name="view">Det view som følger spilleren.</param>
+void RezizeView(const RenderWindow& window, View& view)
+{
+    float aspectRatio = float(window.getSize().x) / float(window.getSize().y);
+    view.setSize(VIEW_HEIGHT * aspectRatio, VIEW_HEIGHT);
+}
+
+
 int main()
 {
     RenderWindow window(sf::VideoMode(1024, 1024), "SFML works!");
+    View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
 
     //Her loader vi en texture til player.
@@ -32,13 +49,17 @@ int main()
         {
             if (event.type == Event::Closed)
                 window.close();
+            if (event.type == Event::Resized)
+                RezizeView(window, view);
         }
 
         //Hvert gameloop kører vi Update på vores animation.
         //Vi kører animationen for række 0 (1).
-        player.Update(deltaTime);
+        player.Update(deltaTime); 
+        view.setCenter(player.GetPosition());
 
         window.clear(Color(255, 255, 255, 255));
+        window.setView(view);
         player.Draw(window);
         window.display();
     }

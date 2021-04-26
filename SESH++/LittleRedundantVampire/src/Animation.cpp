@@ -12,8 +12,8 @@ Animation::Animation(Texture* texture, Vector2u imageCount, float switchTime)
 	currentImage.x = 0;
 
 	//Vi skal definere bredden og højden på vores textureRectangle ift til png-filen, så sprite for den rigtige dimension.
-	textureRect.width = texture->getSize().x / float(imageCount.x);
-	textureRect.height = texture->getSize().y / float(imageCount.y);
+	TextureRect.width = texture->getSize().x / float(imageCount.x);
+	TextureRect.height = texture->getSize().y / float(imageCount.y);
 }
 
 Animation::~Animation()
@@ -54,7 +54,7 @@ void Animation::Update(int row, float deltaTime, bool faceRight, bool moving)
 
 	//Vi udregner hvor toppen på vores sprite ligger, baseret på y-aksen (rækken) og sprite-højden.
 	//F.eks. (top = 0 * 20 = 0).
-	textureRect.top = currentImage.y * textureRect.height;
+	TextureRect.top = currentImage.y * TextureRect.height;
 
 	//Hvordan vi definerer venstre side og spillerens bredde, hvis vi vender mod højre
 	//Standard-retningen.
@@ -62,9 +62,9 @@ void Animation::Update(int row, float deltaTime, bool faceRight, bool moving)
 	{
 		//Vi udregner hvor venstre side vores sprite ligger, baseret på x-aksen (kolonnen) og sprite-bredden.
 		//F.eks. (left = 1 * 20 = 20).
-		textureRect.left = currentImage.x * textureRect.width;
+		TextureRect.left = currentImage.x * TextureRect.width;
 		//Standard bredden er altid lige med den normale bredde.
-		textureRect.width = abs(textureRect.width);
+		TextureRect.width = abs(TextureRect.width);
 	}
 	//Her flipper vi spriten når spilleren vender mod venstre.
 	else
@@ -72,8 +72,8 @@ void Animation::Update(int row, float deltaTime, bool faceRight, bool moving)
 		//Vi udregner hvor venstre side vores sprite ligger, baseret på x-aksen (kolonnen) og sprite-bredden.
 		//Ved at lægge 1 til x-aksen, kan vi forskyde hvor den venstre side ligger, og således flip den.
 		//F.eks. (left = 1 * 20 = 20).
-		textureRect.left = (currentImage.x + 1) * abs(textureRect.width);
+		TextureRect.left = (currentImage.x + 1) * abs(TextureRect.width);
 		//Her skal bredden være den negative version af standard-bredden, for at vi kan flippe vores sprite.
-		textureRect.width = -abs(textureRect.width);
+		TextureRect.width = -abs(TextureRect.width);
 	}
 }
