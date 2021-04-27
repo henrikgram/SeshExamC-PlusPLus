@@ -2,8 +2,8 @@
 #include <vector>
 #include <SFML/graphics.hpp>
 
-#include "Header/GameObject.h"
-#include "Header/Asset.h"
+#include "Headers/GameObject.h"
+#include "Headers/Asset.h"
 using namespace std;
 using namespace sf;
 

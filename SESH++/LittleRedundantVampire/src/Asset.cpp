@@ -1,4 +1,4 @@
-#include "Header\Asset.h"
+#include "Headers\Asset.h"
 
 void Asset::LoadTextures()
 {
@@ -14,6 +14,16 @@ Texture* Asset::GetTexture(TextureTag tag)
 
 
 	return &it->second;
+}
+
+Asset* Asset::GetInstance()
+{
+	if (instance==nullptr)
+	{
+		instance = new Asset();
+	}
+
+	return instance;
 }
 
 Asset::Asset()

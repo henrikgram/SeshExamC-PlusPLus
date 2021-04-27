@@ -27,12 +27,15 @@
     <ClCompile Include="src\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Components\SpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Header\Asset.h">
+    <ClInclude Include="src\Headers\Asset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Header\GameObject.h">
+    <ClInclude Include="src\Headers\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Enum\TextureTag.h">
@@ -41,7 +44,10 @@
     <ClInclude Include="src\Enum\Tag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Header\Component.h">
+    <ClInclude Include="src\Headers\Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Headers\Components\SpriteRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
