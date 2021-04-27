@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/graphics.hpp>
-#include "Enum/TextureTag.h"
+#include "../Enum/TextureTag.h"
 #include <unordered_map>
 #include <iostream>
 
@@ -15,20 +15,16 @@ private:
 	unordered_map<TextureTag, Texture> textures/* = new unordered_map<TextureTag, Texture>*/;
 	Texture* ozzyTexture = new Texture;
 
+	// Part of what makes the class a singleton.
 	static Asset* instance;
 
 public:
 	void LoadTextures();
 	Texture* GetTexture(TextureTag tag);
 
+	// Part of what makes the class a singleton.
 	static Asset* GetInstance();
-
 
 	Asset();
 	~Asset();
 };
-
-Asset* Asset::instance = nullptr;
-
-
-

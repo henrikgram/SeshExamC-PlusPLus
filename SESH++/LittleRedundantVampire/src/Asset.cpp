@@ -35,3 +35,6 @@ Asset::~Asset()
 {
 }
 
+// Sets the instance to  nullptr. Because static variables need a definition.
+// Part of what makes the class a singleton.
+Asset* Asset::instance = nullptr;

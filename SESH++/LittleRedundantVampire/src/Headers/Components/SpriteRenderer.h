@@ -1,6 +1,8 @@
 #pragma once
 #include "../Component.h"
 #include "../../Enum/TextureTag.h"
+#include "../Asset.h"
+using namespace sf;
 
 class SpriteRenderer : public Component
 {

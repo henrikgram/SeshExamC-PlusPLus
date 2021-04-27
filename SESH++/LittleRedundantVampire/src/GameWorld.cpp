@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <SFML/graphics.hpp>
-
+#include "Headers/Components/SpriteRenderer.h"
 #include "Headers/GameObject.h"
 #include "Headers/Asset.h"
 using namespace std;
@@ -18,18 +18,24 @@ Asset asset;
 
 void Initialize()
 {
-    Texture* texture = new Texture;
+    //Texture* texture = new Texture;
 
-    texture = asset.GetTexture(TextureTag::Ozzy);
+    //texture = asset.GetTexture(TextureTag::Ozzy);
 
-    GameObject gameObject = GameObject(texture);
+    //GameObject gameObject = GameObject(texture);
 
-    gameObjects.push_back(gameObject);
+    //gameObjects.push_back(gameObject);
+
+    GameObject go = GameObject();
+    SpriteRenderer * sr = new SpriteRenderer();
+    go.AddComponent(sr);
+    gameObjects.push_back(go);
 }
 
 void LoadContent()
 {  
-    asset.LoadTextures();
+    Asset::GetInstance()->LoadTextures();
+    (SpriteRenderer)(gameObjects[0].GetComponent(Tag::SPRITERENDERER)).GetSprite();
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
@@ -42,7 +48,6 @@ void Update(Time * timePerFrame)
     }
 
 }
-
 
 
 /// <summary>

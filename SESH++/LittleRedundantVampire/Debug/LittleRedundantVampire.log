@@ -1,3 +1,1 @@
-﻿  GameWorld.cpp
-GameWorld.obj : error LNK2005: "private: static class Asset * Asset::instance" (?instance@Asset@@0PAV1@A) already defined in Asset.obj
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe : fatal error LNK1169: one or more multiply defined symbols found
+﻿  LittleRedundantVampire.vcxproj -> C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
