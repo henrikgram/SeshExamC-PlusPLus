@@ -10,10 +10,12 @@ Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float sp
 	moving = false;
 
 	//Definer størrelsen af én sprite fra sheet.
-    body.setSize(Vector2f(texture->getSize().x / 4, texture->getSize().y / 3));
+	Vector2f size = Vector2f(texture->getSize().x / 4, texture->getSize().y / 3);
+    body.setSize(size);
     body.setPosition(100.0f, 100.0f);
     //Vi sætter player-variablens til at have vores texture.
     body.setTexture(texture);
+	body.setOrigin(size / 2.0f);
 }
 
 Player::~Player()
@@ -51,8 +53,6 @@ void Player::Update(float deltaTime)
 		//Vi normaliserer retningen ift til hypotenusens længde.
 		movement.x /= movementVectorLength;
 		movement.y /= movementVectorLength;
-
-		
 
 		moving = true;
 

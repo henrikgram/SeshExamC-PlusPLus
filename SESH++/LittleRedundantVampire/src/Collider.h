@@ -8,11 +8,11 @@ public:
 	Collider(RectangleShape& body);
 	~Collider();
 
-	void Move(float deltaX, float deltaY) { body.move(deltaX, deltaY); }
+	void Move(float deltaX, float deltaY) const { body.move(deltaX, deltaY); }
 
-	bool CheckCollision(Collider& other, float pushFactor);
-	Vector2f GetPosition() { return body.getPosition(); }
-	Vector2f GetHalfsize() { return body.getSize() / 2.0f; }
+	bool CheckCollision(const Collider& other, float pushFactor);
+	Vector2f GetPosition() const { return body.getPosition(); }
+	Vector2f GetHalfsize() const { return body.getSize() / 2.0f; }
 
 private:
 	RectangleShape& body;

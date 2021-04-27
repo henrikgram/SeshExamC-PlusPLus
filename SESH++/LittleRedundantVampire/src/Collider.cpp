@@ -9,7 +9,7 @@ Collider::~Collider()
 {
 }
 
-bool Collider::CheckCollision(Collider& other, float pushFactor)
+bool Collider::CheckCollision(const Collider& other, float pushFactor)
 {
 	Vector2f position = GetPosition();
 	Vector2f halfSize = GetHalfsize();

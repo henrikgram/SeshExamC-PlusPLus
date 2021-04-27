@@ -33,6 +33,10 @@ public:
 
 	void Normalize(Vector2f& movement);
 
+	Vector2f GetPosition() { return body.getPosition(); }
+
+	Collider GetCollider() { return Collider(body); }
+
 private:
 	//Spillerns rectangle
 	RectangleShape body;
@@ -44,5 +48,7 @@ private:
 	float speed;
 	//om spilleren vender mod højre
 	bool faceRight;
+
+	bool moving;
 };
 

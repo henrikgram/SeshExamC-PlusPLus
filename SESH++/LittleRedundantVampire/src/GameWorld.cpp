@@ -2,6 +2,7 @@
 #include <SFML/graphics.hpp>
 #include "Animation.h"
 #include "Player.h"
+#include "Platform.h"
 using namespace sf;
 
 int main()
@@ -15,6 +16,9 @@ int main()
 
     //Vi implementerer vores Animation-klasse, så vi kan animere vores player.
     Player player(&playerTexture, Vector2u(4, 3), 0.13f, 0.5f);
+
+    Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
+    
 
     //Vores deltaTime er den tid der er gået siden sidste update.
     float deltaTime = 0.0f;
@@ -37,9 +41,11 @@ int main()
         //Hvert gameloop kører vi Update på vores animation.
         //Vi kører animationen for række 0 (1).
         player.Update(deltaTime);
+        p1.GetCollider().CheckCollision(player.GetCollider(), 1.0f);
 
-        window.clear(Color(255, 255, 255, 255));
+        window.clear(Color(0, 255, 255, 255));
         player.Draw(window);
+        p1.Draw(window);
         window.display();
     }
 
