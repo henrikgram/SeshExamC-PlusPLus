@@ -42,9 +42,10 @@ public:
 	void Start();
 	void AddComponent(Component * component);
 	Component * GetComponent(Tag tag);
+	template <typename T> T GetComponent2(Tag tag);
 	void Destroy();
 
-	Sprite GetSprite();
+	//Sprite GetSprite();
 
 private:
 	Sprite* sprite;
@@ -52,3 +53,8 @@ private:
 
 #endif 
 
+template<typename T>
+inline T GameObject::GetComponent2(Tag tag)
+{
+	return components[tag];
+}

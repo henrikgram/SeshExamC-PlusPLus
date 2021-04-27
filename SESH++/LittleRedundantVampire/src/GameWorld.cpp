@@ -35,7 +35,7 @@ void Initialize()
 void LoadContent()
 {  
     Asset::GetInstance()->LoadTextures();
-    (SpriteRenderer)(gameObjects[0].GetComponent(Tag::SPRITERENDERER)).GetSprite();
+    gameObjects[0].GetComponent2<SpriteRenderer>(Tag::SPRITERENDERER).SetSprite(TextureTag::Ozzy);
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
@@ -61,10 +61,11 @@ void Draw()
     // Draws the sprite(s).
 
       //iterates through the gameObjects and calls update
-    for (it = gameObjects.begin(); it < gameObjects.end(); it++)
-    {
-        window.draw(it->GetSprite());
-    }
+    //for (it = gameObjects.begin(); it < gameObjects.end(); it++)
+    //{
+    //    //window.draw(it->GetSprite());
+    //}
+    window.draw(gameObjects[0].GetComponent2<SpriteRenderer>(Tag::SPRITERENDERER).GetSprite());
    
     // Displays everything in the window.
     window.display();

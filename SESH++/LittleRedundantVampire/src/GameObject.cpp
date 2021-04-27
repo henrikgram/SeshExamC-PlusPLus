@@ -44,12 +44,17 @@ Component* GameObject::GetComponent(Tag tag)
 	return components[tag];
 }
 
+//template <typename T> T GetComponent2(Tag tag)
+//{
+//	return components[tag];
+//}
+
 void GameObject::Destroy()
 {
 }
 
-//TODO: check if correct reference? memoryleak?
-Sprite GameObject::GetSprite()
-{
-	return *sprite;
-}
+////TODO: check if correct reference? memoryleak?
+//Sprite GameObject::GetSprite()
+//{
+//	return *sprite;
+//}
