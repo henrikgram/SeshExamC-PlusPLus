@@ -3,6 +3,7 @@
 #include "Animation.h"
 #include "Player.h"
 using namespace sf;
+using namespace std;
 
 static const float VIEW_HEIGHT = 1024.0f;
 

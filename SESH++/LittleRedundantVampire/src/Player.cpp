@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Attack.h"
 
 
 Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float speed) : 
@@ -37,6 +38,9 @@ void Player::Update(float deltaTime)
 		movement.y -= speed * deltaTime;
 	if (Keyboard::isKeyPressed(Keyboard::S))
 		movement.y += speed * deltaTime;
+
+	//Her angriber spilleren.
+	if (Keyboard::isKeyPressed(Keyboard::Space))
 
 
 	//Her indstiller man idle animation når du står stille.
@@ -94,3 +98,4 @@ void Player::Normalize(Vector2f& movement)
 	movement.x /= movementVectorLength;
 	movement.y /= movementVectorLength;
 }
+

@@ -145,11 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Attack.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Attack.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Animation.h" />
   </ItemGroup>

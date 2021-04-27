@@ -54,6 +54,7 @@ public:
 	/// <returns>Spillerens position.</returns>
 	Vector2f GetPosition() { return body.getPosition(); }
 
+
 private:
 	//Spillerns rectangle.
 	RectangleShape body;
@@ -69,6 +70,8 @@ private:
 
 	//Om spilleren vender mod højre.
 	bool faceRight;
+	//Om spilleren vender mod op.
+	bool faceUp;
 	//Om spilleren står stille.
 	bool moving;
 };
