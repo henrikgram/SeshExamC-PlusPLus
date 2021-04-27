@@ -25,6 +25,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Attack.cpp">
+    <ClCompile Include="src\Collider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,6 +40,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Attack.h">
+    <ClInclude Include="src\Collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

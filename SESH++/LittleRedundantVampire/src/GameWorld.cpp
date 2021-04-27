@@ -2,6 +2,7 @@
 #include <SFML/graphics.hpp>
 #include "Animation.h"
 #include "Player.h"
+#include "Platform.h"
 using namespace sf;
 using namespace std;
 
@@ -10,10 +11,10 @@ static const float VIEW_HEIGHT = 1024.0f;
 
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
-/// Sørger for at det view scaler med vinduets størrelse. Forhindrer stretching af sprites og lignende.
+/// Sï¿½rger for at det view scaler med vinduets stï¿½rrelse. Forhindrer stretching af sprites og lignende.
 /// </summary>
 /// <param name="window">Spilvinduet.</param>
-/// <param name="view">Det view som følger spilleren.</param>
+/// <param name="view">Det view som fï¿½lger spilleren.</param>
 void RezizeView(const RenderWindow& window, View& view)
 {
     float aspectRatio = float(window.getSize().x) / float(window.getSize().y);
@@ -31,18 +32,21 @@ int main()
     Texture playerTexture;
     playerTexture.loadFromFile("OzzySheet.png");
 
-    //Vi implementerer vores Animation-klasse, så vi kan animere vores player.
-    Player player(&playerTexture, Vector2u(4, 3), 0.13f, 300.0f);
+    //Vi implementerer vores Animation-klasse, sï¿½ vi kan animere vores player.
+    Player player(&playerTexture, Vector2u(4, 3), 0.13f, 0.5f);
 
-    //Vores deltaTime er den tid der er gået siden sidste update.
+    Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
+
+
+    //Vores deltaTime er den tid der er gï¿½et siden sidste update.
     float deltaTime = 0.0f;
-    //Vi skal bruge clock til at regne ud hvor lang tid der er gået.
+    //Vi skal bruge clock til at regne ud hvor lang tid der er gï¿½et.
     Clock clock;
 
 
     while (window.isOpen())
     {
-        //Vi sætter vores deltaTime i forhold til clock.
+        //Vi sï¿½tter vores deltaTime i forhold til clock.
         deltaTime = clock.restart().asSeconds();
 
         Event event;
@@ -54,14 +58,16 @@ int main()
                 RezizeView(window, view);
         }
 
-        //Hvert gameloop kører vi Update på vores animation.
-        //Vi kører animationen for række 0 (1).
-        player.Update(deltaTime); 
+        //Hvert gameloop kï¿½rer vi Update pï¿½ vores animation.
+        //Vi kï¿½rer animationen for rï¿½kke 0 (1).
+        player.Update(deltaTime);
+        p1.GetCollider().CheckCollision(player.GetCollider(), 1.0f);
         view.setCenter(player.GetPosition());
 
         window.clear(Color(255, 255, 255, 255));
         window.setView(view);
         player.Draw(window);
+        p1.Draw(window);
         window.display();
     }
 
@@ -70,19 +76,19 @@ int main()
 
 
 //Ektrea kode:
-//Vi behøver ikke delen herunder når vi bruger Animation-klassen.
-// 
-//Vi skal have størrelsen på vores texture (png-fil).
+//Vi behï¿½ver ikke delen herunder nï¿½r vi bruger Animation-klassen.
+//
+//Vi skal have stï¿½rrelsen pï¿½ vores texture (png-fil).
 //Vector2u textureSize = playerTexture.getSize();
 
-////Vores png-fil er et sprite sheet. Her definerer vi mængden af sprites (kolonner og rækker).
-////Der er 6 sprites på x-aksen og kun 1 række af sprites (y-aksen).
+////Vores png-fil er et sprite sheet. Her definerer vi mï¿½ngden af sprites (kolonner og rï¿½kker).
+////Der er 6 sprites pï¿½ x-aksen og kun 1 rï¿½kke af sprites (y-aksen).
 //textureSize.x /= 6;
 //textureSize.y /= 1;
 
 ////Nu bestemmer vi hvilken af de 6 sprites vi vil tegne som vores player.
-////De første 2 variabler i IntRect definerer hvor vores sprite ligger på x- og y-aksen.
-////Den sprite du ønsker skal der trækkes -1 fra. 
-////Så hvis du vil have sprite 1 på række 1, skal du skrive (textureSize.x* 0, textureSize.y* 0).
-////Så hvis du vil have sprite 6 på række 1, skal du skrive (textureSize.x* 5, textureSize.y* 0).
+////De fï¿½rste 2 variabler i IntRect definerer hvor vores sprite ligger pï¿½ x- og y-aksen.
+////Den sprite du ï¿½nsker skal der trï¿½kkes -1 fra.
+////Sï¿½ hvis du vil have sprite 1 pï¿½ rï¿½kke 1, skal du skrive (textureSize.x* 0, textureSize.y* 0).
+////Sï¿½ hvis du vil have sprite 6 pï¿½ rï¿½kke 1, skal du skrive (textureSize.x* 5, textureSize.y* 0).
 //player.setTextureRect(IntRect(textureSize.x * 1, textureSize.y * 0, textureSize.x, textureSize.y));

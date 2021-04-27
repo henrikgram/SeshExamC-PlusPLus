@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
+#include "Collider.h"
 using namespace sf;
 
 //Guide til textures.
@@ -9,7 +10,7 @@ using namespace sf;
 //Guide til sprite sheets.
 //https://www.youtube.com/watch?v=-mcnW_6QpYA&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=9
 
-//Guide til at animere ift. bevægelse.
+//Guide til at animere ift. bevï¿½gelse.
 //https://www.youtube.com/watch?v=kAZVbPF6N4Q&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=11
 
 
@@ -20,9 +21,9 @@ public:
 	/// Constructor til Player
 	/// </summary>
 	/// <param name="texture">Dit sprite sheet</param>
-	/// <param name="imageCount">Hvor mange sprites dit sheet har (rækker og kolonner)</param>
+	/// <param name="imageCount">Hvor mange sprites dit sheet har (rï¿½kker og kolonner)</param>
 	/// <param name="switchTime">Hvor hurtigt din animation skal cycle gennem sprites</param>
-	/// <param name="speed">Hvor hurtigt Player bevæger sig</param>
+	/// <param name="speed">Hvor hurtigt Player bevï¿½ger sig</param>
 	Player(Texture* texture, Vector2u imageCount, float switchTime, float speed);
 
 	/// <summary>
@@ -31,9 +32,9 @@ public:
 	~Player();
 
 	/// <summary>
-	/// Sørger for at opdatere Player-logik, f.eks. movement.
+	/// Sï¿½rger for at opdatere Player-logik, f.eks. movement.
 	/// </summary>
-	/// <param name="deltaTime">Tid der er gået siden sidste reset af time.</param>
+	/// <param name="deltaTime">Tid der er gï¿½et siden sidste reset af time.</param>
 	void Update(float deltaTime);
 
 	/// <summary>
@@ -42,37 +43,29 @@ public:
 	/// <param name="window">Det vindue som vi skal render sprite i.</param>
 	void Draw(RenderWindow& window);
 
-	/// <summary>
-	/// Sørger for at spilleren ikke går hurtigere, når de går skråt.
-	/// </summary>e.
-	/// <param name="movement">Spillerens vector til at bestemme bevægelsesretning.</param>
 	void Normalize(Vector2f& movement);
 
-	/// <summary>
-	/// Returnerer spillerens position.
-	/// </summary>
-	/// <returns>Spillerens position.</returns>
 	Vector2f GetPosition() { return body.getPosition(); }
 
+	Collider GetCollider() { return Collider(body); }
 
 private:
-	//Spillerns rectangle.
+	//Spillerns rectangle
 	RectangleShape body;
 
 	//Spillerens animation-instans.
 	Animation animation;
 
-	//Hvilken række i spritesheet der skal animeres.
+	//Hvilken rï¿½kke i spritesheet der skal animeres.
 	unsigned int row;
 
-	//Spillerens bevægelseshastighed.
+	//Spillerens bevï¿½gelseshastighed.
 	float speed;
 
-	//Om spilleren vender mod højre.
+	//Om spilleren vender mod hï¿½jre.
 	bool faceRight;
 	//Om spilleren vender mod op.
 	bool faceUp;
-	//Om spilleren står stille.
+	//Om spilleren stï¿½r stille.
 	bool moving;
 };
-
