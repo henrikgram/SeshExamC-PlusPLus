@@ -2,7 +2,11 @@
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
 #include "Collider.h"
+#include "Attack.h"
+#include <string>
+
 using namespace sf;
+using namespace std;
 
 //Guide til textures.
 //https://www.youtube.com/watch?v=jJYHVQbZIfw&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=8
@@ -56,8 +60,13 @@ private:
 	//Spillerens animation-instans.
 	Animation animation;
 
+	Attack attack;
+
 	//Hvilken r�kke i spritesheet der skal animeres.
 	unsigned int row;
+
+	float attackTimer;
+	float attackLength;
 
 	//Spillerens bev�gelseshastighed.
 	float speed;
@@ -68,4 +77,11 @@ private:
 	bool faceUp;
 	//Om spilleren st�r stille.
 	bool moving;
+
+	bool drawAttack;
+
+	bool canMove;
+
+	Keyboard::Key currentKey;
+	Keyboard::Key previousKey;
 };
