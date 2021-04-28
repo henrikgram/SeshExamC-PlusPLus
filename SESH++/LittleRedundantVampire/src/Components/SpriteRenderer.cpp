@@ -24,9 +24,9 @@ void SpriteRenderer::Destroy()
 
 }
 
-Tag SpriteRenderer::ToEnum()
+ComponentTag SpriteRenderer::ToEnum()
 {
-	return Tag::SPRITERENDERER;
+	return ComponentTag::SPRITERENDERER;
 }
 
 Sprite SpriteRenderer::GetSprite()
@@ -36,7 +36,10 @@ Sprite SpriteRenderer::GetSprite()
 
 void SpriteRenderer::SetSprite(TextureTag textureTag)
 {
+	sprite = new Sprite();
 	Texture* texture = new Texture;
-	texture = Asset::GetInstance()->GetTexture(textureTag);
+	//texture = Asset::GetInstance()->GetTexture(textureTag);
+
+	texture->loadFromFile("Asset_2/VampireOzzyStill.png");
 	sprite->setTexture(*texture);
 }

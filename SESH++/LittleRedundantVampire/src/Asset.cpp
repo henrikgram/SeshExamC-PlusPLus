@@ -3,7 +3,7 @@
 void Asset::LoadTextures()
 {
 	ozzyTexture->loadFromFile("Asset_2/VampireOzzyStill.png");
-	textures.insert(make_pair(TextureTag::Ozzy, *ozzyTexture));
+	textures.insert(make_pair(TextureTag::OZZY, *ozzyTexture));
 
 }
 

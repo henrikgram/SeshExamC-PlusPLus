@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
-#include "../Enum/Tag.h"
+#include "../Enum/ComponentTag.h"
 
 
 using namespace std;
@@ -20,6 +20,6 @@ public:
 	virtual void Start() = 0;
 	virtual void Update() = 0;
 	virtual void Destroy() = 0;
-	virtual Tag ToEnum() = 0;
+	virtual ComponentTag ToEnum() = 0;
 };
 

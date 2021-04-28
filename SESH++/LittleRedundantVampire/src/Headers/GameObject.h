@@ -23,7 +23,7 @@ https://stackoverflow.com/questions/4964482/how-to-create-two-classes-in-c-which
 #include <unordered_map>
 
 //#include "Component.h"
-#include "../Enum/Tag.h"
+#include "../Enum/ComponentTag.h"
 
 using namespace sf;
 using namespace std;
@@ -31,7 +31,7 @@ using namespace std;
 class GameObject 
 {
 public:
-	unordered_map<Tag, Component*> components;
+	unordered_map<ComponentTag, Component*> components;
 
 	GameObject(Texture* texture);
 	GameObject();
@@ -41,20 +41,20 @@ public:
 	void Awake();
 	void Start();
 	void AddComponent(Component * component);
-	Component * GetComponent(Tag tag);
-	template <typename T> T GetComponent2(Tag tag);
+	Component * GetComponent(ComponentTag tag);
+	//template <typename T> T GetComponent2(ComponentTag tag);
 	void Destroy();
 
 	//Sprite GetSprite();
 
 private:
-	Sprite* sprite;
+	//Sprite* sprite;
 };
 
 #endif 
 
-template<typename T>
-inline T GameObject::GetComponent2(Tag tag)
-{
-	return components[tag];
-}
+//template<typename T>
+//inline T GameObject::GetComponent2(ComponentTag tag)
+//{
+//	return components[tag];
+//}

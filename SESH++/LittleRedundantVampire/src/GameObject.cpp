@@ -3,11 +3,11 @@
 using namespace sf;
 using namespace std;
 
-GameObject::GameObject(Texture* texture)
-{
-	sprite = new Sprite;
-	sprite->setTexture(*texture);
-}
+//GameObject::GameObject(Texture* texture)
+//{
+//	sprite = new Sprite;
+//	sprite->setTexture(*texture);
+//}
 
 GameObject::GameObject()
 {
@@ -39,12 +39,12 @@ void GameObject::AddComponent(Component* component)
 	components.insert(make_pair(component->ToEnum(), component));
 }
 
-Component* GameObject::GetComponent(Tag tag)
+Component* GameObject::GetComponent(ComponentTag tag)
 {
 	return components[tag];
 }
 
-//template <typename T> T GetComponent2(Tag tag)
+//template <typename T> T GetComponent2(ComponentTag tag)
 //{
 //	return components[tag];
 //}
@@ -53,7 +53,7 @@ void GameObject::Destroy()
 {
 }
 
-////TODO: check if correct reference? memoryleak?
+//TODO: check if correct reference? memoryleak?
 //Sprite GameObject::GetSprite()
 //{
 //	return *sprite;

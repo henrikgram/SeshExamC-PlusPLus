@@ -14,7 +14,7 @@ public:
 	 void Start() override;
 	 void Update() override;
 	 void Destroy() override;
-	 Tag ToEnum() override;
+	 ComponentTag ToEnum() override;
 
 	 Sprite GetSprite();
 	 void SetSprite(TextureTag textureTag);

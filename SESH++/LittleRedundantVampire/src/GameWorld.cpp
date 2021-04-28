@@ -4,6 +4,7 @@
 #include "Headers/Components/SpriteRenderer.h"
 #include "Headers/GameObject.h"
 #include "Headers/Asset.h"
+#include "Enum/ObjectTag.h"
 using namespace std;
 using namespace sf;
 
@@ -15,27 +16,77 @@ vector<GameObject> gameObjects;
 vector<GameObject>::iterator it;
 
 Asset asset;
+//todo: check if this is fine, or actual factory is needed
+void BootlegFactory(ObjectTag tag)
+{
+    //TODO: tjek hvis den ryger ud af scope.
+    GameObject go;
+    SpriteRenderer* sr = new SpriteRenderer();
+
+    switch (tag)
+    {
+    case ObjectTag::PLAYER:
+        sr->SetSprite(TextureTag::OZZY);
+        go.AddComponent(sr);
+        break;
+    case ObjectTag::ENEMY:
+        break;
+    case ObjectTag::NPC:
+        break;
+    case ObjectTag::WALL:
+        break;
+    case ObjectTag::DOOR:
+        break;
+    case ObjectTag::FLOOR:
+        break;
+    case ObjectTag::BOOKCASE:
+        break;
+    case ObjectTag::VASE:
+        break;
+    case ObjectTag::WINDOW:
+        break;
+    case ObjectTag::CRATE:
+        break;
+    default:
+        break;
+    }
+
+    go.Awake();
+    go.Start();
+
+    gameObjects.push_back(go);
+}
 
 void Initialize()
 {
-    //Texture* texture = new Texture;
+  /*  Texture* texture = new Texture;
 
-    //texture = asset.GetTexture(TextureTag::Ozzy);
+    texture = Asset::GetInstance()->GetTexture(TextureTag::OZZY);
 
-    //GameObject gameObject = GameObject(texture);
+    GameObject gameObject = GameObject(texture);
 
-    //gameObjects.push_back(gameObject);
+    gameObjects.push_back(gameObject);*/
 
-    GameObject go = GameObject();
-    SpriteRenderer * sr = new SpriteRenderer();
-    go.AddComponent(sr);
-    gameObjects.push_back(go);
+    //GameObject go = GameObject();
+    //SpriteRenderer * sr = new SpriteRenderer();
+    //go.AddComponent(sr);
+    //gameObjects.push_back(go);
+
+
 }
 
 void LoadContent()
 {  
+  /*  SpriteRenderer* sr = new SpriteRenderer();
+    sr =  dynamic_cast<SpriteRenderer*>(gameObjects[0].GetComponent(ComponentTag::SPRITERENDERER));*/
+   
     Asset::GetInstance()->LoadTextures();
-    gameObjects[0].GetComponent2<SpriteRenderer>(Tag::SPRITERENDERER).SetSprite(TextureTag::Ozzy);
+
+    BootlegFactory(ObjectTag::PLAYER);
+
+   // sr->SetSprite(TextureTag::OZZY);
+
+    //gameObjects[0].GetComponent2<SpriteRenderer>(ComponentTag::SPRITERENDERER).SetSprite(TextureTag::OZZY);
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
@@ -61,15 +112,27 @@ void Draw()
     // Draws the sprite(s).
 
       //iterates through the gameObjects and calls update
-    //for (it = gameObjects.begin(); it < gameObjects.end(); it++)
-    //{
-    //    //window.draw(it->GetSprite());
-    //}
-    window.draw(gameObjects[0].GetComponent2<SpriteRenderer>(Tag::SPRITERENDERER).GetSprite());
+
+    //it needs to point to something, otherwise it wont compile
+    //TODO: this needs to be deleted somewhere, but it dosen't work here.
+    SpriteRenderer* sr /*= dynamic_cast<SpriteRenderer*>(gameObjects[0].GetComponent(ComponentTag::SPRITERENDERER))*/;
+
+    for (it = gameObjects.begin(); it < gameObjects.end(); it++)
+    {
+        sr = dynamic_cast<SpriteRenderer*>(it->GetComponent(ComponentTag::SPRITERENDERER));
+
+        window.draw(sr->GetSprite());
+    }
+   
+
+    //TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
+    //window.draw(sr->GetSprite());
+    //window.draw(gameObjects[0].GetComponent2<SpriteRenderer>(ComponentTag::SPRITERENDERER).GetSprite());
    
     // Displays everything in the window.
     window.display();
 }
+
 
 /// <summary>
 /// Everything is run from here.
@@ -77,9 +140,8 @@ void Draw()
 /// <returns></returns>
 int main()
 {
-    LoadContent();
     Initialize();
-
+    LoadContent();
 
     // Used for fixed update. TimePerFrame needs to be set to the amount of frames you want it to run with.
     Time timePerFrame = seconds(1.f / 60.f);

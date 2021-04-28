@@ -152,9 +152,10 @@
     <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Enum\ObjectTag.h" />
     <ClInclude Include="src\Headers\Components\SpriteRenderer.h" />
     <ClInclude Include="src\Headers\Component.h" />
-    <ClInclude Include="src\Enum\Tag.h" />
+    <ClInclude Include="src\Enum\ComponentTag.h" />
     <ClInclude Include="src\Enum\TextureTag.h" />
     <ClInclude Include="src\Headers\GameObject.h" />
     <ClInclude Include="src\Headers\Asset.h" />

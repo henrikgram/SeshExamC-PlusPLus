@@ -3,6 +3,7 @@
 
 Component::Component()
 {
+	//TODO: Link component to gameobject
 }
 
 Component::~Component()
@@ -25,7 +26,7 @@ void Component::Destroy()
 {
 }
 
-Tag Component::ToEnum()
+ComponentTag Component::ToEnum()
 {
-	return Tag();
+	return ComponentTag();
 }

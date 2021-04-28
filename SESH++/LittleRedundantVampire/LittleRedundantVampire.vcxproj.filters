@@ -41,13 +41,16 @@
     <ClInclude Include="src\Enum\TextureTag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Enum\Tag.h">
+    <ClInclude Include="src\Enum\ComponentTag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Headers\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Headers\Components\SpriteRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enum\ObjectTag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
