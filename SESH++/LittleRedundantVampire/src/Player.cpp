@@ -31,16 +31,16 @@ void Player::Update(float deltaTime)
 
 	//Bestemmer hvilken retning du skal �ndre til baseret p� input fra keyboard.
 	if (Keyboard::isKeyPressed(Keyboard::A))
-		movement.x -= speed * deltaTime;
+		movement.x -= deltaTime;
 	if (Keyboard::isKeyPressed(Keyboard::D))
-		movement.x += speed * deltaTime;
+		movement.x += deltaTime;
 	if (Keyboard::isKeyPressed(Keyboard::W))
-		movement.y -= speed * deltaTime;
+		movement.y -= deltaTime;
 	if (Keyboard::isKeyPressed(Keyboard::S))
-		movement.y += speed * deltaTime;
+		movement.y += deltaTime;
 
-	//Her angriber spilleren.
-	if (Keyboard::isKeyPressed(Keyboard::Space))
+	////Her angriber spilleren.
+	//if (Keyboard::isKeyPressed(Keyboard::Space))
 
 
 	//Her indstiller man idle animation n�r du st�r stille.
@@ -56,8 +56,7 @@ void Player::Update(float deltaTime)
 		float movementVectorLength = sqrt(movement.x * movement.x + movement.y * movement.y);
 
 		//Vi normaliserer retningen ift til hypotenusens l�ngde.
-		movement.x /= movementVectorLength;
-		movement.y /= movementVectorLength;
+		Normalize(movement);
 
 		moving = true;
 

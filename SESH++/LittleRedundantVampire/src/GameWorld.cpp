@@ -33,7 +33,7 @@ int main()
     playerTexture.loadFromFile("OzzySheet.png");
 
     //Vi implementerer vores Animation-klasse, s� vi kan animere vores player.
-    Player player(&playerTexture, Vector2u(4, 3), 0.13f, 0.5f);
+    Player player(&playerTexture, Vector2u(4, 3), 0.13f, 0.1f);
 
     Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
 
@@ -61,11 +61,11 @@ int main()
         //Hvert gameloop k�rer vi Update p� vores animation.
         //Vi k�rer animationen for r�kke 0 (1).
         player.Update(deltaTime);
-        p1.GetCollider().CheckCollision(player.GetCollider(), 1.0f);
+        p1.GetCollider().CheckCollision(player.GetCollider(), 0.5f);
         view.setCenter(player.GetPosition());
 
-        window.clear(Color(255, 255, 255, 255));
-        window.setView(view);
+        window.clear(Color(0, 255, 255, 255));
+        //window.setView(view);
         player.Draw(window);
         p1.Draw(window);
         window.display();
