@@ -2,7 +2,13 @@
 
 SpriteRenderer::~SpriteRenderer()
 {
+	delete sprite;
+	sprite = nullptr;
 
+	delete texture;
+	texture = nullptr;
+
+	
 }
 
 void SpriteRenderer::Awake()
@@ -17,11 +23,12 @@ void SpriteRenderer::Start()
 
 void SpriteRenderer::Update()
 {
+
 }
 
 void SpriteRenderer::Destroy()
 {
-
+	SpriteRenderer::~SpriteRenderer();
 }
 
 ComponentTag SpriteRenderer::ToEnum()
@@ -36,10 +43,6 @@ Sprite SpriteRenderer::GetSprite()
 
 void SpriteRenderer::SetSprite(TextureTag textureTag)
 {
-	sprite = new Sprite();
-	Texture* texture = new Texture;
-	//texture = Asset::GetInstance()->GetTexture(textureTag);
-
-	texture->loadFromFile("Asset_2/VampireOzzyStill.png");
+	texture = Asset::GetInstance()->GetTexture(textureTag);
 	sprite->setTexture(*texture);
 }

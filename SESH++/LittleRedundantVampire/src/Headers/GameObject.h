@@ -31,30 +31,47 @@ using namespace std;
 class GameObject 
 {
 public:
+	//Map for all components attached to the gameobject
 	unordered_map<ComponentTag, Component*> components;
 
-	GameObject(Texture* texture);
 	GameObject();
 	~GameObject();
 
+	/// <summary>
+	/// Calls Update for all components attached to the gameobject
+	/// </summary>
+	/// <param name="timePerFrame">Used for frame dependent update</param>
 	void Update(Time* timePerFrame);
+
+	/// <summary>
+	/// Calls Awake for all components attached to the gameobject
+	/// </summary>
 	void Awake();
+
+	/// <summary>
+	/// Calls Start for all components attached to the gameobject
+	/// </summary>
 	void Start();
+
+	/// <summary>
+	/// Attaching a component to the gameobject
+	/// </summary>
+	/// <param name="component">Component to be attached</param>
 	void AddComponent(Component * component);
+
+	/// <summary>
+	/// Gets a component based on ComponentTag.
+	/// </summary>
 	Component * GetComponent(ComponentTag tag);
-	//template <typename T> T GetComponent2(ComponentTag tag);
+
+	/// <summary>
+	///  Calls Destroy for all components attached to the gameobject
+	/// </summary>
 	void Destroy();
 
-	//Sprite GetSprite();
-
 private:
-	//Sprite* sprite;
+	unordered_map<ComponentTag, Component*>::iterator it;
 };
 
 #endif 
 
-//template<typename T>
-//inline T GameObject::GetComponent2(ComponentTag tag)
-//{
-//	return components[tag];
-//}

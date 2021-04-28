@@ -20,6 +20,7 @@ public:
 	 void SetSprite(TextureTag textureTag);
 
 private:
-	Sprite* sprite;
+	Sprite* sprite = new Sprite;
+	Texture* texture = new Texture;
 };
 
