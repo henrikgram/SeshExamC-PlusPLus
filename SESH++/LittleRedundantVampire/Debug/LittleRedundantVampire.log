@@ -1,4 +1,7 @@
-﻿  Asset.cpp
+﻿  SpriteRenderer.cpp
+  Component.cpp
   GameObject.cpp
+  GameWorld.cpp
+  Transform.cpp
   Generating Code...
-  LittleRedundantVampire.vcxproj -> C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
+  LittleRedundantVampire.vcxproj -> C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

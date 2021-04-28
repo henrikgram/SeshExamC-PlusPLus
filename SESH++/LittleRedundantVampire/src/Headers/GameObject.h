@@ -33,6 +33,7 @@ class GameObject
 public:
 	//Map for all components attached to the gameobject
 	unordered_map<ComponentTag, Component*> components;
+	Transform* transform = new Transform();
 
 	GameObject();
 	~GameObject();

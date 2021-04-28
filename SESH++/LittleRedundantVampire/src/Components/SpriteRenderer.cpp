@@ -23,7 +23,7 @@ void SpriteRenderer::Start()
 
 void SpriteRenderer::Update()
 {
-
+	//sprite->setPosition 
 }
 
 void SpriteRenderer::Destroy()
