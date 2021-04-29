@@ -1,2 +1,7 @@
 ﻿  SpriteRenderer.cpp
-  LittleRedundantVampire.vcxproj -> C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
+  Component.cpp
+  GameObject.cpp
+  Asset.cpp
+  GameWorld.cpp
+  Generating Code...
+  LittleRedundantVampire.vcxproj -> C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

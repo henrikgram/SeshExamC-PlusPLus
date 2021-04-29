@@ -9,8 +9,11 @@
 
 using namespace std;
 using namespace sf;
+static const float VIEW_HEIGHT = 1024.0f;
+
 
 RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
+View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
 //TODO: check if heap or stack
 vector<GameObject> * gameObjects = new vector<GameObject>;
