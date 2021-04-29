@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Collider.h"
+#include "Components/Collider.h"
 using namespace sf;
 
 class Platform

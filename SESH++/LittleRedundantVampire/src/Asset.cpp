@@ -2,8 +2,8 @@
 
 void Asset::LoadTextures()
 {
-	ozzyTexture->loadFromFile("Asset_2/VampireOzzyStill.png");
-	ozzySheetTexture->loadFromFile("Asset_2/OzzySheet.png");
+	ozzyTexture->loadFromFile("Asset/VampireOzzyStill.png");
+	ozzySheetTexture->loadFromFile("Asset/OzzySheet.png");
 	textures.insert(make_pair(TextureTag::OZZY, *ozzyTexture));
 	textures.insert(make_pair(TextureTag::OZZYSHEET, *ozzySheetTexture));
 }

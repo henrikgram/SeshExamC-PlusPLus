@@ -6,7 +6,7 @@
 #include "Headers/GameObject.h"
 #include "Headers/Asset.h"
 #include "Enum/ObjectTag.h"
-#include "Headers/Player.h"
+#include "Headers/Components/Player.h"
 #include "Headers/Platform.h"
 
 using namespace std;
@@ -134,12 +134,10 @@ int main()
     Initialize();
 
     //Her loader vi en texture til player.
-    Texture playerTexture;
-    playerTexture.loadFromFile("OzzySheet.png");
 
 
     //Vi implementerer vores Animation-klasse, s� vi kan animere vores player.
-    Player player(&playerTexture,/* &attackTexture, */ Vector2u(4, 3), 0.13f, 0.1f);
+    Player player(Asset::GetInstance()->GetTexture(TextureTag::OZZYSHEET),/* &attackTexture, */ Vector2u(4, 3), 0.13f, 5.0f);
 
     Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
 
@@ -182,7 +180,7 @@ int main()
             timeSinceLastUpdate -= timePerFrame;
             Update(&timePerFrame);
             player.Update(deltaTime);
-            p1.GetCollider().CheckCollision(player.GetCollider(), 0.5f);
+            p1.GetCollider().CheckCollision(player.GetCollider(), 0.1f);
             view.setCenter(player.GetPosition());
         }   
 
@@ -190,10 +188,12 @@ int main()
        //Vi korer animationen for raekke 0 (1).
 
         //window.setView(view);
+
+        //Draw();
+        window.clear(Color(0, 0, 0, 0));
         player.Draw(window);
         p1.Draw(window);
-
-        Draw();
+        window.display();
     }
 
     return 0;
