@@ -13,21 +13,22 @@ using namespace sf;
 RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 
 //TODO: check if heap or stack
-vector<GameObject> gameObjects;
+vector<GameObject> * gameObjects = new vector<GameObject>;
 vector<GameObject>::iterator it;
 
-//todo: check if this is fine, or actual factory is needed
+//TODO: check if this is fine, or actual factory is needed
 void BootlegFactory(ObjectTag tag)
 {
     //TODO: tjek hvis den ryger ud af scope.
-    GameObject go;
+    GameObject * go = new GameObject();
     SpriteRenderer* sr = new SpriteRenderer();
 
     switch (tag)
     {
     case ObjectTag::PLAYER:
         sr->SetSprite(TextureTag::OZZY);
-        go.AddComponent(sr);
+        go->position = new Vector2<float>(200, 1);
+        go->AddComponent(sr);
         break;
     case ObjectTag::ENEMY:
         break;
@@ -51,10 +52,10 @@ void BootlegFactory(ObjectTag tag)
         break;
     }
 
-    go.Awake();
-    go.Start();
+    go->Awake();
+    go->Start();
 
-    gameObjects.push_back(go);
+    gameObjects->push_back(*go);
 }
 
 void LoadContent()
@@ -76,7 +77,7 @@ void Initialize()
 void Update(Time * timePerFrame)
 {
     //iterates through the gameObjects and calls update
-    for (it = gameObjects.begin(); it < gameObjects.end(); it++)
+    for (it = gameObjects->begin(); it < gameObjects->end(); it++)
     {
         it->Update(timePerFrame);
     }
@@ -95,7 +96,7 @@ void Draw()
     SpriteRenderer* sr;
 
     //iterates through the gameObjects and draws all gameobjects.
-    for (it = gameObjects.begin(); it < gameObjects.end(); it++)
+    for (it = gameObjects->begin(); it < gameObjects->end(); it++)
     {
         //TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
         sr = dynamic_cast<SpriteRenderer*>(it->GetComponent(ComponentTag::SPRITERENDERER));

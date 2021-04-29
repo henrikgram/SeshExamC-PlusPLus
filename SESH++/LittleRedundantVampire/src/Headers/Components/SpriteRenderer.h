@@ -16,7 +16,16 @@ public:
 	 void Destroy() override;
 	 ComponentTag ToEnum() override;
 
+	 /// <summary>
+	 /// Returns a Sprite
+	 /// </summary>
+	 /// <returns></returns>
 	 Sprite GetSprite();
+
+	 /// <summary>
+	 /// Sets the sprite's texture based on TextureTag.
+	 /// </summary>
+	 /// <param name="textureTag">Which texture from the Asset Class </param>
 	 void SetSprite(TextureTag textureTag);
 
 private:

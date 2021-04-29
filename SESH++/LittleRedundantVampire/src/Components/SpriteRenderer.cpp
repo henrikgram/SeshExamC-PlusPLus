@@ -1,4 +1,7 @@
 #include "../Headers/Components/SpriteRenderer.h"
+#include <iostream>
+using namespace std;
+using namespace sf;
 
 SpriteRenderer::~SpriteRenderer()
 {
@@ -23,7 +26,8 @@ void SpriteRenderer::Start()
 
 void SpriteRenderer::Update()
 {
-	//sprite->setPosition 
+	//TODO:Make sure that the position is NOT OUTDATED
+	sprite->setPosition(*gameObject->position);
 }
 
 void SpriteRenderer::Destroy()

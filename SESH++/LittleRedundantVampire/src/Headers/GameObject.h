@@ -33,7 +33,7 @@ class GameObject
 public:
 	//Map for all components attached to the gameobject
 	unordered_map<ComponentTag, Component*> components;
-	Transform* transform = new Transform();
+	Vector2<float> * position = new Vector2<float>;
 
 	GameObject();
 	~GameObject();
