@@ -39,6 +39,7 @@ void BootlegFactory(ObjectTag tag)
     //TODO: tjek hvis den ryger ud af scope.
     GameObject * go = new GameObject();
     SpriteRenderer* sr = new SpriteRenderer();
+    //Collider* colider = new Collider();
 
     switch (tag)
     {
@@ -52,14 +53,30 @@ void BootlegFactory(ObjectTag tag)
     case ObjectTag::NPC:
         break;
     case ObjectTag::WALL:
+        sr->SetSprite(TextureTag::WALL);
+        go->AddComponent(sr);
+        go->position = new Vector2<float>(1, 1);
+        *go->objectTag = ObjectTag::WALL;
         break;
     case ObjectTag::DOOR:
+        sr->SetSprite(TextureTag::DOOR);
+        go->AddComponent(sr);
+        *go->objectTag = ObjectTag::DOOR;
         break;
     case ObjectTag::FLOOR:
+        sr->SetSprite(TextureTag::FLOOR);
+        go->AddComponent(sr);
+        *go->objectTag = ObjectTag::FLOOR;
         break;
     case ObjectTag::BOOKCASE:
+        sr->SetSprite(TextureTag::BOOKCASE);
+        go->AddComponent(sr);
+        *go->objectTag = ObjectTag::BOOKCASE;
         break;
     case ObjectTag::VASE:
+        sr->SetSprite(TextureTag::VASE);
+        go->AddComponent(sr);
+        *go->objectTag = ObjectTag::VASE;
         break;
     case ObjectTag::WINDOW:
         break;
@@ -83,6 +100,7 @@ void LoadContent()
 void Initialize()
 {
     BootlegFactory(ObjectTag::PLAYER);
+    BootlegFactory(ObjectTag::WALL);
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
@@ -189,11 +207,11 @@ int main()
 
         //window.setView(view);
 
-        //Draw();
-        window.clear(Color(0, 0, 0, 0));
-        player.Draw(window);
-        p1.Draw(window);
-        window.display();
+        Draw();
+        //window.clear(Color(0, 0, 0, 0));
+        //player.Draw(window);
+        //p1.Draw(window);
+        //window.display();
     }
 
     return 0;

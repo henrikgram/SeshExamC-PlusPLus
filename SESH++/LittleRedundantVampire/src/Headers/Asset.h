@@ -15,6 +15,9 @@ private:
 	unordered_map<TextureTag, Texture> textures;
 	Texture* ozzyTexture = new Texture;
 	Texture* ozzySheetTexture = new Texture;
+	Texture* wallTexture = new Texture;
+	Texture* floorTexture = new Texture;
+	Texture* bookcaseTexture = new Texture;
 
 	// Part of what makes the class a singleton.
 	static Asset* instance;

@@ -24,6 +24,7 @@ https://stackoverflow.com/questions/4964482/how-to-create-two-classes-in-c-which
 
 //#include "Component.h"
 #include "../Enum/ComponentTag.h"
+#include "../Enum/ObjectTag.h"
 
 using namespace sf;
 using namespace std;
@@ -34,6 +35,7 @@ public:
 	//Map for all components attached to the gameobject
 	unordered_map<ComponentTag, Component*> components;
 	Vector2<float> * position = new Vector2<float>;
+	ObjectTag* objectTag = new ObjectTag();
 
 	GameObject();
 	~GameObject();

@@ -177,7 +177,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />
+    <Image Include="Asset\Bookcase.png" />
+    <Image Include="Asset\WoodenFloor.png" />
     <Image Include="Asset\OzzySheet.png" />
+    <Image Include="Asset\StoneWall.png" />
     <Image Include="Asset\VampireOzzyStill.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

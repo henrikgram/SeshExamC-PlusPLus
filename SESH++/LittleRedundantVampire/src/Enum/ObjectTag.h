@@ -2,7 +2,6 @@
 #define OBJECTTAG_H
 
 enum class ObjectTag {
-
 	PLAYER,
 	ENEMY,
 	NPC,
