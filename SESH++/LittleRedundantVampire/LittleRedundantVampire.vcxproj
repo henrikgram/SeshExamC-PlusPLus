@@ -145,6 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Platform.cpp" />
+    <ClCompile Include="src\IGameEvent.cpp" />
+    <ClCompile Include="src\CollisionEvent.cpp" />
+    <ClCompile Include="src\Collider.cpp" />
+    <ClCompile Include="src\Attack.cpp" />
+    <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Components\SpriteRenderer.cpp" />
     <ClCompile Include="src\Component.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
@@ -152,6 +159,13 @@
     <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Headers\Player.h" />
+    <ClInclude Include="src\Headers\Platform.h" />
+    <ClInclude Include="src\Headers\IGameEvent.h" />
+    <ClInclude Include="src\Headers\CollisionEvent.h" />
+    <ClInclude Include="src\Headers\Collider.h" />
+    <ClInclude Include="src\Headers\Attack.h" />
+    <ClInclude Include="src\Headers\Animation.h" />
     <ClInclude Include="src\Enum\ObjectTag.h" />
     <ClInclude Include="src\Headers\Components\SpriteRenderer.h" />
     <ClInclude Include="src\Headers\Component.h" />
@@ -159,6 +173,7 @@
     <ClInclude Include="src\Enum\TextureTag.h" />
     <ClInclude Include="src\Headers\GameObject.h" />
     <ClInclude Include="src\Headers\Asset.h" />
+    <ClInclude Include="src\Headers\IListener.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

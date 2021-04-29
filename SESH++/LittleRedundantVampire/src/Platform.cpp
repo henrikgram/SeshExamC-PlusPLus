@@ -1,4 +1,4 @@
-#include "Platform.h"
+#include "Headers/Platform.h"
 
 Platform::Platform(Texture* texture, Vector2f size, Vector2f position)
 {

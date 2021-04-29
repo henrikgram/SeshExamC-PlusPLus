@@ -14,7 +14,7 @@ private:
 	// TODO: Bliver den gemt for evigt feat johan olsen? Går den ud af scope? Who knows!
 	unordered_map<TextureTag, Texture> textures;
 	Texture* ozzyTexture = new Texture;
-	Texture* ozzySheet = new Texture;
+	Texture* ozzySheetTexture = new Texture;
 
 	// Part of what makes the class a singleton.
 	static Asset* instance;

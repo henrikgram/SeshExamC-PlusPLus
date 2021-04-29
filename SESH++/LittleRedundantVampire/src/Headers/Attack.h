@@ -11,7 +11,7 @@ using namespace std;
 //Guide til sprite sheets.
 //https://www.youtube.com/watch?v=-mcnW_6QpYA&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=9
 
-//Guide til at animere ift. bevægelse.
+//Guide til at animere ift. bevaegelse.
 //https://www.youtube.com/watch?v=kAZVbPF6N4Q&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=11
 
 
@@ -23,7 +23,7 @@ public:
 	/// </summary>
 	/// <param name="texture">Din sprite</param>
 	/// <param name="spawnPosition">Hvor angrebet skal spawne.</param>
-	/// <param name="attackTime">Hvor længe angrebet skal være på skærmen.</param>
+	/// <param name="attackTime">Hvor laenge angrebet skal vaere på skaermen.</param>
 	Attack(string textureName);
 
 	/// <summary>
@@ -47,7 +47,7 @@ public:
 
 	void SetPosition(Vector2f position) { body.setPosition(position); }
 
-	void SetRow(unsigned int row) {  this->row = row; }
+	void SetRow(unsigned int row) { this->row = row; }
 	void SetColumn(unsigned int column) { this->column = column; }
 
 
@@ -67,5 +67,3 @@ private:
 	//Om Attack vender mod højre.
 	bool faceUp;
 };
-
-

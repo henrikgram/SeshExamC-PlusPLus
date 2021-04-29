@@ -1,5 +1,4 @@
-#include "Animation.h"
-
+#include "Headers/Animation.h"
 
 Animation::Animation(Texture* texture, Vector2u imageCount, float switchTime)
 {

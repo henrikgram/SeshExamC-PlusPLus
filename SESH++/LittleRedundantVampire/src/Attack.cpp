@@ -1,5 +1,4 @@
-#include "Attack.h"
-
+#include "Headers/Attack.h"
 
 Attack::Attack(string textureName)
 {
@@ -25,10 +24,9 @@ Attack::~Attack()
 {
 }
 
-
 void Attack::Update(float deltaTime)
 {
-	//Vi udregner hvor toppen på vores sprite ligger, baseret på y-aksen (rækken) og sprite-højden.
+	//Vi udregner hvor toppen på vores sprite ligger, baseret på y-aksen (raekken) og sprite-højden.
 		//F.eks. (top = 0 * 20 = 0).
 	textureRect.top = row * textureRect.height;
 
@@ -45,4 +43,3 @@ void Attack::Draw(RenderWindow& window)
 {
 	window.draw(body);
 }
-

@@ -1,4 +1,4 @@
-#include "Collider.h"
+#include "Headers/Collider.h"
 #include <iostream>
 
 Collider::Collider(RectangleShape& body) : body(body)

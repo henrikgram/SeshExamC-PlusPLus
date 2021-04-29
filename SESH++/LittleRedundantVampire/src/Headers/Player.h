@@ -14,7 +14,7 @@ using namespace std;
 //Guide til sprite sheets.
 //https://www.youtube.com/watch?v=-mcnW_6QpYA&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=9
 
-//Guide til at animere ift. bev�gelse.
+//Guide til at animere ift. bevaegelse.
 //https://www.youtube.com/watch?v=kAZVbPF6N4Q&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=11
 
 
@@ -25,9 +25,9 @@ public:
 	/// Constructor til Player
 	/// </summary>
 	/// <param name="texture">Dit sprite sheet</param>
-	/// <param name="imageCount">Hvor mange sprites dit sheet har (r�kker og kolonner)</param>
+	/// <param name="imageCount">Hvor mange sprites dit sheet har (raekker og kolonner)</param>
 	/// <param name="switchTime">Hvor hurtigt din animation skal cycle gennem sprites</param>
-	/// <param name="speed">Hvor hurtigt Player bev�ger sig</param>
+	/// <param name="speed">Hvor hurtigt Player bevaeger sig</param>
 	Player(Texture* texture, Vector2u imageCount, float switchTime, float speed);
 
 	/// <summary>
@@ -36,9 +36,9 @@ public:
 	~Player();
 
 	/// <summary>
-	/// S�rger for at opdatere Player-logik, f.eks. movement.
+	/// Soerger for at opdatere Player-logik, f.eks. movement.
 	/// </summary>
-	/// <param name="deltaTime">Tid der er g�et siden sidste reset af time.</param>
+	/// <param name="deltaTime">Tid der er gaaet siden sidste reset af time.</param>
 	void Update(float deltaTime);
 
 	/// <summary>
@@ -62,20 +62,20 @@ private:
 
 	Attack attack;
 
-	//Hvilken r�kke i spritesheet der skal animeres.
+	//Hvilken raekke i spritesheet der skal animeres.
 	unsigned int row;
 
 	float attackTimer;
 	float attackLength;
 
-	//Spillerens bev�gelseshastighed.
+	//Spillerens bevaegelseshastighed.
 	float speed;
 
-	//Om spilleren vender mod h�jre.
+	//Om spilleren vender mod hoejre.
 	bool faceRight;
 	//Om spilleren vender mod op.
 	bool faceUp;
-	//Om spilleren st�r stille.
+	//Om spilleren staar stille.
 	bool moving;
 
 	bool drawAttack;
@@ -85,3 +85,4 @@ private:
 	Keyboard::Key currentKey;
 	Keyboard::Key previousKey;
 };
+

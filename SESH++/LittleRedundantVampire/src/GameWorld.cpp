@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include <SFML/graphics.hpp>
 
@@ -6,6 +6,8 @@
 #include "Headers/GameObject.h"
 #include "Headers/Asset.h"
 #include "Enum/ObjectTag.h"
+#include "Headers/Player.h"
+#include "Headers/Platform.h"
 
 using namespace std;
 using namespace sf;
@@ -18,6 +20,18 @@ View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 //TODO: check if heap or stack
 vector<GameObject> * gameObjects = new vector<GameObject>;
 vector<GameObject>::iterator it;
+
+/// <summary>
+/// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
+/// S�rger for at det view scaler med vinduets st�rrelse. Forhindrer stretching af sprites og lignende.
+/// </summary>
+/// <param name="window">Spilvinduet.</param>
+/// <param name="view">Det view som f�lger spilleren.</param>
+void ResizeView(const RenderWindow& window, View& view)
+{
+    float aspectRatio = float(window.getSize().x) / float(window.getSize().y);
+    view.setSize(VIEW_HEIGHT * aspectRatio, VIEW_HEIGHT);
+}
 
 //TODO: check if this is fine, or actual factory is needed
 void BootlegFactory(ObjectTag tag)
@@ -119,6 +133,22 @@ int main()
     LoadContent();
     Initialize();
 
+    //Her loader vi en texture til player.
+    Texture playerTexture;
+    playerTexture.loadFromFile("OzzySheet.png");
+
+
+    //Vi implementerer vores Animation-klasse, s� vi kan animere vores player.
+    Player player(&playerTexture,/* &attackTexture, */ Vector2u(4, 3), 0.13f, 0.1f);
+
+    Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
+
+    //Vores deltaTime er den tid der er g�et siden sidste update.
+    float deltaTime = 0.0f;
+    //Vi skal bruge clock til at regne ud hvor lang tid der er g�et.
+    Clock clock;
+
+
     // Used for fixed update. TimePerFrame needs to be set to the amount of frames you want it to run with.
     Time timePerFrame = seconds(1.f / 60.f);
     Clock deltaClock;
@@ -126,12 +156,16 @@ int main()
 
     while (window.isOpen())
     {
+        //Vi s�tter vores deltaTime i forhold til clock.
+        deltaTime = clock.restart().asSeconds();
         // Shuts the game down when the window is closed.
         Event event;
         while (window.pollEvent(event))
         {
             if (event.type == Event::Closed)
                 window.close();
+            if (event.type == Event::Resized)
+                ResizeView(window, view);
         }
 
         // For fixed update and 60 frames per second.
@@ -147,7 +181,17 @@ int main()
         {
             timeSinceLastUpdate -= timePerFrame;
             Update(&timePerFrame);
+            player.Update(deltaTime);
+            p1.GetCollider().CheckCollision(player.GetCollider(), 0.5f);
+            view.setCenter(player.GetPosition());
         }   
+
+        //Hvert gameloop korer vi Update paa vores animation.
+       //Vi korer animationen for raekke 0 (1).
+
+        //window.setView(view);
+        player.Draw(window);
+        p1.Draw(window);
 
         Draw();
     }

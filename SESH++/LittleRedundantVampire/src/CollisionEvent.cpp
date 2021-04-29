@@ -1,5 +1,5 @@
-#include "CollisionEvent.h"
-#include "IGameEvent.h"
+#include "Headers/CollisionEvent.h"
+#include "Headers/IGameEvent.h"
 
 CollisionEvent::CollisionEvent()
 {
@@ -12,12 +12,12 @@ CollisionEvent::~CollisionEvent()
 
 void CollisionEvent::Attach(IListener* listener)
 {
-	listeners.push_back(listener);
+    listeners.push_back(listener);
 }
 
 void CollisionEvent::Detach(IListener* listener)
 {
-	listeners.remove(listener);
+    listeners.remove(listener);
 }
 
 void CollisionEvent::Notify()

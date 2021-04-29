@@ -1,8 +1,7 @@
-#include "Player.h"
-
+#include "Headers/Player.h"
 
 Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float speed) :
-	//Her opretter vi en animation med de parametre som er g�ldende for Player.
+	//Her opretter vi en animation med de parametre som er gaeldende for Player.
 	animation(texture, imageCount, switchTime),
 	attack("AttackSheet2.png")
 {
@@ -17,11 +16,11 @@ Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float sp
 	drawAttack = false;
 	canMove = true;
 
-	//Definer st�rrelsen af �n sprite fra sheet.
+	//Definer storrelsen af en sprite fra sheet.
 	body.setSize(Vector2f(texture->getSize().x / 4, texture->getSize().y / 3));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setPosition(100.0f, 100.0f);
-	//Vi s�tter player-variablens til at have vores texture.
+	//Vi saetter player-variablens til at have vores texture.
 	body.setTexture(texture);
 
 	attack.SetPosition(Vector2f(body.getPosition().x, body.getPosition().y + 75.0f));
@@ -37,11 +36,11 @@ void Player::Update(float deltaTime)
 {
 	attackTimer += deltaTime;
 
-	//Bestemmer hvilken retning du bev�ger dig.
+	//Bestemmer hvilken retning du bevaeger dig.
 	Vector2f movement(0.0f, 0.0f);
 
 
-	//Bestemmer hvilken retning du skal �ndre til baseret p� input fra keyboard.
+	//Bestemmer hvilken retning du skal aendre til baseret paa input fra keyboard.
 	//Venstre
 	if (Keyboard::isKeyPressed(Keyboard::A) && canMove)
 	{
@@ -53,7 +52,7 @@ void Player::Update(float deltaTime)
 			attack.SetColumn(1);
 		}
 	}
-	//Højre
+	//Hoejre
 	else if (Keyboard::isKeyPressed(Keyboard::D) && canMove)
 	{
 		movement.x += deltaTime;
@@ -102,22 +101,22 @@ void Player::Update(float deltaTime)
 	}
 
 
-	//Her indstiller man idle animation n�r du st�r stille.
+	//Her indstiller man idle animation naar du staar stille.
 	if (movement.x == 0.0f && movement.y == 0.0f)
-		//Bruges til at s�rge for, at den rigtige sprite tegnes n�r vi st�r stille.
+		//Bruges til at soerge for, at den rigtige sprite tegnes naar vi staar stille.
 		moving = false;
 	//Start en walk cycle.
 	else
 	{
-		//Vi udregner hypotenusen af bev�gelsesretningen.
+		//Vi udregner hypotenusen af bevaegelsesretningen.
 		float movementVectorLength = sqrt(movement.x * movement.x + movement.y * movement.y);
 
-		//Vi normaliserer retningen ift til hypotenusens l�ngde.
+		//Vi normaliserer retningen ift til hypotenusens laengde.
 		Normalize(movement);
 
 		moving = true;
 
-		//H�jre
+		//Hoejre
 		if (movement.x > 0.0f)
 		{
 			faceRight = true;
@@ -156,10 +155,10 @@ void Player::Draw(RenderWindow& window)
 
 void Player::Normalize(Vector2f& movement)
 {
-	//Vi udregner hypotenusen af bev�gelsesretningen.
+	//Vi udregner hypotenusen af bevaegelsesretningen.
 	float movementVectorLength = sqrt(movement.x * movement.x + movement.y * movement.y);
 
-	//Vi normaliserer retningen ift til hypotenusens l�ngde.
+	//Vi normaliserer retningen ift til hypotenusens laengde.
 	movement.x /= movementVectorLength;
 	movement.y /= movementVectorLength;
 
