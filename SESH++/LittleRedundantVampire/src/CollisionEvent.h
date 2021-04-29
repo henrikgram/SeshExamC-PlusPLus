@@ -1,7 +1,6 @@
 #pragma once
 #include <list>
 #include "IGameEvent.h"
-#include "Collider.h"
 
 class CollisionEvent : public IGameEvent
 {

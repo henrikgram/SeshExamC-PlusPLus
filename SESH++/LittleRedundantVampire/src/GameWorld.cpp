@@ -33,7 +33,7 @@ int main()
     playerTexture.loadFromFile("OzzySheet.png");
 
     //Vi implementerer vores Animation-klasse, s� vi kan animere vores player.
-    Player player(&playerTexture, Vector2u(4, 3), 0.13f, 0.1f);
+    Player player(&playerTexture, Vector2u(4, 3), 0.13f, 0.5f);
 
     Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
 

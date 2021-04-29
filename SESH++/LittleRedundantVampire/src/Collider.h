@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "CollisionEvent.h"
-#include "IListener.h"
 
 using namespace sf;
 
