@@ -1,8 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "CollisionEvent.h"
+
 using namespace sf;
 
-class Collider
+class Collider : protected IListener
 {
 public:
 	Collider(RectangleShape& body);
@@ -13,8 +15,10 @@ public:
 	bool CheckCollision(const Collider& other, float pushFactor);
 	Vector2f GetPosition() const { return body.getPosition(); }
 	Vector2f GetHalfsize() const { return body.getSize() / 2.0f; }
+	void Notify(std::string eventName/*, Component component*/);
 
 private:
 	RectangleShape& body;
+	CollisionEvent onColliding;
 };
 

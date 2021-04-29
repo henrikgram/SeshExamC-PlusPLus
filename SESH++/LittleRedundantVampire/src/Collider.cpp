@@ -1,8 +1,9 @@
 #include "Collider.h"
+#include <iostream>
 
 Collider::Collider(RectangleShape& body) : body(body)
 {
-
+	onColliding.Attach(this);
 }
 
 Collider::~Collider()
@@ -25,6 +26,8 @@ bool Collider::CheckCollision(const Collider& other, float pushFactor)
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
+		onColliding.Notify();
+
 		pushFactor = std::min(std::max(pushFactor, 0.0f), 1.0f); //Clamps the pushposition betwwen 0 and 1.
 
 		if (intersectX > intersectY)
@@ -58,4 +61,9 @@ bool Collider::CheckCollision(const Collider& other, float pushFactor)
 	}
 
 	return false; //The objects are not intersecting = We are not colliding
+}
+
+void Collider::Notify(std::string eventName)
+{
+	cout << "Oh dear I hit something\n";
 }
