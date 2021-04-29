@@ -159,6 +159,25 @@
     <ClInclude Include="src\Enum\TextureTag.h" />
     <ClInclude Include="src\Headers\GameObject.h" />
     <ClInclude Include="src\Headers\Asset.h" />
+    <ClCompile Include="src\CollisionEvent.cpp" />
+    <ClCompile Include="src\IGameEvent.cpp" />
+    <ClCompile Include="src\Attack.cpp" />
+    <ClCompile Include="src\Platform.cpp" />
+    <ClCompile Include="src\Collider.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\GameWorld.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CollisionEvent.h" />
+    <ClInclude Include="src\IGameEvent.h" />
+    <ClInclude Include="src\Attack.h" />
+    <ClInclude Include="src\IGameObject.h" />
+    <ClInclude Include="src\IListener.h" />
+    <ClInclude Include="src\Platform.h" />
+    <ClInclude Include="src\Collider.h" />
+    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\Animation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
