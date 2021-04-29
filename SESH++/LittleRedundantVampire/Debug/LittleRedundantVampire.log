@@ -1,23 +1,2 @@
 ﻿  SpriteRenderer.cpp
-﻿  GameWorld.cpp
-  Player.cpp
-C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Player.cpp(21,71): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Player.cpp(21,45): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-  Generating Code...
-  LittleRedundantVampire.vcxproj -> C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
+  LittleRedundantVampire.vcxproj -> C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
