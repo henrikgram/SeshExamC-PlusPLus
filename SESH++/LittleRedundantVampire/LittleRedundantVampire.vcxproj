@@ -145,7 +145,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\SpriteRenderer.cpp" />
+    <ClCompile Include="src\Component.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\Asset.cpp" />
     <ClCompile Include="src\GameWorld.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Enum\ObjectTag.h" />
+    <ClInclude Include="src\Headers\Components\SpriteRenderer.h" />
+    <ClInclude Include="src\Headers\Component.h" />
+    <ClInclude Include="src\Enum\ComponentTag.h" />
+    <ClInclude Include="src\Enum\TextureTag.h" />
+    <ClInclude Include="src\Headers\GameObject.h" />
+    <ClInclude Include="src\Headers\Asset.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
