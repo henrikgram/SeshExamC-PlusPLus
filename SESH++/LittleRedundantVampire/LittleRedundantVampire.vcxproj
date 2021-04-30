@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\OldPlayer.cpp" />
     <ClCompile Include="src\Components\Player.cpp" />
     <ClCompile Include="src\Platform.cpp" />
     <ClCompile Include="src\IGameEvent.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Headers\Components\OldPlayer.h" />
     <ClInclude Include="src\Headers\Components\Player.h" />
     <ClInclude Include="src\Headers\Platform.h" />
     <ClInclude Include="src\Headers\IGameEvent.h" />

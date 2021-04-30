@@ -1,156 +1,62 @@
 #include "../Headers/Components/Player.h"
-
-Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float speed) :
-	//Her opretter vi en animation med de parametre som er gaeldende for Player.
-	animation(texture, imageCount, switchTime),
-	attack("Asset/AttackSheet2.png")
-{
-	this->speed = speed;
-
-	row = 0;
-	attackTimer = 0.0f;
-	attackLength = 0.1f;
-
-	faceRight = true;
-	moving = false;
-	drawAttack = false;
-	canMove = true;
-
-	//Definer storrelsen af en sprite fra sheet.
-	body.setSize(Vector2f(texture->getSize().x / 4, texture->getSize().y / 3));
-	body.setOrigin(body.getSize() / 2.0f);
-	body.setPosition(100.0f, 100.0f);
-	//Vi saetter player-variablens til at have vores texture.
-	body.setTexture(texture);
-
-	attack.SetPosition(Vector2f(body.getPosition().x, body.getPosition().y + 75.0f));
-	attack.SetRow(1);
-}
+#include <iostream>
+using namespace std;
+using namespace sf;
 
 Player::~Player()
 {
+
 }
 
-
-void Player::Update(float deltaTime)
+void Player::Awake()
 {
-	attackTimer += deltaTime;
+	speed = 5.0f;
+}
 
+void Player::Start()
+{
+
+}
+
+void Player::Update(Time* timePerFrame)
+{
 	//Bestemmer hvilken retning du bevaeger dig.
 	Vector2f movement(0.0f, 0.0f);
 
 
 	//Bestemmer hvilken retning du skal aendre til baseret paa input fra keyboard.
 	//Venstre
-	if (Keyboard::isKeyPressed(Keyboard::A) && canMove)
+	if (Keyboard::isKeyPressed(Keyboard::A))
 	{
-		movement.x -= deltaTime;
-
-		if (attackTimer >= attackLength)
-		{
-			attack.SetPosition(Vector2f(body.getPosition().x - 60.0f, body.getPosition().y));
-			attack.SetColumn(1);
-		}
+		movement.x -= timePerFrame->asMilliseconds();
 	}
 	//Hoejre
-	else if (Keyboard::isKeyPressed(Keyboard::D) && canMove)
+	if (Keyboard::isKeyPressed(Keyboard::D))
 	{
-		movement.x += deltaTime;
-
-		if (attackTimer >= attackLength)
-		{
-			attack.SetPosition(Vector2f(body.getPosition().x + 60.0f, body.getPosition().y));
-			attack.SetColumn(0);
-		}
+		movement.x += timePerFrame->asMilliseconds();
 	}
 	//Op
-	else if (Keyboard::isKeyPressed(Keyboard::W) && canMove)
+	if (Keyboard::isKeyPressed(Keyboard::W))
 	{
-		movement.y -= deltaTime;
-
-		if (attackTimer >= attackLength)
-		{
-			attack.SetPosition(Vector2f(body.getPosition().x, body.getPosition().y - 70.0f));
-			attack.SetColumn(2);
-		}
+		movement.y -= timePerFrame->asMilliseconds();
 	}
 	//Ned
-	else if (Keyboard::isKeyPressed(Keyboard::S) && canMove)
+	if (Keyboard::isKeyPressed(Keyboard::S))
 	{
-		movement.y += deltaTime;
-
-		if (attackTimer >= attackLength)
-		{
-			attack.SetPosition(Vector2f(body.getPosition().x, body.getPosition().y + 70.0f));
-			attack.SetColumn(3);
-		}
+		movement.y += timePerFrame->asMilliseconds();
 	}
 
+	//Vi udregner hypotenusen af bevaegelsesretningen.
+	float movementVectorLength = sqrt(movement.x * movement.x + movement.y * movement.y);
 
-	//Her angriber spilleren.
-	if (Keyboard::isKeyPressed(Keyboard::Space))
+	//Vi normaliserer retningen ift til hypotenusens laengde.
+	if (movement != Vector2f(0.0f, 0.0f))
 	{
-		drawAttack = true;
-		attackTimer = 0.0f;
-		canMove = false;
-	}
-	else if (attackTimer >= attackLength)
-	{
-		drawAttack = false;
-		canMove = true;
-	}
-
-
-	//Her indstiller man idle animation naar du staar stille.
-	if (movement.x == 0.0f && movement.y == 0.0f)
-		//Bruges til at soerge for, at den rigtige sprite tegnes naar vi staar stille.
-		moving = false;
-	//Start en walk cycle.
-	else
-	{
-		//Vi udregner hypotenusen af bevaegelsesretningen.
-		float movementVectorLength = sqrt(movement.x * movement.x + movement.y * movement.y);
-
-		//Vi normaliserer retningen ift til hypotenusens laengde.
 		Normalize(movement);
-
-		moving = true;
-
-		//Hoejre
-		if (movement.x > 0.0f)
-		{
-			faceRight = true;
-			row = 1;
-		}
-		//Venstre
-		else if (movement.x < 0.0f)
-		{
-			faceRight = false;
-			row = 1;
-		}
-		//Ned
-		else if (movement.y > 0.0f)
-			row = 0;
-		//Op
-		else if (movement.y < 0.0f)
-			row = 2;
 	}
 
 
-	//Vi kan nu opdatere og tegne.
-	animation.Update(row, deltaTime, faceRight, moving);
-	body.setTextureRect(animation.TextureRect);
-	body.move(movement);
-	attack.Update(deltaTime);
-}
-
-void Player::Draw(RenderWindow& window)
-{
-	window.draw(body);
-
-	if (drawAttack)
-		attack.Draw(window);
-
+	*gameObject->position += movement;
 }
 
 void Player::Normalize(Vector2f& movement)
@@ -164,4 +70,14 @@ void Player::Normalize(Vector2f& movement)
 
 	movement.x *= speed;
 	movement.y *= speed;
+}
+
+void Player::Destroy()
+{
+
+}
+
+ComponentTag Player::ToEnum()
+{
+	return ComponentTag::PLAYER;
 }
