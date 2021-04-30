@@ -2,11 +2,12 @@
 
 #include "GameObject.h"
 #include "../Enum/ComponentTag.h"
+#include "IListener.h"
 
 
 using namespace std;
 
-class Component
+class Component : protected IListener
 {
 public:
 	GameObject* gameObject;
@@ -44,5 +45,8 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	virtual ComponentTag ToEnum() = 0;
+
+	// Inherited via IListener
+	void Notify(std::string eventName) override;
 };
 

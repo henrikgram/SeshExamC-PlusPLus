@@ -18,7 +18,6 @@ public:
 
 	void Normalize(Vector2f& movement);
 
-
 private:
 	float speed;
 };

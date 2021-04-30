@@ -21,6 +21,7 @@ View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
 //TODO: check if heap or stack
 vector<GameObject> * gameObjects = new vector<GameObject>;
+vector<Collider*> colliders;
 vector<GameObject>::iterator it;
 
 /// <summary>
@@ -41,6 +42,7 @@ void BootlegFactory(ObjectTag tag)
     //TODO: tjek hvis den ryger ud af scope.
     GameObject* go = new GameObject();
     SpriteRenderer* sr = new SpriteRenderer();
+    Collider* col;
 
     switch (tag)
     {
@@ -49,6 +51,11 @@ void BootlegFactory(ObjectTag tag)
         go->position = new Vector2<float>(50, 50);
         go->AddComponent(sr);
         go->AddComponent(new Player());
+
+        //TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
+        col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, true);
+        go->AddComponent(col);
+        colliders.push_back(col);
         break;
     case ObjectTag::ENEMY:
         break;
@@ -67,6 +74,13 @@ void BootlegFactory(ObjectTag tag)
     case ObjectTag::WINDOW:
         break;
     case ObjectTag::CRATE:
+        sr->SetSprite(TextureTag::OZZY);
+        go->position = new Vector2f(150, 150);
+        go->AddComponent(sr);
+
+        col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, false);
+        go->AddComponent(col);
+        colliders.push_back(col);
         break;
     default:
         break;
@@ -86,6 +100,7 @@ void LoadContent()
 void Initialize()
 {
     BootlegFactory(ObjectTag::PLAYER);
+    BootlegFactory(ObjectTag::CRATE);
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
@@ -100,6 +115,19 @@ void Update(Time * timePerFrame)
     for (it = gameObjects->begin(); it < gameObjects->end(); it++)
     {
         it->Update(timePerFrame);
+    }
+
+    vector<Collider*>::iterator colIt;
+    vector<Collider*>::iterator colIt2;
+    for (colIt = colliders.begin(); colIt < colliders.end(); colIt++)
+    {
+        for (colIt2 = colliders.begin(); colIt2 < colliders.end(); colIt2++)
+        {
+            if (colIt != colIt2)
+            {
+                (*colIt)->CheckCollision(*colIt2);
+            }
+        }
     }
 }
 

@@ -1,24 +1,34 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../CollisionEvent.h"
+#include "../Component.h"
 
 using namespace sf;
 
-class Collider : protected IListener
+class Collider : public Component
 {
 public:
-	Collider(RectangleShape& body);
+	Collider(Vector2f size, Vector2f position, float pushFactor, bool solid);
 	~Collider();
 
-	void Move(float deltaX, float deltaY) const { body.move(deltaX, deltaY); }
+	//TODO: Move should perhaps not be in this class. Collider shouldn't be responsible for moving an object.
+	//void Move(float deltaX, float deltaY) const { collisionBox->move(deltaX, deltaY); }
 
-	bool CheckCollision(const Collider& other, float pushFactor);
-	Vector2f GetPosition() const { return body.getPosition(); }
-	Vector2f GetHalfsize() const { return body.getSize() / 2.0f; }
-	void Notify(std::string eventName/*, Component component*/);
+	bool CheckCollision(Collider* other);
+	Vector2f GetPosition() const { return *gameObject->position; }
+	Vector2f GetHalfsize() const { return collisionBox->getSize() / 2.0f; }
+
+	// Inherited via Component
+	void Awake() override;
+	void Start() override;
+	void Update(Time* timePerFrame) override;
+	void Destroy() override;
+	ComponentTag ToEnum() override;
 
 private:
-	RectangleShape& body;
+	RectangleShape* collisionBox;
+	float* pushFactor;
+	bool* solid;
 	CollisionEvent onColliding;
 };
 

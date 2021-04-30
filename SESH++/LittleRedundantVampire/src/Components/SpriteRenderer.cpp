@@ -45,6 +45,8 @@ Sprite SpriteRenderer::GetSprite()
 
 void SpriteRenderer::SetSprite(TextureTag textureTag)
 {
+	//TODO: This might work better if we make a constructor for the SpriteRenderer class and pass a texturetag to this 
+	//so we don't have to call SetSprite outside of this class. 
 	texture = Asset::GetInstance()->GetTexture(textureTag);
 	sprite->setTexture(*texture);
 }

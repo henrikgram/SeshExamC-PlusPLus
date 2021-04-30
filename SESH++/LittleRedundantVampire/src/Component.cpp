@@ -8,3 +8,7 @@ Component::~Component()
 	delete gameObject;
 	gameObject = nullptr;
 }
+
+void Component::Notify(std::string eventName)
+{
+}
