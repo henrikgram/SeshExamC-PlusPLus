@@ -8,6 +8,7 @@
 #include "Enum/ObjectTag.h"
 #include "Headers/Components/Player.h"
 #include "Headers/Platform.h"
+#include "Headers/LevelManager.h"
 
 using namespace std;
 using namespace sf;
@@ -148,6 +149,10 @@ void Draw()
 /// <returns></returns>
 int main()
 {
+    LevelManager lm;
+
+    lm.InstantiateLevel();
+
     LoadContent();
     Initialize();
 
