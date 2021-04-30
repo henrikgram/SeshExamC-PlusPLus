@@ -34,6 +34,7 @@ public:
 	//Map for all components attached to the gameobject
 	unordered_map<ComponentTag, Component*> components;
 	Vector2f * position = new Vector2f;
+	bool shouldDraw;
 
 	GameObject();
 	~GameObject();

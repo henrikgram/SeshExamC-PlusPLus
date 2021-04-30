@@ -1,45 +1,84 @@
 #include "../Headers/Components/Attack.h"
+#include <iostream>
+using namespace std;
+using namespace sf;
 
-Attack::Attack(string textureName)
+
+Attack::Attack(Vector2f callerPosition, string direction)
 {
-	texture.loadFromFile(textureName);
-
-	faceRight = true;
-	faceUp = false;
-
-	this->row = row;
-	this->column = column;
-
-	//Definer størrelsen af én sprite fra sheet.
-	body.setSize(Vector2f(texture.getSize().x / 3.0f, texture.getSize().y / 1.5f));
-	body.setOrigin(body.getSize() / 2.0f);
-	//Vi sætter player-variablens til at have vores texture.
-	body.setTexture(&texture);
-
-	textureRect.width = texture.getSize().x / 4.0f;
-	textureRect.height = texture.getSize().y / 2.0f;
+	this->callerPosition = callerPosition;
+	this->direction = direction;
 }
 
 Attack::~Attack()
 {
+
 }
 
-void Attack::Update(float deltaTime)
+void Attack::Awake()
 {
-	//Vi udregner hvor toppen på vores sprite ligger, baseret på y-aksen (raekken) og sprite-højden.
-		//F.eks. (top = 0 * 20 = 0).
-	textureRect.top = row * textureRect.height;
-
-	//Vi udregner hvor venstre side vores sprite ligger, baseret på x-aksen (kolonnen) og sprite-bredden.
-	//F.eks. (left = 1 * 20 = 20).
-	textureRect.left = column * textureRect.width;
-	//Standard bredden er altid lige med den normale bredde.
-	textureRect.width = abs(textureRect.width);
-
-	body.setTextureRect(textureRect);
+	attackLength = 0.5f;
+	gameObject->shouldDraw = false;
 }
 
-void Attack::Draw(RenderWindow& window)
+void Attack::Start()
 {
-	window.draw(body);
+
+}
+
+void Attack::Update(Time* timePerFrame)
+{
+	attackTimer += timePerFrame->asMilliseconds();
+
+	if (attackTimer >= attackLength)
+	{
+		//Bestemmer hvilken retning du skal aendre til baseret paa input fra keyboard.
+		//TODO: Change so that it's not based on keyboard inputs.
+		//Venstre
+		if (direction == "left")
+		{
+			*gameObject->position = Vector2f(callerPosition.x - 60.0f, callerPosition.y);
+			//sprite skal også ændres her somehow.
+		}
+		//Hoejre
+		else if (direction == "right")
+		{
+			*gameObject->position = Vector2f(callerPosition.x + 60.0f, callerPosition.y);
+			//sprite skal også ændres her somehow.
+		}
+		//Op
+		else if (direction == "up")
+		{
+			*gameObject->position = Vector2f(callerPosition.x, callerPosition.y - 70.0f);
+			//sprite skal også ændres her somehow.
+		}
+		//Ned
+		else if (direction == "down")
+		{
+			*gameObject->position = Vector2f(callerPosition.x, callerPosition.y + 70.0f);
+			//sprite skal også ændres her somehow.
+		}
+	}
+
+	//Her angriber spilleren.
+	//TODO: make this based on an attack event.
+	if (Keyboard::isKeyPressed(Keyboard::Space))
+	{
+		attackTimer = 0.0f;
+		gameObject->shouldDraw = true;
+	}
+	else
+	{
+		gameObject->shouldDraw = false;
+	}
+}
+
+void Attack::Destroy()
+{
+
+}
+
+ComponentTag Attack::ToEnum()
+{
+	return ComponentTag::ATTACK;
 }

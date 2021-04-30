@@ -7,6 +7,7 @@
 #include "Headers/Asset.h"
 #include "Enum/ObjectTag.h"
 #include "Headers/Components/Player.h"
+#include "Headers/Components/Attack.h"
 #include "Enum/ObjectTag.h"
 //#include "Headers/Components/OldPlayer.h"
 #include "Headers/Platform.h"
@@ -52,6 +53,12 @@ void BootlegFactory(ObjectTag tag)
         break;
     case ObjectTag::ENEMY:
         break;
+    case ObjectTag::ATTACK:
+        sr->SetSprite(TextureTag::ATTACKSHEET);
+        go->position = new Vector2<float>(100, 100);
+        go->AddComponent(sr);
+        go->AddComponent(new Attack());
+        break;
     case ObjectTag::NPC:
         break;
     case ObjectTag::WALL:
@@ -86,6 +93,7 @@ void LoadContent()
 void Initialize()
 {
     BootlegFactory(ObjectTag::PLAYER);
+    BootlegFactory(ObjectTag::ATTACK);
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary

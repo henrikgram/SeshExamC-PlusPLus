@@ -5,6 +5,7 @@ enum class ObjectTag {
 
 	PLAYER,
 	ENEMY,
+	ATTACK,
 	NPC,
 	WALL,
 	DOOR,
@@ -12,7 +13,7 @@ enum class ObjectTag {
 	BOOKCASE,
 	VASE,
 	WINDOW,
-	CRATE
+	CRATE,
 };
 
 #endif

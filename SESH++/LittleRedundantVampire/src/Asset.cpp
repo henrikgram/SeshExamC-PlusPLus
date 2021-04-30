@@ -4,8 +4,10 @@ void Asset::LoadTextures()
 {
 	ozzyTexture->loadFromFile("Asset/VampireOzzyStill.png");
 	ozzySheetTexture->loadFromFile("Asset/OzzySheet.png");
+	attackSheetTexture->loadFromFile("Asset/AttackSheet2.png");
 	textures.insert(make_pair(TextureTag::OZZY, *ozzyTexture));
 	textures.insert(make_pair(TextureTag::OZZYSHEET, *ozzySheetTexture));
+	textures.insert(make_pair(TextureTag::ATTACKSHEET, *attackSheetTexture));
 }
 
 Texture* Asset::GetTexture(TextureTag tag)

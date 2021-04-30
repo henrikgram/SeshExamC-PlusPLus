@@ -2,7 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
 #include "Collider.h"
-#include "Attack.h"
+#include "OldAttack.h"
 #include <string>
 
 using namespace sf;
@@ -60,7 +60,7 @@ private:
 	//Spillerens animation-instans.
 	Animation animation;
 
-	Attack attack;
+	OldAttack attack;
 
 	//Hvilken raekke i spritesheet der skal animeres.
 	unsigned int row;

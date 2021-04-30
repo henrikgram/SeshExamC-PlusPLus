@@ -2,7 +2,6 @@
 #include "../Component.h"
 #include "../../Enum/TextureTag.h"
 #include "../Asset.h"
-#include "../Component.h"
 using namespace sf;
 
 class Player : public Component
