@@ -10,6 +10,8 @@ class Player : public Component
 public:
 	~Player();
 
+	void Move(Vector2f velocity);
+
 	void Awake() override;
 	void Start() override;
 	void Update(Time* timePerFrame) override;
