@@ -145,7 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Command\PlayerInputHandler.cpp" />
+    <ClCompile Include="src\Command\Invoker.cpp" />
     <ClCompile Include="src\Components\OldPlayer.cpp" />
     <ClCompile Include="src\Components\Player.cpp" />
     <ClCompile Include="src\Headers\Command\MoveCommand.cpp" />
@@ -164,7 +164,7 @@
   <ItemGroup>
     <ClInclude Include="src\Headers\Command\ICommand.h" />
     <ClInclude Include="src\Headers\Command\MoveCommand.h" />
-    <ClInclude Include="src\Headers\Command\PlayerInputHandler.h" />
+    <ClInclude Include="src\Headers\Command\Invoker.h" />
     <ClInclude Include="src\Headers\Components\OldPlayer.h" />
     <ClInclude Include="src\Headers\Components\Player.h" />
     <ClInclude Include="src\Headers\Platform.h" />

@@ -54,10 +54,10 @@
     <ClCompile Include="src\Components\OldPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Command\PlayerInputHandler.cpp">
+    <ClCompile Include="src\Headers\Command\MoveCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Headers\Command\MoveCommand.cpp">
+    <ClCompile Include="src\Command\Invoker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,13 +110,13 @@
     <ClInclude Include="src\Headers\Components\OldPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Headers\Command\PlayerInputHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Headers\Command\ICommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Headers\Command\MoveCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Headers\Command\Invoker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

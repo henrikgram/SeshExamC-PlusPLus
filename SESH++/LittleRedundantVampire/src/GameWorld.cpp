@@ -10,6 +10,7 @@
 #include "Enum/ObjectTag.h"
 //#include "Headers/Components/OldPlayer.h"
 #include "Headers/Platform.h"
+#include "Headers/Command/Invoker.h"
 
 using namespace std;
 using namespace sf;
@@ -19,12 +20,15 @@ static const float VIEW_HEIGHT = 1024.0f;
 RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
-Player* player;
 
 //TODO: check if heap or stack
 vector<GameObject> * gameObjects = new vector<GameObject>;
 vector<Collider*> colliders;
 vector<GameObject>::iterator it;
+
+Player* playerPointer;
+
+
 
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
@@ -52,7 +56,8 @@ void BootlegFactory(ObjectTag tag)
         sr->SetSprite(TextureTag::OZZY);
         go->position = new Vector2<float>(50, 50);
         go->AddComponent(sr);
-        go->AddComponent(new Player());
+        playerPointer = new Player();
+        go->AddComponent(playerPointer);
 
         //TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
         col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, true);
@@ -131,6 +136,10 @@ void Update(Time * timePerFrame)
             }
         }
     }
+
+    Player& playerRef = *playerPointer;
+
+    Invoker::GetInstance(playerRef)->InvokeCommand();
 }
 
 /// <summary>

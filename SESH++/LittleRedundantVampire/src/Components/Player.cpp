@@ -1,6 +1,5 @@
 
 #include "../Headers/Components/Player.h"
-#include "../Headers/Command/PlayerInputHandler.h"
 #include <iostream>
 using namespace std;
 using namespace sf;
@@ -32,7 +31,6 @@ void Player::Start()
 
 void Player::Update(Time* timePerFrame)
 {
-	PlayerInputHandler::GetInstance(this)->InvokeCommand();
 	////Bestemmer hvilken retning du bevaeger dig.
 	//Vector2f movement(0.0f, 0.0f);
 
