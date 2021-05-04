@@ -8,6 +8,8 @@
 #include "Enum/ObjectTag.h"
 #include "Headers/Components/Player.h"
 #include "Headers/Platform.h"
+//#include "Headers/LevelManager.h"
+#include "Headers/BitmapImage.h"
 #include "Headers/LevelManager.h"
 
 using namespace std;
@@ -19,8 +21,8 @@ RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
 //TODO: check if heap or stack
-vector<GameObject> * gameObjects = new vector<GameObject>;
-vector<GameObject>::iterator it;
+vector<GameObject*>* gameObjects;// = new vector<GameObject*>;
+vector<GameObject*>::iterator it;
 
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
@@ -90,7 +92,7 @@ void BootlegFactory(ObjectTag tag)
     go->Awake();
     go->Start();
 
-    gameObjects->push_back(*go);
+    gameObjects->push_back(go);
 }
 
 void LoadContent()
@@ -100,8 +102,8 @@ void LoadContent()
 
 void Initialize()
 {
-    BootlegFactory(ObjectTag::PLAYER);
-    BootlegFactory(ObjectTag::WALL);
+ /*   BootlegFactory(ObjectTag::PLAYER);
+    BootlegFactory(ObjectTag::WALL);*/
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
@@ -115,7 +117,7 @@ void Update(Time * timePerFrame)
     //iterates through the gameObjects and calls update
     for (it = gameObjects->begin(); it < gameObjects->end(); it++)
     {
-        it->Update(timePerFrame);
+        (*it)->Update(timePerFrame);
     }
 }
 
@@ -135,7 +137,7 @@ void Draw()
     for (it = gameObjects->begin(); it < gameObjects->end(); it++)
     {
         //TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
-        sr = dynamic_cast<SpriteRenderer*>(it->GetComponent(ComponentTag::SPRITERENDERER));
+        sr = dynamic_cast<SpriteRenderer*>((*it)->GetComponent(ComponentTag::SPRITERENDERER));
 
         window.draw(sr->GetSprite());
     }
@@ -149,25 +151,52 @@ void Draw()
 /// <returns></returns>
 int main()
 {
-    LevelManager lm;
+    //const int width = 640;
+    //const int height = 480;
 
-    lm.InstantiateLevel();
+    //BitmapImage image(width, height);
+
+    //for (int y = 0; y < height; y++)
+    //{
+    //    for (int x = 0; x < width; x++)
+    //    {
+    //        //sets a random color on each pixel
+    //        //for testing
+    //        //image.SetColor(BitmapColor(20.0f,20.0f,255.0f),x,y);
+
+    //        image.SetColor(BitmapColor((float)x / (float)width, 1.0f - ((float)x / (float)width), (float)y / (float)height), x, y);
+    //    }
+    //}
+
+    //image.Export("image.bmp");
+
+   // BitmapImage copy(0,0);
+
+    //copy.Read("src/Levels/test.bmp");
+
+   // copy.Export("copyLevel.bmp");*/
 
     LoadContent();
     Initialize();
+
+    LevelManager* lm = new LevelManager();
+    gameObjects = lm->InstantiateLevel();
+    
+
+ 
 
     //Her loader vi en texture til player.
 
 
     //Vi implementerer vores Animation-klasse, s� vi kan animere vores player.
-    Player player(Asset::GetInstance()->GetTexture(TextureTag::OZZYSHEET),/* &attackTexture, */ Vector2u(4, 3), 0.13f, 5.0f);
+    //Player player(Asset::GetInstance()->GetTexture(TextureTag::OZZYSHEET),/* &attackTexture, */ Vector2u(4, 3), 0.13f, 5.0f);
 
-    Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
+    //Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
 
-    //Vores deltaTime er den tid der er g�et siden sidste update.
-    float deltaTime = 0.0f;
-    //Vi skal bruge clock til at regne ud hvor lang tid der er g�et.
-    Clock clock;
+    ////Vores deltaTime er den tid der er g�et siden sidste update.
+    //float deltaTime = 0.0f;
+    ////Vi skal bruge clock til at regne ud hvor lang tid der er g�et.
+    //Clock clock;
 
 
     // Used for fixed update. TimePerFrame needs to be set to the amount of frames you want it to run with.
@@ -178,7 +207,7 @@ int main()
     while (window.isOpen())
     {
         //Vi s�tter vores deltaTime i forhold til clock.
-        deltaTime = clock.restart().asSeconds();
+        //deltaTime = clock.restart().asSeconds();
         // Shuts the game down when the window is closed.
         Event event;
         while (window.pollEvent(event))
@@ -202,9 +231,9 @@ int main()
         {
             timeSinceLastUpdate -= timePerFrame;
             Update(&timePerFrame);
-            player.Update(deltaTime);
-            p1.GetCollider().CheckCollision(player.GetCollider(), 0.1f);
-            view.setCenter(player.GetPosition());
+            //player.Update(deltaTime);
+            //p1.GetCollider().CheckCollision(player.GetCollider(), 0.1f);
+            //view.setCenter(player.GetPosition());
         }   
 
         //Hvert gameloop korer vi Update paa vores animation.

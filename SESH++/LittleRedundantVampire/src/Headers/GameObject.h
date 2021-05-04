@@ -38,6 +38,7 @@ public:
 	ObjectTag* objectTag = new ObjectTag();
 
 	GameObject();
+	GameObject(Vector2<float> position);
 	~GameObject();
 
 	/// <summary>

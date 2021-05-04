@@ -54,6 +54,9 @@
     <ClCompile Include="src\Levels\LevelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\BitmapImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Headers\Asset.h">
@@ -104,6 +107,9 @@
     <ClInclude Include="src\Headers\LevelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Headers\BitmapImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png">
@@ -124,7 +130,10 @@
     <Image Include="Asset\StoneWall.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="src\Levels\Level1.bmp">
+    <Image Include="src\Levels\Test.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\Levels\Test2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

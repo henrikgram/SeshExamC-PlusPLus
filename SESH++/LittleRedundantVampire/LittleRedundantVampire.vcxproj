@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BitmapImage.cpp" />
     <ClCompile Include="src\Levels\LevelManager.cpp" />
     <ClCompile Include="src\Components\Player.cpp" />
     <ClCompile Include="src\Platform.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Headers\BitmapImage.h" />
     <ClInclude Include="src\Headers\LevelManager.h" />
     <ClInclude Include="src\Headers\Components\Player.h" />
     <ClInclude Include="src\Headers\Platform.h" />
@@ -184,7 +186,8 @@
     <Image Include="Asset\OzzySheet.png" />
     <Image Include="Asset\StoneWall.png" />
     <Image Include="Asset\VampireOzzyStill.png" />
-    <Image Include="src\Levels\Level1.bmp" />
+    <Image Include="src\Levels\Test.bmp" />
+    <Image Include="src\Levels\Test2.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

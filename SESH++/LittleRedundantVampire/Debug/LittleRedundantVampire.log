@@ -1,2 +1,22 @@
 ﻿  LevelManager.cpp
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Levels\LevelManager.cpp(82,98): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Levels\LevelManager.cpp(82,89): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Levels\LevelManager.cpp(88,99): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Levels\LevelManager.cpp(88,91): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
   LittleRedundantVampire.vcxproj -> C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
