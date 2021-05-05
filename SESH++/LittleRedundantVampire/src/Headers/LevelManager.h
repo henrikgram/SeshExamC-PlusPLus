@@ -14,8 +14,8 @@ private:
 	string filePath = "src/Levels/";
 
 public:
-	vector<GameObject*>* InstantiateLevel(string levelName);
-	vector<GameObject*>* LevelSetup(BitmapImage& level);
+	vector<GameObject*> InstantiateLevel(string levelName);
+	vector<GameObject*> LevelSetup(BitmapImage& level);
 	GameObject* CreateObject(ObjectTag tag, float posX, float posY);
 
 

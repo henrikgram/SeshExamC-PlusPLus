@@ -21,7 +21,7 @@ RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
 //TODO: check if heap or stack
-vector<GameObject*>* gameObjects;// = new vector<GameObject*>;
+vector<GameObject*> gameObjects;// = new vector<GameObject*>;
 vector<GameObject*>::iterator it;
 
 /// <summary>
@@ -92,7 +92,7 @@ void BootlegFactory(ObjectTag tag)
     go->Awake();
     go->Start();
 
-    gameObjects->push_back(go);
+    gameObjects.push_back(go);
 }
 
 void LoadContent()
@@ -115,7 +115,7 @@ void Initialize()
 void Update(Time * timePerFrame)
 {
     //iterates through the gameObjects and calls update
-    for (it = gameObjects->begin(); it < gameObjects->end(); it++)
+    for (it = gameObjects.begin(); it < gameObjects.end(); it++)
     {
         (*it)->Update(timePerFrame);
     }
@@ -134,7 +134,7 @@ void Draw()
     SpriteRenderer* sr;
 
     //iterates through the gameObjects and draws all gameobjects.
-    for (it = gameObjects->begin(); it < gameObjects->end(); it++)
+    for (it = gameObjects.begin(); it < gameObjects.end(); it++)
     {
         //TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
         sr = dynamic_cast<SpriteRenderer*>((*it)->GetComponent(ComponentTag::SPRITERENDERER));

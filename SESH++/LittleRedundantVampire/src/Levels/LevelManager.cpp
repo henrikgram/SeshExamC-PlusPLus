@@ -60,9 +60,9 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	return go;
 }
 
-vector<GameObject*>* LevelManager::InstantiateLevel(string levelName)
+vector<GameObject*> LevelManager::InstantiateLevel(string levelName)
 {
-	vector<GameObject*>* gameObjects = new vector<GameObject*>;
+	vector<GameObject*> gameObjects = {};
 
 	BitmapImage objectLayer(0, 0);
 	BitmapImage decorationLayer(0, 0);
@@ -76,17 +76,17 @@ vector<GameObject*>* LevelManager::InstantiateLevel(string levelName)
 	objectLayer.Read(objectPath);
 	decorationLayer.Read(decorationPath);
 
-	vector<GameObject*>* objects = LevelSetup(objectLayer);
-	vector<GameObject*>* decorations = LevelSetup(decorationLayer);
+	vector<GameObject*> objects = LevelSetup(objectLayer);
+	vector<GameObject*> decorations = LevelSetup(decorationLayer);
 
-	gameObjects->insert(gameObjects->end(), objects->begin(), objects->end());
+	gameObjects.insert(gameObjects.end(), objects.begin(), objects.end());
 
 	return gameObjects;
 }
 
-vector<GameObject*>* LevelManager::LevelSetup(BitmapImage& level)
+vector<GameObject*> LevelManager::LevelSetup(BitmapImage& level)
 {
-	vector<GameObject*>* gameObjects = new vector<GameObject*>;
+	vector<GameObject*> gameObjects = {};
 
 	for (int y = 0; y < level.GetHeight(); y++)
 	{
@@ -100,11 +100,11 @@ vector<GameObject*>* LevelManager::LevelSetup(BitmapImage& level)
 
 			if (color.r == 159 && color.g == 159 && color.b == 170)
 			{
-				gameObjects->push_back(CreateObject(ObjectTag::WALL, x, y));
+				gameObjects.push_back(CreateObject(ObjectTag::WALL, x, y));
 			}
 			else if (color.r == 0 && color.g == 180 && color.b == 0)
 			{
-				gameObjects->push_back(CreateObject(ObjectTag::PLAYER, x, y));
+				gameObjects.push_back(CreateObject(ObjectTag::PLAYER, x, y));
 			}
 		}
 	}
