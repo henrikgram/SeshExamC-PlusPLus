@@ -9,6 +9,12 @@ GameObject::GameObject()
 	shouldDraw = true;
 }
 
+GameObject::GameObject(Vector2<float> position)
+{
+	this->position->x = position.x;
+	this->position->y = position.y;
+}
+
 GameObject::~GameObject()
 {
 

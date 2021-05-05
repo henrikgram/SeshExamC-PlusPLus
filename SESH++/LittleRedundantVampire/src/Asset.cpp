@@ -5,9 +5,15 @@ void Asset::LoadTextures()
 	ozzyTexture->loadFromFile("Asset/VampireOzzyStill.png");
 	ozzySheetTexture->loadFromFile("Asset/OzzySheet.png");
 	attackSheetTexture->loadFromFile("Asset/AttackSheet2.png");
+	wallTexture->loadFromFile("Asset/StoneWall.png");
+	floorWoodTexture->loadFromFile("Asset/WoodenFloor.png");
+	bookcaseTexture->loadFromFile("Asset/Bookcase.png");
 	textures.insert(make_pair(TextureTag::OZZY, *ozzyTexture));
 	textures.insert(make_pair(TextureTag::OZZYSHEET, *ozzySheetTexture));
 	textures.insert(make_pair(TextureTag::ATTACKSHEET, *attackSheetTexture));
+	textures.insert(make_pair(TextureTag::WALL, *wallTexture));
+	textures.insert(make_pair(TextureTag::FLOOR_WOOD, *floorWoodTexture));
+	textures.insert(make_pair(TextureTag::BOOKCASE, *bookcaseTexture));
 }
 
 Texture* Asset::GetTexture(TextureTag tag)
@@ -36,7 +42,7 @@ Asset::Asset()
 
 Asset::~Asset()
 {
-	//TODO: tjek om man skal frigøre alle variabler inden spillet lukkes, eller det er ligegyldigt.
+	//TODO: tjek om man skal frigï¿½re alle variabler inden spillet lukkes, eller det er ligegyldigt.
 }
 
 // Sets the instance to  nullptr. Because static variables need a definition.

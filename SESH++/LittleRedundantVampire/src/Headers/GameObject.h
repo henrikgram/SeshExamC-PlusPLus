@@ -9,8 +9,8 @@ class Component;
 
 /*
 * FROM STACK OVERFLOW
-* You cannot have two classes directly contain objects of the other type, 
-since otherwise you'd need infinite space for the object 
+* You cannot have two classes directly contain objects of the other type,
+since otherwise you'd need infinite space for the object
 (since foo has a bar that has a foo that has a bar that etc.)
 
 You can indeed do this by having the two classes store pointers to one another, though.
@@ -24,19 +24,22 @@ https://stackoverflow.com/questions/4964482/how-to-create-two-classes-in-c-which
 
 //#include "Component.h"
 #include "../Enum/ComponentTag.h"
+#include "../Enum/ObjectTag.h"
 
 using namespace sf;
 using namespace std;
 
-class GameObject 
+class GameObject
 {
 public:
 	//Map for all components attached to the gameobject
 	unordered_map<ComponentTag, Component*> components;
 	Vector2f * position = new Vector2f;
+	ObjectTag* objectTag = new ObjectTag();
 	bool shouldDraw;
 
 	GameObject();
+	GameObject(Vector2<float> position);
 	~GameObject();
 
 	/// <summary>
@@ -75,5 +78,4 @@ private:
 	unordered_map<ComponentTag, Component*>::iterator it;
 };
 
-#endif 
-
+#endif

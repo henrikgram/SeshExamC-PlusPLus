@@ -68,6 +68,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Command\PlayerInvoker.cpp">
+    <ClCompile Include="src\Levels\LevelManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BitmapImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,6 +141,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Headers\Command\PlayerInvoker.h">
+    <ClInclude Include="src\Headers\LevelManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Headers\BitmapImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -148,6 +156,27 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Asset\VampireOzzyStill.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Asset\Bookcase.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Asset\WoodenFloor.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Asset\StoneWall.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\Levels\Test.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\Levels\Test2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\Levels\Level1-DecorationLayer.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="src\Levels\Level1-ObjectLayer.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

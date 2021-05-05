@@ -13,6 +13,9 @@
 #include "Headers/Platform.h"
 #include "Headers/Global.h"
 #include "Headers/Command/PlayerInvoker.h"
+//#include "Headers/LevelManager.h"
+#include "Headers/BitmapImage.h"
+#include "Headers/LevelManager.h"
 
 using namespace std;
 using namespace sf;
@@ -187,6 +190,9 @@ int main()
 {
 	LoadContent();
 	Initialize();
+	
+	LevelManager* lm = new LevelManager();
+	gameObjects = lm->InstantiateLevel("Level1");
 
 	//Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
 

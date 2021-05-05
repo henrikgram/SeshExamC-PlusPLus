@@ -11,11 +11,14 @@ using namespace std;
 class Asset
 {
 private:
-	// TODO: Bliver den gemt for evigt feat johan olsen? Går den ud af scope? Who knows!
+	// TODO: Bliver den gemt for evigt feat johan olsen? Gï¿½r den ud af scope? Who knows!
 	unordered_map<TextureTag, Texture> textures;
 	Texture* ozzyTexture = new Texture;
 	Texture* ozzySheetTexture = new Texture;
 	Texture* attackSheetTexture = new Texture;
+	Texture* wallTexture = new Texture;
+	Texture* floorWoodTexture = new Texture;
+	Texture* bookcaseTexture = new Texture;
 
 	// Part of what makes the class a singleton.
 	static Asset* instance;
