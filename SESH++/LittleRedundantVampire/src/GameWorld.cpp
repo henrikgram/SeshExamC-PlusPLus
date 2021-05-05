@@ -81,8 +81,8 @@ void BootlegFactory(ObjectTag tag)
 		break;
 	case ObjectTag::DOOR:
 		break;
-	case ObjectTag::FLOOR:
-		break;
+	//case ObjectTag::FLOOR:
+	//	break;
 	case ObjectTag::BOOKCASE:
 		break;
 	case ObjectTag::VASE:
