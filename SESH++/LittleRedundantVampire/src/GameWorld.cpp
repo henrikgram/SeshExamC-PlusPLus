@@ -10,7 +10,7 @@
 #include "Enum/ObjectTag.h"
 //#include "Headers/Components/OldPlayer.h"
 #include "Headers/Platform.h"
-#include "Headers/Command/Invoker.h"
+#include "Headers/Command/PlayerInvoker.h"
 
 using namespace std;
 using namespace sf;
@@ -139,7 +139,7 @@ void Update(Time * timePerFrame)
 
     Player& playerRef = *playerPointer;
 
-    Invoker::GetInstance(playerRef)->InvokeCommand();
+    PlayerInvoker::GetInstance(playerRef)->InvokeCommand();
 }
 
 /// <summary>

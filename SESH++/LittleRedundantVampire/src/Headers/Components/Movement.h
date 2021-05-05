@@ -19,7 +19,7 @@ public:
 
 	ComponentTag ToEnum();
 
-	void Move();
+	void Move(Vector2f velocity);
 
 	void Normalize();
 
