@@ -49,7 +49,6 @@ void Attack::CreateAttack()
 	gameObject = new GameObject();
 
 	sr->SetSprite(TextureTag::ATTACKSHEET);
-	gameObject->position = new Vector2<float>(100, 100);
 	gameObject->AddComponent(sr);
 
 	gameObject->Awake();
