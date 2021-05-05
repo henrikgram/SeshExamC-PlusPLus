@@ -60,55 +60,28 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	return go;
 }
 
-
-
 vector<GameObject*>* LevelManager::InstantiateLevel(string levelName)
 {
 	vector<GameObject*>* gameObjects = new vector<GameObject*>;
 
-	BitmapImage ObjectLayer(0, 0);
-	BitmapImage DecorationLayer(0, 0);
+	BitmapImage objectLayer(0, 0);
+	BitmapImage decorationLayer(0, 0);
 
-	string sPath = filePath + levelName;
+	string sObjectPath = filePath + levelName + "-ObjectLayer.bmp";
+	string sDecorationPath = filePath + levelName + "-DecorationLayer.bmp";
 
-	const char* path = sPath.c_str();
+	const char* objectPath = sObjectPath.c_str();
+	const char* decorationPath = sDecorationPath.c_str();
 
-	ObjectLayer.Read(path);
+	objectLayer.Read(objectPath);
+	decorationLayer.Read(decorationPath);
 
-	/*CreateObjects(ObjectLayer);
-	CreateObjects(DecorationLayer);*/
+	vector<GameObject*>* objects = LevelSetup(objectLayer);
+	vector<GameObject*>* decorations = LevelSetup(decorationLayer);
 
-	/*v1.insert(v1.end(), v2.begin(), v2.end());
-
-	vector<GameObject*>* objects = LevelSetup(ObjectLayer);
-
-	gameObjects->insert();*/
-
-	for (int y = 0; y < ObjectLayer.GetHeight(); y++)
-	{
-		for (int x = 0; x < ObjectLayer.GetWidth(); x++)
-		{
-			BitmapColor color = ObjectLayer.GetColor(x, y);
-
-			color.b *= 255;
-			color.r *= 255;
-			color.g *= 255;
-
-
-			if (color.r == 159 && color.g == 159 && color.b == 170)
-			{
-				gameObjects->push_back(CreateObject(ObjectTag::WALL, x, y));
-			}
-
-			else if (color.r == 0 && color.g == 180 && color.b == 0)
-			{
-				gameObjects->push_back(CreateObject(ObjectTag::PLAYER, x, y));
-			}
-		}
-	}
+	gameObjects->insert(gameObjects->end(), objects->begin(), objects->end());
 
 	return gameObjects;
-
 }
 
 vector<GameObject*>* LevelManager::LevelSetup(BitmapImage& level)
@@ -125,16 +98,14 @@ vector<GameObject*>* LevelManager::LevelSetup(BitmapImage& level)
 			color.r *= 255;
 			color.g *= 255;
 
-
-			//if (color.r == 159 && color.g == 159 && color.b == 170)
-			//{
-			//	gameObjects->push_back(CreateObject(ObjectTag::WALL, x, y));
-			//}
-
-			//else if (color.r == 0 && color.g == 180 && color.b == 0)
-			//{
-			//	gameObjects->push_back(CreateObject(ObjectTag::PLAYER, x, y));
-			//}
+			if (color.r == 159 && color.g == 159 && color.b == 170)
+			{
+				gameObjects->push_back(CreateObject(ObjectTag::WALL, x, y));
+			}
+			else if (color.r == 0 && color.g == 180 && color.b == 0)
+			{
+				gameObjects->push_back(CreateObject(ObjectTag::PLAYER, x, y));
+			}
 		}
 	}
 
