@@ -2,6 +2,9 @@
 #include "../Component.h"
 #include "../../Enum/TextureTag.h"
 #include "../Asset.h"
+#include "AttackFactory.h"
+#include <string>
+
 using namespace sf;
 
 class Player : public Component
@@ -20,5 +23,7 @@ public:
 
 private:
 	float speed;
+	Attack* attack;
+	string direction;
 };
 

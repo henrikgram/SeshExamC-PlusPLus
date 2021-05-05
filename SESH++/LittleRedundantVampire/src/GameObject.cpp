@@ -6,7 +6,7 @@ using namespace std;
 
 GameObject::GameObject()
 {
-
+	shouldDraw = true;
 }
 
 GameObject::~GameObject()

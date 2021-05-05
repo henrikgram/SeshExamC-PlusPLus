@@ -1,4 +1,5 @@
 #include "../Headers/Components/Player.h"
+#include "../Enum/ObjectTag.h"
 #include <iostream>
 using namespace std;
 using namespace sf;
@@ -10,6 +11,7 @@ Player::~Player()
 
 void Player::Awake()
 {
+	//attack = new Attack(ObjectTag::PLAYER, Vector2f(gameObject->position->x, gameObject->position->y), direction);
 	speed = 5.0f;
 }
 
@@ -29,23 +31,34 @@ void Player::Update(Time* timePerFrame)
 	if (Keyboard::isKeyPressed(Keyboard::A))
 	{
 		movement.x -= timePerFrame->asMilliseconds();
+		direction = "left";
 	}
 	//Hoejre
 	if (Keyboard::isKeyPressed(Keyboard::D))
 	{
 		movement.x += timePerFrame->asMilliseconds();
+		direction = "right";
 	}
 	//Op
 	if (Keyboard::isKeyPressed(Keyboard::W))
 	{
 		movement.y -= timePerFrame->asMilliseconds();
+		direction = "up";
 	}
 	//Ned
 	if (Keyboard::isKeyPressed(Keyboard::S))
 	{
 		movement.y += timePerFrame->asMilliseconds();
+		direction = "down";
 	}
 
+	//Attack
+	if (Keyboard::isKeyPressed(Keyboard::Space))
+	{
+		attack = new Attack(ObjectTag::PLAYER, Vector2f(gameObject->position->x, gameObject->position->y), direction);
+	}
+
+	
 	//Vi udregner hypotenusen af bevaegelsesretningen.
 	float movementVectorLength = sqrt(movement.x * movement.x + movement.y * movement.y);
 

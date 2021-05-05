@@ -2,13 +2,14 @@
 #include "../Component.h"
 #include "../../Enum/TextureTag.h"
 #include "../Asset.h"
+#include "../../Enum/ObjectTag.h"
 #include <string>
 using namespace sf;
 
 class Attack : public Component
 {
 public:
-	Attack(Vector2f callerPosition, string direction);
+	Attack(ObjectTag tag, Vector2f callerPosition, string direction);
 	~Attack();
 
 	void Awake() override;
@@ -17,11 +18,18 @@ public:
 	void Destroy() override;
 	ComponentTag ToEnum() override;
 
+	void CreateAttack();
+	void StartAttack();
+
 
 private:
 	float attackTimer;
 	float attackLength;
-	string direction;
-	Vector2f callerPosition;
+
+	string* direction;
+
+	Vector2f* callerPosition;
+
+	ObjectTag* tag;
 };
 

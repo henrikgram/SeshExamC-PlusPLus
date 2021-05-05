@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Global.cpp" />
+    <ClCompile Include="src\Components\AttackFactory.cpp" />
     <ClCompile Include="src\Components\OldAttack.cpp" />
     <ClCompile Include="src\Components\OldPlayer.cpp" />
     <ClCompile Include="src\Components\Player.cpp" />
@@ -161,6 +163,8 @@
     <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Headers\Global.h" />
+    <ClInclude Include="src\Headers\Components\AttackFactory.h" />
     <ClInclude Include="src\Headers\Components\OldAttack.h" />
     <ClInclude Include="src\Headers\Components\OldPlayer.h" />
     <ClInclude Include="src\Headers\Components\Player.h" />
