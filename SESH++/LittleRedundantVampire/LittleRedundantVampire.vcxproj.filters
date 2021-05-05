@@ -54,6 +54,9 @@
     <ClCompile Include="src\Levels\LevelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Components\NPC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Headers\Asset.h">
@@ -104,6 +107,9 @@
     <ClInclude Include="src\Headers\LevelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Headers\Components\NPC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png">
@@ -125,6 +131,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="src\Levels\Level1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Asset\Ghost3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Asset\TextBox.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -5,6 +5,7 @@ enum class ObjectTag {
 	PLAYER,
 	ENEMY,
 	NPC,
+	TEXTBOX,
 	WALL,
 	DOOR,
 	FLOOR,

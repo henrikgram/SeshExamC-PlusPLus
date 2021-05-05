@@ -18,6 +18,8 @@ private:
 	Texture* wallTexture = new Texture;
 	Texture* floorTexture = new Texture;
 	Texture* bookcaseTexture = new Texture;
+	Texture* npcTexture = new Texture;
+	Texture* textBoxTexture = new Texture;
 
 	// Part of what makes the class a singleton.
 	static Asset* instance;

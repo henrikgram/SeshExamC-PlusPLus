@@ -9,11 +9,11 @@
 #include "Headers/Components/Player.h"
 #include "Headers/Platform.h"
 #include "Headers/LevelManager.h"
+#include "Headers/Components/NPC.h"
 
 using namespace std;
 using namespace sf;
 static const float VIEW_HEIGHT = 1024.0f;
-
 
 RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
@@ -21,6 +21,8 @@ View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 //TODO: check if heap or stack
 vector<GameObject> * gameObjects = new vector<GameObject>;
 vector<GameObject>::iterator it;
+
+bool textBoxOpen = false;
 
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
@@ -52,6 +54,9 @@ void BootlegFactory(ObjectTag tag)
     case ObjectTag::ENEMY:
         break;
     case ObjectTag::NPC:
+        sr->SetSprite(TextureTag::NPC);
+        go->position = new Vector2<float>(150, 100);
+        go->AddComponent(sr);
         break;
     case ObjectTag::WALL:
         sr->SetSprite(TextureTag::WALL);
@@ -102,6 +107,7 @@ void Initialize()
 {
     BootlegFactory(ObjectTag::PLAYER);
     BootlegFactory(ObjectTag::WALL);
+    BootlegFactory(ObjectTag::NPC);
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
@@ -149,6 +155,12 @@ void Draw()
 /// <returns></returns>
 int main()
 {
+    GdiplusStartupInput gdiplusStartupInput;
+    ULONG_PTR           gdiplusToken;
+
+    // Initialize GDI+.
+    GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+
     LevelManager lm;
 
     lm.InstantiateLevel();
@@ -157,7 +169,6 @@ int main()
     Initialize();
 
     //Her loader vi en texture til player.
-
 
     //Vi implementerer vores Animation-klasse, s� vi kan animere vores player.
     Player player(Asset::GetInstance()->GetTexture(TextureTag::OZZYSHEET),/* &attackTexture, */ Vector2u(4, 3), 0.13f, 5.0f);
@@ -209,11 +220,38 @@ int main()
 
         //Hvert gameloop korer vi Update paa vores animation.
        //Vi korer animationen for raekke 0 (1).
-
+        NPC* npc = new NPC();
+        //GameObject* npc = new GameObject();
+        SpriteRenderer* npcSr = new SpriteRenderer();
+        npcSr->SetSprite(TextureTag::NPC);
+        npc->position = new Vector2<float>(150, 100);
+        npc->AddComponent(npcSr);
+        GameObject npcGo = npc->TextBoxPopup();
         //window.setView(view);
 
         Draw();
         //window.clear(Color(0, 0, 0, 0));
+        if (Keyboard::isKeyPressed(Keyboard::F) && !textBoxOpen)
+        {
+            
+            gameObjects->push_back(npcGo);
+            textBoxOpen = true;
+        }
+        //// YOU ARE HERE
+        //else if (Keyboard::isKeyPressed(Keyboard::F) && textBoxOpen)
+        //{
+        //    for (it = gameObjects->begin(); it < gameObjects->end(); it++)
+        //    {
+        //        if (*it->objectTag == ObjectTag::NPC)
+        //        {
+        //            gameObjects->pop_back();
+        //        }
+        //    }
+        //    //gameObjects->pop_back();
+        //    //npc->TextBoxRemoval();
+        //    textBoxOpen = false;
+        //}
+        //window.clear();
         //player.Draw(window);
         //p1.Draw(window);
         //window.display();

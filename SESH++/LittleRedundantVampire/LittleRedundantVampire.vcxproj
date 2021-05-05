@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\NPC.cpp" />
     <ClCompile Include="src\Levels\LevelManager.cpp" />
     <ClCompile Include="src\Components\Player.cpp" />
     <ClCompile Include="src\Platform.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Headers\Components\NPC.h" />
     <ClInclude Include="src\Headers\LevelManager.h" />
     <ClInclude Include="src\Headers\Components\Player.h" />
     <ClInclude Include="src\Headers\Platform.h" />
@@ -180,6 +182,8 @@
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />
     <Image Include="Asset\Bookcase.png" />
+    <Image Include="Asset\Ghost3.png" />
+    <Image Include="Asset\TextBox.png" />
     <Image Include="Asset\WoodenFloor.png" />
     <Image Include="Asset\OzzySheet.png" />
     <Image Include="Asset\StoneWall.png" />

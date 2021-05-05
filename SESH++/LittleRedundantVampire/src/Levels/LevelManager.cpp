@@ -3,23 +3,19 @@
 
 void LevelManager::InstantiateLevel()
 {
-	//wstring path = L"C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Levels\Level1.bmp";
-	//LevelManager::level->FromFile(path.c_str(), true);
+	Bitmap* level1 = Bitmap::FromFile(L"src/Levels/Level1.bmp");
 
-	//Bitmap bm(L"/Levels/pik.bmp");
+	Color color;
 
-	Color pixelColor;
+	level1->GetPixel(0, 0, &color);
 
-	level->GetPixel(1, 1, &pixelColor);
+	byte b1 = color.GetBlue();
+	byte r1 = color.GetRed();
+	byte g1 = color.GetGreen();
 
-	byte a = pixelColor.GetA();
-	byte r = pixelColor.GetR();
-	byte g = pixelColor.GetG();
-	byte b = pixelColor.GetB();
+	byte a = color.GetA();
+	byte r = color.GetR();
+	byte g = color.GetG();
+	byte b = color.GetB();
 
-	pixelColor.MakeARGB(a, r, g, b);
-	
-	cout << pixelColor.GetGreen();
-
-	//cout << pixelColor << endl;
 }

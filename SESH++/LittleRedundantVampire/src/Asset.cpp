@@ -7,11 +7,15 @@ void Asset::LoadTextures()
 	wallTexture->loadFromFile("Asset/StoneWall.png");
 	floorTexture->loadFromFile("Asset/WoodenFloor.png");
 	bookcaseTexture->loadFromFile("Asset/Bookcase.png");
+	npcTexture->loadFromFile("Asset/Ghost3.png");
+	textBoxTexture->loadFromFile("Asset/TextBox.png");
 	textures.insert(make_pair(TextureTag::OZZY, *ozzyTexture));
 	textures.insert(make_pair(TextureTag::OZZYSHEET, *ozzySheetTexture));
 	textures.insert(make_pair(TextureTag::WALL, *wallTexture));
 	textures.insert(make_pair(TextureTag::FLOOR, *floorTexture));
 	textures.insert(make_pair(TextureTag::BOOKCASE, *bookcaseTexture));
+	textures.insert(make_pair(TextureTag::NPC, *npcTexture));
+	textures.insert(make_pair(TextureTag::TEXTBOX, *textBoxTexture));
 }
 
 Texture* Asset::GetTexture(TextureTag tag)
