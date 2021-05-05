@@ -54,10 +54,13 @@
     <ClCompile Include="src\Components\OldPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Headers\Command\MoveCommand.cpp">
+    <ClCompile Include="src\Command\Invoker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Command\Invoker.cpp">
+    <ClCompile Include="src\Command\MoveCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Movement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,6 +120,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Headers\Command\Invoker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Headers\Components\Movement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

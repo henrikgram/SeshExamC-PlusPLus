@@ -145,10 +145,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\Movement.cpp" />
     <ClCompile Include="src\Command\Invoker.cpp" />
     <ClCompile Include="src\Components\OldPlayer.cpp" />
     <ClCompile Include="src\Components\Player.cpp" />
-    <ClCompile Include="src\Headers\Command\MoveCommand.cpp" />
+    <ClCompile Include="src\Command\MoveCommand.cpp" />
     <ClCompile Include="src\Platform.cpp" />
     <ClCompile Include="src\IGameEvent.cpp" />
     <ClCompile Include="src\CollisionEvent.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Headers\Components\Movement.h" />
     <ClInclude Include="src\Headers\Command\ICommand.h" />
     <ClInclude Include="src\Headers\Command\MoveCommand.h" />
     <ClInclude Include="src\Headers\Command\Invoker.h" />

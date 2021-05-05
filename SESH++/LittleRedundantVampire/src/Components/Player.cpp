@@ -45,7 +45,6 @@ void Player::Normalize()
 		velocity.y *= speed;
 
 		cout << velocity.x << " : " << velocity.y << "\n";
-
 		*gameObject->position += velocity;
 		velocity = Vector2f(0.0f, 0.0f);
 	}
