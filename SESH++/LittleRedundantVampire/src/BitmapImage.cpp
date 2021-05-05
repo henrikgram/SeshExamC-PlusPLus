@@ -45,6 +45,8 @@ void BitmapImage::SetColor(const BitmapColor& color, int x, int y)
 	colors[y * width + x].b = color.b;
 }
 
+
+//TODO: find ud af hvorfor pointer her
 void BitmapImage::Read(const char* path)
 {
 	std::ifstream f;
@@ -92,7 +94,7 @@ void BitmapImage::Read(const char* path)
 
 	const int paddingAmount =((4 - (width * 3) % 4) % 4);
 
-	for (int y = 0; y < height; y++)
+	for (int y = height-1; y >= 0; y--)
 	{
 		for (int x = 0; x < width; x++)
 		{
@@ -126,7 +128,6 @@ void BitmapImage::Export(const char* path)
 		std::cout << "Couldn't open file\n";
 		return;
 	} 
-
 	
 	//Padding for bitmap. Each colorchangel has 3 bytes for storing data.
 	//The color array should have a row, which has an amount of memory thats divideable by 4.
@@ -174,7 +175,6 @@ void BitmapImage::Export(const char* path)
 	fileHeader[11] = 0;
 	fileHeader[12] = 0;
 	fileHeader[13] = 0;
-
 
 	unsigned char informationHeader[InformationHeaderSize];
 	//Headersize 
@@ -274,4 +274,14 @@ void BitmapImage::Export(const char* path)
 
 	std::cout << "File created!\n";
 
+}
+
+int BitmapImage::GetHeight()
+{
+	return height;
+}
+
+int BitmapImage::GetWidth()
+{
+	return width;
 }

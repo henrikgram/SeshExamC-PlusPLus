@@ -180,7 +180,7 @@ int main()
     Initialize();
 
     LevelManager* lm = new LevelManager();
-    gameObjects = lm->InstantiateLevel();
+    gameObjects = lm->InstantiateLevel("Test2.bmp");
     
 
  

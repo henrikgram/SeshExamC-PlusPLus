@@ -186,6 +186,8 @@
     <Image Include="Asset\OzzySheet.png" />
     <Image Include="Asset\StoneWall.png" />
     <Image Include="Asset\VampireOzzyStill.png" />
+    <Image Include="src\Levels\Level1-DecorationLayer.bmp" />
+    <Image Include="src\Levels\Level1-ObjectLayer.bmp" />
     <Image Include="src\Levels\Test.bmp" />
     <Image Include="src\Levels\Test2.bmp" />
   </ItemGroup>

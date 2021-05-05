@@ -4,28 +4,20 @@
 #include "GameObject.h"
 #include "../Enum/TextureTag.h"
 #include "Components/SpriteRenderer.h"
-//#include <Windows.h>
-//#include <ObjIdl.h>
-//#include <gdiplus.h>
-//#include <string>
-//
-//#pragma comment (lib,"Gdiplus.lib")
-//
-//using namespace std;
-//
-//using namespace Gdiplus;
+
+using namespace std;
+
 
 class LevelManager
 {
 private:
-	//Bitmap* level;
+	string filePath = "src/Levels/";
 
 public:
-	vector<GameObject*>* InstantiateLevel();
+	vector<GameObject*>* InstantiateLevel(string levelName);
+	vector<GameObject*>* LevelSetup(BitmapImage& level);
+	GameObject* CreateObject(ObjectTag tag, float posX, float posY);
 
-	       // // Retrieve the image.
-        //image1 = new Bitmap(@"C:\Documents and Settings\All Users\" 
-        //    + @"Documents\My Music\music.bmp", true);
 
 };
 
