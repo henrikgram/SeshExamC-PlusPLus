@@ -32,7 +32,7 @@ public:
 	/// Runs all update code needed to update specific objects.
 	/// For example if an object moves.
 	/// </summary>
-	virtual void Update() = 0;
+	virtual void Update(Time* timePerFrame) = 0;
 
 	/// <summary>
 	/// Destroy and remove the component from the game.

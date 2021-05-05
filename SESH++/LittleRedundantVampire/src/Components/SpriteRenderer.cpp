@@ -10,8 +10,6 @@ SpriteRenderer::~SpriteRenderer()
 
 	delete texture;
 	texture = nullptr;
-
-	
 }
 
 void SpriteRenderer::Awake()
@@ -24,7 +22,7 @@ void SpriteRenderer::Start()
 
 }
 
-void SpriteRenderer::Update()
+void SpriteRenderer::Update(Time* timePerFrame)
 {
 	//TODO:Make sure that the position is NOT OUTDATED
 	sprite->setPosition(*gameObject->position);

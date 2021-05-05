@@ -12,7 +12,7 @@ public:
 	
 	 void Awake() override;
 	 void Start() override;
-	 void Update() override;
+	 void Update(Time* timePerFrame) override;
 	 void Destroy() override;
 	 ComponentTag ToEnum() override;
 

@@ -6,7 +6,7 @@ using namespace std;
 
 GameObject::GameObject()
 {
-
+	shouldDraw = true;
 }
 
 GameObject::~GameObject()
@@ -21,7 +21,7 @@ void GameObject::Update(Time* timePerFrame)
 	//iterates through the gameObjects and calls Update
 	for (it = components.begin(); it != components.end(); it++)
 	{
-		it->second->Update();
+		it->second->Update(timePerFrame);
 	}
 }
 
