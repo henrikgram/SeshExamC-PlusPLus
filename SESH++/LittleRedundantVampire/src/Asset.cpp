@@ -5,12 +5,12 @@ void Asset::LoadTextures()
 	ozzyTexture->loadFromFile("Asset/VampireOzzyStill.png");
 	ozzySheetTexture->loadFromFile("Asset/OzzySheet.png");
 	wallTexture->loadFromFile("Asset/StoneWall.png");
-	floorTexture->loadFromFile("Asset/WoodenFloor.png");
+	floorWoodTexture->loadFromFile("Asset/WoodenFloor.png");
 	bookcaseTexture->loadFromFile("Asset/Bookcase.png");
 	textures.insert(make_pair(TextureTag::OZZY, *ozzyTexture));
 	textures.insert(make_pair(TextureTag::OZZYSHEET, *ozzySheetTexture));
 	textures.insert(make_pair(TextureTag::WALL, *wallTexture));
-	textures.insert(make_pair(TextureTag::FLOOR, *floorTexture));
+	textures.insert(make_pair(TextureTag::FLOOR_WOOD, *floorWoodTexture));
 	textures.insert(make_pair(TextureTag::BOOKCASE, *bookcaseTexture));
 }
 

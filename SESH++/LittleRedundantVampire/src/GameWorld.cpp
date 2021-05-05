@@ -36,64 +36,64 @@ void ResizeView(const RenderWindow& window, View& view)
     view.setSize(VIEW_HEIGHT * aspectRatio, VIEW_HEIGHT);
 }
 
-//TODO: check if this is fine, or actual factory is needed
-void BootlegFactory(ObjectTag tag)
-{
-    //TODO: tjek hvis den ryger ud af scope.
-    GameObject * go = new GameObject();
-    SpriteRenderer* sr = new SpriteRenderer();
-    //Collider* colider = new Collider();
-
-    switch (tag)
-    {
-    case ObjectTag::PLAYER:
-        sr->SetSprite(TextureTag::OZZY);
-        go->position = new Vector2<float>(200, 1);
-        go->AddComponent(sr);
-        break;
-    case ObjectTag::ENEMY:
-        break;
-    case ObjectTag::NPC:
-        break;
-    case ObjectTag::WALL:
-        sr->SetSprite(TextureTag::WALL);
-        go->AddComponent(sr);
-        go->position = new Vector2<float>(1, 1);
-        *go->objectTag = ObjectTag::WALL;
-        break;
-    case ObjectTag::DOOR:
-        sr->SetSprite(TextureTag::DOOR);
-        go->AddComponent(sr);
-        *go->objectTag = ObjectTag::DOOR;
-        break;
-    case ObjectTag::FLOOR:
-        sr->SetSprite(TextureTag::FLOOR);
-        go->AddComponent(sr);
-        *go->objectTag = ObjectTag::FLOOR;
-        break;
-    case ObjectTag::BOOKCASE:
-        sr->SetSprite(TextureTag::BOOKCASE);
-        go->AddComponent(sr);
-        *go->objectTag = ObjectTag::BOOKCASE;
-        break;
-    case ObjectTag::VASE:
-        sr->SetSprite(TextureTag::VASE);
-        go->AddComponent(sr);
-        *go->objectTag = ObjectTag::VASE;
-        break;
-    case ObjectTag::WINDOW:
-        break;
-    case ObjectTag::CRATE:
-        break;
-    default:
-        break;
-    }
-
-    go->Awake();
-    go->Start();
-
-    gameObjects.push_back(go);
-}
+////TODO: check if this is fine, or actual factory is needed
+//void BootlegFactory(ObjectTag tag)
+//{
+//    //TODO: tjek hvis den ryger ud af scope.
+//    GameObject * go = new GameObject();
+//    SpriteRenderer* sr = new SpriteRenderer();
+//    //Collider* colider = new Collider();
+//
+//    switch (tag)
+//    {
+//    case ObjectTag::PLAYER:
+//        sr->SetSprite(TextureTag::OZZY);
+//        go->position = new Vector2<float>(200, 1);
+//        go->AddComponent(sr);
+//        break;
+//    case ObjectTag::ENEMY:
+//        break;
+//    case ObjectTag::NPC:
+//        break;
+//    case ObjectTag::WALL:
+//        sr->SetSprite(TextureTag::WALL);
+//        go->AddComponent(sr);
+//        go->position = new Vector2<float>(1, 1);
+//        *go->objectTag = ObjectTag::WALL;
+//        break;
+//    case ObjectTag::DOOR:
+//        sr->SetSprite(TextureTag::DOOR);
+//        go->AddComponent(sr);
+//        *go->objectTag = ObjectTag::DOOR;
+//        break;
+//    case ObjectTag::FLOOR:
+//        sr->SetSprite(TextureTag::FLOOR);
+//        go->AddComponent(sr);
+//        *go->objectTag = ObjectTag::FLOOR;
+//        break;
+//    case ObjectTag::BOOKCASE:
+//        sr->SetSprite(TextureTag::BOOKCASE);
+//        go->AddComponent(sr);
+//        *go->objectTag = ObjectTag::BOOKCASE;
+//        break;
+//    case ObjectTag::VASE:
+//        sr->SetSprite(TextureTag::VASE);
+//        go->AddComponent(sr);
+//        *go->objectTag = ObjectTag::VASE;
+//        break;
+//    case ObjectTag::WINDOW:
+//        break;
+//    case ObjectTag::CRATE:
+//        break;
+//    default:
+//        break;
+//    }
+//
+//    go->Awake();
+//    go->Start();
+//
+//    gameObjects.push_back(go);
+//}
 
 void LoadContent()
 {  

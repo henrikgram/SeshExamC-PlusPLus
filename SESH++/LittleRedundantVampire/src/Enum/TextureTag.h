@@ -4,13 +4,17 @@
 enum class TextureTag {
 	OZZY,
 	OZZYSHEET,
+	NPC,
 	WALL,
-	FLOOR,
+	FLOOR_CARPET,
+	FLOOR_WOOD,
 	BOOKCASE,
+	ENEMY,
 	VASE,
 	KEY,
 	DOOR,
 	CRATE,
+	CHEST,
 	WINDOW
 };
 

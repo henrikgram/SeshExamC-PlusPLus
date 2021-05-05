@@ -16,7 +16,7 @@ private:
 	Texture* ozzyTexture = new Texture;
 	Texture* ozzySheetTexture = new Texture;
 	Texture* wallTexture = new Texture;
-	Texture* floorTexture = new Texture;
+	Texture* floorWoodTexture = new Texture;
 	Texture* bookcaseTexture = new Texture;
 
 	// Part of what makes the class a singleton.
