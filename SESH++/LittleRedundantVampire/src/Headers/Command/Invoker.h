@@ -29,6 +29,4 @@ private:
 	unordered_map<Keyboard::Key, ICommand*>::iterator keyIt;
 };
 
-Invoker* Invoker::instance = nullptr;;
-
 

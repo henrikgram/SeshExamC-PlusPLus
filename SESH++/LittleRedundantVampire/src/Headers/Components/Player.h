@@ -18,10 +18,11 @@ public:
 	void Destroy() override;
 	ComponentTag ToEnum() override;
 
-	void Normalize(Vector2f& movement);
+	void Normalize();
 
 private:
 	float speed;
+	Vector2f velocity;
 };
 
 

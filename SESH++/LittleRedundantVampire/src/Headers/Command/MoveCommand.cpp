@@ -1,8 +1,8 @@
 #include "MoveCommand.h"
 
-MoveCommand::MoveCommand(Player& receiver, Vector2f velocity) : receiver(receiver)
+MoveCommand::MoveCommand(Player& receiver, Vector2f* velocity) : receiver(receiver)
 {
-	this->velocity = new Vector2f(velocity);
+	this->velocity = velocity;
 }
 
 MoveCommand::~MoveCommand()
