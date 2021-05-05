@@ -1,22 +1,34 @@
 #include <iostream>
 #include "../Headers/Components/Collider.h"
 
-Collider::Collider(RectangleShape& body) : body(body)
+Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool solid)
 {
-	onColliding.Attach(this);
+	collisionBox = new RectangleShape(size);
+	collisionBox->setPosition(position);
+	collisionBox->setOrigin(size / 2.0f);
+	this->pushFactor = new float(std::min(std::max(pushFactor, 0.0f), 1.0f)); //Clamps the pushposition betwwen 0 and 1.
+	this->solid = new bool(solid);
 }
 
 Collider::~Collider()
 {
+	delete collisionBox;
+	collisionBox = nullptr;
+
+	delete pushFactor;
+	pushFactor = nullptr;
+
+	delete solid;
+	solid = nullptr;
 }
 
-bool Collider::CheckCollision(const Collider& other, float pushFactor)
+bool Collider::CheckCollision(Collider* other)
 {
 	Vector2f position = GetPosition();
 	Vector2f halfSize = GetHalfsize();
 
-	Vector2f otherPosition = other.GetPosition();
-	Vector2f otherHalfSize = other.GetHalfsize();
+	Vector2f otherPosition = other->GetPosition();
+	Vector2f otherHalfSize = other->GetHalfsize();
 
 	float deltaX = otherPosition.x - position.x;
 	float deltaY = otherPosition.y - position.y;
@@ -28,42 +40,70 @@ bool Collider::CheckCollision(const Collider& other, float pushFactor)
 	{
 		onColliding.Notify();
 
-		pushFactor = std::min(std::max(pushFactor, 0.0f), 1.0f); //Clamps the pushposition betwwen 0 and 1.
-
-		if (intersectX > intersectY)
+		//TODO: All this following is related to pushing an object and maybe shouldn't be in this class. 
+		if (*solid == true)
 		{
-			if (deltaX > 0.0f)
+			if (intersectX > intersectY)
 			{
-				Move(intersectX * (1.0f - pushFactor), 0.0f);
-				other.Move(-intersectX * pushFactor, 0.0f);
+				if (deltaX > 0.0f)
+				{
+					//Move(intersectX * (1.0f - *pushFactor), 0.0f);
+					//other.Move(-intersectX * *pushFactor, 0.0f);
+					cout << "You're colliding with the left side\n";
+				}
+				else
+				{
+					//Move(-intersectX * (1.0f - *pushFactor), 0.0f);
+					//other.Move(intersectX * *pushFactor, 0.0f);
+					cout << "You're colliding with the right side\n";
+				}
 			}
 			else
 			{
-				Move(-intersectX * (1.0f - pushFactor), 0.0f);
-				other.Move(intersectX * pushFactor, 0.0f);
+				if (deltaY > 0.0f)
+				{
+					//Move(0.0f, intersectY * (1.0f - *pushFactor));
+					//other.Move(0.0f, -intersectY * *pushFactor);
+					cout << "You're colliding with the top\n";
+				}
+				else
+				{
+					//Move(0.0f, -intersectY * (1.0f - *pushFactor));
+					//other.Move(0.0f, intersectY * *pushFactor);
+					cout << "You're colliding with the bottom\n";
+				}
 			}
 		}
-		else
-		{
-			if (deltaY > 0.0f)
-			{
-				Move(0.0f, intersectY * (1.0f - pushFactor));
-				other.Move(0.0f, -intersectY * pushFactor);
-			}
-			else
-			{
-				Move(0.0f, -intersectY * (1.0f - pushFactor));
-				other.Move(0.0f, intersectY * pushFactor);
-			}
-		}
-
 		return true; //The objects are intersecting = We are colliding)
 	}
 
 	return false; //The objects are not intersecting = We are not colliding
 }
 
-void Collider::Notify(std::string eventName)
+void Collider::Awake()
 {
-	cout << "Oh dear I hit something\n";
+	onColliding.Attach(this);
+}
+
+void Collider::Start()
+{
+	unordered_map<ComponentTag, Component*>::iterator it;
+	for (it = gameObject->components.begin(); it != gameObject->components.end(); it++)
+	{
+		onColliding.Attach(it->second);
+	}
+}
+
+void Collider::Update(Time* timePerFrame)
+{
+
+}
+
+void Collider::Destroy()
+{
+}
+
+ComponentTag Collider::ToEnum()
+{
+	return ComponentTag::COLLIDER;
 }

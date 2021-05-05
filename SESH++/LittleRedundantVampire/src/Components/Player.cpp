@@ -1,3 +1,4 @@
+
 #include "../Headers/Components/Player.h"
 #include "../Enum/ObjectTag.h"
 #include <iostream>
@@ -9,10 +10,16 @@ Player::~Player()
 
 }
 
+void Player::Move(Vector2f velocity)
+{
+	this->velocity += velocity;
+}
+
 void Player::Awake()
 {
 	//attack = new Attack(ObjectTag::PLAYER, Vector2f(gameObject->position->x, gameObject->position->y), direction);
 	speed = 5.0f;
+	velocity = Vector2f(0.0f, 0.0f);
 }
 
 void Player::Start()
@@ -22,67 +29,27 @@ void Player::Start()
 
 void Player::Update(Time* timePerFrame)
 {
-	//Bestemmer hvilken retning du bevaeger dig.
-	Vector2f movement(0.0f, 0.0f);
-
-
-	//Bestemmer hvilken retning du skal aendre til baseret paa input fra keyboard.
-	//Venstre
-	if (Keyboard::isKeyPressed(Keyboard::A))
-	{
-		movement.x -= timePerFrame->asMilliseconds();
-		direction = "left";
-	}
-	//Hoejre
-	if (Keyboard::isKeyPressed(Keyboard::D))
-	{
-		movement.x += timePerFrame->asMilliseconds();
-		direction = "right";
-	}
-	//Op
-	if (Keyboard::isKeyPressed(Keyboard::W))
-	{
-		movement.y -= timePerFrame->asMilliseconds();
-		direction = "up";
-	}
-	//Ned
-	if (Keyboard::isKeyPressed(Keyboard::S))
-	{
-		movement.y += timePerFrame->asMilliseconds();
-		direction = "down";
-	}
-
-	//Attack
-	if (Keyboard::isKeyPressed(Keyboard::Space))
-	{
-		attack = new Attack(ObjectTag::PLAYER, Vector2f(gameObject->position->x, gameObject->position->y), direction);
-	}
-
-	
-	//Vi udregner hypotenusen af bevaegelsesretningen.
-	float movementVectorLength = sqrt(movement.x * movement.x + movement.y * movement.y);
-
-	//Vi normaliserer retningen ift til hypotenusens laengde.
-	if (movement != Vector2f(0.0f, 0.0f))
-	{
-		Normalize(movement);
-	}
-
-
-	*gameObject->position += movement;
+	Normalize();
 }
 
-void Player::Normalize(Vector2f& movement)
+void Player::Normalize()
 {
-	//Vi udregner hypotenusen af bevaegelsesretningen.
-	float movementVectorLength = sqrt(movement.x * movement.x + movement.y * movement.y);
+	if (velocity != Vector2f(0.0f, 0.0f))
+	{
+		//Vi udregner hypotenusen af bevaegelsesretningen.
+		float movementVectorLength = sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
 
-	//Vi normaliserer retningen ift til hypotenusens laengde.
-	movement.x /= movementVectorLength;
-	movement.y /= movementVectorLength;
+		//Vi normaliserer retningen ift til hypotenusens laengde.
+		velocity.x /= movementVectorLength;
+		velocity.y /= movementVectorLength;
 
-	movement.x *= speed;
-	movement.y *= speed;
+		velocity.x *= speed;
+		velocity.y *= speed;
+
+		cout << velocity.x << " : " << velocity.y << "\n";
+		*gameObject->position += velocity;
+		velocity = Vector2f(0.0f, 0.0f);
+	}
 }
 
 void Player::Destroy()

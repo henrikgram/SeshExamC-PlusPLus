@@ -8,6 +8,10 @@ CollisionEvent::CollisionEvent()
 
 CollisionEvent::~CollisionEvent()
 {
+    for (auto&& listener : listeners) {
+        delete listener;
+    }
+    listeners.clear();
 }
 
 void CollisionEvent::Attach(IListener* listener)

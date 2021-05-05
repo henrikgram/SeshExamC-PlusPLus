@@ -51,7 +51,7 @@ public:
 
 	Vector2f GetPosition() { return body.getPosition(); }
 
-	Collider GetCollider() { return Collider(body); }
+	//Collider GetCollider() { return Collider(body); }
 
 private:
 	//Spillerns rectangle

@@ -12,6 +12,7 @@
 //#include "Headers/Components/OldPlayer.h"
 #include "Headers/Platform.h"
 #include "Headers/Global.h"
+#include "Headers/Command/PlayerInvoker.h"
 
 using namespace std;
 using namespace sf;
@@ -21,11 +22,18 @@ static const float VIEW_HEIGHT = 1024.0f;
 RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
+
 //TODO: check if heap or stack
 //vector<GameObject>::iterator it;
 //vector<GameObject> gameObjects = Global::GetInstance()->GetGameObjects();
 
 //const vector<GameObject>& gameObjects = Global::GetGameObjects();
+
+vector<Collider*> colliders;
+
+
+Player* playerPointer;
+
 
 
 /// <summary>
@@ -46,6 +54,7 @@ void BootlegFactory(ObjectTag tag)
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject();
 	SpriteRenderer* sr = new SpriteRenderer();
+	Collider* col;
 
 	switch (tag)
 	{
@@ -53,7 +62,13 @@ void BootlegFactory(ObjectTag tag)
 		sr->SetSprite(TextureTag::OZZY);
 		go->position = new Vector2<float>(50, 50);
 		go->AddComponent(sr);
-		go->AddComponent(new Player());
+		playerPointer = new Player();
+		go->AddComponent(playerPointer);
+
+		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, true);
+		go->AddComponent(col);
+		colliders.push_back(col);
 		break;
 	case ObjectTag::ENEMY:
 		break;
@@ -72,6 +87,13 @@ void BootlegFactory(ObjectTag tag)
 	case ObjectTag::WINDOW:
 		break;
 	case ObjectTag::CRATE:
+	sr->SetSprite(TextureTag::OZZY);
+	go->position = new Vector2f(150, 150);
+	go->AddComponent(sr);
+
+	col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, false);
+	go->AddComponent(col);
+	colliders.push_back(col);
 		break;
 	default:
 		break;
@@ -91,7 +113,8 @@ void LoadContent()
 
 void Initialize()
 {
-	BootlegFactory(ObjectTag::PLAYER);
+    BootlegFactory(ObjectTag::PLAYER);
+    BootlegFactory(ObjectTag::CRATE);
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
@@ -110,6 +133,23 @@ void Update(Time* timePerFrame)
 	{
 		(*Global::GetInstance()->GetGameObjects())[i]->Update(timePerFrame);
 	}
+
+	vector<Collider*>::iterator colIt;
+	vector<Collider*>::iterator colIt2;
+	for (colIt = colliders.begin(); colIt < colliders.end(); colIt++)
+	{
+			for (colIt2 = colliders.begin(); colIt2 < colliders.end(); colIt2++)
+			{
+					if (colIt != colIt2)
+					{
+							(*colIt)->CheckCollision(*colIt2);
+					}
+			}
+	}
+
+	Player& playerRef = *playerPointer;
+
+	PlayerInvoker::GetInstance(playerRef)->InvokeCommand();
 }
 
 /// <summary>
@@ -176,7 +216,7 @@ int main()
 		}
 
 		// For fixed update and 60 frames per second.
-		// Clock is restarted to make sure we start from 0 every time.      
+		// Clock is restarted to make sure we start from 0 every time.
 		timeSinceLastUpdate += deltaClock.restart();
 
 		// Once we reach 60 frames, we reset timeSinceLastUpdate, run Update(), and move the character.

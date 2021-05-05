@@ -148,8 +148,11 @@
     <ClCompile Include="src\Global.cpp" />
     <ClCompile Include="src\Components\AttackFactory.cpp" />
     <ClCompile Include="src\Components\OldAttack.cpp" />
+    <ClCompile Include="src\Components\Movement.cpp" />
+    <ClCompile Include="src\Command\PlayerInvoker.cpp" />
     <ClCompile Include="src\Components\OldPlayer.cpp" />
     <ClCompile Include="src\Components\Player.cpp" />
+    <ClCompile Include="src\Command\MoveCommand.cpp" />
     <ClCompile Include="src\Platform.cpp" />
     <ClCompile Include="src\IGameEvent.cpp" />
     <ClCompile Include="src\CollisionEvent.cpp" />
@@ -166,6 +169,10 @@
     <ClInclude Include="src\Headers\Global.h" />
     <ClInclude Include="src\Headers\Components\AttackFactory.h" />
     <ClInclude Include="src\Headers\Components\OldAttack.h" />
+    <ClInclude Include="src\Headers\Components\Movement.h" />
+    <ClInclude Include="src\Headers\Command\ICommand.h" />
+    <ClInclude Include="src\Headers\Command\MoveCommand.h" />
+    <ClInclude Include="src\Headers\Command\PlayerInvoker.h" />
     <ClInclude Include="src\Headers\Components\OldPlayer.h" />
     <ClInclude Include="src\Headers\Components\Player.h" />
     <ClInclude Include="src\Headers\Platform.h" />

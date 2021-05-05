@@ -15,7 +15,7 @@ public:
 /// <param name="window">Det vindue som vi skal render sprite i.</param>
 	void Draw(RenderWindow& window);
 
-	Collider GetCollider() { return Collider(body); }
+	//Collider GetCollider() { return Collider(body); }
 
 private:
 	RectangleShape body;
