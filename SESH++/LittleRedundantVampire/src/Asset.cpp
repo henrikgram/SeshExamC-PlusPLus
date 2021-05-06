@@ -18,7 +18,6 @@ void Asset::LoadTextures()
 
 Texture* Asset::GetTexture(TextureTag tag)
 {
-	Texture txt;
 	unordered_map<TextureTag, Texture>::iterator it;
 	it = textures.find(tag);
 

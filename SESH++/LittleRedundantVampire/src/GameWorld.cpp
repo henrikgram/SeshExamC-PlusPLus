@@ -116,8 +116,8 @@ void LoadContent()
 
 void Initialize()
 {
-    BootlegFactory(ObjectTag::PLAYER);
-    BootlegFactory(ObjectTag::CRATE);
+    /*BootlegFactory(ObjectTag::PLAYER);
+    BootlegFactory(ObjectTag::CRATE);*/
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
@@ -192,7 +192,7 @@ int main()
 	Initialize();
 	
 	LevelManager* lm = new LevelManager();
-	gameObjects = lm->InstantiateLevel("Level1");
+	*Global::GetInstance()->GetGameObjects() = lm->InstantiateLevel("Level1");
 
 	//Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
 
