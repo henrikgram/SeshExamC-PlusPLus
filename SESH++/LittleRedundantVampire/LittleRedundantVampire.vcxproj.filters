@@ -1,183 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="src\Global.cpp" />
+    <ClCompile Include="src\Components\AttackFactory.cpp" />
+    <ClCompile Include="src\Components\OldAttack.cpp" />
+    <ClCompile Include="src\Components\Movement.cpp" />
+    <ClCompile Include="src\Command\PlayerInvoker.cpp" />
+    <ClCompile Include="src\Components\OldPlayer.cpp" />
+    <ClCompile Include="src\BitmapImage.cpp" />
+    <ClCompile Include="src\Levels\LevelManager.cpp" />
+    <ClCompile Include="src\Components\Player.cpp" />
+    <ClCompile Include="src\Command\MoveCommand.cpp" />
+    <ClCompile Include="src\Platform.cpp" />
+    <ClCompile Include="src\IGameEvent.cpp" />
+    <ClCompile Include="src\CollisionEvent.cpp" />
+    <ClCompile Include="src\Components\Collider.cpp" />
+    <ClCompile Include="src\Components\Attack.cpp" />
+    <ClCompile Include="src\Components\Animation.cpp" />
+    <ClCompile Include="src\Components\SpriteRenderer.cpp" />
+    <ClCompile Include="src\Component.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\Asset.cpp" />
+    <ClCompile Include="src\GameWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\GameWorld.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Asset.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\SpriteRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CollisionEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IGameEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Attack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Collider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\OldPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\OldAttack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\AttackFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Global.cpp">
-    <ClCompile Include="src\Command\MoveCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Movement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Command\PlayerInvoker.cpp">
-    <ClCompile Include="src\Levels\LevelManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BitmapImage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="src\Headers\Global.h" />
+    <ClInclude Include="src\Headers\Components\AttackFactory.h" />
+    <ClInclude Include="src\Headers\Components\OldAttack.h" />
+    <ClInclude Include="src\Headers\Components\Movement.h" />
+    <ClInclude Include="src\Headers\Command\ICommand.h" />
+    <ClInclude Include="src\Headers\Command\MoveCommand.h" />
+    <ClInclude Include="src\Headers\Command\PlayerInvoker.h" />
+    <ClInclude Include="src\Headers\Components\OldPlayer.h" />
+    <ClInclude Include="src\Headers\BitmapImage.h" />
+    <ClInclude Include="src\Headers\LevelManager.h" />
+    <ClInclude Include="src\Headers\Components\Player.h" />
+    <ClInclude Include="src\Headers\Platform.h" />
+    <ClInclude Include="src\Headers\IGameEvent.h" />
+    <ClInclude Include="src\Headers\CollisionEvent.h" />
+    <ClInclude Include="src\Headers\Components\Collider.h" />
+    <ClInclude Include="src\Headers\Components\Attack.h" />
+    <ClInclude Include="src\Headers\Components\Animation.h" />
+    <ClInclude Include="src\Enum\ObjectTag.h" />
+    <ClInclude Include="src\Headers\Components\SpriteRenderer.h" />
+    <ClInclude Include="src\Headers\Component.h" />
+    <ClInclude Include="src\Enum\ComponentTag.h" />
+    <ClInclude Include="src\Enum\TextureTag.h" />
+    <ClInclude Include="src\Headers\GameObject.h" />
+    <ClInclude Include="src\Headers\Asset.h" />
+    <ClInclude Include="src\Headers\IListener.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Headers\Asset.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Enum\TextureTag.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Enum\ComponentTag.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Components\SpriteRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Enum\ObjectTag.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\CollisionEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\IGameEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\IListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Platform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Components\Collider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Components\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Components\Attack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Components\Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Components\OldPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Components\OldAttack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Components\AttackFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Global.h">
-    <ClInclude Include="src\Headers\Command\ICommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Command\MoveCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Components\Movement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\Command\PlayerInvoker.h">
-    <ClInclude Include="src\Headers\LevelManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Headers\BitmapImage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Asset\AttackSheet2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Asset\OzzySheet.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Asset\VampireOzzyStill.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Asset\Bookcase.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Asset\WoodenFloor.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Asset\StoneWall.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="src\Levels\Test.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="src\Levels\Test2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="src\Levels\Level1-DecorationLayer.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="src\Levels\Level1-ObjectLayer.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <Image Include="Asset\AttackSheet2.png" />
+    <Image Include="Asset\Bookcase.png" />
+    <Image Include="Asset\WoodenFloor.png" />
+    <Image Include="Asset\OzzySheet.png" />
+    <Image Include="Asset\StoneWall.png" />
+    <Image Include="Asset\VampireOzzyStill.png" />
+    <Image Include="src\Levels\Level1-DecorationLayer.bmp" />
+    <Image Include="src\Levels\Level1-ObjectLayer.bmp" />
+    <Image Include="src\Levels\Test.bmp" />
+    <Image Include="src\Levels\Test2.bmp" />
+    <Image Include="Asset\FloorCarpet.png" />
+    <Image Include="Asset\Crate.png" />
+    <Image Include="Asset\DoorClosed.png" />
+    <Image Include="Asset\DoorOpen.png" />
+    <Image Include="Asset\healthUI.png" />
+    <Image Include="Asset\Key.png" />
+    <Image Include="Asset\NewVillagerDown.png" />
+    <Image Include="Asset\TreasureChest.png" />
+    <Image Include="Asset\VaseWhole.png" />
+    <Image Include="Asset\Window.png" />
+    <Image Include="Asset\Ghost.png" />
   </ItemGroup>
 </Project>

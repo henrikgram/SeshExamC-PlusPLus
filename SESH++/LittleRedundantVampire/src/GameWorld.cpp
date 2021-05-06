@@ -161,7 +161,7 @@ void Update(Time* timePerFrame)
 void Draw()
 {
 	// Clears the window.
-	window.clear(Color(0, 255, 255, 255));
+	window.clear(Color(/*0, 255, 255, 255*/));
 
 	//it needs to point to something, otherwise it wont compile, because it cant delete an "empty pointer"
 	//TODO: this needs to be deleted somewhere, but it dosen't work here, actually, check if it matters because its on stack.

@@ -13,7 +13,7 @@ void AttackFactory::CreateAttack(ObjectTag tag, Vector2f callerPosition, string 
 	GameObject* go = new GameObject();
 	SpriteRenderer* sr = new SpriteRenderer();
 
-	sr->SetSprite(TextureTag::ATTACKSHEET);
+	sr->SetSprite(TextureTag::ATTACK_SHEET);
 	go->position = new Vector2<float>(100, 100);
 	go->AddComponent(sr);
 	//go->AddComponent(new Attack(tag, callerPosition, direction));

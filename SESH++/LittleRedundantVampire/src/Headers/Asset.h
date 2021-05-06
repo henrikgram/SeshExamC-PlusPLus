@@ -13,12 +13,26 @@ class Asset
 private:
 	// TODO: Bliver den gemt for evigt feat johan olsen? G�r den ud af scope? Who knows!
 	unordered_map<TextureTag, Texture> textures;
-	Texture* ozzyTexture = new Texture;
-	Texture* ozzySheetTexture = new Texture;
-	Texture* attackSheetTexture = new Texture;
-	Texture* wallTexture = new Texture;
-	Texture* floorWoodTexture = new Texture;
+
+	// DECORATIONS
 	Texture* bookcaseTexture = new Texture;
+	Texture* chestTexture = new Texture;
+	Texture* crateTexture = new Texture;
+	Texture* floorWoodTexture = new Texture;
+	Texture* floorCarpetTexture = new Texture;
+	Texture* wallTexture = new Texture;
+	Texture* windowTexture = new Texture;
+
+	// OBJECTS
+	Texture* attackSheetTexture = new Texture;
+	Texture* doorTexture = new Texture;
+	Texture* enemyTexture = new Texture;
+	Texture* keyTexture = new Texture;
+	Texture* npcTexture = new Texture;
+	Texture* ozzyTexture = new Texture;
+	Texture* playerSheetTexture = new Texture;
+	Texture* vaseTexture = new Texture;
+
 
 	// Part of what makes the class a singleton.
 	static Asset* instance;
