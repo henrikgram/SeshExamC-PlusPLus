@@ -116,8 +116,8 @@ void LoadContent()
 
 void Initialize()
 {
-    /*BootlegFactory(ObjectTag::PLAYER);
-    BootlegFactory(ObjectTag::CRATE);*/
+    BootlegFactory(ObjectTag::PLAYER);
+    //BootlegFactory(ObjectTag::CRATE);
 }
 
 // TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
@@ -150,9 +150,11 @@ void Update(Time* timePerFrame)
 			}
 	}
 
-	Player& playerRef = *playerPointer;
-
-	PlayerInvoker::GetInstance(playerRef)->InvokeCommand();
+	if (playerPointer != nullptr)
+	{
+		Player& playerRef = *playerPointer;
+		PlayerInvoker::GetInstance(playerRef)->InvokeCommand();
+	}
 }
 
 /// <summary>
@@ -189,10 +191,11 @@ void Draw()
 int main()
 {
 	LoadContent();
-	Initialize();
 	
 	LevelManager* lm = new LevelManager();
 	*Global::GetInstance()->GetGameObjects() = lm->InstantiateLevel("Level1");
+
+	Initialize();
 
 	//Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
 
@@ -236,13 +239,13 @@ int main()
 			Update(&timePerFrame);
 			//player.Update(deltaTime);
 			//p1.GetCollider().CheckCollision(player.GetCollider(), 0.1f);
-			//view.setCenter(player.GetPosition());
+			view.setCenter(*playerPointer->gameObject->position);
 		}
 
 		//Hvert gameloop korer vi Update paa vores animation.
 	   //Vi korer animationen for raekke 0 (1).
 
-		//window.setView(view);
+		window.setView(view);
 
 		Draw();
 		//window.clear(Color(0, 255, 255, 255));
