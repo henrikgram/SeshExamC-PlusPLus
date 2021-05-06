@@ -1,7 +1,7 @@
 #include "Attack.h"
 #include "AttackFactory.h"
 #include "SpriteRenderer.h"
-#include "../Global.h"
+#include "../GameWorld.h"
 #include <iostream>
 using namespace std;
 using namespace sf;
@@ -54,7 +54,7 @@ void Attack::CreateAttack()
 	gameObject->Awake();
 	gameObject->Start();
 
-	(*Global::GetInstance()->GetGameObjects()).push_back(gameObject);
+	(*GameWorld::GetInstance()->GetGameObjects()).push_back(gameObject);
 }
 
 void Attack::StartAttack()

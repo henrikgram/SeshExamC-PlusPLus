@@ -1,43 +1,11 @@
-﻿#include <iostream>
-#include <vector>
-#include <SFML/graphics.hpp>
+﻿#include "GameWorld.h"
 
-#include "Components/SpriteRenderer.h"
-#include "GameObject.h"
-#include "Asset.h"
-#include "Enum/ObjectTag.h"
-#include "Components/Player.h"
-#include "Components/Attack.h"
-#include "Enum/ObjectTag.h"
-//#include "Headers/Components/OldPlayer.h"
-#include "Observer/Platform.h"
-#include "Global.h"
-#include "Command/PlayerInvoker.h"
-//#include "Headers/LevelManager.h"
-#include "BitmapImage.h"
-#include "LevelManager.h"
 
-using namespace std;
-using namespace sf;
+//TODO: tjek om det her er fybabab
 static const float VIEW_HEIGHT = 1024.0f;
-
-
-RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
-
-//TODO: check if heap or stack
-//vector<GameObject>::iterator it;
-//vector<GameObject> gameObjects = Global::GetInstance()->GetGameObjects();
-
-//const vector<GameObject>& gameObjects = Global::GetGameObjects();
-
-vector<Collider*> colliders;
-
-
-Player* playerPointer;
-
-
+RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
@@ -45,14 +13,14 @@ Player* playerPointer;
 /// </summary>
 /// <param name="window">Spilvinduet.</param>
 /// <param name="view">Det view som f�lger spilleren.</param>
-void ResizeView(const RenderWindow& window, View& view)
+void GameWorld::ResizeView(const RenderWindow& window, View& view)
 {
 	float aspectRatio = float(window.getSize().x) / float(window.getSize().y);
 	view.setSize(VIEW_HEIGHT * aspectRatio, VIEW_HEIGHT);
 }
 
 //TODO: check if this is fine, or actual factory is needed
-void BootlegFactory(ObjectTag tag)
+void GameWorld::BootlegFactory(ObjectTag tag)
 {
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject();
@@ -81,8 +49,8 @@ void BootlegFactory(ObjectTag tag)
 		break;
 	case ObjectTag::DOOR:
 		break;
-	//case ObjectTag::FLOOR:
-	//	break;
+		//case ObjectTag::FLOOR:
+		//	break;
 	case ObjectTag::BOOKCASE:
 		break;
 	case ObjectTag::VASE:
@@ -90,13 +58,13 @@ void BootlegFactory(ObjectTag tag)
 	case ObjectTag::WINDOW:
 		break;
 	case ObjectTag::CRATE:
-	sr->SetSprite(TextureTag::OZZY);
-	go->position = new Vector2f(150, 150);
-	go->AddComponent(sr);
+		sr->SetSprite(TextureTag::OZZY);
+		go->position = new Vector2f(150, 150);
+		go->AddComponent(sr);
 
-	col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, false);
-	go->AddComponent(col);
-	colliders.push_back(col);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, false);
+		go->AddComponent(col);
+		colliders.push_back(col);
 		break;
 	default:
 		break;
@@ -105,95 +73,16 @@ void BootlegFactory(ObjectTag tag)
 	go->Awake();
 	go->Start();
 
-	(*Global::GetInstance()->GetGameObjects()).push_back(go);
+	(*GameWorld::GetInstance()->GetGameObjects()).push_back(go);
 }
 
-
-void LoadContent()
+void GameWorld::Run()
 {
-	Asset::GetInstance()->LoadTextures();
-}
 
-void Initialize()
-{
-    BootlegFactory(ObjectTag::PLAYER);
-    //BootlegFactory(ObjectTag::CRATE);
-}
-
-// TODO: Pointer fix. Check if it works correctly. Check if double pointers necessary
-
-/// <summary>
-/// Update loop for all gameobjects
-/// </summary>
-/// <param name="timePerFrame"></param>
-void Update(Time* timePerFrame)
-{
-	vector<GameObject*>::size_type gameObjectsSize = (*Global::GetInstance()->GetGameObjects()).size();
-	//iterates through the gameObjects and calls update
-	for (vector<GameObject*>::size_type i = 0;
-		i < gameObjectsSize;
-		++i)
-	{
-		(*Global::GetInstance()->GetGameObjects())[i]->Update(timePerFrame);
-	}
-
-	vector<Collider*>::iterator colIt;
-	vector<Collider*>::iterator colIt2;
-	for (colIt = colliders.begin(); colIt < colliders.end(); colIt++)
-	{
-			for (colIt2 = colliders.begin(); colIt2 < colliders.end(); colIt2++)
-			{
-					if (colIt != colIt2)
-					{
-							(*colIt)->CheckCollision(*colIt2);
-					}
-			}
-	}
-
-	if (playerPointer != nullptr)
-	{
-		Player& playerRef = *playerPointer;
-		PlayerInvoker::GetInstance(playerRef)->InvokeCommand();
-	}
-}
-
-/// <summary>
-/// Method for drawing all sprites into the game.
-/// </summary>
-void Draw()
-{
-	// Clears the window.
-	window.clear(Color(/*0, 255, 255, 255*/));
-
-	//it needs to point to something, otherwise it wont compile, because it cant delete an "empty pointer"
-	//TODO: this needs to be deleted somewhere, but it dosen't work here, actually, check if it matters because its on stack.
-	SpriteRenderer* sr;
-
-	vector<GameObject*>::size_type gameObjectsSize = (*Global::GetInstance()->GetGameObjects()).size();
-	//iterates through the gameObjects and draws all gameobjects.
-	for (vector<GameObject*>::size_type i = 0;
-		i < gameObjectsSize;
-		++i)
-	{
-		//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
-		sr = dynamic_cast<SpriteRenderer*>((*Global::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
-
-		window.draw(sr->GetSprite());
-	}
-	// Displays everything in the window.
-	window.display();
-}
-
-/// <summary>
-/// Everything is run from here.
-/// </summary>
-/// <returns></returns>
-int main()
-{
 	LoadContent();
-	
+
 	LevelManager* lm = new LevelManager();
-	*Global::GetInstance()->GetGameObjects() = lm->InstantiateLevel("Level1");
+	*GameWorld::GetInstance()->GetGameObjects() = lm->InstantiateLevel("Level1");
 
 	Initialize();
 
@@ -254,5 +143,104 @@ int main()
 		//window.display();
 	}
 
-	return 0;
 }
+
+void GameWorld::Initialize()
+{
+	BootlegFactory(ObjectTag::PLAYER);
+	//BootlegFactory(ObjectTag::CRATE);
+}
+
+void GameWorld::LoadContent()
+{
+	Asset::GetInstance()->LoadTextures();
+}
+
+void GameWorld::Update(Time* timePerFrame)
+{
+	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+	//iterates through the gameObjects and calls update
+	for (vector<GameObject*>::size_type i = 0;
+		i < gameObjectsSize;
+		++i)
+	{
+		(*GameWorld::GetInstance()->GetGameObjects())[i]->Update(timePerFrame);
+	}
+
+	vector<Collider*>::iterator colIt;
+	vector<Collider*>::iterator colIt2;
+	for (colIt = colliders.begin(); colIt < colliders.end(); colIt++)
+	{
+		for (colIt2 = colliders.begin(); colIt2 < colliders.end(); colIt2++)
+		{
+			if (colIt != colIt2)
+			{
+				(*colIt)->CheckCollision(*colIt2);
+			}
+		}
+	}
+
+	if (playerPointer != nullptr)
+	{
+		Player& playerRef = *playerPointer;
+		PlayerInvoker::GetInstance(playerRef)->InvokeCommand();
+	}
+}
+
+void GameWorld::Draw()
+{
+	// Clears the window.
+	window.clear(Color(/*0, 255, 255, 255*/));
+
+	//it needs to point to something, otherwise it wont compile, because it cant delete an "empty pointer"
+	//TODO: this needs to be deleted somewhere, but it dosen't work here, actually, check if it matters because its on stack.
+	SpriteRenderer* sr;
+
+	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+	//iterates through the gameObjects and draws all gameobjects.
+	for (vector<GameObject*>::size_type i = 0;
+		i < gameObjectsSize;
+		++i)
+	{
+		//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
+		sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
+
+		window.draw(sr->GetSprite());
+	}
+	// Displays everything in the window.
+	window.display();
+}
+
+GameWorld::GameWorld()
+{
+	gameObjects = new vector<GameObject*>;
+}
+
+GameWorld::~GameWorld()
+{
+	delete instance;
+	instance = nullptr;
+
+	delete gameObjects;
+	gameObjects = nullptr;
+}
+
+GameWorld* GameWorld::GetInstance()
+{
+	if (instance == nullptr)
+	{
+		instance = new GameWorld();
+	}
+
+	return instance;
+}
+
+vector<GameObject*>* GameWorld::GetGameObjects()
+{
+	return gameObjects;
+}
+
+
+// Sets the instance to  nullptr. Because static variables need a definition.
+// Part of what makes the class a singleton.
+GameWorld* GameWorld::instance = nullptr;

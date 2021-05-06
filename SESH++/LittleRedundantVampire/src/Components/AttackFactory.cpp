@@ -1,6 +1,6 @@
 #include "AttackFactory.h"
 #include "SpriteRenderer.h"
-#include "../Global.h"
+#include "../GameWorld.h"
 #include "../Enum/ObjectTag.h"
 #include <string>
 
@@ -21,7 +21,7 @@ void AttackFactory::CreateAttack(ObjectTag tag, Vector2f callerPosition, string 
 	go->Awake();
 	go->Start();
 
-	(*Global::GetInstance()->GetGameObjects()).push_back(go);
+	(*GameWorld::GetInstance()->GetGameObjects()).push_back(go);
 }
 
 AttackFactory::AttackFactory()
