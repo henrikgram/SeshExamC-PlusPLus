@@ -23,6 +23,7 @@ vector<GameObject> * gameObjects = new vector<GameObject>;
 vector<GameObject>::iterator it;
 
 bool textBoxOpen = false;
+bool firstTry = true;
 
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
@@ -224,33 +225,41 @@ int main()
         //GameObject* npc = new GameObject();
         SpriteRenderer* npcSr = new SpriteRenderer();
         npcSr->SetSprite(TextureTag::NPC);
+        *npc->objectTag = ObjectTag::NPC;
         npc->position = new Vector2<float>(150, 100);
         npc->AddComponent(npcSr);
         GameObject npcGo = npc->TextBoxPopup();
+        *npcGo.objectTag = ObjectTag::NPC;
         //window.setView(view);
 
         Draw();
         //window.clear(Color(0, 0, 0, 0));
         if (Keyboard::isKeyPressed(Keyboard::F) && !textBoxOpen)
-        {
-            
+        {       
             gameObjects->push_back(npcGo);
             textBoxOpen = true;
+            firstTry = false;
         }
+
         //// YOU ARE HERE
-        //else if (Keyboard::isKeyPressed(Keyboard::F) && textBoxOpen)
-        //{
-        //    for (it = gameObjects->begin(); it < gameObjects->end(); it++)
-        //    {
-        //        if (*it->objectTag == ObjectTag::NPC)
-        //        {
-        //            gameObjects->pop_back();
-        //        }
-        //    }
-        //    //gameObjects->pop_back();
-        //    //npc->TextBoxRemoval();
-        //    textBoxOpen = false;
-        //}
+        else if (Keyboard::isKeyPressed(Keyboard::F) && textBoxOpen)
+        {
+            vector<GameObject>::iterator meh;
+            for (meh = gameObjects->begin(); meh < gameObjects->end(); meh++)
+            {
+                if (*meh->objectTag == ObjectTag::NPC)
+                {
+                    //cout >> *it->objectTag.c_str();
+                    //gameObjects->pop_back();
+                    gameObjects->erase(meh);
+                    //gameObject->meh
+                    break;
+                }
+            }
+            //gameObjects->pop_back();
+            //npc->TextBoxRemoval();
+            textBoxOpen = false;
+        }
         //window.clear();
         //player.Draw(window);
         //p1.Draw(window);
