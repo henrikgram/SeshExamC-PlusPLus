@@ -16,3 +16,12 @@ void Platform::Draw(RenderWindow& window)
 {
 	window.draw(body);
 }
+
+void Platform::Notify(std::string eventName)
+{
+}
+
+void Platform::NotifyOfCollision(Collider otherCollider, Collider myCollider)
+{
+}
+

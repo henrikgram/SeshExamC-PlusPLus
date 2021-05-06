@@ -47,6 +47,7 @@ bool Collider::CheckCollision(Collider* other)
 			{
 				if (deltaX > 0.0f)
 				{
+					//TODO: Look into making a rigidbody so we can void the solid variable if possible. 
 					//Move(intersectX * (1.0f - *pushFactor), 0.0f);
 					//other.Move(-intersectX * *pushFactor, 0.0f);
 					cout << "You're colliding with the left side\n";

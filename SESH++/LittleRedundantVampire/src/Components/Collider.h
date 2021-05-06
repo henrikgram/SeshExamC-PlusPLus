@@ -5,7 +5,7 @@
 
 using namespace sf;
 
-class Collider : public Component
+class Collider : public Component, protected ICollisionListener
 {
 public:
 	Collider(Vector2f size, Vector2f position, float pushFactor, bool solid);

@@ -1,9 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../Components/Collider.h"
+#include "ICollisionListener.h"
 using namespace sf;
 
-class Platform
+class Platform : public ICollisionListener
 {
 public:
 	Platform(Texture* texture, Vector2f size, Vector2f position);
@@ -16,6 +16,10 @@ public:
 	void Draw(RenderWindow& window);
 
 	//Collider GetCollider() { return Collider(body); }
+
+	// Inherited via ICollisionListener
+	void Notify(std::string eventName);
+	void NotifyOfCollision(Collider otherCollider, Collider myCollider);
 
 private:
 	RectangleShape body;

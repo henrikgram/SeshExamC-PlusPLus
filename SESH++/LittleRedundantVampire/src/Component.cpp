@@ -12,3 +12,4 @@ Component::~Component()
 void Component::Notify(std::string eventName)
 {
 }
+
