@@ -3,8 +3,8 @@
 
 enum class TextureTag {
 	OZZY,
-	OZZYSHEET,
-	ATTACKSHEET,
+	PLAYER_SHEET,
+	ATTACK_SHEET,
 	NPC,
 	WALL,
 	FLOOR_CARPET,

@@ -48,7 +48,7 @@ void Attack::CreateAttack()
 	SpriteRenderer* sr = new SpriteRenderer();
 	gameObject = new GameObject();
 
-	sr->SetSprite(TextureTag::ATTACKSHEET);
+	sr->SetSprite(TextureTag::ATTACK_SHEET);
 	gameObject->AddComponent(sr);
 
 	gameObject->Awake();
