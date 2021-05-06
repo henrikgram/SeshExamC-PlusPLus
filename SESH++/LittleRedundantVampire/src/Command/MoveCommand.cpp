@@ -1,4 +1,4 @@
-#include "../Headers/Command/MoveCommand.h"
+#include "MoveCommand.h"
 
 MoveCommand::MoveCommand(Player& receiver, Vector2f velocity) : receiver(receiver)
 {

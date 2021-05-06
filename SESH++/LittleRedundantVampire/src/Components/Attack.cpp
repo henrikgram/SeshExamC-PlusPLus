@@ -1,7 +1,7 @@
-#include "../Headers/Components/Attack.h"
-#include "../Headers/Components/AttackFactory.h"
-#include "../Headers/Components/SpriteRenderer.h"
-#include "../Headers/Global.h"
+#include "Attack.h"
+#include "AttackFactory.h"
+#include "SpriteRenderer.h"
+#include "../Global.h"
 #include <iostream>
 using namespace std;
 using namespace sf;

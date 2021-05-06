@@ -1,4 +1,4 @@
-#include "../Headers/Command/PlayerInvoker.h"
+#include "PlayerInvoker.h"
 
 PlayerInvoker::PlayerInvoker(Player& receiver) : receiver(receiver)
 {

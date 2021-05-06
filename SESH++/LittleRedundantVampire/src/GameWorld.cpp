@@ -2,20 +2,20 @@
 #include <vector>
 #include <SFML/graphics.hpp>
 
-#include "Headers/Components/SpriteRenderer.h"
-#include "Headers/GameObject.h"
-#include "Headers/Asset.h"
+#include "Components/SpriteRenderer.h"
+#include "GameObject.h"
+#include "Asset.h"
 #include "Enum/ObjectTag.h"
-#include "Headers/Components/Player.h"
-#include "Headers/Components/Attack.h"
+#include "Components/Player.h"
+#include "Components/Attack.h"
 #include "Enum/ObjectTag.h"
 //#include "Headers/Components/OldPlayer.h"
-#include "Headers/Platform.h"
-#include "Headers/Global.h"
-#include "Headers/Command/PlayerInvoker.h"
+#include "Observer/Platform.h"
+#include "Global.h"
+#include "Command/PlayerInvoker.h"
 //#include "Headers/LevelManager.h"
-#include "Headers/BitmapImage.h"
-#include "Headers/LevelManager.h"
+#include "BitmapImage.h"
+#include "LevelManager.h"
 
 using namespace std;
 using namespace sf;

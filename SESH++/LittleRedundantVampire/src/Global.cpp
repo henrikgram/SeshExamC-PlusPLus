@@ -1,4 +1,4 @@
-#include "Headers\Global.h"
+#include "Global.h"
 
 
 Global::Global()

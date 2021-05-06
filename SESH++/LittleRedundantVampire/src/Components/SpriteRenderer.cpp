@@ -1,4 +1,4 @@
-#include "../Headers/Components/SpriteRenderer.h"
+#include "SpriteRenderer.h"
 #include <iostream>
 using namespace std;
 using namespace sf;

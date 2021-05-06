@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../Headers/Components/Collider.h"
+#include "Collider.h"
 
 Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool solid)
 {

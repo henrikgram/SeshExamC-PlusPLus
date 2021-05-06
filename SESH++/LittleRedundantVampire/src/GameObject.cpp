@@ -1,5 +1,5 @@
-#include "Headers/GameObject.h"
-#include "Headers/Component.h"
+#include "GameObject.h"
+#include "Component.h"
 
 using namespace sf;
 using namespace std;

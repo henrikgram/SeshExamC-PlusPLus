@@ -1,5 +1,5 @@
 
-#include "../Headers/Components/Player.h"
+#include "Player.h"
 #include "../Enum/ObjectTag.h"
 #include <iostream>
 using namespace std;

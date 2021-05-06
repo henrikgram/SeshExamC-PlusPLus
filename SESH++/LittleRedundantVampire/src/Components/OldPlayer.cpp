@@ -1,4 +1,4 @@
-#include "../Headers/Components/OldPlayer.h"
+#include "OldPlayer.h"
 
 OldPlayer::OldPlayer(Texture* texture, Vector2u imageCount, float switchTime, float speed) :
 	//Her opretter vi en animation med de parametre som er gaeldende for Player.

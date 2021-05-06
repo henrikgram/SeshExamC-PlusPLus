@@ -1,4 +1,4 @@
-#include "../Headers/Components/OldAttack.h"
+#include "OldAttack.h"
 
 OldAttack::OldAttack(string textureName)
 {

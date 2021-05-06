@@ -1,5 +1,5 @@
-#include "Headers/Component.h"
-#include "Headers/GameObject.h"
+#include "Component.h"
+#include "GameObject.h"
 
 
 Component::~Component()

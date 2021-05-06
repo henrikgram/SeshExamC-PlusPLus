@@ -1,4 +1,4 @@
-#include "../Headers/Components/Movement.h"
+#include "Movement.h"
 
 Movement::Movement(float speed, Vector2f velocity)
 {

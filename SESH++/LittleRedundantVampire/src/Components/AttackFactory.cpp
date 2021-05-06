@@ -1,6 +1,6 @@
-#include "../Headers/Components/AttackFactory.h"
-#include "../Headers/Components/SpriteRenderer.h"
-#include "../Headers/Global.h"
+#include "AttackFactory.h"
+#include "SpriteRenderer.h"
+#include "../Global.h"
 #include "../Enum/ObjectTag.h"
 #include <string>
 
