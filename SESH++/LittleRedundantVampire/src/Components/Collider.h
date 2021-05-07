@@ -11,8 +11,8 @@ public:
 	Collider(Vector2f size, Vector2f position, float pushFactor, bool solid);
 	~Collider();
 
-	//TODO: Move should perhaps not be in this class. Collider shouldn't be responsible for moving an object.
-	//void Move(float deltaX, float deltaY) const { collisionBox->move(deltaX, deltaY); }
+	//TODO: Move should perhaps not be in this class. Collider shouldn't be responsible for moving an object perhaps a Rigidbody class.
+	void Move(float deltaX, float deltaY);
 
 	bool CheckCollision(Collider* other);
 	Vector2f GetPosition() const { return *gameObject->position; }

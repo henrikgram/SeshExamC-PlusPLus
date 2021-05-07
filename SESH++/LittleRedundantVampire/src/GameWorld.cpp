@@ -24,6 +24,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 {
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject();
+	*go->objectTag = tag;
 	SpriteRenderer* sr = new SpriteRenderer();
 	Collider* col;
 
@@ -37,7 +38,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->AddComponent(playerPointer);
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, true);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.9f, true);
 		go->AddComponent(col);
 		colliders.push_back(col);
 		break;
@@ -62,7 +63,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->position = new Vector2f(150, 150);
 		go->AddComponent(sr);
 
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, false);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, true);
 		go->AddComponent(col);
 		colliders.push_back(col);
 		break;
@@ -148,7 +149,7 @@ void GameWorld::Run()
 void GameWorld::Initialize()
 {
 	BootlegFactory(ObjectTag::PLAYER);
-	//BootlegFactory(ObjectTag::CRATE);
+	BootlegFactory(ObjectTag::CRATE);
 }
 
 void GameWorld::LoadContent()

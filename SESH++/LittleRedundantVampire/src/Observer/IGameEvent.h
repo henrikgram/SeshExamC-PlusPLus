@@ -7,9 +7,9 @@ using namespace std;
 class IGameEvent
 {
 public:
-	virtual void Attach(IListener* listener) = 0;
-	virtual void Detach(IListener* listener) = 0;
-	virtual void Notify(/*Component* other*/) = 0;
+	void Attach(IListener* listener);
+	void Detach(IListener* listener);
+	void Notify();
 
 	string GetEventTitle() const { return eventTitle; }
 	void SetEventTitle(string newTitle) { eventTitle = newTitle; }

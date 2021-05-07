@@ -6,7 +6,7 @@ Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool soli
 	collisionBox = new RectangleShape(size);
 	collisionBox->setPosition(position);
 	collisionBox->setOrigin(size / 2.0f);
-	this->pushFactor = new float(std::min(std::max(pushFactor, 0.0f), 1.0f)); //Clamps the pushposition betwwen 0 and 1.
+	this->pushFactor = new float(std::min(std::max(pushFactor, 0.0f), 1.0f)); //Clamps the pushfactor betwwen 0 and 1.
 	this->solid = new bool(solid);
 }
 
@@ -20,6 +20,11 @@ Collider::~Collider()
 
 	delete solid;
 	solid = nullptr;
+}
+
+void Collider::Move(float deltaX, float deltaY)
+{
+	*this->gameObject->position += Vector2f(deltaX, deltaY);
 }
 
 bool Collider::CheckCollision(Collider* other)
@@ -38,7 +43,7 @@ bool Collider::CheckCollision(Collider* other)
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
-		onColliding.Notify();
+		onColliding.Notify(*other->gameObject->objectTag);
 
 		//TODO: All this following is related to pushing an object and maybe shouldn't be in this class. 
 		if (*solid == true)
@@ -47,30 +52,26 @@ bool Collider::CheckCollision(Collider* other)
 			{
 				if (deltaX > 0.0f)
 				{
-					//Move(intersectX * (1.0f - *pushFactor), 0.0f);
-					//other.Move(-intersectX * *pushFactor, 0.0f);
-					cout << "You're colliding with the left side\n";
+					Move(intersectX * (1.0f - *pushFactor), 0.0f);
+					//cout << "You're colliding with the left side\n";
 				}
 				else
 				{
-					//Move(-intersectX * (1.0f - *pushFactor), 0.0f);
-					//other.Move(intersectX * *pushFactor, 0.0f);
-					cout << "You're colliding with the right side\n";
+					Move(-intersectX * (1.0f - *pushFactor), 0.0f);
+					//cout << "You're colliding with the right side\n";
 				}
 			}
 			else
 			{
 				if (deltaY > 0.0f)
 				{
-					//Move(0.0f, intersectY * (1.0f - *pushFactor));
-					//other.Move(0.0f, -intersectY * *pushFactor);
-					cout << "You're colliding with the top\n";
+					Move(0.0f, intersectY * (1.0f - *pushFactor));
+					//cout << "You're colliding with the top\n";
 				}
 				else
 				{
-					//Move(0.0f, -intersectY * (1.0f - *pushFactor));
-					//other.Move(0.0f, intersectY * *pushFactor);
-					cout << "You're colliding with the bottom\n";
+					Move(0.0f, -intersectY * (1.0f - *pushFactor));
+					//cout << "You're colliding with the bottom\n";
 				}
 			}
 		}
