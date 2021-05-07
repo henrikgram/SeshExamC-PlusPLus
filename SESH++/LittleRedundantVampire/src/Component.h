@@ -3,11 +3,12 @@
 #include "GameObject.h"
 #include "Enum/ComponentTag.h"
 #include "Observer/IListener.h"
+#include "Observer/ICollisionListener.h"
 
 
 using namespace std;
 
-class Component : protected IListener
+class Component : protected IListener, protected ICollisionListener
 {
 public:
 	GameObject* gameObject;
@@ -48,5 +49,8 @@ public:
 
 	// Inherited via IListener
 	void Notify(std::string eventName) override;
+
+	// Inherited via ICollisionListener
+	void NotifyCollision(ObjectTag otherTag) override;
 };
 

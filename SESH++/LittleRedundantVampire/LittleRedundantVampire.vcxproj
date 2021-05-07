@@ -179,6 +179,7 @@
     <ClInclude Include="src\BitmapImage.h" />
     <ClInclude Include="src\LevelManager.h" />
     <ClInclude Include="src\Components\Player.h" />
+    <ClInclude Include="src\Observer\ICollisionListener.h" />
     <ClInclude Include="src\Observer\Platform.h" />
     <ClInclude Include="src\Observer\IGameEvent.h" />
     <ClInclude Include="src\Observer\CollisionEvent.h" />

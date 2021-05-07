@@ -49,6 +49,7 @@
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Asset.h" />
     <ClInclude Include="src\Observer\IListener.h" />
+    <ClInclude Include="src\Observer\ICollisionListener.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />

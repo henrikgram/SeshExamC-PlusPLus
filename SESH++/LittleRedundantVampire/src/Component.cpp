@@ -1,5 +1,6 @@
 #include "Component.h"
 #include "GameObject.h"
+#include <iostream>
 
 
 Component::~Component()
@@ -10,5 +11,9 @@ Component::~Component()
 }
 
 void Component::Notify(std::string eventName)
+{
+}
+
+void Component::NotifyCollision(ObjectTag otherTag)
 {
 }

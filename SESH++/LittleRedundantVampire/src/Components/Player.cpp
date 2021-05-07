@@ -61,3 +61,47 @@ ComponentTag Player::ToEnum()
 {
 	return ComponentTag::PLAYER;
 }
+
+void Player::NotifyCollision(ObjectTag otherTag)
+{
+	switch (otherTag)
+	{
+	case ObjectTag::PLAYER:
+		break;
+	case ObjectTag::ENEMY:
+		break;
+	case ObjectTag::PLAYERATTACK:
+		break;
+	case ObjectTag::ENEMYATTACK:
+		break;
+	case ObjectTag::NPC:
+		break;
+	case ObjectTag::WALL:
+		break;
+	case ObjectTag::WALL_DECORATION:
+		break;
+	case ObjectTag::WINDOW:
+		break;
+	case ObjectTag::WINDOW_DECORATION:
+		break;
+	case ObjectTag::DOOR:
+		break;
+	case ObjectTag::FLOOR_CARPET:
+		break;
+	case ObjectTag::FLOOR_WOOD:
+		break;
+	case ObjectTag::BOOKCASE:
+		break;
+	case ObjectTag::VASE:
+		break;
+	case ObjectTag::KEY:
+		break;
+	case ObjectTag::CHEST:
+		break;
+	case ObjectTag::CRATE:
+		cout << "I hit a crate";
+		break;
+	default:
+		break;
+	}
+}
