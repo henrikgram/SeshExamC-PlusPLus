@@ -11,8 +11,8 @@ public:
 	~SpriteRenderer();
 
 	SpriteRenderer();
-	SpriteRenderer(bool isSpriteSheet);
-	Sprite* sprite = new Sprite;
+	SpriteRenderer(Vector2u currentImage, Vector2u imageCount);
+
 
 	
 	 void Awake() override;
@@ -40,15 +40,14 @@ public:
 
 	 void SetTextureRect(IntRect& textureRect);
 
-	 //Spillerns rectangle
-	 RectangleShape body;
 	 IntRect* TextureRect = new IntRect;
+
 	 Vector2u* currentImage = new Vector2u;
 	 Vector2u* imageCount = new Vector2u;
 
 
 private:
-
+	Sprite* sprite = new Sprite;
 	Texture* texture = new Texture;
 
 };

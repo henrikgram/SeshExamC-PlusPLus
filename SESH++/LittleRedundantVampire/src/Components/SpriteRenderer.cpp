@@ -17,9 +17,14 @@ SpriteRenderer::SpriteRenderer()
 	
 }
 
-SpriteRenderer::SpriteRenderer(bool isSpriteSheet)
+SpriteRenderer::SpriteRenderer(Vector2u currentImage, Vector2u imageCount)
 {
-	this->isSpriteSheet = isSpriteSheet;
+	//currentImage = new Vector2u(1, 1);
+	this->currentImage = &currentImage;
+	this->imageCount = &currentImage;
+	//imageCount = new Vector2u(4, 3);
+
+	isSpriteSheet = true;
 }
 
 void SpriteRenderer::Awake()
@@ -73,9 +78,6 @@ void SpriteRenderer::SetSprite(TextureTag textureTag)
 	{
 		sprite->setTexture(*texture);
 
-		currentImage = new Vector2u(1, 1);
-		imageCount = new Vector2u(4,3);
-
 		//Vi skal definere bredden og højden på vores textureRectangle ift til png-filen, så sprite for den rigtige dimension.
 		TextureRect->width = texture->getSize().x / float(imageCount->x);
 		TextureRect->height = texture->getSize().y / float(imageCount->y);
@@ -95,4 +97,5 @@ void SpriteRenderer::SetSprite(TextureTag textureTag)
 void SpriteRenderer::SetTextureRect(IntRect& textureRect)
 {
 	this->TextureRect = &textureRect;
+	sprite->setTextureRect(*TextureRect);
 }

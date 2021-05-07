@@ -33,13 +33,15 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	case ObjectTag::PLAYER:
 	{	
 		sr->isSpriteSheet = true;
+		sr->currentImage = new Vector2u(1, 1);
+		sr->imageCount = new Vector2u(4, 3);
 		sr->SetSprite(TextureTag::PLAYER_SHEET);
 		go->position = new Vector2<float>(50, 50);
 	
 		go->AddComponent(sr);
 		playerPointer = new Player();
 		go->AddComponent(playerPointer);
-		AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 3), 0.3f, 1);
+		AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 3), 200.0f, 1);
 		go->AddComponent(aC);
 
 
