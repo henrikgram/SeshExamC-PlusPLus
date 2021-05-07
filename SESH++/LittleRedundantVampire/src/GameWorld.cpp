@@ -62,7 +62,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->position = new Vector2f(150, 150);
 		go->AddComponent(sr);
 
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, false);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, true);
 		go->AddComponent(col);
 		colliders.push_back(col);
 		break;
@@ -148,7 +148,7 @@ void GameWorld::Run()
 void GameWorld::Initialize()
 {
 	BootlegFactory(ObjectTag::PLAYER);
-	//BootlegFactory(ObjectTag::CRATE);
+	BootlegFactory(ObjectTag::CRATE);
 }
 
 void GameWorld::LoadContent()
