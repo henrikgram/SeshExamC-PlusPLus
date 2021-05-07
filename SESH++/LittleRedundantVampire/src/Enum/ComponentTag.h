@@ -14,7 +14,8 @@ enum class ComponentTag {
 	WINDOW,
 	CRATE,
 	ATTACK,
-	ANIMATION
+	ANIMATION,
+	NPC_TEXT
 };
 
 #endif

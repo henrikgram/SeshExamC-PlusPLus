@@ -1,2 +1,8 @@
-﻿  GameWorld.cpp
+﻿  NpcText.cpp
+  NPC.cpp
+  SpriteRenderer.cpp
+  Component.cpp
+  GameObject.cpp
+  GameWorld.cpp
+  Generating Code...
   LittleRedundantVampire.vcxproj -> C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

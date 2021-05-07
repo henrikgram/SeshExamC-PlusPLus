@@ -21,9 +21,12 @@ View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 //TODO: check if heap or stack
 vector<GameObject> * gameObjects = new vector<GameObject>;
 vector<GameObject>::iterator it;
+sf::Font* font = new sf::Font();
+Text* text = new Text();
 
 bool textBoxOpen = false;
 bool firstTry = true;
+bool drawText = false;
 
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
@@ -102,6 +105,8 @@ void BootlegFactory(ObjectTag tag)
 void LoadContent()
 {  
     Asset::GetInstance()->LoadTextures();
+    font->loadFromFile("Asset/PlayfairDisplay-VariableFont_wght.ttf");
+
 }
 
 void Initialize()
@@ -145,6 +150,10 @@ void Draw()
         sr = dynamic_cast<SpriteRenderer*>(it->GetComponent(ComponentTag::SPRITERENDERER));
 
         window.draw(sr->GetSprite());
+    }
+    if (drawText)
+    {
+        window.draw(*text);
     }
     // Displays everything in the window.
     window.display();
@@ -220,46 +229,55 @@ int main()
         }   
 
         //Hvert gameloop korer vi Update paa vores animation.
-       //Vi korer animationen for raekke 0 (1).
-        NPC* npc = new NPC();
-        //GameObject* npc = new GameObject();
-        SpriteRenderer* npcSr = new SpriteRenderer();
-        npcSr->SetSprite(TextureTag::NPC);
-        *npc->objectTag = ObjectTag::NPC;
-        npc->position = new Vector2<float>(150, 100);
-        npc->AddComponent(npcSr);
-        GameObject npcGo = npc->TextBoxPopup();
-        *npcGo.objectTag = ObjectTag::NPC;
-        //window.setView(view);
+        //Vi korer animationen for raekke 0 (1).
+        ////////NPC* npc = new NPC();
+        ////////GameObject* npc = new GameObject();
+        ////////SpriteRenderer* npcSr = new SpriteRenderer();
+        ////////npcSr->SetSprite(TextureTag::NPC);
+        ////////*npc->objectTag = ObjectTag::NPC;
+        ////////npc->position = new Vector2<float>(150, 100);
+        ////////npc->AddComponent(npcSr);
+        ////////GameObject npcGo = npc->TextBoxPopup(Vector2f(npc->position->x, npc->position->y));
+        ////////*npcGo.objectTag = ObjectTag::NPC;
+        //////////window.setView(view);
 
-        Draw();
-        //window.clear(Color(0, 0, 0, 0));
-        if (Keyboard::isKeyPressed(Keyboard::F) && !textBoxOpen)
-        {       
-            gameObjects->push_back(npcGo);
-            textBoxOpen = true;
-            firstTry = false;
-        }
+        ////////Draw();
+        //////////window.clear(Color(0, 0, 0, 0));
+        ////////if (Keyboard::isKeyPressed(Keyboard::F) && !textBoxOpen)
+        ////////{   
+        ////////    gameObjects->push_back(npcGo);
+        ////////    text->setFont(*font);
+        ////////    text->setString("Aaay");
+        ////////    text->setCharacterSize(24);
+        ////////    text->setFillColor(sf::Color::Red);
+        ////////    text->setStyle(Text::Bold | Text::Italic);
+        ////////    text->setPosition(Vector2f(npc->position->x, npc->position->y));
+        ////////    textBoxOpen = true;
+        ////////    firstTry = false;
+        ////////    drawText = true;
+        ////////}
 
-        //// YOU ARE HERE
-        else if (Keyboard::isKeyPressed(Keyboard::F) && textBoxOpen)
-        {
-            vector<GameObject>::iterator meh;
-            for (meh = gameObjects->begin(); meh < gameObjects->end(); meh++)
-            {
-                if (*meh->objectTag == ObjectTag::NPC)
-                {
-                    //cout >> *it->objectTag.c_str();
-                    //gameObjects->pop_back();
-                    gameObjects->erase(meh);
-                    //gameObject->meh
-                    break;
-                }
-            }
-            //gameObjects->pop_back();
-            //npc->TextBoxRemoval();
-            textBoxOpen = false;
-        }
+        //////////// YOU ARE HERE
+        ////////else if (Keyboard::isKeyPressed(Keyboard::F) && textBoxOpen)
+        ////////{
+        ////////    vector<GameObject>::iterator meh;
+        ////////    for (meh = gameObjects->begin(); meh < gameObjects->end(); meh++)
+        ////////    {
+        ////////        if (*meh->objectTag == ObjectTag::NPC)
+        ////////        {
+        ////////            //cout >> *it->objectTag.c_str();
+        ////////            //gameObjects->pop_back();
+        ////////            gameObjects->erase(meh);
+        ////////            //text = nullptr;
+        ////////            //gameObject->meh
+        ////////            break;
+        ////////        }
+        ////////    }
+        ////////    //gameObjects->pop_back();
+        ////////    //npc->TextBoxRemoval();
+        ////////    drawText = false;
+        ////////    textBoxOpen = false;
+        ////////}
         //window.clear();
         //player.Draw(window);
         //p1.Draw(window);
