@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\AnimationComponent.cpp" />
     <ClCompile Include="src\GameWorld.cpp" />
     <ClCompile Include="src\Components\AttackFactory.cpp" />
     <ClCompile Include="src\Components\OldAttack.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Components\AnimationComponent.h" />
     <ClInclude Include="src\GameWorld.h" />
     <ClInclude Include="src\Components\AttackFactory.h" />
     <ClInclude Include="src\Components\OldAttack.h" />

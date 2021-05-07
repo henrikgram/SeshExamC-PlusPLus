@@ -12,6 +12,16 @@ SpriteRenderer::~SpriteRenderer()
 	texture = nullptr;
 }
 
+SpriteRenderer::SpriteRenderer()
+{
+	
+}
+
+SpriteRenderer::SpriteRenderer(bool isSpriteSheet)
+{
+	this->isSpriteSheet = isSpriteSheet;
+}
+
 void SpriteRenderer::Awake()
 {
 
@@ -43,10 +53,46 @@ Sprite SpriteRenderer::GetSprite()
 	return *sprite;
 }
 
+Texture SpriteRenderer::GetTexture()
+{
+	return *texture;
+}
+
+bool SpriteRenderer::GetIsSpriteSheet()
+{
+	return isSpriteSheet;
+}
+
 void SpriteRenderer::SetSprite(TextureTag textureTag)
 {
 	//TODO: This might work better if we make a constructor for the SpriteRenderer class and pass a texturetag to this 
 	//so we don't have to call SetSprite outside of this class. 
 	texture = Asset::GetInstance()->GetTexture(textureTag);
-	sprite->setTexture(*texture);
+
+	if (isSpriteSheet)
+	{
+		sprite->setTexture(*texture);
+
+		currentImage = new Vector2u(1, 1);
+		imageCount = new Vector2u(4,3);
+
+		//Vi skal definere bredden og højden på vores textureRectangle ift til png-filen, så sprite for den rigtige dimension.
+		TextureRect->width = texture->getSize().x / float(imageCount->x);
+		TextureRect->height = texture->getSize().y / float(imageCount->y);
+
+		//Standard bredden er altid lige med den normale bredde.
+		TextureRect->width = abs(TextureRect->width);
+
+		sprite->setTextureRect(*TextureRect);
+	}
+	else
+	{
+		sprite->setTexture(*texture);
+	}
+
+}
+
+void SpriteRenderer::SetTextureRect(IntRect& textureRect)
+{
+	this->TextureRect = &textureRect;
 }

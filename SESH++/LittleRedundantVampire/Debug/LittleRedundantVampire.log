@@ -1,40 +1,12 @@
-﻿  GameWorld.cpp
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(40,114): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+﻿  AnimationComponent.cpp
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\AnimationComponent.cpp(20,64): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
           with
           [
-              T=unsigned int
+              T=int
           ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(40,71): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\AnimationComponent.cpp(21,65): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
           with
           [
-              T=unsigned int
+              T=int
           ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(65,114): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(65,71): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-  main.cpp
-  Generating Code...
   LittleRedundantVampire.vcxproj -> C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
