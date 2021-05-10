@@ -44,6 +44,8 @@ bool Collider::CheckCollision(Collider* other)
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
 		onColliding.Notify(*other->gameObject->objectTag);
+		currentCollisions.push_back(other);
+		onGameObjDestroyed.Attach(other);
 
 		//TODO: All this following is related to pushing an object and maybe shouldn't be in this class. 
 		if (*solid && *other->solid)
@@ -83,7 +85,7 @@ bool Collider::CheckCollision(Collider* other)
 
 void Collider::Awake()
 {
-	onColliding.Attach(this);
+	//onColliding.Attach(this);
 }
 
 void Collider::Start()
@@ -102,9 +104,19 @@ void Collider::Update(Time* timePerFrame)
 
 void Collider::Destroy()
 {
+	currentCollisions.clear();
+	onGameObjDestroyed.Notify("GameObject Destroyed", this);
 }
 
 ComponentTag Collider::ToEnum()
 {
 	return ComponentTag::COLLIDER;
+}
+
+
+void Collider::Notify(std::string eventName, IListener* sender)
+{
+	//TODO: Ensure that this doesn't cause issues if the list does not contain the element. 
+	//This should remove all instances of the collider in question
+	currentCollisions.remove(dynamic_cast<Collider*>(sender));
 }

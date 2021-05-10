@@ -9,17 +9,17 @@ using namespace std;
 class IGameEvent
 {
 public:
-	IGameEvent(string eventTitle);
+	IGameEvent();
 	~IGameEvent();
 
 	void Attach(IListener* listener);
 	void Detach(IListener* listener);
-	void Notify();
+	void Notify(string eventTitle, IListener* sender);
 
-	string GetEventTitle() const { return *eventTitle; }
+	//string GetEventTitle() const { return *eventTitle; }
 
 private:
-	string* eventTitle;
+	//string* eventTitle;
 	std::list<IListener*> listeners;
 };
 

@@ -1,14 +1,14 @@
 #include "IGameEvent.h"
 
-IGameEvent::IGameEvent(string eventTitle)
+IGameEvent::IGameEvent()
 {
-	this->eventTitle = new string(eventTitle);
+	//this->eventTitle = new string(eventTitle);
 }
 
 IGameEvent::~IGameEvent()
 {
-	delete eventTitle;
-	eventTitle = nullptr;
+	/*delete eventTitle;
+	eventTitle = nullptr;*/
 
 
 }
@@ -23,11 +23,11 @@ void IGameEvent::Detach(IListener* listener)
 	listeners.remove(listener);
 }
 
-void IGameEvent::Notify()
+void IGameEvent::Notify(string eventTitle, IListener* sender)
 {
 	std::list<IListener*>::iterator iterator = listeners.begin();
 	while (iterator != listeners.end()) {
-		(*iterator)->Notify(*eventTitle);
+		(*iterator)->Notify(eventTitle, sender);
 		++iterator;
 	}
 }

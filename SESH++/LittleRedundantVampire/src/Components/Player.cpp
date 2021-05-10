@@ -104,7 +104,7 @@ void Player::NotifyCollision(ObjectTag otherTag)
 	case ObjectTag::CHEST:
 		break;
 	case ObjectTag::CRATE:
-		speed = 0.9f;
+		//speed = 0.9f;
 		cout << "I hit a crate";
 		break;
 	default:

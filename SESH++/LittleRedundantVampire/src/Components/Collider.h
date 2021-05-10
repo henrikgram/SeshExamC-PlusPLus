@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../Observer/CollisionEvent.h"
+#include "../Observer/IGameEvent.h"
 #include "../Component.h"
 
 using namespace sf;
@@ -25,10 +26,16 @@ public:
 	void Destroy() override;
 	ComponentTag ToEnum() override;
 
+	void Notify(std::string eventName, IListener* sender) override;
+
 private:
 	RectangleShape* collisionBox;
 	float* pushFactor;
 	bool* solid;
 	CollisionEvent onColliding;
+	CollisionEvent onNoLongerColliding;
+	IGameEvent onGameObjDestroyed;
+
+	std::list<Collider* const> currentCollisions;
 };
 
