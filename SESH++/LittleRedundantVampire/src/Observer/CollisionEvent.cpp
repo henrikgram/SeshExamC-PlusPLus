@@ -1,34 +1,32 @@
 #include "CollisionEvent.h"
-#include "IGameEvent.h"
 
 CollisionEvent::CollisionEvent()
 {
-    IGameEvent::SetEventTitle("Collision");
 }
 
 CollisionEvent::~CollisionEvent()
 {
-    for (auto&& listener : listeners) {
+    /*for (auto&& listener : listeners) {
         delete listener;
-    }
+    }*/
     listeners.clear();
 }
 
-void CollisionEvent::Attach(IListener* listener)
+void CollisionEvent::Attach(ICollisionListener* listener)
 {
     listeners.push_back(listener);
 }
 
-void CollisionEvent::Detach(IListener* listener)
+void CollisionEvent::Detach(ICollisionListener* listener)
 {
     listeners.remove(listener);
 }
 
-void CollisionEvent::Notify()
+void CollisionEvent::Notify(ObjectTag otherTag)
 {
-    std::list<IListener*>::iterator iterator = listeners.begin();
+    std::list<ICollisionListener*>::iterator iterator = listeners.begin();
     while (iterator != listeners.end()) {
-        (*iterator)->Notify(IGameEvent::GetEventTitle());
+        (*iterator)->NotifyCollision(otherTag);
         ++iterator;
     }
 }

@@ -63,6 +63,28 @@ void AnimationComponent::Destroy()
 
 }
 
+void AnimationComponent::OnNotify(string eventName)
+{
+
+	//convert string to int
+	//If it fails the conversion it checks for other augments
+	//TODO: tjek om det er cursed at så voldsomt udnytte en trycatch
+	try
+	{
+		row = stoi(eventName);
+	}
+	catch (const std::exception&)
+	{
+		if (eventName == "flip")
+		{
+			spriteRenderer->FlipSprite();
+		}
+	}
+	
+}
+
+
+
 ComponentTag AnimationComponent::ToEnum()
 {
 	return ComponentTag::ANIMATION;

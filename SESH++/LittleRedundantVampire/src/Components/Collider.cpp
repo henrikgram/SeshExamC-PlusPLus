@@ -38,7 +38,7 @@ bool Collider::CheckCollision(Collider* other)
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
-		onColliding.Notify();
+		onColliding.Notify(*other->gameObject->objectTag);
 
 		//TODO: All this following is related to pushing an object and maybe shouldn't be in this class. 
 		if (*solid == true)
@@ -88,6 +88,7 @@ void Collider::Awake()
 void Collider::Start()
 {
 	unordered_map<ComponentTag, Component*>::iterator it;
+
 	for (it = gameObject->components.begin(); it != gameObject->components.end(); it++)
 	{
 		onColliding.Attach(it->second);

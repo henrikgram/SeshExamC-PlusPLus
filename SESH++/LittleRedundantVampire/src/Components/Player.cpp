@@ -5,6 +5,11 @@
 using namespace std;
 using namespace sf;
 
+Player::Player()
+{
+
+}
+
 Player::~Player()
 {
 
@@ -12,6 +17,7 @@ Player::~Player()
 
 void Player::Move(Vector2f velocity)
 {
+	ChangeAnimation.Notify("1");
 	this->velocity += velocity;
 }
 
@@ -27,9 +33,48 @@ void Player::Start()
 
 }
 
+void Player::UpdateAnimation()
+{
+	//TODO: fix så den ikke kører medmindre det er en ny animation
+	if (velocity.x == 0 && velocity.y == 0)
+	{
+		ChangeAnimation.Notify("3");
+	}
+	else if (velocity.y < 0)
+	{
+		ChangeAnimation.Notify("2");
+	}
+	else if (velocity.y > 0)
+	{
+		ChangeAnimation.Notify("0");
+	}
+	else if (velocity.x < 0)
+	{
+		if (!flipped)
+		{
+			ChangeAnimation.Notify("1");
+			ChangeAnimation.Notify("flip");
+			flipped = true;
+		}
+	}
+
+	else if (velocity.x > 0)
+	{
+		if (flipped)
+		{
+			ChangeAnimation.Notify("1");
+			ChangeAnimation.Notify("flip");
+			flipped = false;
+		}
+	}
+
+}
+
 void Player::Update(Time* timePerFrame)
 {
+	UpdateAnimation();
 	Normalize();
+
 }
 
 void Player::Normalize()

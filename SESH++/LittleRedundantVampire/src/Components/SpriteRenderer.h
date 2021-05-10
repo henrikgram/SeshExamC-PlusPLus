@@ -27,6 +27,8 @@ public:
 	 /// <returns></returns>
 	 Sprite GetSprite();
 
+	 void FlipSprite();
+
 	 Texture GetTexture();
 
 	 bool GetIsSpriteSheet();

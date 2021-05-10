@@ -13,57 +13,41 @@ using namespace sf;
 class AnimationComponent : public Component
 {
 public:
+
 	/// <summary>
-	/// Constructor til Animation.
+	/// Components that will animate by changing sprite through a spriteSheet
 	/// </summary>
-	/// <param name="texture">Den texture (sprite sheet) som skal animeres.</param>
-	/// <param name="imageCount">Hvor mange billeder der skal cycles imellem (raekker og kolonner).</param>
-	/// <param name="switchTime">Hvor lang tid der skal gå imellem hvert skift af image.</param>
+	/// <param name="spriteRenderer">Reference for the objects spriteRenderer</param>
+	/// <param name="imageCount">How many rows of images, and how many images that is in one row</param>
+	/// <param name="switchTime">How fast it should switch between frames</param>
+	/// <param name="row">Default row to start the animation</param>
 	AnimationComponent(SpriteRenderer* spriteRenderer, Vector2u imageCount, float switchTime, int row);
 
-	/// <summary>
-	/// Destructor til Animation.
-	/// </summary>
 	~AnimationComponent();
-
-	//
-	//row = d
-	//deltaTime = d
-
-	/// <summary>
-	/// Update skal køre hvert gameloop. Her kører animations-logikken.
-	/// </summary>
-	/// <param name="row">Den raekke i dit sprite sheet som skal cycles igennem.</param>
-	/// <param name="deltaTime">Den tid der er gået siden sidste Update.</param>
-	/// <param name="faceRight">Om spilleren vender mod højre.</param>
-	/// <param name="moving">Om spilleren står stille.</param>
-	//void Update(float deltaTime, bool faceRight, bool moving);
-
 
 	void Awake() override;
 	void Start() override;
 	void Update(Time* timePerFrame) override;
 	void Destroy() override;
+	void OnNotify(string eventName) override;
 	ComponentTag ToEnum() override;
 
 public:
-	//Rectangle for vores texture.
-	IntRect* TextureRect;
+
 
 private:
-	//Hvor mange billeder der skal cycles igennem.
+	//How many pictures that is in one animation row
 	Vector2u imageCount;
-	//Hvad er det nuvaerende billede i animationen.
+	IntRect* TextureRect;
 	Vector2u currentImage;
 
-	//Hvor hurtigt der skal cycles igennem animationen.
+	//How fast it should cycle through the animation.
 	float totalTime;
-	//Hvor lang tid det skal tage at skifte billede.
+
+	//Time between frames
 	float switchTime;
 
 	int row;
 
 	SpriteRenderer* spriteRenderer;
-
-
 };

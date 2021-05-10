@@ -58,6 +58,11 @@ Sprite SpriteRenderer::GetSprite()
 	return *sprite;
 }
 
+void SpriteRenderer::FlipSprite()
+{
+	sprite->scale(-1, 1);
+}
+
 Texture SpriteRenderer::GetTexture()
 {
 	return *texture;
@@ -86,12 +91,17 @@ void SpriteRenderer::SetSprite(TextureTag textureTag)
 		TextureRect->width = abs(TextureRect->width);
 
 		sprite->setTextureRect(*TextureRect);
+		sprite->setOrigin(Vector2f(TextureRect->width/2, TextureRect->height/2));
 	}
 	else
 	{
 		sprite->setTexture(*texture);
-	}
 
+		float width = texture->getSize().x;
+		float heigt = texture->getSize().y;
+
+		sprite->setOrigin(Vector2f(width, heigt));
+	}
 }
 
 void SpriteRenderer::SetTextureRect(IntRect& textureRect)

@@ -12,7 +12,6 @@
     <ClCompile Include="src\Components\Player.cpp" />
     <ClCompile Include="src\Command\MoveCommand.cpp" />
     <ClCompile Include="src\Observer\Platform.cpp" />
-    <ClCompile Include="src\Observer\IGameEvent.cpp" />
     <ClCompile Include="src\Observer\CollisionEvent.cpp" />
     <ClCompile Include="src\Components\Collider.cpp" />
     <ClCompile Include="src\Components\Attack.cpp" />
@@ -23,6 +22,7 @@
     <ClCompile Include="src\Asset.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Components\AnimationComponent.cpp" />
+    <ClCompile Include="src\Observer\IGameEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameWorld.h" />
@@ -51,6 +51,7 @@
     <ClInclude Include="src\Asset.h" />
     <ClInclude Include="src\Observer\IListener.h" />
     <ClInclude Include="src\Components\AnimationComponent.h" />
+    <ClInclude Include="src\Observer\ICollisionListener.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />

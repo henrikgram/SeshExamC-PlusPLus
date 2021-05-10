@@ -1,20 +1,25 @@
 #pragma once
 #include <string>
+#include <list>
 #include "IListener.h"
 
 using namespace std;
 
+//TODO: Remove I since it's no longer an interface.
 class IGameEvent
 {
 public:
-	virtual void Attach(IListener* listener) = 0;
-	virtual void Detach(IListener* listener) = 0;
-	virtual void Notify(/*Component* other*/) = 0;
+	IGameEvent();
+	~IGameEvent();
 
-	string GetEventTitle() const { return eventTitle; }
-	void SetEventTitle(string newTitle) { eventTitle = newTitle; }
+	void Attach(IListener* listener);
+	void Detach(IListener* listener);
+	void Notify(string EventTitle);
+
+	/*string GetEventTitle() const { return *eventTitle; }*/
 
 private:
-	string eventTitle;
+	//string* eventTitle;
+	std::list<IListener*> listeners;
 };
 
