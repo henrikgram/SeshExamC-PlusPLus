@@ -1,6 +1,7 @@
 ﻿#include "GameWorld.h"
 
 
+
 //TODO: tjek om det her er fybabab
 static const float VIEW_HEIGHT = 1024.0f;
 View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
@@ -31,17 +32,29 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	switch (tag)
 	{
 	case ObjectTag::PLAYER:
-		sr->SetSprite(TextureTag::OZZY);
-		go->position = new Vector2<float>(50, 50);
+	{
+		sr->isSpriteSheet = true;
+		sr->currentImage = new Vector2u(1, 1);
+		sr->imageCount = new Vector2u(4, 3);
+		sr->SetSprite(TextureTag::PLAYER_SHEET);
+		go->position = new Vector2<float>(1000, 1000);
+
 		go->AddComponent(sr);
 		playerPointer = new Player();
 		go->AddComponent(playerPointer);
+		AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 4), 200.0f, 1);
+		go->AddComponent(aC);
+
+		playerPointer->ChangeAnimation.Attach(aC);
+
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
 		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.9f, true);
 		go->AddComponent(col);
-		colliders.push_back(col);
-		break;
+		colliders.push_back(col);*/
+	}
+	break;
+
 	case ObjectTag::ENEMY:
 		break;
 	case ObjectTag::NPC:
