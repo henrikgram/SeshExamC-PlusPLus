@@ -8,8 +8,7 @@
 
 using namespace std;
 
-//TODO: find ud af om den anden skal v�re protected. den kan ikke castes til iListener udenfor, hvis den ikke er public
-class Component : public IListener, protected ICollisionListener
+class Component : protected IListener, protected ICollisionListener
 {
 public:
 	GameObject* gameObject;
@@ -54,3 +53,4 @@ public:
 	// Inherited via ICollisionListener
 	void NotifyCollision(ObjectTag otherTag) override;
 };
+

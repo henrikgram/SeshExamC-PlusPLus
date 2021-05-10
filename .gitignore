@@ -360,7 +360,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-SESH++/.vs/SESH++/v16/ipch/AutoPCH/ff84fd598e723db1/GAMEWORLD.ipch
-SESH++/Debug/LittleRedundantVampire.exe
-SESH++/LittleRedundantVampire/Debug/IGameEvent.obj
-SESH++/LittleRedundantVampire/Debug/LittleRe.0ed691ab.tlog/CL.command.1.tlog

@@ -6,9 +6,9 @@ CollisionEvent::CollisionEvent()
 
 CollisionEvent::~CollisionEvent()
 {
-    /*for (auto&& listener : listeners) {
+    for (auto&& listener : listeners) {
         delete listener;
-    }*/
+    }
     listeners.clear();
 }
 
