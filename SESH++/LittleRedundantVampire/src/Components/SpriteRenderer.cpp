@@ -10,6 +10,15 @@ SpriteRenderer::~SpriteRenderer()
 
 	delete texture;
 	texture = nullptr;
+
+	delete TextureRect;
+	TextureRect = nullptr;
+
+	delete currentImage;
+	currentImage = nullptr;
+
+	delete imageCount;
+	imageCount = nullptr;
 }
 
 SpriteRenderer::SpriteRenderer()

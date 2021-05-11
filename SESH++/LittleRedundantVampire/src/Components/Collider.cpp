@@ -43,11 +43,15 @@ bool Collider::CheckCollision(Collider* other)
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
-		onColliding.Notify(*other->gameObject->objectTag);
-		currentCollisions.push_back(other);
-		onGameObjDestroyed.Attach(other);
+		if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
+		{
+			currentCollisions.push_back(other);
+			onGameObjDestroyed.Attach(other);
+		}
 
-		OnColliding(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
+		onColliding.Notify(*other->gameObject->objectTag);
+
+		Push(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
 
 		return true; //The objects are intersecting = We are colliding)
 	}
@@ -55,7 +59,7 @@ bool Collider::CheckCollision(Collider* other)
 	return false; //The objects are not intersecting = We are not colliding
 }
 
-void Collider::OnColliding(Vector2f delta, Vector2f intersect, Collider* other)
+void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 {
 	if (*solid && *other->solid)
 	{
@@ -90,6 +94,18 @@ void Collider::OnColliding(Vector2f delta, Vector2f intersect, Collider* other)
 
 void Collider::OnNoLongerColliding()
 {
+	if (currentCollisions.size() > 0)
+	{
+		std::list<Collider*>::iterator it = currentCollisions.begin();
+		while (it != currentCollisions.end())
+		{
+			bool isStillColliding = CheckCollision(*it);
+			if (!isStillColliding)
+			{
+				it = currentCollisions.erase(it);
+			}
+		}
+	}
 }
 
 void Collider::Awake()
@@ -108,7 +124,7 @@ void Collider::Start()
 
 void Collider::Update(Time* timePerFrame)
 {
-
+	OnNoLongerColliding();
 }
 
 void Collider::Destroy()

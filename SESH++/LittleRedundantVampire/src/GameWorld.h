@@ -13,6 +13,7 @@
 #include "Enum/ObjectTag.h"
 //#include "Headers/Components/OldPlayer.h"
 #include "Observer/Platform.h"
+#include "Components/Collider.h"
 #include "GameWorld.h"
 #include "Command/PlayerInvoker.h"
 //#include "Headers/LevelManager.h"

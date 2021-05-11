@@ -1,18 +1,46 @@
 #include "Platform.h"
 
-Platform::Platform(Texture* texture, Vector2f size, Vector2f position)
+Platform::Platform(/*Texture* texture, Vector2f size, Vector2f position*/)
 {
-	body.setTexture(texture);
+	something = new string("Hello");
+	/*body.setTexture(texture);
 	body.setOrigin(size / 2.0f);
 	body.setSize(size);
-	body.setPosition(position);
+	body.setPosition(position);*/
 }
 
 Platform::~Platform()
 {
+	delete something;
+	something = nullptr;
 }
 
-void Platform::Draw(RenderWindow& window)
+//void Platform::Draw(RenderWindow& window)
+//{
+//	window.draw(body);
+//}
+
+void Platform::Awake()
 {
-	window.draw(body);
+}
+
+void Platform::Start()
+{
+}
+
+void Platform::Update(Time* timePerFrame)
+{
+	if (Keyboard::isKeyPressed(Keyboard::L));
+	{
+		this->gameObject->Destroy();
+	}
+}
+
+void Platform::Destroy()
+{
+}
+
+ComponentTag Platform::ToEnum()
+{
+	return ComponentTag::CRATE;
 }
