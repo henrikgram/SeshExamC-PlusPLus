@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class Component : protected IListener, protected ICollisionListener
+class Component : public IListener, public ICollisionListener
 {
 public:
 	GameObject* gameObject;

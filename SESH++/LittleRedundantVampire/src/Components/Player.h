@@ -4,6 +4,7 @@
 #include "../Asset.h"
 #include "AttackFactory.h"
 #include <string>
+#include "../Observer/IGameEvent.h"
 
 using namespace sf;
 
@@ -23,8 +24,11 @@ public:
 	void OnNotifyCollision(ObjectTag otherTag) override;
 
 	void Normalize();
+	void UpdateAnimation();
+	IGameEvent ChangeAnimation;
 
 private:
+	bool flipped = false;
 	float speed;
 	Attack* attack;
 	string direction;

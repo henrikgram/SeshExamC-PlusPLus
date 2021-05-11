@@ -22,6 +22,7 @@
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Asset.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Components\AnimationComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameWorld.h" />
@@ -50,6 +51,7 @@
     <ClInclude Include="src\Asset.h" />
     <ClInclude Include="src\Observer\IListener.h" />
     <ClInclude Include="src\Observer\ICollisionListener.h" />
+    <ClInclude Include="src\Components\AnimationComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />

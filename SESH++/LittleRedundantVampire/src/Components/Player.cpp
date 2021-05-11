@@ -12,6 +12,7 @@ Player::~Player()
 
 void Player::Move(Vector2f velocity)
 {
+	ChangeAnimation.Notify("1",this);
 	this->velocity += velocity;
 }
 
@@ -22,6 +23,43 @@ void Player::Awake()
 	velocity = Vector2f(0.0f, 0.0f);
 }
 
+void Player::UpdateAnimation()
+{
+	//TODO: OPTIMERING fix så den ikke kører medmindre det er en ny animation. OPTIMERING
+	if (velocity.x == 0 && velocity.y == 0)
+	{
+		ChangeAnimation.Notify("3", this);
+	}
+	else if (velocity.y < 0)
+	{
+		ChangeAnimation.Notify("2", this);
+	}
+	else if (velocity.y > 0)
+	{
+		ChangeAnimation.Notify("0", this);
+	}
+	else if (velocity.x < 0)
+	{
+		if (!flipped)
+		{
+			ChangeAnimation.Notify("1", this);
+			ChangeAnimation.Notify("flip",this);
+			flipped = true;
+		}
+	}
+
+	else if (velocity.x > 0)
+	{
+		if (flipped)
+		{
+			ChangeAnimation.Notify("1", this);
+			ChangeAnimation.Notify("flip",this);
+			flipped = false;
+		}
+	}
+
+}
+
 void Player::Start()
 {
 
@@ -29,6 +67,8 @@ void Player::Start()
 
 void Player::Update(Time* timePerFrame)
 {
+	UpdateAnimation();
+
 	Normalize();
 
 	if (speed < 5.0f)
@@ -41,6 +81,7 @@ void Player::Normalize()
 {
 	if (velocity != Vector2f(0.0f, 0.0f))
 	{
+	
 		//Vi udregner hypotenusen af bevaegelsesretningen.
 		float movementVectorLength = sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
 
@@ -51,7 +92,7 @@ void Player::Normalize()
 		velocity.x *= speed;
 		velocity.y *= speed;
 
-		//cout << velocity.x << " : " << velocity.y << "\n";
+		cout << velocity.x << " : " << velocity.y << "\n";
 		*gameObject->position += velocity;
 		velocity = Vector2f(0.0f, 0.0f);
 	}
