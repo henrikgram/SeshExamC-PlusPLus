@@ -1,28 +1,4 @@
 ﻿  GameWorld.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(770,20): error C2338: The C++ Standard forbids containers of const elements because allocator<const T> is ill-formed.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(664): message : see reference to class template instantiation 'std::allocator<Collider *const >' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(720): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<std::allocator<Collider *const >,_Ty>' being compiled
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\Collider.h(43): message : see reference to class template instantiation 'std::list<Collider *const ,std::allocator<Collider *const >>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(798,1): error C2535: '_Ty *std::allocator<_Ty>::address(_Ty &) noexcept const': member function already defined or declared
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(794): message : see declaration of 'std::allocator<Collider *const >::address'
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(41,114): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
@@ -60,56 +36,7 @@ C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
               T=float
           ]
   AttackFactory.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(770,20): error C2338: The C++ Standard forbids containers of const elements because allocator<const T> is ill-formed.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(664): message : see reference to class template instantiation 'std::allocator<Collider *const >' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(720): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<std::allocator<Collider *const >,_Ty>' being compiled
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\Collider.h(43): message : see reference to class template instantiation 'std::list<Collider *const ,std::allocator<Collider *const >>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(798,1): error C2535: '_Ty *std::allocator<_Ty>::address(_Ty &) noexcept const': member function already defined or declared
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(794): message : see declaration of 'std::allocator<Collider *const >::address'
-  Movement.cpp
   OldPlayer.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(770,20): error C2338: The C++ Standard forbids containers of const elements because allocator<const T> is ill-formed.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(664): message : see reference to class template instantiation 'std::allocator<Collider *const >' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(720): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<std::allocator<Collider *const >,_Ty>' being compiled
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\Collider.h(43): message : see reference to class template instantiation 'std::list<Collider *const ,std::allocator<Collider *const >>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(798,1): error C2535: '_Ty *std::allocator<_Ty>::address(_Ty &) noexcept const': member function already defined or declared
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(794): message : see declaration of 'std::allocator<Collider *const >::address'
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\OldPlayer.cpp(20,71): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
@@ -159,105 +86,11 @@ C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(217,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(221,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(221,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Player.cpp
   Platform.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(770,20): error C2338: The C++ Standard forbids containers of const elements because allocator<const T> is ill-formed.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(664): message : see reference to class template instantiation 'std::allocator<Collider *const >' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(720): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<std::allocator<Collider *const >,_Ty>' being compiled
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\Collider.h(43): message : see reference to class template instantiation 'std::list<Collider *const ,std::allocator<Collider *const >>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(798,1): error C2535: '_Ty *std::allocator<_Ty>::address(_Ty &) noexcept const': member function already defined or declared
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(794): message : see declaration of 'std::allocator<Collider *const >::address'
   Collider.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(770,20): error C2338: The C++ Standard forbids containers of const elements because allocator<const T> is ill-formed.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(664): message : see reference to class template instantiation 'std::allocator<Collider *const >' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(720): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<std::allocator<Collider *const >,_Ty>' being compiled
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\Collider.h(43): message : see reference to class template instantiation 'std::list<Collider *const ,std::allocator<Collider *const >>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(798,1): error C2535: '_Ty *std::allocator<_Ty>::address(_Ty &) noexcept const': member function already defined or declared
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(794): message : see declaration of 'std::allocator<Collider *const >::address'
   Attack.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(770,20): error C2338: The C++ Standard forbids containers of const elements because allocator<const T> is ill-formed.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(664): message : see reference to class template instantiation 'std::allocator<Collider *const >' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(720): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<std::allocator<Collider *const >,_Ty>' being compiled
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\Collider.h(43): message : see reference to class template instantiation 'std::list<Collider *const ,std::allocator<Collider *const >>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(798,1): error C2535: '_Ty *std::allocator<_Ty>::address(_Ty &) noexcept const': member function already defined or declared
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(794): message : see declaration of 'std::allocator<Collider *const >::address'
+  Component.cpp
   main.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(770,20): error C2338: The C++ Standard forbids containers of const elements because allocator<const T> is ill-formed.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(664): message : see reference to class template instantiation 'std::allocator<Collider *const >' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(720): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
-          with
-          [
-              _Alloc=std::allocator<Collider *const >
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\list(770): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<std::allocator<Collider *const >,_Ty>' being compiled
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\Collider.h(43): message : see reference to class template instantiation 'std::list<Collider *const ,std::allocator<Collider *const >>' being compiled
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(798,1): error C2535: '_Ty *std::allocator<_Ty>::address(_Ty &) noexcept const': member function already defined or declared
-          with
-          [
-              _Ty=Collider *const
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\xmemory(794): message : see declaration of 'std::allocator<Collider *const >::address'
   Generating Code...
+  LINK : C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe not found or not built by the last incremental link; performing full link
+  LittleRedundantVampire.vcxproj -> C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

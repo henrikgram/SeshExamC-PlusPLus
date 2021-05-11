@@ -40,6 +40,6 @@ private:
 	CollisionEvent onNoLongerColliding;
 	IGameEvent onGameObjDestroyed;
 
-	std::list<Collider* const> currentCollisions;
+	std::list<Collider*> currentCollisions;
 };
 
