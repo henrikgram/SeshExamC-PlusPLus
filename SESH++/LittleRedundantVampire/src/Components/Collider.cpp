@@ -47,40 +47,49 @@ bool Collider::CheckCollision(Collider* other)
 		currentCollisions.push_back(other);
 		onGameObjDestroyed.Attach(other);
 
-		//TODO: All this following is related to pushing an object and maybe shouldn't be in this class. 
-		if (*solid && *other->solid)
-		{
-			if (intersectX > intersectY)
-			{
-				if (deltaX > 0.0f)
-				{
-					Move(intersectX * (1.0f - *pushFactor), 0.0f);
-					//cout << "You're colliding with the left side\n";
-				}
-				else
-				{
-					Move(-intersectX * (1.0f - *pushFactor), 0.0f);
-					//cout << "You're colliding with the right side\n";
-				}
-			}
-			else
-			{
-				if (deltaY > 0.0f)
-				{
-					Move(0.0f, intersectY * (1.0f - *pushFactor));
-					//cout << "You're colliding with the top\n";
-				}
-				else
-				{
-					Move(0.0f, -intersectY * (1.0f - *pushFactor));
-					//cout << "You're colliding with the bottom\n";
-				}
-			}
-		}
+		OnColliding(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
+
 		return true; //The objects are intersecting = We are colliding)
 	}
 
 	return false; //The objects are not intersecting = We are not colliding
+}
+
+void Collider::OnColliding(Vector2f delta, Vector2f intersect, Collider* other)
+{
+	if (*solid && *other->solid)
+	{
+		if (intersect.x > intersect.y)
+		{
+			if (delta.x > 0.0f)
+			{
+				Move(intersect.x * (1.0f - *pushFactor), 0.0f);
+				//cout << "You're colliding with the left side\n";
+			}
+			else
+			{
+				Move(-intersect.x * (1.0f - *pushFactor), 0.0f);
+				//cout << "You're colliding with the right side\n";
+			}
+		}
+		else
+		{
+			if (delta.y > 0.0f)
+			{
+				Move(0.0f, intersect.y * (1.0f - *pushFactor));
+				//cout << "You're colliding with the top\n";
+			}
+			else
+			{
+				Move(0.0f, -intersect.y * (1.0f - *pushFactor));
+				//cout << "You're colliding with the bottom\n";
+			}
+		}
+	}
+}
+
+void Collider::OnNoLongerColliding()
+{
 }
 
 void Collider::Awake()

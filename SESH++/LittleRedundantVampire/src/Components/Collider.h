@@ -15,9 +15,13 @@ public:
 	//TODO: Move should perhaps not be in this class. Collider shouldn't be responsible for moving an object perhaps a Rigidbody class.
 	void Move(float deltaX, float deltaY);
 
+	//TODO: Should maybe be a void method
 	bool CheckCollision(Collider* other);
 	Vector2f GetPosition() const { return *gameObject->position; }
 	Vector2f GetHalfsize() const { return collisionBox->getSize() / 2.0f; }
+
+	void OnColliding(Vector2f delta, Vector2f intersect, Collider* other);
+	void OnNoLongerColliding();
 
 	// Inherited via Component
 	void Awake() override;
