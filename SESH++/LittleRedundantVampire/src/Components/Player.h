@@ -20,7 +20,7 @@ public:
 	void Destroy() override;
 	ComponentTag ToEnum() override;
 
-	void NotifyCollision(ObjectTag otherTag) override;
+	void OnNotifyCollision(ObjectTag otherTag) override;
 
 	void Normalize();
 

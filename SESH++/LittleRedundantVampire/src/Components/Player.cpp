@@ -30,6 +30,11 @@ void Player::Start()
 void Player::Update(Time* timePerFrame)
 {
 	Normalize();
+
+	if (speed < 5.0f)
+	{
+		speed++;
+	}
 }
 
 void Player::Normalize()
@@ -62,7 +67,7 @@ ComponentTag Player::ToEnum()
 	return ComponentTag::PLAYER;
 }
 
-void Player::NotifyCollision(ObjectTag otherTag)
+void Player::OnNotifyCollision(ObjectTag otherTag)
 {
 	switch (otherTag)
 	{
@@ -99,6 +104,7 @@ void Player::NotifyCollision(ObjectTag otherTag)
 	case ObjectTag::CHEST:
 		break;
 	case ObjectTag::CRATE:
+		//speed = 0.9f;
 		cout << "I hit a crate";
 		break;
 	default:

@@ -5,6 +5,6 @@ class IListener
 {
 public:
 	//TODO: Fix when merging with signe and henriks componentcode
-	virtual void Notify(std::string eventName/*, Component component*/) = 0;
+	virtual void OnNotify(std::string eventName, IListener* sender) = 0;
 };
 

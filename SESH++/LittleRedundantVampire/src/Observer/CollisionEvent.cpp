@@ -6,9 +6,9 @@ CollisionEvent::CollisionEvent()
 
 CollisionEvent::~CollisionEvent()
 {
-    for (auto&& listener : listeners) {
+    /*for (auto&& listener : listeners) {
         delete listener;
-    }
+    }*/
     listeners.clear();
 }
 
@@ -26,7 +26,7 @@ void CollisionEvent::Notify(ObjectTag otherTag)
 {
     std::list<ICollisionListener*>::iterator iterator = listeners.begin();
     while (iterator != listeners.end()) {
-        (*iterator)->NotifyCollision(otherTag);
+        (*iterator)->OnNotifyCollision(otherTag);
         ++iterator;
     }
 }
