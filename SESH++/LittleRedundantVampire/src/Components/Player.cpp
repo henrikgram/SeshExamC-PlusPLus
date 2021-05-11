@@ -94,6 +94,8 @@ void Player::Normalize()
 
 		cout << velocity.x << " : " << velocity.y << "\n";
 		*gameObject->position += velocity;
+
+		//TODO: OPTIMERING: implementer funktioanlitet i commmand pattern så den registrerer når man slipper en tast, og sætter vector til 0 frem for her
 		velocity = Vector2f(0.0f, 0.0f);
 	}
 }
