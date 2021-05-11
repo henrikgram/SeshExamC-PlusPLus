@@ -100,7 +100,7 @@ void SpriteRenderer::SetSprite(TextureTag textureTag)
 		float width = texture->getSize().x;
 		float heigt = texture->getSize().y;
 
-		sprite->setOrigin(Vector2f(width, heigt));
+		sprite->setOrigin(Vector2f(width/2, heigt/2));
 	}
 }
 

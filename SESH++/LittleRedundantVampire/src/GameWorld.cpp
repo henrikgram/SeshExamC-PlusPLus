@@ -49,7 +49,9 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		playerPointer->ChangeAnimation.Attach(aC);
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.9f, true);
+		float x = sr->TextureRect->width;
+		float y = sr->TextureRect->height;
+		col = new  Collider(Vector2f(x, y), *go->position, 0.5f, true);
 		go->AddComponent(col);
 		colliders.push_back(col);
 	}
