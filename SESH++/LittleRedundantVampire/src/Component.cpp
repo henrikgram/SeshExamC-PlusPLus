@@ -9,10 +9,6 @@ Component::~Component()
 	gameObject = nullptr;
 }
 
-void Component::OnNotify(std::string eventName)
-{
-}
-
-void Component::NotifyCollision(ObjectTag otherTag)
+void Component::Notify(std::string eventName)
 {
 }

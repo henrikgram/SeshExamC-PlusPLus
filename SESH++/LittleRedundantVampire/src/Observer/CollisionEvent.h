@@ -1,19 +1,18 @@
 #pragma once
 #include <list>
-#include "ICollisionListener.h"
-#include "../Enum/ObjectTag.h"
+#include "IGameEvent.h"
 
-class CollisionEvent
+class CollisionEvent : public IGameEvent
 {
 public:
 	CollisionEvent();
 	~CollisionEvent();
 
-	void Attach(ICollisionListener* listener);
-	void Detach(ICollisionListener* listener);
-	void Notify(ObjectTag otherTag);
+	void Attach(IListener* listener);
+	void Detach(IListener* listener);
+	void Notify();
 
 private:
-	std::list<ICollisionListener*> listeners;
+	std::list<IListener*> listeners;
 };
 

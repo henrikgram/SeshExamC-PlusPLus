@@ -36,15 +36,14 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		sr->currentImage = new Vector2u(1, 1);
 		sr->imageCount = new Vector2u(4, 3);
 		sr->SetSprite(TextureTag::PLAYER_SHEET);
-		go->position = new Vector2<float>(1000, 1000);
+		go->position = new Vector2<float>(50, 50);
 	
 		go->AddComponent(sr);
 		playerPointer = new Player();
 		go->AddComponent(playerPointer);
-		AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 4), 200.0f, 1);
+		AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 3), 200.0f, 1);
 		go->AddComponent(aC);
 
-		playerPointer->ChangeAnimation.Attach(aC);
 
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.

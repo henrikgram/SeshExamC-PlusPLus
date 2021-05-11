@@ -3,13 +3,11 @@
 #include "GameObject.h"
 #include "Enum/ComponentTag.h"
 #include "Observer/IListener.h"
-#include "Observer/ICollisionListener.h"
 
 
 using namespace std;
 
-//TODO: find ud af om den anden skal være protected. den kan ikke castes til iListener udenfor, hvis den ikke er public
-class Component : public IListener, protected ICollisionListener
+class Component : protected IListener
 {
 public:
 	GameObject* gameObject;
@@ -49,9 +47,6 @@ public:
 	virtual ComponentTag ToEnum() = 0;
 
 	// Inherited via IListener
-	void OnNotify(std::string eventName) override;
-
-	// Inherited via ICollisionListener
-	virtual void NotifyCollision(ObjectTag otherTag) override;
+	void Notify(std::string eventName) override;
 };
 
