@@ -27,7 +27,11 @@ void GameObject::Update(Time* timePerFrame)
 	//iterates through the gameObjects and calls Update
 	for (it = components.begin(); it != components.end(); it++)
 	{
-		it->second->Update(timePerFrame);
+		if (it->second != nullptr)
+		{
+			it->second->Update(timePerFrame);
+		}
+
 	}
 }
 

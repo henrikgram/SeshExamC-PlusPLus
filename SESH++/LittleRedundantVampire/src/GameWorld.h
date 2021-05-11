@@ -33,6 +33,7 @@ public:
 
 	void Run();
 	vector<GameObject*>* GetGameObjects();
+	vector<Collider*>* GetColliders();
 
 
 private:
@@ -62,7 +63,7 @@ private:
 	void BootlegFactory(ObjectTag tag);
 	void ResizeView(const RenderWindow& window, View& view);
 
-	vector<Collider*> colliders;
+	vector<Collider*>* colliders;
 	Player* playerPointer;
 };
 

@@ -1,4 +1,5 @@
 ﻿#include "GameWorld.h"
+#include "Components/Npc.h"
 
 
 //TODO: tjek om det her er fybabab
@@ -32,15 +33,15 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	{
 	case ObjectTag::PLAYER:
 		sr->SetSprite(TextureTag::OZZY);
-		go->position = new Vector2<float>(50, 50);
+		go->position = new Vector2<float>(800, 1400);
 		go->AddComponent(sr);
 		playerPointer = new Player();
 		go->AddComponent(playerPointer);
-
+		*go->objectTag = tag;
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.9f, true);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.5f, true);
 		go->AddComponent(col);
-		colliders.push_back(col);
+		colliders->push_back(col);
 		break;
 	case ObjectTag::ENEMY:
 		break;
@@ -65,7 +66,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, true);
 		go->AddComponent(col);
-		colliders.push_back(col);
+		colliders->push_back(col);
 		break;
 	default:
 		break;
@@ -86,6 +87,11 @@ void GameWorld::Run()
 	*GameWorld::GetInstance()->GetGameObjects() = lm->InstantiateLevel("Level1");
 
 	Initialize();
+	//String* string = new String("fuck you");
+	//Npc npc(string);
+	////GameObject* npcBoxFuck = new GameObject(npc.TextBoxPopup(Vector2f(npc.gameObject->position->x, npc.gameObject->position->y)));
+	//GameObject* npcBoxFuck = new GameObject(npc.TextBoxPopup(Vector2f(100, 100)));
+	//(*GameWorld::GetInstance()->GetGameObjects()).push_back(npcBoxFuck);
 
 	//Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
 
@@ -148,6 +154,17 @@ void GameWorld::Run()
 
 void GameWorld::Initialize()
 {
+	//Text* text = new Text();
+	////text->setString(*msg);
+	//Font* font = new Font();
+	//font->loadFromFile("Asset/PlayfairDisplay-VariableFont_wght.ttf");
+	//text->setFont(*font);
+	//text->setString("fuck all");
+	//text->setCharacterSize(24);
+	//text->setFillColor(sf::Color::Red);
+	//text->setStyle(Text::Bold | Text::Italic);
+	//text->setPosition(50,50);
+
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
 }
@@ -170,9 +187,9 @@ void GameWorld::Update(Time* timePerFrame)
 
 	vector<Collider*>::iterator colIt;
 	vector<Collider*>::iterator colIt2;
-	for (colIt = colliders.begin(); colIt < colliders.end(); colIt++)
+	for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
 	{
-		for (colIt2 = colliders.begin(); colIt2 < colliders.end(); colIt2++)
+		for (colIt2 = colliders->begin(); colIt2 < colliders->end(); colIt2++)
 		{
 			if (colIt != colIt2)
 			{
@@ -196,6 +213,7 @@ void GameWorld::Draw()
 	//it needs to point to something, otherwise it wont compile, because it cant delete an "empty pointer"
 	//TODO: this needs to be deleted somewhere, but it dosen't work here, actually, check if it matters because its on stack.
 	SpriteRenderer* sr;
+	//TextMessage* tm;
 
 	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
 	//iterates through the gameObjects and draws all gameobjects.
@@ -205,16 +223,44 @@ void GameWorld::Draw()
 	{
 		//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
 		sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
+		TextMessage* tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
 
 		window.draw(sr->GetSprite());
+
+		if (tm != nullptr)
+		{
+			window.draw(tm->GetMessage());
+		}
+		else
+		{
+			delete tm;
+			tm = nullptr;
+		}
+
+
 	}
+	// DU KAN IKKE TEGNE TEKST. FUCK ALT. PRØVE IGEN. ØV. F.
+	//for (vector<GameObject*>::size_type i = 0;
+	//	i < gameObjectsSize;
+	//	++i)
+	//{
+	//	//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
+	//	tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
+
+	//	if (tm != nullptr)
+	//	{
+	//		window.draw(tm->GetMessage());
+	//	}
+	//}
 	// Displays everything in the window.
 	window.display();
 }
 
 GameWorld::GameWorld()
 {
+	// TODO: Maybe move to initialize.
 	gameObjects = new vector<GameObject*>;
+	colliders = new vector<Collider*>;
 }
 
 GameWorld::~GameWorld()
@@ -239,6 +285,11 @@ GameWorld* GameWorld::GetInstance()
 vector<GameObject*>* GameWorld::GetGameObjects()
 {
 	return gameObjects;
+}
+
+vector<Collider*>* GameWorld::GetColliders()
+{
+	return colliders;
 }
 
 

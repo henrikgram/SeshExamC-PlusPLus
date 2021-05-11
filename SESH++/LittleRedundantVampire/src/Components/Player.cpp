@@ -75,6 +75,7 @@ void Player::NotifyCollision(ObjectTag otherTag)
 	case ObjectTag::ENEMYATTACK:
 		break;
 	case ObjectTag::NPC:
+		//cout << "hit npc";
 		break;
 	case ObjectTag::WALL:
 		break;

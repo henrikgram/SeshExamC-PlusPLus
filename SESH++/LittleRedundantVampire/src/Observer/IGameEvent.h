@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <list>
 #include "IListener.h"
 
 using namespace std;
@@ -7,14 +8,13 @@ using namespace std;
 class IGameEvent
 {
 public:
+	IGameEvent();
+	~IGameEvent();
+
 	void Attach(IListener* listener);
 	void Detach(IListener* listener);
-	void Notify();
-
-	string GetEventTitle() const { return eventTitle; }
-	void SetEventTitle(string newTitle) { eventTitle = newTitle; }
+	void Notify(string eventTitle);
 
 private:
-	string eventTitle;
+	list<IListener*> listeners;
 };
-

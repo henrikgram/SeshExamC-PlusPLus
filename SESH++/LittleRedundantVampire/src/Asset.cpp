@@ -4,6 +4,7 @@ void Asset::LoadTextures()
 {
 	//DECORATIONS
 	floorWoodTexture->	loadFromFile("Asset/WoodenFloor.png");
+	textBoxTexture->	loadFromFile("Asset/TextBox_V3.png");
 
 	//OBJECTS
 	attackSheetTexture->loadFromFile("Asset/AttackSheet2.png");
@@ -23,6 +24,7 @@ void Asset::LoadTextures()
 
 	// DECORATIONS
 	textures.insert(make_pair(TextureTag::FLOOR_WOOD,	 *floorWoodTexture));
+	textures.insert(make_pair(TextureTag::TEXT_BOX,		 *textBoxTexture));
 
 	//OBJECTS
 	textures.insert(make_pair(TextureTag::ATTACK_SHEET,	 *attackSheetTexture));

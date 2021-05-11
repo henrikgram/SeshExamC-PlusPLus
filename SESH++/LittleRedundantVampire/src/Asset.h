@@ -20,6 +20,7 @@ private:
 	Texture* crateTexture = new Texture;
 	Texture* floorWoodTexture = new Texture;
 	Texture* floorCarpetTexture = new Texture;
+	Texture* textBoxTexture = new Texture();
 	Texture* wallTexture = new Texture;
 	Texture* windowTexture = new Texture;
 

@@ -46,7 +46,7 @@ bool Collider::CheckCollision(Collider* other)
 		onColliding.Notify(*other->gameObject->objectTag);
 
 		//TODO: All this following is related to pushing an object and maybe shouldn't be in this class. 
-		if (*solid == true)
+		if (*solid && *other->solid)
 		{
 			if (intersectX > intersectY)
 			{
@@ -102,6 +102,7 @@ void Collider::Update(Time* timePerFrame)
 
 void Collider::Destroy()
 {
+
 }
 
 ComponentTag Collider::ToEnum()
