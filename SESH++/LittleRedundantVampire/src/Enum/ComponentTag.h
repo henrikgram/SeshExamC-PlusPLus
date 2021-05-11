@@ -13,6 +13,7 @@ enum class ComponentTag {
 	VASE,
 	WINDOW,
 	CRATE,
+	ATTACKSPAWNER,
 	ATTACK,
 	ANIMATION
 };

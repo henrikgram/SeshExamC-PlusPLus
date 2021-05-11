@@ -36,7 +36,8 @@ public:
 	unordered_map<ComponentTag, Component*> components;
 	Vector2f * position = new Vector2f;
 	ObjectTag* objectTag = new ObjectTag();
-	bool shouldDraw;
+	string* direction;
+	bool* shouldDraw;
 
 	GameObject();
 	GameObject(Vector2<float> position);

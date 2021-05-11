@@ -7,6 +7,7 @@ View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
 RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 
+
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
 /// S�rger for at det view scaler med vinduets st�rrelse. Forhindrer stretching af sprites og lignende.
@@ -36,6 +37,8 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->AddComponent(sr);
 		playerPointer = new Player();
 		go->AddComponent(playerPointer);
+		atckSpwnPointer = new AttackSpawner(ObjectTag::PLAYERATTACK);
+		go->AddComponent(atckSpwnPointer);
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
 		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.9f, true);
@@ -127,7 +130,6 @@ void GameWorld::Run()
 		{
 			timeSinceLastUpdate -= timePerFrame;
 			Update(&timePerFrame);
-			//player.Update(deltaTime);
 			//p1.GetCollider().CheckCollision(player.GetCollider(), 0.1f);
 			view.setCenter(*playerPointer->gameObject->position);
 		}
@@ -138,13 +140,10 @@ void GameWorld::Run()
 		window.setView(view);
 
 		Draw();
-		//window.clear(Color(0, 255, 255, 255));
-		//player.Draw(window);
-		//p1.Draw(window);
-		//window.display();
 	}
 
 }
+
 
 void GameWorld::Initialize()
 {
@@ -183,8 +182,18 @@ void GameWorld::Update(Time* timePerFrame)
 
 	if (playerPointer != nullptr)
 	{
+		//TODO: Fix så den tager imod attack også
 		Player& playerRef = *playerPointer;
-		PlayerInvoker::GetInstance(playerRef)->InvokeCommand();
+		AttackSpawner& atckSpwnPointerRef = *atckSpwnPointer;
+
+		//AttackSpawner* attackPointer = dynamic_cast<AttackSpawner*>(playerPointer->gameObject->GetComponent(ComponentTag::ATTACKSPAWNER));
+		//AttackSpawner& attackRef = *attackPointer;
+
+		PlayerInvoker::GetInstance(playerRef, atckSpwnPointerRef)->InvokeCommand();
+
+
+
+
 	}
 }
 
@@ -203,14 +212,21 @@ void GameWorld::Draw()
 		i < gameObjectsSize;
 		++i)
 	{
-		//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
-		sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
+		GameObject* go = (*GameWorld::GetInstance()->GetGameObjects())[i];
 
-		window.draw(sr->GetSprite());
+		if (*go->shouldDraw)
+		{
+			//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
+			sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
+
+			window.draw(sr->GetSprite());
+		}
 	}
+
 	// Displays everything in the window.
 	window.display();
 }
+
 
 GameWorld::GameWorld()
 {
@@ -226,6 +242,7 @@ GameWorld::~GameWorld()
 	gameObjects = nullptr;
 }
 
+
 GameWorld* GameWorld::GetInstance()
 {
 	if (instance == nullptr)
@@ -239,6 +256,11 @@ GameWorld* GameWorld::GetInstance()
 vector<GameObject*>* GameWorld::GetGameObjects()
 {
 	return gameObjects;
+}
+
+vector<GameObject*>* GameWorld::GetDeletedObjects()
+{
+	return deletedObjects;
 }
 
 

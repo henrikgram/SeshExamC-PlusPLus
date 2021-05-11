@@ -1,5 +1,5 @@
 #include "Attack.h"
-#include "AttackFactory.h"
+#include "AttackSpawner.h"
 #include "SpriteRenderer.h"
 #include "../GameWorld.h"
 #include <iostream>
@@ -7,111 +7,87 @@ using namespace std;
 using namespace sf;
 
 
-Attack::Attack(ObjectTag tag, Vector2f callerPosition, string direction)
+Attack::Attack(ObjectTag* objectTag, Vector2f callerPosition, string direction, float attackLength)
 {
-	this->tag = new ObjectTag();
-	*this->tag = tag;
+	this->objectTag = new ObjectTag;
+	this->objectTag = objectTag;
 
-	this->callerPosition = new Vector2f();
+	this->callerPosition = new Vector2f;
 	*this->callerPosition = callerPosition;
 
-	this->direction = new string();
-	*this->direction = direction;
+	attackTimer = new float;
 
-	CreateAttack();
+	this->attackLength = new float;
+	*this->attackLength = attackLength;
 }
 
 Attack::~Attack()
 {
-	delete tag;
-	tag = nullptr;
+	delete objectTag;
+	objectTag = nullptr;
 
 	delete callerPosition;
 	callerPosition = nullptr;
 
-	delete direction;
-	direction = nullptr;
+	delete attackTimer;
+	attackTimer = nullptr;
+
+	delete attackLength;
+	attackLength = nullptr;
 }
+
 
 void Attack::Awake()
 {
-	//attackLength = 0.5f;
+	*attackTimer = 0.0f;
 }
 
 void Attack::Start()
 {
-
-}
-
-void Attack::CreateAttack()
-{
-	SpriteRenderer* sr = new SpriteRenderer();
-	gameObject = new GameObject();
-
-	sr->SetSprite(TextureTag::ATTACK_SHEET);
-	gameObject->AddComponent(sr);
-
-	gameObject->Awake();
-	gameObject->Start();
-
-	(*GameWorld::GetInstance()->GetGameObjects()).push_back(gameObject);
-}
-
-void Attack::StartAttack()
-{
-
+	//Left
+	if (*gameObject->direction == "left")
+	{
+		*gameObject->position = Vector2f((*callerPosition).x - 60.0f, (*callerPosition).y);
+	}
+	//Right
+	if (*gameObject->direction == "right")
+	{
+		*gameObject->position = Vector2f((*callerPosition).x + 60.0f, (*callerPosition).y);
+	}
+	//Up
+	if (*gameObject->direction == "up")
+	{
+		*gameObject->position = Vector2f((*callerPosition).x, (*callerPosition).y - 70.0f);
+	}
+	//Down
+	if (*gameObject->direction == "down")
+	{
+		*gameObject->position = Vector2f((*callerPosition).x, (*callerPosition).y + 70.0f);
+	}
 }
 
 void Attack::Update(Time* timePerFrame)
 {
-	attackTimer += timePerFrame->asMilliseconds();
+	*attackTimer += timePerFrame->asMilliseconds();
 
-	//if (attackTimer >= attackLength)
-	//{
-		//Bestemmer hvilken retning du skal aendre til baseret paa input fra keyboard.
-		//TODO: Change so that it's not based on keyboard inputs.
-		//Venstre
-		if (*direction == "left")
-		{
-			*gameObject->position = Vector2f((*callerPosition).x - 60.0f, (*callerPosition).y);
-			//sprite skal også ændres her somehow.
-		}
-		//Hoejre
-		else if (*direction == "right")
-		{
-			*gameObject->position = Vector2f((*callerPosition).x + 60.0f, (*callerPosition).y);
-			//sprite skal også ændres her somehow.
-		}
-		//Op
-		else if (*direction == "up")
-		{
-			*gameObject->position = Vector2f((*callerPosition).x, (*callerPosition).y - 70.0f);
-			//sprite skal også ændres her somehow.
-		}
-		//Ned
-		else if (*direction == "down")
-		{
-			*gameObject->position = Vector2f((*callerPosition).x, (*callerPosition).y + 70.0f);
-			//sprite skal også ændres her somehow.
-		}
-	//}
+	if (*attackTimer >= *attackLength)
+	{
+		Destroy();
+		cout << "Object destroyed" << "\n";
 
-	////Her angriber spilleren.
-	////TODO: make this based on an attack event.
-	//if (Keyboard::isKeyPressed(Keyboard::Space))
-	//{
-	//	attackTimer = 0.0f;
-	//	gameObject->shouldDraw = true;
-	//}
-	//else
-	//{
-	//	gameObject->shouldDraw = false;
-	//}
+		*attackTimer = 0.0f;
+		*gameObject->shouldDraw = false;
+	}
+	else
+	{
+		*gameObject->shouldDraw = true;
+	}
 }
 
+//TODO: Find a proper way to delete objects.
 void Attack::Destroy()
 {
-
+	//fjern fra listen af objekter.
 }
 
 ComponentTag Attack::ToEnum()

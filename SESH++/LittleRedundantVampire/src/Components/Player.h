@@ -2,7 +2,7 @@
 #include "../Component.h"
 #include "../Enum/TextureTag.h"
 #include "../Asset.h"
-#include "AttackFactory.h"
+#include "AttackSpawner.h"
 #include <string>
 
 using namespace sf;
@@ -26,7 +26,8 @@ public:
 
 private:
 	float speed;
-	Attack* attack;
+
 	string direction;
+
 	Vector2f velocity;
 };

@@ -15,11 +15,12 @@ void Player::Move(Vector2f velocity)
 	this->velocity += velocity;
 }
 
+
 void Player::Awake()
 {
-	//attack = new Attack(ObjectTag::PLAYER, Vector2f(gameObject->position->x, gameObject->position->y), direction);
 	speed = 5.0f;
 	velocity = Vector2f(0.0f, 0.0f);
+	direction = "right";
 }
 
 void Player::Start()

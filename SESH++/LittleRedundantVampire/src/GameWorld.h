@@ -11,13 +11,14 @@
 #include "Components/Player.h"
 #include "Components/Attack.h"
 #include "Enum/ObjectTag.h"
-//#include "Headers/Components/OldPlayer.h"
 #include "Observer/Platform.h"
 #include "GameWorld.h"
 #include "Command/PlayerInvoker.h"
-//#include "Headers/LevelManager.h"
+#include "GameWorld.h"
+#include "Components/AttackSpawner.h"
 #include "BitmapImage.h"
 #include "LevelManager.h"
+
 
 using namespace std;
 
@@ -33,12 +34,14 @@ public:
 
 	void Run();
 	vector<GameObject*>* GetGameObjects();
+	vector<GameObject*>* GetDeletedObjects();
 
 
 private:
 	static GameWorld* instance;
 
 	vector<GameObject*>* gameObjects;
+	vector<GameObject*>* deletedObjects;
 
 
 	void Initialize();
@@ -64,5 +67,6 @@ private:
 
 	vector<Collider*> colliders;
 	Player* playerPointer;
+	AttackSpawner* atckSpwnPointer;
 };
 

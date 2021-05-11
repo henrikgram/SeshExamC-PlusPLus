@@ -6,7 +6,7 @@ using namespace std;
 
 GameObject::GameObject()
 {
-	shouldDraw = true;
+
 }
 
 GameObject::GameObject(Vector2<float> position)
@@ -33,6 +33,12 @@ void GameObject::Update(Time* timePerFrame)
 
 void GameObject::Awake()
 {
+	shouldDraw = new bool;
+	*shouldDraw = true;
+
+	direction = new string;
+	*direction = "";
+
 	it = components.begin();
 
 	//iterates through the gameObjects and calls Awake
