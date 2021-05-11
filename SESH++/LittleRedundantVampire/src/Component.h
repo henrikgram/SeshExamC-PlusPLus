@@ -48,9 +48,9 @@ public:
 	virtual ComponentTag ToEnum() = 0;
 
 	// Inherited via IListener
-	virtual void Notify(std::string eventName, IListener* sender) override;
+	virtual void OnNotify(std::string eventName, IListener* sender) override;
 
 	// Inherited via ICollisionListener
-	virtual void NotifyCollision(ObjectTag otherTag) override;
+	virtual void OnNotifyCollision(ObjectTag otherTag) override;
 };
 

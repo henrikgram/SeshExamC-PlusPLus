@@ -36,6 +36,19 @@ C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
               T=float
           ]
   AttackFactory.cpp
+  OldAttack.cpp
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\OldAttack.cpp(19,42): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\OldAttack.cpp(20,43): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+  Movement.cpp
+  PlayerInvoker.cpp
   OldPlayer.cpp
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\OldPlayer.cpp(20,71): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
@@ -55,6 +68,7 @@ C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
           [
               T=float
           ]
+  BitmapImage.cpp
   LevelManager.cpp
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(163,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(163,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
@@ -86,11 +100,30 @@ C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(217,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(221,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(221,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Player.cpp
+  MoveCommand.cpp
   Platform.cpp
+  IGameEvent.cpp
+  CollisionEvent.cpp
   Collider.cpp
   Attack.cpp
+  Animation.cpp
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\Animation.cpp(14,43): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\Animation.cpp(15,44): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+  SpriteRenderer.cpp
   Component.cpp
+  GameObject.cpp
+  Asset.cpp
+  Generating Code...
+  Compiling...
   main.cpp
   Generating Code...
-  LINK : C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe not found or not built by the last incremental link; performing full link
   LittleRedundantVampire.vcxproj -> C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

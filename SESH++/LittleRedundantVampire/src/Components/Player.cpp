@@ -67,7 +67,7 @@ ComponentTag Player::ToEnum()
 	return ComponentTag::PLAYER;
 }
 
-void Player::NotifyCollision(ObjectTag otherTag)
+void Player::OnNotifyCollision(ObjectTag otherTag)
 {
 	switch (otherTag)
 	{

@@ -26,7 +26,7 @@ void CollisionEvent::Notify(ObjectTag otherTag)
 {
     std::list<ICollisionListener*>::iterator iterator = listeners.begin();
     while (iterator != listeners.end()) {
-        (*iterator)->NotifyCollision(otherTag);
+        (*iterator)->OnNotifyCollision(otherTag);
         ++iterator;
     }
 }

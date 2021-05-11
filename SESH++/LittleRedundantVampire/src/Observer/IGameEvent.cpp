@@ -27,7 +27,7 @@ void IGameEvent::Notify(string eventTitle, IListener* sender)
 {
 	std::list<IListener*>::iterator iterator = listeners.begin();
 	while (iterator != listeners.end()) {
-		(*iterator)->Notify(eventTitle, sender);
+		(*iterator)->OnNotify(eventTitle, sender);
 		++iterator;
 	}
 }

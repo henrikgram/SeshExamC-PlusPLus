@@ -30,7 +30,7 @@ public:
 	void Destroy() override;
 	ComponentTag ToEnum() override;
 
-	void Notify(std::string eventName, IListener* sender) override;
+	void OnNotify(std::string eventName, IListener* sender) override;
 
 private:
 	RectangleShape* collisionBox;
