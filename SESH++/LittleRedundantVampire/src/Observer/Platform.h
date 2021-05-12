@@ -1,23 +1,30 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../Components/Collider.h"
+#include "../Component.h"
 using namespace sf;
 
-class Platform
+class Platform : public Component
 {
 public:
-	Platform(Texture* texture, Vector2f size, Vector2f position);
+	Platform(/*Texture* texture, Vector2f size, Vector2f position*/);
 	~Platform();
 
 	/// <summary>
 /// Tegner platformens sprite.
 /// </summary>
 /// <param name="window">Det vindue som vi skal render sprite i.</param>
-	void Draw(RenderWindow& window);
+	//void Draw(RenderWindow& window);
 
 	//Collider GetCollider() { return Collider(body); }
 
 private:
-	RectangleShape body;
+	string* something;
+
+	// Inherited via Component
+	void Awake() override;
+	void Start() override;
+	void Update(Time* timePerFrame) override;
+	void Destroy() override;
+	ComponentTag ToEnum() override;
 };
 

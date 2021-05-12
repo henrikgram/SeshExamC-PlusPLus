@@ -43,11 +43,15 @@ bool Collider::CheckCollision(Collider* other)
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
-		onColliding.Notify(*other->gameObject->objectTag);
-		currentCollisions.push_back(other);
-		onGameObjDestroyed.Attach(other);
+		if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
+		{
+			currentCollisions.push_back(other);
+			onOtherGameObjDestroyed.Attach(other);
+		}
 
-		OnColliding(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
+		onColliding.Notify(*other->gameObject->objectTag);
+
+		Push(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
 
 		return true; //The objects are intersecting = We are colliding)
 	}
@@ -55,7 +59,7 @@ bool Collider::CheckCollision(Collider* other)
 	return false; //The objects are not intersecting = We are not colliding
 }
 
-void Collider::OnColliding(Vector2f delta, Vector2f intersect, Collider* other)
+void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 {
 	if (*solid && *other->solid)
 	{
@@ -88,8 +92,23 @@ void Collider::OnColliding(Vector2f delta, Vector2f intersect, Collider* other)
 	}
 }
 
-void Collider::OnNoLongerColliding()
+void Collider::UpdateListOfCurrentCollisions()
 {
+	if (currentCollisions.size() > 0)
+	{
+		std::list<Collider*>::iterator it = currentCollisions.begin();
+		while (it != currentCollisions.end())
+		{
+			bool isStillColliding = CheckCollision(*it);
+			if (!isStillColliding)
+			{
+				cout << currentCollisions.size();
+				onNoLongerColliding.Notify("NoLongerCollidingWith", *it);
+				it = currentCollisions.erase(it);
+				cout << currentCollisions.size();
+			}
+		}
+	}
 }
 
 void Collider::Awake()
@@ -103,18 +122,19 @@ void Collider::Start()
 	for (it = gameObject->components.begin(); it != gameObject->components.end(); it++)
 	{
 		onColliding.Attach(it->second);
+		onNoLongerColliding.Attach(it->second);
 	}
 }
 
 void Collider::Update(Time* timePerFrame)
 {
-
+	UpdateListOfCurrentCollisions();
 }
 
 void Collider::Destroy()
 {
 	currentCollisions.clear();
-	onGameObjDestroyed.Notify("GameObject Destroyed", this);
+	onOtherGameObjDestroyed.Notify("OtherGmObjDestroyed", this);
 }
 
 ComponentTag Collider::ToEnum()
@@ -127,5 +147,10 @@ void Collider::OnNotify(std::string eventName, IListener* sender)
 {
 	//TODO: Ensure that this doesn't cause issues if the list does not contain the element. 
 	//This should remove all instances of the collider in question
-	currentCollisions.remove(dynamic_cast<Collider*>(sender));
+	if (eventName == "OtherGmObjDestroyed")
+	{
+		//cout << currentCollisions.size();
+		currentCollisions.remove(dynamic_cast<Collider*>(sender));
+		//cout << currentCollisions.size();
+	}
 }

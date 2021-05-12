@@ -76,6 +76,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		sr->SetSprite(TextureTag::OZZY);
 		go->position = new Vector2f(150, 150);
 		go->AddComponent(sr);
+		go->AddComponent(new Platform);
 
 		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, true);
 		go->AddComponent(col);

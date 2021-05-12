@@ -20,8 +20,8 @@ public:
 	Vector2f GetPosition() const { return *gameObject->position; }
 	Vector2f GetHalfsize() const { return collisionBox->getSize() / 2.0f; }
 
-	void OnColliding(Vector2f delta, Vector2f intersect, Collider* other);
-	void OnNoLongerColliding();
+	void Push(Vector2f delta, Vector2f intersect, Collider* other);
+	void UpdateListOfCurrentCollisions();
 
 	// Inherited via Component
 	void Awake() override;
@@ -37,8 +37,8 @@ private:
 	float* pushFactor;
 	bool* solid;
 	CollisionEvent onColliding;
-	CollisionEvent onNoLongerColliding;
-	IGameEvent onGameObjDestroyed;
+	IGameEvent onNoLongerColliding;
+	IGameEvent onOtherGameObjDestroyed;
 
 	std::list<Collider*> currentCollisions;
 };
