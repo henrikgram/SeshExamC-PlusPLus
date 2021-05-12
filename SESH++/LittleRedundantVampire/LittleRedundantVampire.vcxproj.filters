@@ -24,6 +24,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Components\Npc.cpp" />
     <ClCompile Include="src\Components\TextMessage.cpp" />
+    <ClCompile Include="src\Textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameWorld.h" />
@@ -54,6 +55,7 @@
     <ClInclude Include="src\Observer\ICollisionListener.h" />
     <ClInclude Include="src\Components\Npc.h" />
     <ClInclude Include="src\Components\TextMessage.h" />
+    <ClInclude Include="src\Textbox.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />

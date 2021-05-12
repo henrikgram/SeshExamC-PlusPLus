@@ -148,23 +148,15 @@ void GameWorld::Run()
 		//player.Draw(window);
 		//p1.Draw(window);
 		//window.display();
+
+		//GetScreenHeight();
+		//GetScreenWidth();
 	}
 
 }
 
 void GameWorld::Initialize()
 {
-	//Text* text = new Text();
-	////text->setString(*msg);
-	//Font* font = new Font();
-	//font->loadFromFile("Asset/PlayfairDisplay-VariableFont_wght.ttf");
-	//text->setFont(*font);
-	//text->setString("fuck all");
-	//text->setCharacterSize(24);
-	//text->setFillColor(sf::Color::Red);
-	//text->setStyle(Text::Bold | Text::Italic);
-	//text->setPosition(50,50);
-
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
 }
@@ -290,6 +282,16 @@ vector<GameObject*>* GameWorld::GetGameObjects()
 vector<Collider*>* GameWorld::GetColliders()
 {
 	return colliders;
+}
+
+float GameWorld::GetScreenWidth()
+{
+	return view.getCenter().x;
+}
+
+float GameWorld::GetScreenHeight()
+{
+	return view.getCenter().y - (view.getSize().y / 2);
 }
 
 

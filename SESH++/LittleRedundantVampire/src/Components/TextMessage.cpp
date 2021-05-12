@@ -35,14 +35,14 @@ void TextMessage::Start()
 {
 	text = new Text();
 	text->setFont(*font);
-	text->setCharacterSize(12);
-	text->setFillColor(sf::Color::Black);
-	//text->setStyle(Text::Bold | Text::Italic);
+	text->setCharacterSize(32);
+	text->setFillColor(sf::Color::White);
+	text->setStyle(Text::Bold | Text::Italic);
 }
 
 void TextMessage::Update(Time* timePerFrame)
 {
-
+	text->setPosition(Vector2f(GameWorld::GetInstance()->GetScreenWidth() - (text->getGlobalBounds().width / 2), GameWorld::GetInstance()->GetScreenHeight() + (text->getGlobalBounds().height *2)));
 }
 
 void TextMessage::Destroy()

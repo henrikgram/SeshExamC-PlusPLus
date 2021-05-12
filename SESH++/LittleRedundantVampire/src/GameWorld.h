@@ -35,6 +35,9 @@ public:
 	vector<GameObject*>* GetGameObjects();
 	vector<Collider*>* GetColliders();
 
+	float GetScreenWidth();
+	float GetScreenHeight();
+
 
 private:
 	static GameWorld* instance;

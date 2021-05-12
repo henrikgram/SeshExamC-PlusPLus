@@ -4,7 +4,7 @@ void Asset::LoadTextures()
 {
 	//DECORATIONS
 	floorWoodTexture->	loadFromFile("Asset/WoodenFloor.png");
-	textBoxTexture->	loadFromFile("Asset/TextBox_V3.png");
+	textBoxTexture->	loadFromFile("Asset/TestTextBox.png");
 
 	//OBJECTS
 	attackSheetTexture->loadFromFile("Asset/AttackSheet2.png");

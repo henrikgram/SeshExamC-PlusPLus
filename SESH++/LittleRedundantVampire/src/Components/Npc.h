@@ -14,6 +14,7 @@ private:
 	string* npcMessage = new string;
 	int offset = 30;
 	bool* textShown = new bool;
+
 	//Font* font;
 	//Text* text;
 
@@ -29,7 +30,7 @@ public:
 	Npc(string* message);
 	~Npc();
 
-	void TextBoxPopup(Vector2f boxPosition);
+	void TextBoxPopup(/*Vector2f boxPosition*/);
 	void TextBoxRemoval();
 };
 
