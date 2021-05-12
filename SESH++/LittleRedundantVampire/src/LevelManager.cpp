@@ -137,40 +137,40 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	(*GameWorld::GetInstance()->GetColliders()).push_back(col1);
 	go1->AddComponent(col1);
 
-	//GameObject* go2 = new GameObject(Vector2<float>(3000, 500));
-	//Npc* npc2 = new Npc(new string("Fuck you in particular."));
-	//SpriteRenderer* sr2 = new SpriteRenderer();
-	//Collider* col2;
-	//go2->AddComponent(npc2);
-	//sr2->SetSprite(TextureTag::NPC);
-	//go2->AddComponent(sr2);
-	//*go2->objectTag = ObjectTag::NPC;
-	//col2 = new Collider(Vector2f(sr2->GetSprite().getTexture()->getSize().x, sr2->GetSprite().getTexture()->getSize().y), *go2->position, 1.0f, false);
-	//(*GameWorld::GetInstance()->GetColliders()).push_back(col2);
-	//go2->AddComponent(col2);
+	GameObject* go2 = new GameObject(Vector2<float>(3000, 500));
+	Npc* npc2 = new Npc(new string("Fuck you in particular."));
+	SpriteRenderer* sr2 = new SpriteRenderer();
+	Collider* col2;
+	go2->AddComponent(npc2);
+	sr2->SetSprite(TextureTag::NPC);
+	go2->AddComponent(sr2);
+	*go2->objectTag = ObjectTag::NPC;
+	col2 = new Collider(Vector2f(sr2->GetSprite().getTexture()->getSize().x, sr2->GetSprite().getTexture()->getSize().y), *go2->position, 1.0f, false);
+	(*GameWorld::GetInstance()->GetColliders()).push_back(col2);
+	go2->AddComponent(col2);
 
-	//GameObject* go3 = new GameObject(Vector2<float>(1000, 1500));
-	//Npc* npc3 = new Npc(new string("I'm Hua Cheng. Høhø, gege."));
-	//SpriteRenderer* sr3 = new SpriteRenderer();
-	//Collider* col3;
-	//go3->AddComponent(npc3);
-	//sr3->SetSprite(TextureTag::NPC);
-	//go3->AddComponent(sr3);
-	//*go3->objectTag = ObjectTag::NPC;
-	//col3 = new Collider(Vector2f(sr3->GetSprite().getTexture()->getSize().x, sr3->GetSprite().getTexture()->getSize().y), *go3->position, 1.0f, false);
-	//(*GameWorld::GetInstance()->GetColliders()).push_back(col3);
-	//go3->AddComponent(col3);
+	GameObject* go3 = new GameObject(Vector2<float>(1000, 1500));
+	Npc* npc3 = new Npc(new string("Ghost boi, BOO!"));
+	SpriteRenderer* sr3 = new SpriteRenderer();
+	Collider* col3;
+	go3->AddComponent(npc3);
+	sr3->SetSprite(TextureTag::NPC);
+	go3->AddComponent(sr3);
+	*go3->objectTag = ObjectTag::NPC;
+	col3 = new Collider(Vector2f(sr3->GetSprite().getTexture()->getSize().x, sr3->GetSprite().getTexture()->getSize().y), *go3->position, 1.0f, false);
+	(*GameWorld::GetInstance()->GetColliders()).push_back(col3);
+	go3->AddComponent(col3);
 
 	go1->Awake();
 	go1->Start();
 
-	//go2->Awake();
-	//go2->Start();
-	//go3->Awake();
-	//go3->Start();
+	go2->Awake();
+	go2->Start();
+	go3->Awake();
+	go3->Start();
 	gameObjects.push_back(go1);
-	//gameObjects.push_back(go2);
-	//gameObjects.push_back(go3);
+	gameObjects.push_back(go2);
+	gameObjects.push_back(go3);
 
 	return gameObjects;
 }
