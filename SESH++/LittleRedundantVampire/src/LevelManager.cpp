@@ -77,13 +77,13 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		break;
 
 	case ObjectTag::NPC:
-		//go->AddComponent(new Npc(new string("'V' to pick up keys!")));
-		//sr->SetSprite(TextureTag::NPC);
-		//go->AddComponent(sr);
-		//*go->objectTag = ObjectTag::NPC;
-		//col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, false);
-		//(*GameWorld::GetInstance()->GetColliders()).push_back(col);
-		//go->AddComponent(col);
+		go->AddComponent(new Npc(new string("'V' to pick up keys!")));
+		sr->SetSprite(TextureTag::NPC);
+		go->AddComponent(sr);
+		*go->objectTag = ObjectTag::NPC;
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, false);
+		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		go->AddComponent(col);
 		break;
 
 	case ObjectTag::PLAYER:
@@ -161,6 +161,13 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	//(*GameWorld::GetInstance()->GetColliders()).push_back(col3);
 	//go3->AddComponent(col3);
 
+	go1->Awake();
+	go1->Start();
+
+	//go2->Awake();
+	//go2->Start();
+	//go3->Awake();
+	//go3->Start();
 	gameObjects.push_back(go1);
 	//gameObjects.push_back(go2);
 	//gameObjects.push_back(go3);
@@ -260,7 +267,7 @@ vector<GameObject*> LevelManager::LevelSetup(BitmapImage& level)
 			}
 			else if (color.r == 0 && color.g == 255 && color.b == 0)
 			{
-				/*gameObjects.push_back(CreateObject(ObjectTag::NPC, x, y));*/
+				//gameObjects.push_back(CreateObject(ObjectTag::NPC, x, y));
 			}
 			if (color.r == 0 && color.g == 180 && color.b == 0)
 			{
