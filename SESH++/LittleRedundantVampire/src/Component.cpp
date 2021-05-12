@@ -14,6 +14,6 @@ void Component::OnNotify(std::string eventName, IListener* sender)
 {
 }
 
-void Component::OnNotifyCollision(ObjectTag otherTag)
+void Component::OnNotifyCollision(ObjectTag otherTag, string side)
 {
 }
