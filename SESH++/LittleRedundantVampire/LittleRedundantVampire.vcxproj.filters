@@ -80,6 +80,7 @@
     <Image Include="Asset\TextBox.png" />
     <Image Include="Asset\TextBox_V2.png" />
     <Image Include="Asset\TextBox_V3.png" />
+    <Image Include="Asset\TestTextbox.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Asset\PlayfairDisplay-VariableFont_wght.ttf" />
