@@ -46,7 +46,7 @@ bool Collider::CheckCollision(Collider* other)
 		if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
 		{
 			currentCollisions.push_back(other);
-			onGameObjDestroyed.Attach(other);
+			onOtherGameObjDestroyed.Attach(other);
 		}
 
 		onColliding.Notify(*other->gameObject->objectTag);
@@ -92,7 +92,7 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 	}
 }
 
-void Collider::OnNoLongerColliding()
+void Collider::UpdateListOfCurrentCollisions()
 {
 	if (currentCollisions.size() > 0)
 	{
@@ -102,7 +102,10 @@ void Collider::OnNoLongerColliding()
 			bool isStillColliding = CheckCollision(*it);
 			if (!isStillColliding)
 			{
+				cout << currentCollisions.size();
+				onNoLongerColliding.Notify("NoLongerCollidingWith", *it);
 				it = currentCollisions.erase(it);
+				cout << currentCollisions.size();
 			}
 		}
 	}
@@ -119,18 +122,19 @@ void Collider::Start()
 	for (it = gameObject->components.begin(); it != gameObject->components.end(); it++)
 	{
 		onColliding.Attach(it->second);
+		onNoLongerColliding.Attach(it->second);
 	}
 }
 
 void Collider::Update(Time* timePerFrame)
 {
-	OnNoLongerColliding();
+	UpdateListOfCurrentCollisions();
 }
 
 void Collider::Destroy()
 {
 	currentCollisions.clear();
-	onGameObjDestroyed.Notify("GameObject Destroyed", this);
+	onOtherGameObjDestroyed.Notify("OtherGmObjDestroyed", this);
 }
 
 ComponentTag Collider::ToEnum()
@@ -143,5 +147,10 @@ void Collider::OnNotify(std::string eventName, IListener* sender)
 {
 	//TODO: Ensure that this doesn't cause issues if the list does not contain the element. 
 	//This should remove all instances of the collider in question
-	currentCollisions.remove(dynamic_cast<Collider*>(sender));
+	if (eventName == "OtherGmObjDestroyed")
+	{
+		//cout << currentCollisions.size();
+		currentCollisions.remove(dynamic_cast<Collider*>(sender));
+		//cout << currentCollisions.size();
+	}
 }
