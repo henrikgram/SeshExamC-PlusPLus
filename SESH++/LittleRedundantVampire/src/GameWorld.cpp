@@ -2,6 +2,7 @@
 #include "Components/AnimationComponent.h"
 
 
+
 //TODO: tjek om det her er fybabab
 static const float VIEW_HEIGHT = 1024.0f;
 View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
@@ -71,6 +72,15 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	case ObjectTag::VASE:
 		break;
 	case ObjectTag::WINDOW:
+		sr->SetSprite(TextureTag::WINDOW);
+		go->AddComponent(sr);
+		go->position = new Vector2f(1000, 800);
+		LightPointer = new Light(Vector2f(1,1));
+		go->AddComponent(LightPointer);
+
+		col = new  Collider(Vector2f(1,1), *go->position, 1.0f, true);
+		go->AddComponent(col);
+
 		break;
 	case ObjectTag::CRATE:
 		sr->SetSprite(TextureTag::OZZY);
@@ -163,6 +173,7 @@ void GameWorld::Run()
 void GameWorld::Initialize()
 {
 	BootlegFactory(ObjectTag::PLAYER);
+	BootlegFactory(ObjectTag::WINDOW);
 	BootlegFactory(ObjectTag::CRATE);
 }
 
@@ -222,6 +233,22 @@ void GameWorld::Draw()
 
 		window.draw(sr->GetSprite());
 	}
+
+	//sf::VertexArray line(sf::LinesStrip, 2);
+	//line[0].position.x = 500;
+	//line[0].position.y = 500;
+
+	//line[1].position.x = 800;
+	//line[1].position.y = 800;
+
+	////line. = sf::Color::Red;
+
+	//window.draw(line);
+
+
+
+	window.draw((*LightPointer->GetRays()));
+
 	// Displays everything in the window.
 	window.display();
 }

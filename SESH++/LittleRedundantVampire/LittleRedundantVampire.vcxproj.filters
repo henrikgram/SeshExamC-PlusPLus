@@ -23,6 +23,11 @@
     <ClCompile Include="src\Asset.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Components\AnimationComponent.cpp" />
+    <ClCompile Include="src\Components\Light.cpp" />
+    <ClCompile Include="src\Main2.cpp" />
+    <ClCompile Include="src\RayCasting\Main3.cpp" />
+    <ClCompile Include="src\RayCasting\Ray.cpp" />
+    <ClCompile Include="src\RayCasting\LightSource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameWorld.h" />
@@ -52,6 +57,9 @@
     <ClInclude Include="src\Observer\IListener.h" />
     <ClInclude Include="src\Observer\ICollisionListener.h" />
     <ClInclude Include="src\Components\AnimationComponent.h" />
+    <ClInclude Include="src\Components\Light.h" />
+    <ClInclude Include="src\RayCasting\Ray.h" />
+    <ClInclude Include="src\RayCasting\LightSource.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />
