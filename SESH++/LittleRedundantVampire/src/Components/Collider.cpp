@@ -24,7 +24,7 @@ Collider::~Collider()
 
 void Collider::Move(float deltaX, float deltaY)
 {
-	*this->gameObject->position += Vector2f(deltaX, deltaY);
+	*this->gameObject->GetPosition() += Vector2f(deltaX, deltaY);
 }
 
 bool Collider::CheckCollision(Collider* other)
@@ -43,7 +43,7 @@ bool Collider::CheckCollision(Collider* other)
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
-		onColliding.Notify(*other->gameObject->objectTag);
+		onColliding.Notify(*other->gameObject->GetObjectTag());
 
 		//TODO: All this following is related to pushing an object and maybe shouldn't be in this class. 
 		if (*solid == true)

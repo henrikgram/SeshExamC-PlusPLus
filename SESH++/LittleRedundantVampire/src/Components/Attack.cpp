@@ -7,10 +7,13 @@ using namespace std;
 using namespace sf;
 
 
-Attack::Attack(ObjectTag* objectTag, Vector2f callerPosition, string direction, float attackLength)
+Attack::Attack(ObjectTag objectTag, Vector2f callerPosition, string direction, float attackLength)
 {
+	this->direction = new string;
+	*this->direction = direction;
+
 	this->objectTag = new ObjectTag;
-	this->objectTag = objectTag;
+	*this->objectTag = objectTag;
 
 	this->callerPosition = new Vector2f;
 	*this->callerPosition = callerPosition;
@@ -34,35 +37,40 @@ Attack::~Attack()
 
 	delete attackLength;
 	attackLength = nullptr;
+
+	delete direction;
+	direction = nullptr;
 }
 
 
 void Attack::Awake()
 {
+	*gameObject->GetPosition() = *callerPosition;
 	*attackTimer = 0.0f;
 }
 
 void Attack::Start()
 {
+	//TODO: Det her skal kunne fungere med events, der kører når spilleren bevæger sig.
 	//Left
-	if (*gameObject->direction == "left")
+	if (*direction == "left")
 	{
-		*gameObject->position = Vector2f((*callerPosition).x - 60.0f, (*callerPosition).y);
+		*gameObject->GetPosition() = Vector2f((*gameObject->GetPosition()).x - 300.0f, (*gameObject->GetPosition()).y);
 	}
 	//Right
-	if (*gameObject->direction == "right")
+	if (*direction == "right")
 	{
-		*gameObject->position = Vector2f((*callerPosition).x + 60.0f, (*callerPosition).y);
+		*gameObject->GetPosition() = Vector2f((*gameObject->GetPosition()).x + 60.0f, (*gameObject->GetPosition()).y);
 	}
 	//Up
-	if (*gameObject->direction == "up")
+	if (*direction == "up")
 	{
-		*gameObject->position = Vector2f((*callerPosition).x, (*callerPosition).y - 70.0f);
+		*gameObject->GetPosition() = Vector2f((*gameObject->GetPosition()).x, (*gameObject->GetPosition()).y - 70.0f);
 	}
 	//Down
-	if (*gameObject->direction == "down")
+	if (*direction == "down")
 	{
-		*gameObject->position = Vector2f((*callerPosition).x, (*callerPosition).y + 70.0f);
+		*gameObject->GetPosition() = Vector2f((*gameObject->GetPosition()).x, (*gameObject->GetPosition()).y + 70.0f);
 	}
 }
 
@@ -72,15 +80,8 @@ void Attack::Update(Time* timePerFrame)
 
 	if (*attackTimer >= *attackLength)
 	{
-		Destroy();
-		cout << "Object destroyed" << "\n";
-
-		*attackTimer = 0.0f;
-		*gameObject->shouldDraw = false;
-	}
-	else
-	{
-		*gameObject->shouldDraw = true;
+		//TODO: Make sure object gets deleted here instead.
+		*gameObject->GetShouldDraw() = false;
 	}
 }
 

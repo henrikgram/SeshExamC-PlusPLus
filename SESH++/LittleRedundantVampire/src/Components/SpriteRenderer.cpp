@@ -25,7 +25,7 @@ void SpriteRenderer::Start()
 void SpriteRenderer::Update(Time* timePerFrame)
 {
 	//TODO:Make sure that the position is NOT OUTDATED
-	sprite->setPosition(*gameObject->position);
+	sprite->setPosition(*gameObject->GetPosition());
 }
 
 void SpriteRenderer::Destroy()

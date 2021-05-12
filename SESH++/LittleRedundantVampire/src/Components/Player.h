@@ -10,6 +10,7 @@ using namespace sf;
 class Player : public Component
 {
 public:
+	Player();
 	~Player();
 
 	void Move(Vector2f velocity);
@@ -24,10 +25,9 @@ public:
 
 	void Normalize();
 
+
 private:
 	float speed;
-
-	string direction;
 
 	Vector2f velocity;
 };

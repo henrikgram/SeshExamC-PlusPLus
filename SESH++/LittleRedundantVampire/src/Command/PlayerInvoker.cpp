@@ -5,10 +5,10 @@ PlayerInvoker::PlayerInvoker(Player& receiver, AttackSpawner& attackReceiver) :
 	receiver(receiver), 
 	attackReceiver(attackReceiver)
 {
-	keyBinds.insert(make_pair(Keyboard::A, new MoveCommand(receiver, Vector2f(-1.0f,0.0f), *receiver.gameObject->direction = "left")));
-	keyBinds.insert(make_pair(Keyboard::D, new MoveCommand(receiver, Vector2f(1.0f, 0.0f), *receiver.gameObject->direction = "right")));
-	keyBinds.insert(make_pair(Keyboard::W, new MoveCommand(receiver, Vector2f(0.0f, -1.0f), *receiver.gameObject->direction = "up")));
-	keyBinds.insert(make_pair(Keyboard::S, new MoveCommand(receiver, Vector2f(0.0f, 1.0f), *receiver.gameObject->direction = "down")));
+	keyBinds.insert(make_pair(Keyboard::A, new MoveCommand(receiver, Vector2f(-1.0f,0.0f))));
+	keyBinds.insert(make_pair(Keyboard::D, new MoveCommand(receiver, Vector2f(1.0f, 0.0f))));
+	keyBinds.insert(make_pair(Keyboard::W, new MoveCommand(receiver, Vector2f(0.0f, -1.0f))));
+	keyBinds.insert(make_pair(Keyboard::S, new MoveCommand(receiver, Vector2f(0.0f, 1.0f))));
 	keyBinds.insert(make_pair(Keyboard::Space, new AttackCommand(attackReceiver)));
 }
 

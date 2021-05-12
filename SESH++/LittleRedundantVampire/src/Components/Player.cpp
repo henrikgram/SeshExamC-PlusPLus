@@ -5,6 +5,11 @@
 using namespace std;
 using namespace sf;
 
+Player::Player()
+{
+
+}
+
 Player::~Player()
 {
 
@@ -20,7 +25,6 @@ void Player::Awake()
 {
 	speed = 5.0f;
 	velocity = Vector2f(0.0f, 0.0f);
-	direction = "right";
 }
 
 void Player::Start()
@@ -48,10 +52,11 @@ void Player::Normalize()
 		velocity.y *= speed;
 
 		//cout << velocity.x << " : " << velocity.y << "\n";
-		*gameObject->position += velocity;
+		*gameObject->GetPosition() += velocity;
 		velocity = Vector2f(0.0f, 0.0f);
 	}
 }
+
 
 void Player::Destroy()
 {

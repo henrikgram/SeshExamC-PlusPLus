@@ -5,7 +5,7 @@
 class MoveCommand : public ICommand
 {
 public:
-	MoveCommand(Player& receiver, Vector2f velocity, string recieverDirection);
+	MoveCommand(Player& receiver, Vector2f velocity);
 	~MoveCommand();
 
 	// Inherited via ICommand

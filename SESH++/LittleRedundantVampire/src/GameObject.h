@@ -34,10 +34,6 @@ class GameObject
 public:
 	//Map for all components attached to the gameobject
 	unordered_map<ComponentTag, Component*> components;
-	Vector2f * position = new Vector2f;
-	ObjectTag* objectTag = new ObjectTag();
-	string* direction;
-	bool* shouldDraw;
 
 	GameObject();
 	GameObject(Vector2<float> position);
@@ -60,6 +56,12 @@ public:
 	void Start();
 
 	/// <summary>
+	///  Calls Destroy for all components attached to the gameobject
+	/// </summary>
+	void Destroy();
+
+
+	/// <summary>
 	/// Attaching a component to the gameobject
 	/// </summary>
 	/// <param name="component">Component to be attached</param>
@@ -68,15 +70,27 @@ public:
 	/// <summary>
 	/// Gets a component based on ComponentTag.
 	/// </summary>
-	Component * GetComponent(ComponentTag tag);
+	Component* GetComponent(ComponentTag tag);
+	
+	Vector2f* GetPosition();
 
-	/// <summary>
-	///  Calls Destroy for all components attached to the gameobject
-	/// </summary>
-	void Destroy();
+	ObjectTag* GetObjectTag();
+
+	string* GetDirection();
+
+	bool* GetShouldDraw();
+
 
 private:
 	unordered_map<ComponentTag, Component*>::iterator it;
+
+	Vector2f* position;
+
+	ObjectTag* objectTag;
+
+	string* direction;
+
+	bool* shouldDraw;
 };
 
 #endif

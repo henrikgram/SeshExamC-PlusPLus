@@ -12,7 +12,7 @@ AttackCommand::~AttackCommand()
 
 void AttackCommand::Execute()
 {
-	attackReceiver.CreateAttack("left");
+	attackReceiver.CreateAttack();
 }
 
 

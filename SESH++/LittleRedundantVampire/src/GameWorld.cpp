@@ -25,7 +25,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 {
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject();
-	*go->objectTag = tag;
+	*go->GetObjectTag() = tag;
 	SpriteRenderer* sr = new SpriteRenderer();
 	Collider* col;
 
@@ -33,7 +33,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	{
 	case ObjectTag::PLAYER:
 		sr->SetSprite(TextureTag::OZZY);
-		go->position = new Vector2<float>(50, 50);
+		*go->GetPosition() = Vector2<float>(50, 50);
 		go->AddComponent(sr);
 		playerPointer = new Player();
 		go->AddComponent(playerPointer);
@@ -41,7 +41,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->AddComponent(atckSpwnPointer);
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 0.9f, true);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.9f, true);
 		go->AddComponent(col);
 		colliders.push_back(col);
 		break;
@@ -63,10 +63,10 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		break;
 	case ObjectTag::CRATE:
 		sr->SetSprite(TextureTag::OZZY);
-		go->position = new Vector2f(150, 150);
+		*go->GetPosition() = Vector2f(150, 150);
 		go->AddComponent(sr);
 
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, true);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
 		go->AddComponent(col);
 		colliders.push_back(col);
 		break;
@@ -131,7 +131,7 @@ void GameWorld::Run()
 			timeSinceLastUpdate -= timePerFrame;
 			Update(&timePerFrame);
 			//p1.GetCollider().CheckCollision(player.GetCollider(), 0.1f);
-			view.setCenter(*playerPointer->gameObject->position);
+			view.setCenter(*playerPointer->gameObject->GetPosition());
 		}
 
 		//Hvert gameloop korer vi Update paa vores animation.
@@ -214,7 +214,7 @@ void GameWorld::Draw()
 	{
 		GameObject* go = (*GameWorld::GetInstance()->GetGameObjects())[i];
 
-		if (*go->shouldDraw)
+		if (*go->GetShouldDraw())
 		{
 			//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
 			sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));

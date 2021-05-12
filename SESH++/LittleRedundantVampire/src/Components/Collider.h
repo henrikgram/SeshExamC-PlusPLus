@@ -15,7 +15,7 @@ public:
 	void Move(float deltaX, float deltaY);
 
 	bool CheckCollision(Collider* other);
-	Vector2f GetPosition() const { return *gameObject->position; }
+	Vector2f GetPosition() const { return *gameObject->GetPosition(); }
 	Vector2f GetHalfsize() const { return collisionBox->getSize() / 2.0f; }
 
 	// Inherited via Component

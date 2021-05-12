@@ -15,12 +15,12 @@ public:
 	void Destroy() override;
 	ComponentTag ToEnum() override;
 
-	void CreateAttack(string direction);
+	void CreateAttack();
 
 private:
 	ObjectTag* objectTag;
 
-	float* attackLength;
+	float* attackCooldown;
 	float* attackTimer;
 
 	bool* canAttack;

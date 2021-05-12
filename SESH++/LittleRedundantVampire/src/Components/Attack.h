@@ -9,7 +9,7 @@ using namespace sf;
 class Attack : public Component
 {
 public:
-	Attack(ObjectTag* objectTag, Vector2f callerPosition, string direction, float attackLength);
+	Attack(ObjectTag objectTag, Vector2f callerPosition, string direction, float attackLength);
 	~Attack();
 
 	void Awake() override;
@@ -26,5 +26,7 @@ private:
 	Vector2f* callerPosition;
 
 	ObjectTag* objectTag;
+
+	string* direction;
 };
 
