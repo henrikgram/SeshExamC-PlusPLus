@@ -13,8 +13,8 @@ void AttackSpawner::CreateAttack()
 	{
 		//TODO: tjek hvis den ryger ud af scope.
 		GameObject* go = new GameObject();
-		SpriteRenderer* sr = new SpriteRenderer();
-		sr->SetSprite(TextureTag::ATTACK_SHEET);
+		SpriteRenderer* sr = new SpriteRenderer(TextureTag::ATTACK_SHEET);
+		//sr->SetSprite(TextureTag::ATTACK_SHEET);
 		go->AddComponent(sr);
 		go->AddComponent(new Attack(*objectTag, *gameObject->GetPosition(), *gameObject->GetDirection(), *attackCooldown));
 

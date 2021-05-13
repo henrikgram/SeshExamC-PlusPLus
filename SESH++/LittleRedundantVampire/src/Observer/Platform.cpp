@@ -30,7 +30,7 @@ void Platform::Start()
 
 void Platform::Update(Time* timePerFrame)
 {
-	/*if (Keyboard::isKeyPressed(Keyboard::L));
+	/*if (Keyboard::isKeyPressed(Keyboard::Delete));
 	{
 		this->gameObject->Destroy();
 	}*/

@@ -28,17 +28,19 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject();
 	*go->GetObjectTag() = tag;
-	SpriteRenderer* sr = new SpriteRenderer();
+	//SpriteRenderer* sr = new SpriteRenderer();
+	SpriteRenderer* sr;
 	Collider* col;
 
 	switch (tag)
 	{
 	case ObjectTag::PLAYER:
 	{
-		sr->isSpriteSheet = true;
+		sr = new SpriteRenderer(TextureTag::PLAYER_SHEET, Vector2u(1, 1), Vector2u(4, 4));
+		/*sr->isSpriteSheet = true;
 		sr->currentImage = new Vector2u(1, 1);
 		sr->imageCount = new Vector2u(4, 4);
-		sr->SetSprite(TextureTag::PLAYER_SHEET);
+		sr->SetSprite(TextureTag::PLAYER_SHEET);*/
 
 		*go->GetPosition() = Vector2<float>(1000, 1000);
 		go->AddComponent(sr);
@@ -77,8 +79,9 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	case ObjectTag::WINDOW:
 		break;
 	case ObjectTag::CRATE:
-		sr->SetSprite(TextureTag::OZZY);
-		*go->GetPosition() = Vector2f(150, 150);
+		sr = new SpriteRenderer(TextureTag::OZZY);
+		//sr->SetSprite(TextureTag::OZZY);
+		*go->GetPosition() = Vector2f(750, 750);
 		go->AddComponent(sr);
 		go->AddComponent(new Platform);
 
@@ -188,11 +191,23 @@ void GameWorld::Update(Time* timePerFrame)
 {
 	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
 	//iterates through the gameObjects and calls update
-	for (vector<GameObject*>::size_type i = 0;
-		i < gameObjectsSize;
-		++i)
+	//for (vector<GameObject*>::size_type i = 0;
+	//	i < gameObjectsSize;
+	//	++i)
+	//{
+	//	(*GameWorld::GetInstance()->GetGameObjects())[i]->Update(timePerFrame);
+	//}
+
+	for (auto i = (*GameWorld::GetInstance()->GetGameObjects()).begin(); i != (*GameWorld::GetInstance()->GetGameObjects()).end();)
 	{
-		(*GameWorld::GetInstance()->GetGameObjects())[i]->Update(timePerFrame);
+		vector<GameObject*>::size_type originalSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+		(*i)->Update(timePerFrame);
+		vector<GameObject*>::size_type updatedSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+
+		if (originalSize == updatedSize)
+		{
+			++i;
+		}
 	}
 
 	vector<Collider*>::iterator colIt;

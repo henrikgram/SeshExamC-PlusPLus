@@ -9,8 +9,10 @@ using namespace sf;
 class Npc : public Component
 {
 private:
+	//TODO: We have to stop declaring pointers as new in the header files because it appears that it gives us problems down the line with meory management.
+	//Change these so new keyword is called somewhere else in the cpp file. Prefereably the constructor. 
 	GameObject* textBox = new GameObject();
-	SpriteRenderer* textBoxSr = new SpriteRenderer();
+	SpriteRenderer* textBoxSr = new SpriteRenderer(TextureTag::TEXT_BOX);
 	string* npcMessage = new string;
 	int offset = 30;
 	bool* textShown = new bool;

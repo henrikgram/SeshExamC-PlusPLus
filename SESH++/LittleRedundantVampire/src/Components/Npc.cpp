@@ -35,7 +35,7 @@ void Npc::TextBoxRemoval()
 void Npc::Awake()
 {
 	*textBox->GetObjectTag() = ObjectTag::TEXT_BOX;
-	textBoxSr->SetSprite(TextureTag::TEXT_BOX);
+	//textBoxSr->SetSprite(TextureTag::TEXT_BOX);
 	*textBox->GetPosition() = Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2));
 	textBox->AddComponent(textBoxSr);
 	textBox->AddComponent(new TextMessage(npcMessage, Vector2f(GameWorld::GetInstance()->GetScreenWidth() - (textBoxSr->GetSprite().getLocalBounds().width / 2), GameWorld::GetInstance()->GetScreenHeight())));

@@ -10,10 +10,9 @@ public:
 
 	~SpriteRenderer();
 
-	SpriteRenderer();
-	SpriteRenderer(Vector2u currentImage, Vector2u imageCount);
-
-
+	//SpriteRenderer();
+	SpriteRenderer(TextureTag textureTag);
+	SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vector2u imageCount);
 
 	void Awake() override;
 	void Start() override;
@@ -38,19 +37,18 @@ public:
 	/// Sets the sprite's texture based on TextureTag.
 	/// </summary>
 	/// <param name="textureTag">Which texture from the Asset Class </param>
-	void SetSprite(TextureTag textureTag);
+	//void SetSprite(TextureTag textureTag);
 
 	void SetTextureRect(IntRect& textureRect);
 
 	IntRect* TextureRect = new IntRect;
 
-	Vector2u* currentImage = new Vector2u;
-	Vector2u* imageCount = new Vector2u;
+	Vector2u* currentImage;
+	Vector2u* imageCount;
 
 
 private:
-	Sprite* sprite = new Sprite;
-	Texture* texture = new Texture;
-
+	Sprite* sprite;
+	Texture* texture;
 };
 
