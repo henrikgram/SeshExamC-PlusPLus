@@ -18,70 +18,70 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::FLOOR_CARPET:
 		sr->SetSprite(TextureTag::FLOOR_CARPET);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::FLOOR_CARPET;
+		*go->GetObjectTag() = ObjectTag::FLOOR_CARPET;
 		break;
 
 	case ObjectTag::FLOOR_WOOD:
 		sr->SetSprite(TextureTag::FLOOR_WOOD);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::FLOOR_WOOD;
+		*go->GetObjectTag() = ObjectTag::FLOOR_WOOD;
 		break;
 
 	case ObjectTag::WALL_DECORATION:
 		sr->SetSprite(TextureTag::WALL);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::WALL_DECORATION;
+		*go->GetObjectTag() = ObjectTag::WALL_DECORATION;
 		break;
 
 	case ObjectTag::WINDOW_DECORATION:
 		sr->SetSprite(TextureTag::WINDOW);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::WINDOW_DECORATION;
+		*go->GetObjectTag() = ObjectTag::WINDOW_DECORATION;
 		break;
 
 		//OBJECTS
 	case ObjectTag::BOOKCASE:
 		sr->SetSprite(TextureTag::BOOKCASE);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::BOOKCASE;
+		*go->GetObjectTag() = ObjectTag::BOOKCASE;
 		break;
 
 	case ObjectTag::CHEST:
 		sr->SetSprite(TextureTag::CHEST);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::CHEST;
+		*go->GetObjectTag() = ObjectTag::CHEST;
 		break;
 
 	case ObjectTag::CRATE:
 		sr->SetSprite(TextureTag::CRATE);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::CRATE;
+		*go->GetObjectTag() = ObjectTag::CRATE;
 		break;
 
 	case ObjectTag::DOOR:
 		sr->SetSprite(TextureTag::DOOR);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::DOOR;
+		*go->GetObjectTag() = ObjectTag::DOOR;
 		break;
 
 	case ObjectTag::ENEMY:
 		sr->SetSprite(TextureTag::ENEMY);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::ENEMY;
+		*go->GetObjectTag() = ObjectTag::ENEMY;
 		break;
 
 	case ObjectTag::KEY:
 		sr->SetSprite(TextureTag::KEY);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::KEY;
+		*go->GetObjectTag() = ObjectTag::KEY;
 		break;
 
 	case ObjectTag::NPC:
 		go->AddComponent(new Npc(new string("'V' to pick up keys!")));
 		sr->SetSprite(TextureTag::NPC);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::NPC;
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, false);
+		*go->GetObjectTag() = ObjectTag::NPC;
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, false);
 		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
 		go->AddComponent(col);
 		break;
@@ -89,26 +89,26 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::PLAYER:
 		sr->SetSprite(TextureTag::OZZY);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::PLAYER;
+		*go->GetObjectTag() = ObjectTag::PLAYER;
 		break;
-		
+
 	case ObjectTag::WINDOW:
 		sr->SetSprite(TextureTag::WINDOW);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::WINDOW;
+		*go->GetObjectTag() = ObjectTag::WINDOW;
 		break;
 
 	case ObjectTag::VASE:
 		sr->SetSprite(TextureTag::VASE);
 		go->AddComponent(sr);
-		*go->objectTag = ObjectTag::VASE;
+		*go->GetObjectTag() = ObjectTag::VASE;
 		break;
 
 	case ObjectTag::WALL:
 		sr->SetSprite(TextureTag::WALL);
 		go->AddComponent(sr);
 		//go->position = new Vector2<float>(1, 1);
-		*go->objectTag = ObjectTag::WALL;
+		*go->GetObjectTag() = ObjectTag::WALL;
 		break;
 
 	default:
@@ -217,12 +217,12 @@ vector<GameObject*> LevelManager::LevelSetup(BitmapImage& level)
 		{
 			BitmapColor color = level.GetColor(x, y);
 
-			//converts the float value (0-1) to 255 
+			//converts the float value (0-1) to 255
 			color.b *= 255;
 			color.r *= 255;
 			color.g *= 255;
 
-			// Decorations		
+			// Decorations
 			if (color.r == 98 && color.g == 26 && color.b == 36)
 			{
 				gameObjects.push_back(CreateObject(ObjectTag::FLOOR_CARPET, x, y));
@@ -290,4 +290,3 @@ vector<GameObject*> LevelManager::LevelSetup(BitmapImage& level)
 
 	return gameObjects;
 }
-

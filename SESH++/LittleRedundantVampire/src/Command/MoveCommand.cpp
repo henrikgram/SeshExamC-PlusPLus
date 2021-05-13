@@ -13,5 +13,22 @@ MoveCommand::~MoveCommand()
 
 void MoveCommand::Execute()
 {
+	if (*velocity == Vector2f(-1.0f, 0.0f))
+	{
+		*receiver.gameObject->GetDirection() = "left";
+	}
+	else if (*velocity == Vector2f(1.0f, 0.0f))
+	{
+		*receiver.gameObject->GetDirection() = "right";
+	}
+	else if (*velocity == Vector2f(0.0f, -1.0f))
+	{
+		*receiver.gameObject->GetDirection() = "up";
+	}
+	else if (*velocity == Vector2f(0.0f, 1.0f))
+	{
+		*receiver.gameObject->GetDirection() = "down";
+	}
+
 	receiver.Move(*velocity);
 }

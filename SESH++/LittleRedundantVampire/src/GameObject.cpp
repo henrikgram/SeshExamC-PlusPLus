@@ -6,18 +6,45 @@ using namespace std;
 
 GameObject::GameObject()
 {
-	shouldDraw = true;
+	shouldDraw = new bool;
+	*shouldDraw = true;
+
+	direction = new string;
+	*direction = "left";
+
+	position = new Vector2f;
+
+	objectTag = new ObjectTag;
 }
 
 GameObject::GameObject(Vector2<float> position)
 {
-	this->position->x = position.x;
-	this->position->y = position.y;
+	shouldDraw = new bool;
+	*shouldDraw = true;
+
+	direction = new string;
+	*direction = "left";
+
+	this->position = new Vector2f;
+	(*this->position).x = position.x;
+	(*this->position).y = position.y;
+
+	objectTag = new ObjectTag;
 }
 
 GameObject::~GameObject()
 {
+	delete shouldDraw;
+	shouldDraw = nullptr;
 
+	delete direction;
+	direction = nullptr;
+
+	delete position;
+	position = nullptr;
+
+	delete objectTag;
+	objectTag = nullptr;
 }
 
 void GameObject::Update(Time* timePerFrame)
@@ -57,6 +84,21 @@ void GameObject::Start()
 	}
 }
 
+void GameObject::Destroy()
+{
+	it = components.begin();
+
+	//iterates through the gameObjects and calls Destroy
+	for (it = components.begin(); it != components.end(); it++)
+	{
+		it->second->Destroy();
+
+		delete it->second;
+		it->second = nullptr;
+	}
+}
+
+
 void GameObject::AddComponent(Component* component)
 {
 	//adds the current gameobject as a parrent to the component
@@ -70,16 +112,22 @@ Component* GameObject::GetComponent(ComponentTag tag)
 	return components[tag];
 }
 
-void GameObject::Destroy()
+Vector2f* GameObject::GetPosition()
 {
-	it = components.begin();
+	return position;
+}
 
-	//iterates through the gameObjects and calls Destroy
-	for (it = components.begin(); it != components.end(); it++)
-	{
-		it->second->Destroy();
+ObjectTag* GameObject::GetObjectTag()
+{
+	return objectTag;
+}
 
-		delete it->second;
-		it->second = nullptr;
-	}
+string* GameObject::GetDirection()
+{
+	return direction;
+}
+
+bool* GameObject::GetShouldDraw()
+{
+	return shouldDraw;
 }

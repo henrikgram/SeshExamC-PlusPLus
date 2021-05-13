@@ -17,7 +17,7 @@ public:
 
 	//TODO: Should maybe be a void method
 	bool CheckCollision(Collider* other);
-	Vector2f GetPosition() const { return *gameObject->position; }
+	Vector2f GetPosition() const { return *gameObject->GetPosition(); }
 	Vector2f GetHalfsize() const { return collisionBox->getSize() / 2.0f; }
 
 	void Push(Vector2f delta, Vector2f intersect, Collider* other);

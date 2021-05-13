@@ -1,0 +1,28 @@
+#pragma once
+#include "Attack.h"
+
+
+class AttackSpawner : public Component
+{
+public:
+	AttackSpawner(ObjectTag tag);
+	~AttackSpawner();
+
+	// Inherited via Component
+	void Awake() override;
+	void Start() override;
+	void Update(Time* timePerFrame) override;
+	void Destroy() override;
+	ComponentTag ToEnum() override;
+
+	void CreateAttack();
+
+private:
+	ObjectTag* objectTag;
+
+	float* attackCooldown;
+	float* attackTimer;
+
+	bool* canAttack;
+};
+

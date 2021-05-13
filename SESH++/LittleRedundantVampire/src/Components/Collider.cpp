@@ -24,7 +24,7 @@ Collider::~Collider()
 
 void Collider::Move(float deltaX, float deltaY)
 {
-	*this->gameObject->position += Vector2f(deltaX, deltaY);
+	*this->gameObject->GetPosition() += Vector2f(deltaX, deltaY);
 }
 
 bool Collider::CheckCollision(Collider* other)
@@ -49,7 +49,7 @@ bool Collider::CheckCollision(Collider* other)
 		//	onOtherGameObjDestroyed.Attach(other);
 		//}
 
-		onColliding.Notify(*other->gameObject->objectTag);
+		onColliding.Notify(*other->gameObject->GetObjectTag());
 
 		//Push(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
 

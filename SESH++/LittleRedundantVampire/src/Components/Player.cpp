@@ -5,6 +5,11 @@
 using namespace std;
 using namespace sf;
 
+Player::Player()
+{
+
+}
+
 Player::~Player()
 {
 
@@ -16,16 +21,16 @@ void Player::Move(Vector2f velocity)
 	this->velocity += velocity;
 }
 
+
 void Player::Awake()
 {
-	//attack = new Attack(ObjectTag::PLAYER, Vector2f(gameObject->position->x, gameObject->position->y), direction);
 	speed = 5.0f;
 	velocity = Vector2f(0.0f, 0.0f);
 }
 
 void Player::UpdateAnimation()
 {
-	//TODO: OPTIMERING fix så den ikke kører medmindre det er en ny animation. OPTIMERING
+	//TODO: OPTIMERING fix sï¿½ den ikke kï¿½rer medmindre det er en ny animation. OPTIMERING
 	if (velocity.x == 0 && velocity.y == 0)
 	{
 		ChangeAnimation.Notify("3", this);
@@ -81,7 +86,7 @@ void Player::Normalize()
 {
 	if (velocity != Vector2f(0.0f, 0.0f))
 	{
-	
+
 		//Vi udregner hypotenusen af bevaegelsesretningen.
 		float movementVectorLength = sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
 
@@ -93,12 +98,13 @@ void Player::Normalize()
 		velocity.y *= speed;
 
 		//cout << velocity.x << " : " << velocity.y << "\n";
-		*gameObject->position += velocity;
+		*gameObject->GetPosition() += velocity;
 
-		//TODO: OPTIMERING: implementer funktioanlitet i commmand pattern så den registrerer når man slipper en tast, og sætter vector til 0 frem for her
+		//TODO: OPTIMERING: implementer funktioanlitet i commmand pattern sï¿½ den registrerer nï¿½r man slipper en tast, og sï¿½tter vector til 0 frem for her
 		velocity = Vector2f(0.0f, 0.0f);
 	}
 }
+
 
 void Player::Destroy()
 {

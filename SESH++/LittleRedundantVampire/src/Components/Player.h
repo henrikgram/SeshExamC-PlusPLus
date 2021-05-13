@@ -2,7 +2,7 @@
 #include "../Component.h"
 #include "../Enum/TextureTag.h"
 #include "../Asset.h"
-#include "AttackFactory.h"
+#include "AttackSpawner.h"
 #include <string>
 #include "../Observer/IGameEvent.h"
 
@@ -11,6 +11,7 @@ using namespace sf;
 class Player : public Component
 {
 public:
+	Player();
 	~Player();
 
 	void Move(Vector2f velocity);
@@ -27,10 +28,10 @@ public:
 	void UpdateAnimation();
 	IGameEvent ChangeAnimation;
 
+
 private:
 	bool flipped = false;
 	float speed;
-	Attack* attack;
-	string direction;
+
 	Vector2f velocity;
 };

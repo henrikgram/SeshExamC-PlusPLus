@@ -147,12 +147,11 @@
   <ItemGroup>
     <ClCompile Include="src\Components\AnimationComponent.cpp" />
     <ClCompile Include="src\Components\Npc.cpp" />
+    <ClCompile Include="src\Command\AttackCommand.cpp" />
     <ClCompile Include="src\GameWorld.cpp" />
-    <ClCompile Include="src\Components\AttackFactory.cpp" />
-    <ClCompile Include="src\Components\OldAttack.cpp" />
+    <ClCompile Include="src\Components\AttackSpawner.cpp" />
     <ClCompile Include="src\Components\Movement.cpp" />
     <ClCompile Include="src\Command\PlayerInvoker.cpp" />
-    <ClCompile Include="src\Components\OldPlayer.cpp" />
     <ClCompile Include="src\BitmapImage.cpp" />
     <ClCompile Include="src\LevelManager.cpp" />
     <ClCompile Include="src\Components\Player.cpp" />
@@ -174,14 +173,13 @@
   <ItemGroup>
     <ClInclude Include="src\Components\AnimationComponent.h" />
     <ClInclude Include="src\Components\Npc.h" />
+    <ClInclude Include="src\Command\AttackCommand.h" />
     <ClInclude Include="src\GameWorld.h" />
-    <ClInclude Include="src\Components\AttackFactory.h" />
-    <ClInclude Include="src\Components\OldAttack.h" />
+    <ClInclude Include="src\Components\AttackSpawner.h" />
     <ClInclude Include="src\Components\Movement.h" />
     <ClInclude Include="src\Command\ICommand.h" />
     <ClInclude Include="src\Command\MoveCommand.h" />
     <ClInclude Include="src\Command\PlayerInvoker.h" />
-    <ClInclude Include="src\Components\OldPlayer.h" />
     <ClInclude Include="src\BitmapImage.h" />
     <ClInclude Include="src\LevelManager.h" />
     <ClInclude Include="src\Components\Player.h" />

@@ -56,7 +56,7 @@ void Movement::Normalize()
 		velocity->y *= *speed;
 
 		cout << velocity->x << " : " << velocity->y << "\n";
-		*gameObject->position += *velocity;
+		*gameObject->GetPosition() += *velocity;
 		*velocity = Vector2f(0.0f, 0.0f);
 	}
 }
