@@ -116,7 +116,7 @@ ComponentTag Player::ToEnum()
 	return ComponentTag::PLAYER;
 }
 
-void Player::OnNotifyCollision(ObjectTag otherTag)
+void Player::OnNotifyCollision(ObjectTag otherTag, std::string side)
 {
 	switch (otherTag)
 	{
@@ -156,6 +156,22 @@ void Player::OnNotifyCollision(ObjectTag otherTag)
 	case ObjectTag::CRATE:
 		//speed = 0.9f;
 		//cout << "I hit a crate";
+		/*if (side == "Left")
+		{
+			velocity.x -= 0.1f;
+		}
+		if (side == "Right")
+		{
+			velocity.x += 0.1f;
+		}
+		if (side == "Top")
+		{
+			velocity.y -= 0.1f;
+		}
+		if (side == "Bottom")
+		{
+			velocity.y += 0.1f;
+		}*/
 		break;
 	default:
 		break;

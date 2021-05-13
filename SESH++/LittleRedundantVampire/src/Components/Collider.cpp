@@ -49,7 +49,7 @@ bool Collider::CheckCollision(Collider* other)
 		//	onOtherGameObjDestroyed.Attach(other);
 		//}
 
-		onColliding.Notify(*other->gameObject->GetObjectTag());
+		onColliding.Notify(*other->gameObject->GetObjectTag(), "NotDefined");
 
 		//Push(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
 
@@ -69,11 +69,13 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 			{
 				Move(intersect.x * (1.0f - *pushFactor), 0.0f);
 				//cout << "You're colliding with the left side\n";
+				onColliding.Notify(*other->gameObject->objectTag, "Left");
 			}
 			else
 			{
 				Move(-intersect.x * (1.0f - *pushFactor), 0.0f);
 				//cout << "You're colliding with the right side\n";
+				onColliding.Notify(*other->gameObject->objectTag, "Right");
 			}
 		}
 		else
@@ -82,11 +84,13 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 			{
 				Move(0.0f, intersect.y * (1.0f - *pushFactor));
 				//cout << "You're colliding with the top\n";
+				onColliding.Notify(*other->gameObject->objectTag, "Top");
 			}
 			else
 			{
 				Move(0.0f, -intersect.y * (1.0f - *pushFactor));
 				//cout << "You're colliding with the bottom\n";
+				onColliding.Notify(*other->gameObject->objectTag, "Bottom");
 			}
 		}
 	}
@@ -96,16 +100,18 @@ void Collider::UpdateListOfCurrentCollisions()
 {
 	if (currentCollisions.size() > 0)
 	{
-		std::list<Collider*>::iterator it = currentCollisions.begin();
-		while (it != currentCollisions.end())
+		//TODO: This for loop doesn't crash the game when deleting elements from the list while iterating through it. Check other loops that they also don't crash the game.
+		for (auto i = currentCollisions.begin(); i != currentCollisions.end();)
 		{
-			bool isStillColliding = CheckCollision(*it);
+			bool isStillColliding = CheckCollision(*i);
 			if (!isStillColliding)
 			{
-				cout << currentCollisions.size();
-				onNoLongerColliding.Notify("NoLongerCollidingWith", *it);
-				it = currentCollisions.erase(it);
-				cout << currentCollisions.size();
+				onNoLongerColliding.Notify("NoLongerCollidingWith", *i);
+				i = currentCollisions.erase(i);
+			}
+			else
+			{
+				++i;
 			}
 		}
 	}
@@ -113,7 +119,6 @@ void Collider::UpdateListOfCurrentCollisions()
 
 void Collider::Awake()
 {
-	//onColliding.Attach(this);
 }
 
 void Collider::Start()

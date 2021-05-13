@@ -4,6 +4,7 @@
 #include "Enum/ComponentTag.h"
 #include "Observer/IListener.h"
 #include "Observer/ICollisionListener.h"
+#include <string>
 
 
 using namespace std;
@@ -51,6 +52,6 @@ public:
 	virtual void OnNotify(std::string eventName, IListener* sender) override;
 
 	// Inherited via ICollisionListener
-	virtual void OnNotifyCollision(ObjectTag otherTag) override;
+	virtual void OnNotifyCollision(ObjectTag otherTag, std::string side) override;
 };
 

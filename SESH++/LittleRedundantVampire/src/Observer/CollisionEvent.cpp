@@ -1,4 +1,5 @@
 #include "CollisionEvent.h"
+#include <string>
 
 CollisionEvent::CollisionEvent()
 {
@@ -22,11 +23,11 @@ void CollisionEvent::Detach(ICollisionListener* listener)
     listeners.remove(listener);
 }
 
-void CollisionEvent::Notify(ObjectTag otherTag)
+void CollisionEvent::Notify(ObjectTag otherTag, std::string side)
 {
     std::list<ICollisionListener*>::iterator iterator = listeners.begin();
     while (iterator != listeners.end()) {
-        (*iterator)->OnNotifyCollision(otherTag);
+        (*iterator)->OnNotifyCollision(otherTag, side);
         ++iterator;
     }
 }

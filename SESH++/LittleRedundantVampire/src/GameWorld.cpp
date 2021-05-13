@@ -55,7 +55,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
 		float x = sr->TextureRect->width;
 		float y = sr->TextureRect->height;
-		col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
+		col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.6f, true);
 		go->AddComponent(col);
 		colliders->push_back(col);
 	}
