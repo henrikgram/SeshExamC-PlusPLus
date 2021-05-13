@@ -15,22 +15,19 @@ private:
 	int offset = 30;
 	bool* textShown = new bool;
 
-	//Font* font;
-	//Text* text;
-
 	void Awake() override;
 	void Start() override;
 	void Update(Time* timePerFrame) override;
 	void Destroy() override;
 	ComponentTag ToEnum() override;
 
-	void NotifyCollision(ObjectTag otherTag) override;
+	void OnNotifyCollision(ObjectTag otherTag) override;
 
 public:
 	Npc(string* message);
 	~Npc();
 
-	void TextBoxPopup(/*Vector2f boxPosition*/);
+	void TextBoxPopup();
 	void TextBoxRemoval();
 };
 

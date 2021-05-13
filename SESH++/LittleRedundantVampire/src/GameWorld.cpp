@@ -54,7 +54,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		float y = sr->TextureRect->height;
 		col = new  Collider(Vector2f(x, y), *go->position, 0.5f, true);
 		go->AddComponent(col);
-		colliders.push_back(col);
+		colliders->push_back(col);
 	}
 		break;
 	case ObjectTag::ENEMY:

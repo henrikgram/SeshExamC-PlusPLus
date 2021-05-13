@@ -43,15 +43,15 @@ bool Collider::CheckCollision(Collider* other)
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
-		if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
-		{
-			currentCollisions.push_back(other);
-			onOtherGameObjDestroyed.Attach(other);
-		}
+		//if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
+		//{
+		//	currentCollisions.push_back(other);
+		//	onOtherGameObjDestroyed.Attach(other);
+		//}
 
 		onColliding.Notify(*other->gameObject->objectTag);
 
-		Push(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
+		//Push(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
 
 		return true; //The objects are intersecting = We are colliding)
 	}
@@ -128,7 +128,7 @@ void Collider::Start()
 
 void Collider::Update(Time* timePerFrame)
 {
-	UpdateListOfCurrentCollisions();
+	//UpdateListOfCurrentCollisions();
 }
 
 void Collider::Destroy()
