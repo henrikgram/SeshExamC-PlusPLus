@@ -12,6 +12,10 @@ Component::~Component()
 
 void Component::OnNotify(std::string eventName, IListener* sender)
 {
+	if (eventName == "NoLongerCollidingWith")
+	{
+		
+	}
 }
 
 void Component::OnNotifyCollision(ObjectTag otherTag, string side)

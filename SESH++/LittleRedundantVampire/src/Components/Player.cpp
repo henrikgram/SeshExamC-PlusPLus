@@ -151,19 +151,19 @@ void Player::OnNotifyCollision(ObjectTag otherTag, std::string side)
 		//cout << "I hit a crate";
 		/*if (side == "Left")
 		{
-			velocity.x += 2;
+			velocity.x -= 0.1f;
 		}
 		if (side == "Right")
 		{
-			velocity.x -= 2;
+			velocity.x += 0.1f;
 		}
 		if (side == "Top")
 		{
-			velocity.y += 2;
+			velocity.y -= 0.1f;
 		}
 		if (side == "Bottom")
 		{
-			velocity.y -= 2;
+			velocity.y += 0.1f;
 		}*/
 		break;
 	default:

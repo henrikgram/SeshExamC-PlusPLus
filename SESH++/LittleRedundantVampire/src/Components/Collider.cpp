@@ -67,30 +67,30 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 		{
 			if (delta.x > 0.0f)
 			{
-				//Move(intersect.x * (1.0f - *pushFactor), 0.0f);
-				cout << "You're colliding with the left side\n";
-				//onColliding.Notify(*other->gameObject->objectTag, "Left");
+				Move(intersect.x * (1.0f - *pushFactor), 0.0f);
+				//cout << "You're colliding with the left side\n";
+				onColliding.Notify(*other->gameObject->objectTag, "Left");
 			}
 			else
 			{
-				//Move(-intersect.x * (1.0f - *pushFactor), 0.0f);
-				cout << "You're colliding with the right side\n";
-				//onColliding.Notify(*other->gameObject->objectTag, "Right");
+				Move(-intersect.x * (1.0f - *pushFactor), 0.0f);
+				//cout << "You're colliding with the right side\n";
+				onColliding.Notify(*other->gameObject->objectTag, "Right");
 			}
 		}
 		else
 		{
 			if (delta.y > 0.0f)
 			{
-				//Move(0.0f, intersect.y * (1.0f - *pushFactor));
-				cout << "You're colliding with the top\n";
-				//onColliding.Notify(*other->gameObject->objectTag, "Top");
+				Move(0.0f, intersect.y * (1.0f - *pushFactor));
+				//cout << "You're colliding with the top\n";
+				onColliding.Notify(*other->gameObject->objectTag, "Top");
 			}
 			else
 			{
-				//Move(0.0f, -intersect.y * (1.0f - *pushFactor));
-				cout << "You're colliding with the bottom\n";
-				//onColliding.Notify(*other->gameObject->objectTag, "Bottom");
+				Move(0.0f, -intersect.y * (1.0f - *pushFactor));
+				//cout << "You're colliding with the bottom\n";
+				onColliding.Notify(*other->gameObject->objectTag, "Bottom");
 			}
 		}
 	}
@@ -119,7 +119,6 @@ void Collider::UpdateListOfCurrentCollisions()
 
 void Collider::Awake()
 {
-	//onColliding.Attach(this);
 }
 
 void Collider::Start()
