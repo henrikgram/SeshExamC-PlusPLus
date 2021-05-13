@@ -42,19 +42,27 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 		*go->GetPosition() = Vector2<float>(1000, 1000);
 		go->AddComponent(sr);
+
 		playerPointer = new Player();
 		go->AddComponent(playerPointer);
+
 		atckSpwnPointer = new AttackSpawner(ObjectTag::PLAYERATTACK);
 		go->AddComponent(atckSpwnPointer);
+
+		movementPointer = new Movement(5.0f, Vector2f(0.0f, 0.0f));
+		go->AddComponent(movementPointer);
 
 		AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 4), 200.0f, 1);
 		go->AddComponent(aC);
 
-		playerPointer->ChangeAnimation.Attach(aC);
+		AnimationController* acController = new AnimationController(movementPointer, sr, go, 
+																	"3", "2", "0", "1", "1");
+		acController->ChangeAnimation.Attach(aC);
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
 		float x = sr->TextureRect->width;
 		float y = sr->TextureRect->height;
+
 		col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
 		go->AddComponent(col);
 		colliders->push_back(col);
@@ -213,15 +221,12 @@ void GameWorld::Update(Time* timePerFrame)
 		//TODO: Fix så den tager imod attack også
 		Player& playerRef = *playerPointer;
 		AttackSpawner& atckSpwnPointerRef = *atckSpwnPointer;
+		Movement& movementPointerRef = *movementPointer;
 
 		//AttackSpawner* attackPointer = dynamic_cast<AttackSpawner*>(playerPointer->gameObject->GetComponent(ComponentTag::ATTACKSPAWNER));
 		//AttackSpawner& attackRef = *attackPointer;
 
-		PlayerInvoker::GetInstance(playerRef, atckSpwnPointerRef)->InvokeCommand();
-
-
-
-
+		PlayerInvoker::GetInstance(movementPointerRef, atckSpwnPointerRef)->InvokeCommand();
 	}
 }
 

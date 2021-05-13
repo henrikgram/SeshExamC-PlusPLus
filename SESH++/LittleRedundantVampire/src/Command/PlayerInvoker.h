@@ -4,12 +4,13 @@
 #include "SFML/Graphics.hpp"
 #include "MoveCommand.h"
 #include "AttackCommand.h"
+#include "../Components/Movement.h"
 using namespace sf;
 
 class PlayerInvoker
 {
 private:
-	PlayerInvoker(Player& receiver, AttackSpawner& attackReciever);
+	PlayerInvoker(Movement& movementReceiver, AttackSpawner& attackReciever);
 
 public:
 	~PlayerInvoker();
@@ -18,13 +19,13 @@ public:
 
 	void operator=(const PlayerInvoker&) = delete;
 
-	static PlayerInvoker* GetInstance(Player& receiver, AttackSpawner& attackReceiver);
+	static PlayerInvoker* GetInstance(Movement& movementReceiver, AttackSpawner& attackReceiver);
 
 	void InvokeCommand();
 
 private:
 	static PlayerInvoker* instance;
-	Player& receiver;
+	Movement& movementReceiver;
 	AttackSpawner& attackReceiver;
 
 	unordered_map<Keyboard::Key, ICommand*> keyBinds;

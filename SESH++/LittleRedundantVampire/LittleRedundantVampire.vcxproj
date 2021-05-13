@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\AnimationController.cpp" />
     <ClCompile Include="src\Components\AnimationComponent.cpp" />
     <ClCompile Include="src\Components\Npc.cpp" />
     <ClCompile Include="src\Command\AttackCommand.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="src\Textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Components\AnimationController.h" />
     <ClInclude Include="src\Components\AnimationComponent.h" />
     <ClInclude Include="src\Components\Npc.h" />
     <ClInclude Include="src\Command\AttackCommand.h" />

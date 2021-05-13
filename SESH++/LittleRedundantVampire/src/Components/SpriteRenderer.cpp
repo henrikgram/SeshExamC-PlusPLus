@@ -19,15 +19,22 @@ SpriteRenderer::~SpriteRenderer()
 
 	delete imageCount;
 	imageCount = nullptr;
+
+	delete flipped;
+	flipped = nullptr;
 }
 
 SpriteRenderer::SpriteRenderer()
 {
-
+	flipped = new bool;
+	*flipped = false;
 }
 
 SpriteRenderer::SpriteRenderer(Vector2u currentImage, Vector2u imageCount)
 {
+	flipped = new bool;
+	*flipped = false;
+
 	//currentImage = new Vector2u(1, 1);
 	this->currentImage = &currentImage;
 	this->imageCount = &currentImage;
@@ -117,4 +124,9 @@ void SpriteRenderer::SetTextureRect(IntRect& textureRect)
 {
 	this->TextureRect = &textureRect;
 	sprite->setTextureRect(*TextureRect);
+}
+
+bool* SpriteRenderer::GetFlipped()
+{
+	return flipped;
 }

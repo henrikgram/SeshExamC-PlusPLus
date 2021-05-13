@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "SpriteRenderer.h"
+#include "AnimationController.h"
 using namespace sf;
 
 //Guide til animation af sprite sheet.

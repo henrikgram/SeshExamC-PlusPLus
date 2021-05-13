@@ -23,6 +23,9 @@ public:
 
 	void Normalize();
 
+	Vector2f* GetVelocity();
+
+
 private:
 	float* speed;
 	Vector2f* velocity;

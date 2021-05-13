@@ -14,8 +14,6 @@ public:
 	Player();
 	~Player();
 
-	void Move(Vector2f velocity);
-
 	void Awake() override;
 	void Start() override;
 	void Update(Time* timePerFrame) override;
@@ -24,15 +22,6 @@ public:
 
 	void OnNotifyCollision(ObjectTag otherTag, string side) override;
 
-	void Normalize();
-	void UpdateAnimation();
-	IGameEvent ChangeAnimation;
-
-
-private:
-	bool flipped = false;
-	char lastDir;
-	float speed;
-
-	Vector2f velocity;
+	//void UpdateAnimation();
+	//IGameEvent ChangeAnimation;
 };

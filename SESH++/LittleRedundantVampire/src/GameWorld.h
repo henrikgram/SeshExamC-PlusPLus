@@ -74,4 +74,5 @@ private:
 	vector<Collider*>* colliders;
 	Player* playerPointer;
 	AttackSpawner* atckSpwnPointer;
+	Movement* movementPointer;
 };

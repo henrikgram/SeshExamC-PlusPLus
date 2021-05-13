@@ -25,6 +25,11 @@ void Movement::Start()
 void Movement::Update(Time* timePerFrame)
 {
 	Normalize();
+
+	if (*speed < 5.0f)
+	{
+		*speed++;
+	}
 }
 
 void Movement::Destroy()
@@ -59,4 +64,9 @@ void Movement::Normalize()
 		*gameObject->GetPosition() += *velocity;
 		*velocity = Vector2f(0.0f, 0.0f);
 	}
+}
+
+Vector2f* Movement::GetVelocity()
+{
+	return velocity;
 }
