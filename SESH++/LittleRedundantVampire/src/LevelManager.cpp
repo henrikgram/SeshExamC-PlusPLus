@@ -132,8 +132,8 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	go1->AddComponent(new Npc(new string("'V' to pick up keys!")));
 	sr1->SetSprite(TextureTag::NPC);
 	go1->AddComponent(sr1);
-	*go1->objectTag = ObjectTag::NPC;
-	col1 = new Collider(Vector2f(sr1->GetSprite().getTexture()->getSize().x, sr1->GetSprite().getTexture()->getSize().y), *go1->position, 1.0f, false);
+	*go1->GetObjectTag() = ObjectTag::NPC;
+	col1 = new Collider(Vector2f(sr1->GetSprite().getTexture()->getSize().x, sr1->GetSprite().getTexture()->getSize().y), *go1->GetPosition(), 1.0f, false);
 	(*GameWorld::GetInstance()->GetColliders()).push_back(col1);
 	go1->AddComponent(col1);
 
@@ -144,8 +144,8 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	go2->AddComponent(npc2);
 	sr2->SetSprite(TextureTag::NPC);
 	go2->AddComponent(sr2);
-	*go2->objectTag = ObjectTag::NPC;
-	col2 = new Collider(Vector2f(sr2->GetSprite().getTexture()->getSize().x, sr2->GetSprite().getTexture()->getSize().y), *go2->position, 1.0f, false);
+	*go2->GetObjectTag() = ObjectTag::NPC;
+	col2 = new Collider(Vector2f(sr2->GetSprite().getTexture()->getSize().x, sr2->GetSprite().getTexture()->getSize().y), *go2->GetPosition(), 1.0f, false);
 	(*GameWorld::GetInstance()->GetColliders()).push_back(col2);
 	go2->AddComponent(col2);
 
@@ -156,8 +156,8 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	go3->AddComponent(npc3);
 	sr3->SetSprite(TextureTag::NPC);
 	go3->AddComponent(sr3);
-	*go3->objectTag = ObjectTag::NPC;
-	col3 = new Collider(Vector2f(sr3->GetSprite().getTexture()->getSize().x, sr3->GetSprite().getTexture()->getSize().y), *go3->position, 1.0f, false);
+	*go3->GetObjectTag() = ObjectTag::NPC;
+	col3 = new Collider(Vector2f(sr3->GetSprite().getTexture()->getSize().x, sr3->GetSprite().getTexture()->getSize().y), *go3->GetPosition(), 1.0f, false);
 	(*GameWorld::GetInstance()->GetColliders()).push_back(col3);
 	go3->AddComponent(col3);
 
