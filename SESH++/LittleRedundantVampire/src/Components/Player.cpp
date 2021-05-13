@@ -17,7 +17,7 @@ Player::~Player()
 
 void Player::Move(Vector2f velocity)
 {
-	//ChangeAnimation.Notify("1",this);
+	//ChangeAnimation.Notify("0",this);
 	this->velocity += velocity;
 }
 
@@ -33,34 +33,59 @@ void Player::UpdateAnimation()
 	//TODO: OPTIMERING fix s� den ikke k�rer medmindre det er en ny animation. OPTIMERING
 	if (velocity.x == 0 && velocity.y == 0)
 	{
-		ChangeAnimation.Notify("3", this);
+		if (lastDir != 'N')
+		{
+			ChangeAnimation.Notify("3", this);
+			lastDir = 'N';
+		}
+		
 	}
 	else if (velocity.y < 0)
 	{
-		ChangeAnimation.Notify("2", this);
+		if (lastDir != 'U')
+		{
+			ChangeAnimation.Notify("2", this);
+			lastDir = 'U';
+		}
+		
 	}
 	else if (velocity.y > 0)
 	{
-		ChangeAnimation.Notify("0", this);
+		if (lastDir != 'D')
+		{
+			ChangeAnimation.Notify("0", this);
+			lastDir = 'D';
+		}
+	
 	}
 	else if (velocity.x < 0)
 	{
-		if (!flipped)
+		if (lastDir != 'L')
 		{
+			if (!flipped)
+			{
+				flipped = true;
+				ChangeAnimation.Notify("flip", this);
+			}
 			ChangeAnimation.Notify("1", this);
-			ChangeAnimation.Notify("flip",this);
-			flipped = true;
+			lastDir = 'L';
 		}
+
 	}
 
-	if (velocity.x > 0)
+	else if (velocity.x > 0)
 	{
-		if (flipped)
+		if (lastDir != 'R')
 		{
+			if (flipped)
+			{
+				flipped = false;
+				ChangeAnimation.Notify("flip", this);
+			}
 			ChangeAnimation.Notify("1", this);
-			ChangeAnimation.Notify("flip",this);
-			flipped = false;
+			lastDir = 'R';
 		}
+
 	}
 
 }

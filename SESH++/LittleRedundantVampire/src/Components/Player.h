@@ -31,6 +31,7 @@ public:
 
 private:
 	bool flipped = false;
+	char lastDir;
 	float speed;
 
 	Vector2f velocity;
