@@ -8,7 +8,8 @@ using namespace std;
 class Ray
 {
 public:
-	Ray(Vector2f position, Vector2f direction);
+	Ray(Vector2f& position, Vector2f direction);
+	//Ray(Vector2f position, Vector2f direction);
 	Ray();
 	bool Cast(VertexArray& wall);
 	void LookAt(Vector2f);

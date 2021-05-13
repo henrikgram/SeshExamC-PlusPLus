@@ -3,6 +3,9 @@
 #include <iostream>
 #include "Ray.h"
 #include "LightSource.h"
+
+#include <stdlib.h>
+#include <time.h>
 using namespace sf;
 using namespace std;
 
@@ -21,21 +24,28 @@ int main()
 	box[1].position.x = 500;
 	box[1].position.y = 100;
 
+	vector<VertexArray> walls[5];
 
-	//LightSource light(Vector2f(250,250));
-	Ray ray(Vector2f(250, 250), Vector2f(50, 0));
+	srand(time(NULL));
 
-	//cout << ray.Cast(box);
+	for (int i = 0; i < 5; i++)
+	{
+		int x1 = rand() % 600+ 1;
+		int y1 = rand() % 800 + 1;
 
-	//if (ray.Cast(box))
-	//{
-	//	intersectCircle.setPosition(*ray.GetIntersectionPoint());
-	//	intersectCircle.setOrigin(10, 10);
-	//	intersectCircle.setRadius(10);
-	//	intersectCircle.setFillColor(Color::Red);
-	//}
+		int x2 = rand() % 600 + 1;
+		int y2 = rand() % 800 + 1;
 
-	  // Start the game loop
+		VertexArray tmp = VertexArray(sf::LinesStrip, 2);
+		tmp[0].position = Vector2f(x1, y1);
+		tmp[1].position = Vector2f(x2, y2);
+
+		walls->push_back(tmp);
+	}
+
+	LightSource light(Vector2f(250,250));
+	
+	// Start the game loop
 	while (window.isOpen())
 	{
 		// Process events
@@ -52,20 +62,35 @@ int main()
 		sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 		sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 
-		ray.LookAt(worldPos);
+		//ray.LookAt(worldPos);
+
+		//light.Move(worldPos);
 
 		window.draw(box);
-		window.draw(*ray.GetVertexArray());
+		//window.draw(*ray.GetVertexArray());
 
-		if (ray.Cast(box))
+		vector<Ray*>::iterator it;
+
+		vector<Vector2f> vray = light.Look(walls);
+
+		vector<Vector2f>::iterator vrayIt;
+
+		for (vrayIt = vray.begin(); vrayIt < vray.end(); vrayIt++)
 		{
-			intersectCircle.setPosition(*ray.GetIntersectionPoint());
-			intersectCircle.setOrigin(10, 10);
-			intersectCircle.setRadius(10);
-			intersectCircle.setFillColor(Color::Red);	
-			window.draw(intersectCircle);
+			VertexArray tmp = VertexArray(sf::LinesStrip, 2);
+			tmp[0].position = light.GetPosition();
+			tmp[1].position = *vrayIt;
+			window.draw(tmp);
 		}
-	
+
+		vector<VertexArray>::iterator It;
+
+		for (It = walls->begin(); It < walls->end(); It++)
+		{
+			window.draw(*It);
+		}
+
+
 		// Update the window
 		window.display();
 	}

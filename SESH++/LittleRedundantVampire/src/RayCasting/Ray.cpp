@@ -1,10 +1,16 @@
 #include "Ray.h"
 
-Ray::Ray(Vector2f position, Vector2f direction)
+Ray::Ray(Vector2f& position, Vector2f direction)
 {
     (*ray)[0].position = position;
     (*ray)[1].position = Vector2f((position.x + direction.x),position.y+direction.y);
 }
+
+//Ray::Ray(Vector2f position, Vector2f direction)
+//{
+//    (*ray)[0].position = position;
+//    (*ray)[1].position = Vector2f((position.x + direction.x), position.y + direction.y);
+//}
 
 Ray::Ray()
 {
