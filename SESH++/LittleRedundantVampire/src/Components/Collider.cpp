@@ -49,7 +49,7 @@ bool Collider::CheckCollision(Collider* other)
 			onOtherGameObjDestroyed.Attach(other);
 		}
 
-		//onColliding.Notify(*other->gameObject->objectTag, "NotDefined");
+		onColliding.Notify(*other->gameObject->objectTag, "NotDefined");
 
 		Push(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
 
@@ -100,16 +100,18 @@ void Collider::UpdateListOfCurrentCollisions()
 {
 	if (currentCollisions.size() > 0)
 	{
-		std::list<Collider*>::iterator it = currentCollisions.begin();
-		while (it != currentCollisions.end())
+		//TODO: This for loop doesn't crash the game when deleting elements from the list while iterating through it. Check other loops that they also don't crash the game.
+		for (auto i = currentCollisions.begin(); i != currentCollisions.end();)
 		{
-			bool isStillColliding = CheckCollision(*it);
+			bool isStillColliding = CheckCollision(*i);
 			if (!isStillColliding)
 			{
-				cout << currentCollisions.size();
-				onNoLongerColliding.Notify("NoLongerCollidingWith", *it);
-				it = currentCollisions.erase(it);
-				cout << currentCollisions.size();
+				onNoLongerColliding.Notify("NoLongerCollidingWith", *i);
+				i = currentCollisions.erase(i);
+			}
+			else
+			{
+				++i;
 			}
 		}
 	}
