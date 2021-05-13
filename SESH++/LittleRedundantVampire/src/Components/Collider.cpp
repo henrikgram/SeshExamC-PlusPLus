@@ -145,7 +145,7 @@ ComponentTag Collider::ToEnum()
 
 void Collider::OnNotify(std::string eventName, IListener* sender)
 {
-	//TODO: Ensure that this doesn't cause issues if the list does not contain the element. 
+	//TODO: Ensure that this doesn't cause issues if the list does not contain the element.
 	//This should remove all instances of the collider in question
 	if (eventName == "OtherGmObjDestroyed")
 	{

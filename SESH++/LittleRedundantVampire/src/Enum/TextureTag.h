@@ -16,7 +16,8 @@ enum class TextureTag {
 	DOOR,
 	CRATE,
 	CHEST,
-	WINDOW
+	WINDOW,
+	TEXT_BOX
 };
 
 #endif

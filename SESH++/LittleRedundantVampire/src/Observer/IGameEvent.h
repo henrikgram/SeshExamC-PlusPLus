@@ -22,4 +22,3 @@ private:
 	//string* eventTitle;
 	std::list<IListener*> listeners;
 };
-

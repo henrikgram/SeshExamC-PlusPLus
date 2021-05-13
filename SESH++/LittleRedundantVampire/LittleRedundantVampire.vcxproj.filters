@@ -23,6 +23,9 @@
     <ClCompile Include="src\Asset.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Components\AnimationComponent.cpp" />
+    <ClCompile Include="src\Components\Npc.cpp" />
+    <ClCompile Include="src\Components\TextMessage.cpp" />
+    <ClCompile Include="src\Textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameWorld.h" />
@@ -52,6 +55,9 @@
     <ClInclude Include="src\Observer\IListener.h" />
     <ClInclude Include="src\Observer\ICollisionListener.h" />
     <ClInclude Include="src\Components\AnimationComponent.h" />
+    <ClInclude Include="src\Components\Npc.h" />
+    <ClInclude Include="src\Components\TextMessage.h" />
+    <ClInclude Include="src\Textbox.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />
@@ -75,5 +81,12 @@
     <Image Include="Asset\VaseWhole.png" />
     <Image Include="Asset\Window.png" />
     <Image Include="Asset\Ghost.png" />
+    <Image Include="Asset\TextBox.png" />
+    <Image Include="Asset\TextBox_V2.png" />
+    <Image Include="Asset\TextBox_V3.png" />
+    <Image Include="Asset\TestTextbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Asset\PlayfairDisplay-VariableFont_wght.ttf" />
   </ItemGroup>
 </Project>

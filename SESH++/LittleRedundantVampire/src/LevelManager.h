@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "Enum/TextureTag.h"
 #include "Components/SpriteRenderer.h"
+#include "Components/Collider.h"
+#include "Components/Npc.h"
 
 using namespace std;
 
@@ -39,6 +41,6 @@ public:
 	/// <returns></returns>
 	GameObject* CreateObject(ObjectTag tag, float posX, float posY);
 
-
+	vector<GameObject*> CreateNpcLevelOne();
 };
 

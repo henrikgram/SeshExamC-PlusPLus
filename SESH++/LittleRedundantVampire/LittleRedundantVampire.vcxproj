@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Components\AnimationComponent.cpp" />
+    <ClCompile Include="src\Components\Npc.cpp" />
     <ClCompile Include="src\GameWorld.cpp" />
     <ClCompile Include="src\Components\AttackFactory.cpp" />
     <ClCompile Include="src\Components\OldAttack.cpp" />
@@ -167,9 +168,12 @@
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Asset.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Components\TextMessage.cpp" />
+    <ClCompile Include="src\Textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\AnimationComponent.h" />
+    <ClInclude Include="src\Components\Npc.h" />
     <ClInclude Include="src\GameWorld.h" />
     <ClInclude Include="src\Components\AttackFactory.h" />
     <ClInclude Include="src\Components\OldAttack.h" />
@@ -196,6 +200,8 @@
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\Asset.h" />
     <ClInclude Include="src\Observer\IListener.h" />
+    <ClInclude Include="src\Components\TextMessage.h" />
+    <ClInclude Include="src\Textbox.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />
@@ -208,6 +214,10 @@
     <Image Include="Asset\healthUI.png" />
     <Image Include="Asset\Key.png" />
     <Image Include="Asset\NewVillagerDown.png" />
+    <Image Include="Asset\TestTextbox.png" />
+    <Image Include="Asset\TextBox.png" />
+    <Image Include="Asset\TextBox_V2.png" />
+    <Image Include="Asset\TextBox_V3.png" />
     <Image Include="Asset\TreasureChest.png" />
     <Image Include="Asset\VaseWhole.png" />
     <Image Include="Asset\Window.png" />
@@ -219,6 +229,9 @@
     <Image Include="src\Levels\Level1-ObjectLayer.bmp" />
     <Image Include="src\Levels\Test.bmp" />
     <Image Include="src\Levels\Test2.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Asset\PlayfairDisplay-VariableFont_wght.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

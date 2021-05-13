@@ -18,7 +18,8 @@ enum class ObjectTag {
 	VASE,
 	KEY,
 	CHEST,
-	CRATE
+	CRATE,
+	TEXT_BOX
 };
 
 #endif

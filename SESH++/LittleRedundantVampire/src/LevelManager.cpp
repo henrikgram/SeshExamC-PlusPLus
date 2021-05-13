@@ -1,4 +1,6 @@
 #include "LevelManager.h"
+#include "GameWorld.h"
+
 
 
 GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
@@ -6,7 +8,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject(Vector2<float>(posX * 96, posY * 96));
 	SpriteRenderer* sr = new SpriteRenderer();
-	//Collider* colider = new Collider();
+	Collider* col;
 
 	//go->position = &position;
 
@@ -75,9 +77,13 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		break;
 
 	case ObjectTag::NPC:
+		go->AddComponent(new Npc(new string("'V' to pick up keys!")));
 		sr->SetSprite(TextureTag::NPC);
 		go->AddComponent(sr);
 		*go->objectTag = ObjectTag::NPC;
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, false);
+		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		go->AddComponent(col);
 		break;
 
 	case ObjectTag::PLAYER:
@@ -115,6 +121,59 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	return go;
 }
 
+vector<GameObject*> LevelManager::CreateNpcLevelOne()
+{
+	vector<GameObject*> gameObjects;
+
+	GameObject* go1 = new GameObject(Vector2<float>(1000, 1300));
+	//Npc* npc1 = new Npc(new string("'V' to pick up keys!"));
+	SpriteRenderer* sr1 = new SpriteRenderer();
+	Collider* col1;
+	go1->AddComponent(new Npc(new string("'V' to pick up keys!")));
+	sr1->SetSprite(TextureTag::NPC);
+	go1->AddComponent(sr1);
+	*go1->objectTag = ObjectTag::NPC;
+	col1 = new Collider(Vector2f(sr1->GetSprite().getTexture()->getSize().x, sr1->GetSprite().getTexture()->getSize().y), *go1->position, 1.0f, false);
+	(*GameWorld::GetInstance()->GetColliders()).push_back(col1);
+	go1->AddComponent(col1);
+
+	GameObject* go2 = new GameObject(Vector2<float>(3000, 500));
+	Npc* npc2 = new Npc(new string("Fuck you in particular."));
+	SpriteRenderer* sr2 = new SpriteRenderer();
+	Collider* col2;
+	go2->AddComponent(npc2);
+	sr2->SetSprite(TextureTag::NPC);
+	go2->AddComponent(sr2);
+	*go2->objectTag = ObjectTag::NPC;
+	col2 = new Collider(Vector2f(sr2->GetSprite().getTexture()->getSize().x, sr2->GetSprite().getTexture()->getSize().y), *go2->position, 1.0f, false);
+	(*GameWorld::GetInstance()->GetColliders()).push_back(col2);
+	go2->AddComponent(col2);
+
+	GameObject* go3 = new GameObject(Vector2<float>(1000, 1500));
+	Npc* npc3 = new Npc(new string("Ghost boi, BOO!"));
+	SpriteRenderer* sr3 = new SpriteRenderer();
+	Collider* col3;
+	go3->AddComponent(npc3);
+	sr3->SetSprite(TextureTag::NPC);
+	go3->AddComponent(sr3);
+	*go3->objectTag = ObjectTag::NPC;
+	col3 = new Collider(Vector2f(sr3->GetSprite().getTexture()->getSize().x, sr3->GetSprite().getTexture()->getSize().y), *go3->position, 1.0f, false);
+	(*GameWorld::GetInstance()->GetColliders()).push_back(col3);
+	go3->AddComponent(col3);
+
+	go1->Awake();
+	go1->Start();
+
+	go2->Awake();
+	go2->Start();
+	go3->Awake();
+	go3->Start();
+	gameObjects.push_back(go1);
+	gameObjects.push_back(go2);
+	gameObjects.push_back(go3);
+
+	return gameObjects;
+}
 
 vector<GameObject*> LevelManager::InstantiateLevel(string levelName)
 {
@@ -138,6 +197,12 @@ vector<GameObject*> LevelManager::InstantiateLevel(string levelName)
 
 	gameObjects.insert(gameObjects.end(), decorations.begin(), decorations.end());
 	gameObjects.insert(gameObjects.end(), objects.begin(), objects.end());
+
+	if (levelName == "Level1")
+	{
+		vector<GameObject*> npcs = CreateNpcLevelOne();
+		gameObjects.insert(gameObjects.end(), npcs.begin(), npcs.end());
+	}
 
 	return gameObjects;
 }
@@ -202,7 +267,7 @@ vector<GameObject*> LevelManager::LevelSetup(BitmapImage& level)
 			}
 			else if (color.r == 0 && color.g == 255 && color.b == 0)
 			{
-				gameObjects.push_back(CreateObject(ObjectTag::NPC, x, y));
+				//gameObjects.push_back(CreateObject(ObjectTag::NPC, x, y));
 			}
 			if (color.r == 0 && color.g == 180 && color.b == 0)
 			{
