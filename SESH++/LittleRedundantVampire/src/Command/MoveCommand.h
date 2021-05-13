@@ -13,6 +13,6 @@ public:
 	void Execute();
 
 private:
-	Movement& receiver;
+	Movement& movementReceiver;
 	Vector2f* velocity;
 };

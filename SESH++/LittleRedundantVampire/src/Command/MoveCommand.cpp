@@ -1,6 +1,6 @@
 #include "MoveCommand.h"
 
-MoveCommand::MoveCommand(Movement& movementReceiver, Vector2f velocity) : receiver(receiver)
+MoveCommand::MoveCommand(Movement& movementReceiver, Vector2f velocity) : movementReceiver(movementReceiver)
 {
 	this->velocity = new Vector2f(velocity);
 }
@@ -13,5 +13,5 @@ MoveCommand::~MoveCommand()
 
 void MoveCommand::Execute()
 {
-	receiver.Move(*velocity);
+	movementReceiver.Move(*velocity);
 }

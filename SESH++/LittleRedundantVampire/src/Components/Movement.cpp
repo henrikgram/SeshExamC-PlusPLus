@@ -28,7 +28,7 @@ void Movement::Update(Time* timePerFrame)
 
 	if (*speed < 5.0f)
 	{
-		*speed++;
+		++*speed;
 	}
 }
 
@@ -43,7 +43,7 @@ ComponentTag Movement::ToEnum()
 
 void Movement::Move(Vector2f velocity)
 {
-	(*this->velocity) += velocity;
+	*this->velocity += velocity;
 }
 
 void Movement::Normalize()
