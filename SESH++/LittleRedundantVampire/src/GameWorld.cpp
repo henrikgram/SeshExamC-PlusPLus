@@ -9,6 +9,7 @@ View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
 RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 
+
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
 /// S�rger for at det view scaler med vinduets st�rrelse. Forhindrer stretching af sprites og lignende.
@@ -26,7 +27,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 {
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject();
-	*go->objectTag = tag;
+	*go->GetObjectTag() = tag;
 	SpriteRenderer* sr = new SpriteRenderer();
 	Collider* col;
 
@@ -39,10 +40,12 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		sr->imageCount = new Vector2u(4, 4);
 		sr->SetSprite(TextureTag::PLAYER_SHEET);
 
-		go->position = new Vector2<float>(1000, 1000);
+		go->GetPosition() = Vector2<float>(1000, 1000);
 		go->AddComponent(sr);
 		playerPointer = new Player();
 		go->AddComponent(playerPointer);
+		atckSpwnPointer = new AttackSpawner(ObjectTag::PLAYERATTACK);
+		go->AddComponent(atckSpwnPointer);
 
 		AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 4), 200.0f, 1);
 		go->AddComponent(aC);
@@ -52,7 +55,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
 		float x = sr->TextureRect->width;
 		float y = sr->TextureRect->height;
-		col = new  Collider(Vector2f(x, y), *go->position, 0.5f, true);
+		col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
 		go->AddComponent(col);
 		colliders->push_back(col);
 	}
@@ -75,11 +78,11 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		break;
 	case ObjectTag::CRATE:
 		sr->SetSprite(TextureTag::OZZY);
-		go->position = new Vector2f(150, 150);
+		*go->GetPosition() = Vector2f(150, 150);
 		go->AddComponent(sr);
 		go->AddComponent(new Platform);
 
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, true);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
 		go->AddComponent(col);
 		colliders->push_back(col);
 		break;
@@ -148,9 +151,8 @@ void GameWorld::Run()
 		{
 			timeSinceLastUpdate -= timePerFrame;
 			Update(&timePerFrame);
-			//player.Update(deltaTime);
 			//p1.GetCollider().CheckCollision(player.GetCollider(), 0.1f);
-			view.setCenter(*playerPointer->gameObject->position);
+			view.setCenter(*playerPointer->gameObject->GetPosition());
 		}
 
 		//Hvert gameloop korer vi Update paa vores animation.
@@ -169,6 +171,7 @@ void GameWorld::Run()
 	}
 
 }
+
 
 void GameWorld::Initialize()
 {
@@ -207,8 +210,18 @@ void GameWorld::Update(Time* timePerFrame)
 
 	if (playerPointer != nullptr)
 	{
+		//TODO: Fix så den tager imod attack også
 		Player& playerRef = *playerPointer;
-		PlayerInvoker::GetInstance(playerRef)->InvokeCommand();
+		AttackSpawner& atckSpwnPointerRef = *atckSpwnPointer;
+
+		//AttackSpawner* attackPointer = dynamic_cast<AttackSpawner*>(playerPointer->gameObject->GetComponent(ComponentTag::ATTACKSPAWNER));
+		//AttackSpawner& attackRef = *attackPointer;
+
+		PlayerInvoker::GetInstance(playerRef, atckSpwnPointerRef)->InvokeCommand();
+
+
+
+
 	}
 }
 
@@ -228,6 +241,12 @@ void GameWorld::Draw()
 		i < gameObjectsSize;
 		++i)
 	{
+<<<<<<< HEAD
+
+GameObject* go = (*GameWorld::GetInstance()->GetGameObjects())[i];
+
+if (*go->GetShouldDraw())
+{
 		//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
 		sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
 		TextMessage* tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
@@ -243,8 +262,7 @@ void GameWorld::Draw()
 			delete tm;
 			tm = nullptr;
 		}
-
-
+		}
 	}
 	// DU KAN IKKE TEGNE TEKST. FUCK ALT. PRØVE IGEN. ØV. F.
 	//for (vector<GameObject*>::size_type i = 0;
@@ -263,6 +281,7 @@ void GameWorld::Draw()
 	window.display();
 }
 
+
 GameWorld::GameWorld()
 {
 	// TODO: Maybe move to initialize.
@@ -278,6 +297,7 @@ GameWorld::~GameWorld()
 	delete gameObjects;
 	gameObjects = nullptr;
 }
+
 
 GameWorld* GameWorld::GetInstance()
 {
@@ -307,6 +327,11 @@ float GameWorld::GetScreenWidth()
 float GameWorld::GetScreenHeight()
 {
 	return view.getCenter().y - (view.getSize().y / 2);
+}
+
+vector<GameObject*>* GameWorld::GetDeletedObjects()
+{
+	return deletedObjects;
 }
 
 
