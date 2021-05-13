@@ -133,7 +133,7 @@ void Collider::Start()
 
 void Collider::Update(Time* timePerFrame)
 {
-	//UpdateListOfCurrentCollisions();
+	UpdateListOfCurrentCollisions();
 }
 
 void Collider::Destroy()

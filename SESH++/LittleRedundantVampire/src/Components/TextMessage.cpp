@@ -38,6 +38,7 @@ void TextMessage::Start()
 	text->setCharacterSize(32);
 	text->setFillColor(sf::Color::White);
 	text->setStyle(Text::Bold | Text::Italic);
+	text->setPosition(Vector2f(GameWorld::GetInstance()->GetScreenWidth() - (text->getGlobalBounds().width / 2), GameWorld::GetInstance()->GetScreenHeight() + (text->getGlobalBounds().height * 2)));
 }
 
 void TextMessage::Update(Time* timePerFrame)

@@ -83,6 +83,8 @@
     <Image Include="Asset\TextBox_V2.png" />
     <Image Include="Asset\TextBox_V3.png" />
     <Image Include="Asset\TestTextbox.png" />
+    <Image Include="Asset\GhostSheet.png" />
+    <Image Include="Asset\GhostSheet2.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Asset\PlayfairDisplay-VariableFont_wght.ttf" />

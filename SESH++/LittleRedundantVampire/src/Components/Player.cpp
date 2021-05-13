@@ -80,6 +80,7 @@ void Player::Update(Time* timePerFrame)
 	{
 		speed++;
 	}
+	//cout << "x: " << this->gameObject->GetPosition()->x << ". y: " << this->gameObject->GetPosition()->y;
 }
 
 void Player::Normalize()
