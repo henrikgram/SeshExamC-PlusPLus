@@ -17,7 +17,7 @@ Player::~Player()
 
 void Player::Move(Vector2f velocity)
 {
-	ChangeAnimation.Notify("1",this);
+	//ChangeAnimation.Notify("1",this);
 	this->velocity += velocity;
 }
 
@@ -53,7 +53,7 @@ void Player::UpdateAnimation()
 		}
 	}
 
-	else if (velocity.x > 0)
+	if (velocity.x > 0)
 	{
 		if (flipped)
 		{

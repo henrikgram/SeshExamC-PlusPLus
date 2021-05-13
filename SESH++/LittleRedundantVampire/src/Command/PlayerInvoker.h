@@ -29,6 +29,9 @@ private:
 
 	unordered_map<Keyboard::Key, ICommand*> keyBinds;
 	unordered_map<Keyboard::Key, ICommand*>::iterator keyIt;
+
+	unordered_map<Keyboard::Key, ICommand*> releaseKeyBinds;
+	unordered_map<Keyboard::Key, ICommand*>::iterator releaseKeyIt;
 };
 
 

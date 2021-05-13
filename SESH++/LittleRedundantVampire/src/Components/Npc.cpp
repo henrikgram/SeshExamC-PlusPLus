@@ -65,7 +65,7 @@ ComponentTag Npc::ToEnum()
 	return ComponentTag::NPC;
 }
 
-void Npc::OnNotifyCollision(ObjectTag otherTag)
+void Npc::OnNotifyCollision(ObjectTag otherTag, string side)
 {
 	switch (otherTag)
 	{

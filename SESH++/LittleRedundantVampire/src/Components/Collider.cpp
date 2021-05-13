@@ -43,15 +43,15 @@ bool Collider::CheckCollision(Collider* other)
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
-		//if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
-		//{
-		//	currentCollisions.push_back(other);
-		//	onOtherGameObjDestroyed.Attach(other);
-		//}
+		if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
+		{
+			currentCollisions.push_back(other);
+			onOtherGameObjDestroyed.Attach(other);
+		}
 
 		onColliding.Notify(*other->gameObject->GetObjectTag(), "NotDefined");
 
-		//Push(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
+		Push(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
 
 		return true; //The objects are intersecting = We are colliding)
 	}
@@ -69,13 +69,13 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 			{
 				Move(intersect.x * (1.0f - *pushFactor), 0.0f);
 				//cout << "You're colliding with the left side\n";
-				onColliding.Notify(*other->gameObject->objectTag, "Left");
+				onColliding.Notify(*other->gameObject->GetObjectTag(), "Left");
 			}
 			else
 			{
 				Move(-intersect.x * (1.0f - *pushFactor), 0.0f);
 				//cout << "You're colliding with the right side\n";
-				onColliding.Notify(*other->gameObject->objectTag, "Right");
+				onColliding.Notify(*other->gameObject->GetObjectTag(), "Right");
 			}
 		}
 		else
@@ -84,13 +84,13 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 			{
 				Move(0.0f, intersect.y * (1.0f - *pushFactor));
 				//cout << "You're colliding with the top\n";
-				onColliding.Notify(*other->gameObject->objectTag, "Top");
+				onColliding.Notify(*other->gameObject->GetObjectTag(), "Top");
 			}
 			else
 			{
 				Move(0.0f, -intersect.y * (1.0f - *pushFactor));
 				//cout << "You're colliding with the bottom\n";
-				onColliding.Notify(*other->gameObject->objectTag, "Bottom");
+				onColliding.Notify(*other->gameObject->GetObjectTag(), "Bottom");
 			}
 		}
 	}
