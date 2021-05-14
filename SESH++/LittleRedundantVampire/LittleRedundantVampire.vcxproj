@@ -209,6 +209,8 @@
     <Image Include="Asset\DoorClosed.png" />
     <Image Include="Asset\DoorOpen.png" />
     <Image Include="Asset\Ghost.png" />
+    <Image Include="Asset\GhostSheet.png" />
+    <Image Include="Asset\GhostSheet2.png" />
     <Image Include="Asset\healthUI.png" />
     <Image Include="Asset\Key.png" />
     <Image Include="Asset\NewVillagerDown.png" />

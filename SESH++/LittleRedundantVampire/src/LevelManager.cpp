@@ -125,39 +125,62 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 {
 	vector<GameObject*> gameObjects;
 
-	GameObject* go1 = new GameObject(Vector2<float>(1000, 1300));
-	//Npc* npc1 = new Npc(new string("'V' to pick up keys!"));
+	GameObject* go1 = new GameObject(Vector2<float>(960, 1220));
 	SpriteRenderer* sr1 = new SpriteRenderer();
 	Collider* col1;
-	go1->AddComponent(new Npc(new string("'V' to pick up keys!")));
+	sr1->isSpriteSheet = true;
+	sr1->currentImage = new Vector2u(1, 1);
+	sr1->imageCount = new Vector2u(6, 1);
+
+	go1->AddComponent(new Npc(new string("If you find any keys you can pick them up by pressing 'V'!")));
 	sr1->SetSprite(TextureTag::NPC);
 	go1->AddComponent(sr1);
+	AnimationComponent* ac1 = new AnimationComponent(sr1, Vector2u(6, 1), 200.0f, 0);
+	go1->AddComponent(ac1);
 	*go1->GetObjectTag() = ObjectTag::NPC;
-	col1 = new Collider(Vector2f(sr1->GetSprite().getTexture()->getSize().x, sr1->GetSprite().getTexture()->getSize().y), *go1->GetPosition(), 1.0f, false);
+	float x1 = sr1->TextureRect->width;
+	float y1 = sr1->TextureRect->height;
+	col1 = new Collider(Vector2f(x1, y1), *go1->GetPosition(), 1.0f, false);
 	(*GameWorld::GetInstance()->GetColliders()).push_back(col1);
 	go1->AddComponent(col1);
 
-	GameObject* go2 = new GameObject(Vector2<float>(3000, 500));
-	Npc* npc2 = new Npc(new string("Fuck you in particular."));
+	GameObject* go2 = new GameObject(Vector2<float>(1825, 2200));
+	Npc* npc2 = new Npc(new string("If you run into any hostile humans, press 'Space' to fight back!"));
 	SpriteRenderer* sr2 = new SpriteRenderer();
 	Collider* col2;
+	sr2->isSpriteSheet = true;
+	sr2->currentImage = new Vector2u(1, 1);
+	sr2->imageCount = new Vector2u(6, 1);
+
 	go2->AddComponent(npc2);
 	sr2->SetSprite(TextureTag::NPC);
 	go2->AddComponent(sr2);
+	AnimationComponent* ac2 = new AnimationComponent(sr2, Vector2u(6, 1), 200.0f, 0);
+	go2->AddComponent(ac2);
 	*go2->GetObjectTag() = ObjectTag::NPC;
-	col2 = new Collider(Vector2f(sr2->GetSprite().getTexture()->getSize().x, sr2->GetSprite().getTexture()->getSize().y), *go2->GetPosition(), 1.0f, false);
+	float x2 = sr2->TextureRect->width;
+	float y2 = sr2->TextureRect->height;
+	col2 = new Collider(Vector2f(x2, y2), *go2->GetPosition(), 1.0f, false);
 	(*GameWorld::GetInstance()->GetColliders()).push_back(col2);
 	go2->AddComponent(col2);
 
-	GameObject* go3 = new GameObject(Vector2<float>(1000, 1500));
-	Npc* npc3 = new Npc(new string("Ghost boi, BOO!"));
+	GameObject* go3 = new GameObject(Vector2<float>(2210, 545));
+	Npc* npc3 = new Npc(new string("The sun sucks! B-)"));
 	SpriteRenderer* sr3 = new SpriteRenderer();
 	Collider* col3;
+	sr3->isSpriteSheet = true;
+	sr3->currentImage = new Vector2u(1, 1);
+	sr3->imageCount = new Vector2u(6, 1);
+
 	go3->AddComponent(npc3);
 	sr3->SetSprite(TextureTag::NPC);
 	go3->AddComponent(sr3);
+	AnimationComponent* ac3 = new AnimationComponent(sr3, Vector2u(6, 1), 200.0f, 0);
+	go3->AddComponent(ac3);
 	*go3->GetObjectTag() = ObjectTag::NPC;
-	col3 = new Collider(Vector2f(sr3->GetSprite().getTexture()->getSize().x, sr3->GetSprite().getTexture()->getSize().y), *go3->GetPosition(), 1.0f, false);
+	float x3 = sr3->TextureRect->width;
+	float y3 = sr3->TextureRect->height;
+	col3 = new Collider(Vector2f(x2, y2), *go3->GetPosition(), 1.0f, false);
 	(*GameWorld::GetInstance()->GetColliders()).push_back(col3);
 	go3->AddComponent(col3);
 

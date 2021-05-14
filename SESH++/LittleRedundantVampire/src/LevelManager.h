@@ -6,6 +6,7 @@
 #include "Components/SpriteRenderer.h"
 #include "Components/Collider.h"
 #include "Components/Npc.h"
+#include "Components/AnimationComponent.h"
 
 using namespace std;
 

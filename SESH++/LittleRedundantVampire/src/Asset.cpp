@@ -15,7 +15,7 @@ void Asset::LoadTextures()
 	enemyTexture->		loadFromFile("Asset/NewVillagerDown.png");
 	floorCarpetTexture->loadFromFile("Asset/FloorCarpet.png");
 	keyTexture->		loadFromFile("Asset/Key.png");
-	npcTexture->		loadFromFile("Asset/Ghost.png");
+	npcTexture->		loadFromFile("Asset/GhostSheet.png");
 	ozzyTexture->		loadFromFile("Asset/VampireOzzyStill.png");
 	playerSheetTexture->loadFromFile("Asset/OzzySheet.png");
 	vaseTexture->		loadFromFile("Asset/VaseWhole.png");

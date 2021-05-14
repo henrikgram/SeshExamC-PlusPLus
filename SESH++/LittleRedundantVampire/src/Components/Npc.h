@@ -23,6 +23,8 @@ private:
 
 	void OnNotifyCollision(ObjectTag otherTag, string side) override;
 
+	void OnNotify(std::string eventName, IListener* sender) override;
+
 public:
 	Npc(string* message);
 	~Npc();

@@ -186,13 +186,25 @@ void GameWorld::LoadContent()
 
 void GameWorld::Update(Time* timePerFrame)
 {
-	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
-	//iterates through the gameObjects and calls update
-	for (vector<GameObject*>::size_type i = 0;
-		i < gameObjectsSize;
-		++i)
+	//vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+	////iterates through the gameObjects and calls update
+	//for (vector<GameObject*>::size_type i = 0;
+	//	i < gameObjectsSize;
+	//	++i)
+	//{
+	//	(*GameWorld::GetInstance()->GetGameObjects())[i]->Update(timePerFrame);
+	//}
+
+	for (auto i = (*GameWorld::GetInstance()->GetGameObjects()).begin(); i != (*GameWorld::GetInstance()->GetGameObjects()).end();)
 	{
-		(*GameWorld::GetInstance()->GetGameObjects())[i]->Update(timePerFrame);
+		vector<GameObject*>::size_type originalSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+		(*i)->Update(timePerFrame);
+		vector<GameObject*>::size_type updatedSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+
+		if (originalSize == updatedSize)
+		{
+			++i;
+		}
 	}
 
 	vector<Collider*>::iterator colIt;
