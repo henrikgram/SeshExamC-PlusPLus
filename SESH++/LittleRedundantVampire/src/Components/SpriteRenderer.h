@@ -41,7 +41,7 @@ public:
 
 	void SetTextureRect(IntRect& textureRect);
 
-	IntRect* TextureRect = new IntRect;
+	IntRect* TextureRect;
 
 	Vector2u* currentImage;
 	Vector2u* imageCount;

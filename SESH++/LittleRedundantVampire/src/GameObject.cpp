@@ -96,6 +96,8 @@ void GameObject::Destroy()
 		delete it->second;
 		it->second = nullptr;
 	}
+	components.clear();
+
 }
 
 

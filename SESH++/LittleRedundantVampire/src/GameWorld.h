@@ -53,6 +53,8 @@ private:
 	void Initialize();
 	void LoadContent();
 
+	void DeleteObjects();
+
 	/// <summary>
 	/// Update loop for all gameobjects
 	/// </summary>

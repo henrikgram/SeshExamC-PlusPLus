@@ -2,7 +2,8 @@
 
 Platform::Platform(/*Texture* texture, Vector2f size, Vector2f position*/)
 {
-	something = new string("Hello");
+	timer = new float(0.0f);
+	//something = new string("Hello");
 	/*body.setTexture(texture);
 	body.setOrigin(size / 2.0f);
 	body.setSize(size);
@@ -11,8 +12,10 @@ Platform::Platform(/*Texture* texture, Vector2f size, Vector2f position*/)
 
 Platform::~Platform()
 {
-	delete something;
-	something = nullptr;
+	//delete something;
+	//something = nullptr;
+	delete timer;
+	timer = nullptr;
 }
 
 //void Platform::Draw(RenderWindow& window)
@@ -34,10 +37,22 @@ void Platform::Update(Time* timePerFrame)
 	{
 		this->gameObject->Destroy();
 	}*/
+
+	if (*timer >= 100)
+	{
+		this->gameObject->Destroy();
+		return;
+	}
+	else
+	{
+		cout << *timer;
+		(*timer) += 1;
+	}
 }
 
 void Platform::Destroy()
 {
+	Platform::~Platform();
 }
 
 ComponentTag Platform::ToEnum()

@@ -140,6 +140,7 @@ void Collider::Destroy()
 {
 	currentCollisions.clear();
 	onOtherGameObjDestroyed.Notify("OtherGmObjDestroyed", this);
+	Collider::~Collider();
 }
 
 ComponentTag Collider::ToEnum()

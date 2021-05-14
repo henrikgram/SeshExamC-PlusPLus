@@ -42,6 +42,7 @@ SpriteRenderer::~SpriteRenderer()
 /// <param name="textureTag"></param>
 SpriteRenderer::SpriteRenderer(TextureTag textureTag)
 {
+	//TODO: This enture constructor may be unnecessary if we put everything up in a spritesheet.
 	texture = new Texture(*Asset::GetInstance()->GetTexture(textureTag));
 	sprite = new Sprite(*texture);
 	//TODO: These following two are only used for spritesheets so can we avoid them taking up space in the heap memory?
@@ -49,6 +50,7 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag)
 	this->imageCount = new Vector2u;
 	isSpriteSheet = false;
 
+	TextureRect = new IntRect();
 	TextureRect->width = texture->getSize().x;
 	TextureRect->height = texture->getSize().y;
 	float width = texture->getSize().x;
@@ -69,6 +71,7 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vec
 	this->imageCount = new Vector2u(imageCount);
 	isSpriteSheet = true;
 
+	TextureRect = new IntRect();
 	//Vi skal definere bredden og højden på vores textureRectangle ift til png-filen, så sprite for den rigtige dimension.
 	TextureRect->width = texture->getSize().x / float(this->imageCount->x);
 	TextureRect->height = texture->getSize().y / float(this->imageCount->y);
@@ -82,27 +85,27 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vec
 
 void SpriteRenderer::Awake()
 {
-	if (isSpriteSheet)
-	{
-		//Vi skal definere bredden og højden på vores textureRectangle ift til png-filen, så sprite for den rigtige dimension.
-		TextureRect->width = texture->getSize().x / float(imageCount->x);
-		TextureRect->height = texture->getSize().y / float(imageCount->y);
+	//if (isSpriteSheet)
+	//{
+	//	//Vi skal definere bredden og højden på vores textureRectangle ift til png-filen, så sprite for den rigtige dimension.
+	//	TextureRect->width = texture->getSize().x / float(imageCount->x);
+	//	TextureRect->height = texture->getSize().y / float(imageCount->y);
 
-		//Standard bredden er altid lige med den normale bredde.
-		TextureRect->width = abs(TextureRect->width);
+	//	//Standard bredden er altid lige med den normale bredde.
+	//	TextureRect->width = abs(TextureRect->width);
 
-		sprite->setTextureRect(*TextureRect);
-		sprite->setOrigin(Vector2f(TextureRect->width / 2, TextureRect->height / 2));
-	}
-	else
-	{
-		TextureRect->width = texture->getSize().x;
-		TextureRect->height = texture->getSize().y;
-		float width = texture->getSize().x;
-		float heigt = texture->getSize().y;
+	//	sprite->setTextureRect(*TextureRect);
+	//	sprite->setOrigin(Vector2f(TextureRect->width / 2, TextureRect->height / 2));
+	//}
+	//else
+	//{
+	//	TextureRect->width = texture->getSize().x;
+	//	TextureRect->height = texture->getSize().y;
+	//	float width = texture->getSize().x;
+	//	float heigt = texture->getSize().y;
 
-		sprite->setOrigin(Vector2f(width / 2, heigt / 2));
-	}
+	//	sprite->setOrigin(Vector2f(width / 2, heigt / 2));
+	//}
 }
 
 void SpriteRenderer::Start()

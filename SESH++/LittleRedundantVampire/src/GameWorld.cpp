@@ -96,6 +96,8 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	go->Awake();
 	go->Start();
 
+	//TODO: This defeats the purpose of making a Get method for the variable. Get should only be used for accessing information in a variable
+	// outside of it's class, not for altering the variable.
 	(*GameWorld::GetInstance()->GetGameObjects()).push_back(go);
 }
 
@@ -175,7 +177,6 @@ void GameWorld::Run()
 
 }
 
-
 void GameWorld::Initialize()
 {
 	BootlegFactory(ObjectTag::PLAYER);
@@ -185,6 +186,22 @@ void GameWorld::Initialize()
 void GameWorld::LoadContent()
 {
 	Asset::GetInstance()->LoadTextures();
+}
+
+void GameWorld::DeleteObjects()
+{
+
+	for (size_t i = 0; i < length; i++)
+	{
+
+	}
+
+	for (auto i = (*GameWorld::GetInstance()->GetDeletedObjects()).begin(); i != (*GameWorld::GetInstance()->GetDeletedObjects()).end();)
+	{
+		remove_if()
+	}
+
+	
 }
 
 void GameWorld::Update(Time* timePerFrame)
@@ -233,10 +250,6 @@ void GameWorld::Update(Time* timePerFrame)
 		//AttackSpawner& attackRef = *attackPointer;
 
 		PlayerInvoker::GetInstance(playerRef, atckSpwnPointerRef)->InvokeCommand();
-
-
-
-
 	}
 }
 
@@ -262,19 +275,25 @@ void GameWorld::Draw()
 		{
 			//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
 			sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
-			TextMessage* tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
+
 
 			window.draw(sr->GetSprite());
 
-			if (tm != nullptr)
+			if (*go->GetObjectTag() == ObjectTag::TEXT_BOX)
 			{
-				window.draw(tm->GetMessage());
+				TextMessage* tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
+
+				if (tm != nullptr)
+				{
+					window.draw(tm->GetMessage());
+				}
+				else
+				{
+					delete tm;
+					tm = nullptr;
+				}
 			}
-			else
-			{
-				delete tm;
-				tm = nullptr;
-			}
+
 		}
 	}
 	// DU KAN IKKE TEGNE TEKST. FUCK ALT. PRØVE IGEN. ØV. F.
