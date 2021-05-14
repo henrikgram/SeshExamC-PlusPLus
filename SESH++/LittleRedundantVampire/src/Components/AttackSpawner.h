@@ -18,11 +18,11 @@ public:
 	void CreateAttack();
 
 private:
-	ObjectTag* objectTag;
+	ObjectTag objectTag;
 
-	float* attackCooldown;
-	float* attackTimer;
+	float attackCooldown;
+	float attackTimer;
 
-	bool* canAttack;
+	bool canAttack;
 };
 

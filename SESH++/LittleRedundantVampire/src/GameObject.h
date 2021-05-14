@@ -33,7 +33,6 @@ class GameObject
 {
 public:
 	//Map for all components attached to the gameobject
-	unordered_map<ComponentTag, Component*> components;
 
 	GameObject();
 	GameObject(Vector2<float> position);
@@ -76,9 +75,11 @@ public:
 
 	ObjectTag* GetObjectTag();
 
-	string* GetDirection();
+	char* GetDirection();
 
 	bool* GetShouldDraw();
+
+	unordered_map<ComponentTag, Component*>* GetComponents();
 
 
 private:
@@ -88,9 +89,11 @@ private:
 
 	ObjectTag* objectTag;
 
-	string* direction;
+	char* direction;
 
 	bool* shouldDraw;
+
+	unordered_map<ComponentTag, Component*>* components;
 };
 
 #endif

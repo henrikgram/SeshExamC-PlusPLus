@@ -20,67 +20,6 @@ void Player::Awake()
 	
 }
 
-//void Player::UpdateAnimation()
-//{
-//	//TODO: OPTIMERING fix s� den ikke k�rer medmindre det er en ny animation. OPTIMERING
-//	if (velocity.x == 0 && velocity.y == 0)
-//	{
-//		if (lastDir != 'N')
-//		{
-//			ChangeAnimation.Notify("3", this);
-//			lastDir = 'N';
-//		}
-//		
-//	}
-//	else if (velocity.y < 0)
-//	{
-//		if (lastDir != 'U')
-//		{
-//			ChangeAnimation.Notify("2", this);
-//			lastDir = 'U';
-//		}
-//		
-//	}
-//	else if (velocity.y > 0)
-//	{
-//		if (lastDir != 'D')
-//		{
-//			ChangeAnimation.Notify("0", this);
-//			lastDir = 'D';
-//		}
-//	
-//	}
-//	else if (velocity.x < 0)
-//	{
-//		if (lastDir != 'L')
-//		{
-//			if (!flipped)
-//			{
-//				flipped = true;
-//				ChangeAnimation.Notify("flip", this);
-//			}
-//			ChangeAnimation.Notify("1", this);
-//			lastDir = 'L';
-//		}
-//
-//	}
-//
-//	else if (velocity.x > 0)
-//	{
-//		if (lastDir != 'R')
-//		{
-//			if (flipped)
-//			{
-//				flipped = false;
-//				ChangeAnimation.Notify("flip", this);
-//			}
-//			ChangeAnimation.Notify("1", this);
-//			lastDir = 'R';
-//		}
-//
-//	}
-//
-//}
 
 void Player::Start()
 {

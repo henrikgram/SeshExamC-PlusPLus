@@ -214,6 +214,7 @@
     <Image Include="Asset\healthUI.png" />
     <Image Include="Asset\Key.png" />
     <Image Include="Asset\NewVillagerDown.png" />
+    <Image Include="Asset\PlayerAttackSheet.png" />
     <Image Include="Asset\TestTextbox.png" />
     <Image Include="Asset\TextBox.png" />
     <Image Include="Asset\TextBox_V2.png" />

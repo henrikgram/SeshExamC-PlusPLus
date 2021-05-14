@@ -2,14 +2,12 @@
 
 Movement::Movement(float speed, Vector2f velocity)
 {
-	this->speed = new float(speed);
+	this->speed = speed;
 	this->velocity = new Vector2f(velocity);
 }
 
 Movement::~Movement()
 {
-	delete speed;
-	speed = nullptr;
 	delete velocity;
 	velocity = nullptr;
 }
@@ -24,12 +22,41 @@ void Movement::Start()
 
 void Movement::Update(Time* timePerFrame)
 {
-	Normalize();
-
-	if (*speed < 5.0f)
+	if (speed < 5.0f)
 	{
-		++*speed;
+		++speed;
 	}
+
+	//No walking
+	if ((*velocity).x == 0 && (*velocity).y == 0)
+	{
+		*gameObject->GetDirection() = 'N';
+	}
+	//Up
+	if ((*velocity).y < 0)
+	{
+		*gameObject->GetDirection() = 'U';
+	}
+
+	//Down
+	if ((*velocity).y > 0)
+	{
+		*gameObject->GetDirection() = 'D';
+	}
+
+	//Left
+	if ((*velocity).x < 0)
+	{
+		*gameObject->GetDirection() = 'L';
+	}
+
+	//Right
+	if ((*velocity).x > 0)
+	{
+		*gameObject->GetDirection() = 'R';
+	}
+
+	Normalize();
 }
 
 void Movement::Destroy()
@@ -38,7 +65,7 @@ void Movement::Destroy()
 
 ComponentTag Movement::ToEnum()
 {
-	return ComponentTag();
+	return ComponentTag::MOVEMENT;
 }
 
 void Movement::Move(Vector2f velocity)
@@ -57,10 +84,10 @@ void Movement::Normalize()
 		velocity->x /= movementVectorLength;
 		velocity->y /= movementVectorLength;
 
-		velocity->x *= *speed;
-		velocity->y *= *speed;
+		velocity->x *= speed;
+		velocity->y *= speed;
 
-		cout << velocity->x << " : " << velocity->y << "\n";
+		//cout << velocity->x << " : " << velocity->y << "\n";
 		*gameObject->GetPosition() += *velocity;
 		*velocity = Vector2f(0.0f, 0.0f);
 	}

@@ -55,8 +55,9 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 4), 200.0f, 1);
 		go->AddComponent(aC);
 
-		AnimationController* acController = new AnimationController(movementPointer, sr, go, 
-																	"3", "2", "0", "1", "1");
+		SpriteRenderer& srRef = *sr;
+		AnimationController* acController = new AnimationController(srRef, "3", "2", "0", "1", "1");
+		go->AddComponent(acController);
 		acController->ChangeAnimation.Attach(aC);
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
@@ -76,8 +77,6 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		break;
 	case ObjectTag::DOOR:
 		break;
-		//case ObjectTag::FLOOR:
-		//	break;
 	case ObjectTag::BOOKCASE:
 		break;
 	case ObjectTag::VASE:
@@ -169,13 +168,6 @@ void GameWorld::Run()
 		window.setView(view);
 
 		Draw();
-		//window.clear(Color(0, 255, 255, 255));
-		//player.Draw(window);
-		//p1.Draw(window);
-		//window.display();
-
-		//GetScreenHeight();
-		//GetScreenWidth();
 	}
 
 }

@@ -8,15 +8,24 @@
 using namespace std;
 
 
-class AnimationController : public IListener
+class AnimationController : public Component
 {
 public:
 	/// <summary>
 	/// For animating moving objects such as Player.
 	/// </summary>
-	AnimationController(Movement* movementComponent, SpriteRenderer* spriteRenderer, GameObject* gameObject, 
+	AnimationController(SpriteRenderer& spriteRenderer, 
 		string noAniRow, string upAniRow, string downAniRow, string leftAniRow, string rightAniRow);
 	~AnimationController();
+
+
+	// Inherited via Component
+	virtual void Awake() override;
+	virtual void Start() override;
+	virtual void Update(Time* timePerFrame) override;
+	virtual void Destroy() override;
+	virtual ComponentTag ToEnum() override;
+
 
 	void MovementAnimation();
 
@@ -24,11 +33,7 @@ public:
 
 
 private:
-	GameObject* gameObject;
-	
-	SpriteRenderer* spriteRenderer;
-
-	Movement* movementComponent;
+	SpriteRenderer& spriteRenderer;
 
 	string noAniRow;
 	string upAniRow;
@@ -36,7 +41,6 @@ private:
 	string leftAniRow;
 	string rightAniRow;
 
-	// Inherited via IListener
-	virtual void OnNotify(std::string eventName, IListener* sender) override;
+	bool isMovable;
 };
 

@@ -1,23 +1,24 @@
 ﻿#include "AnimationController.h"
 
 
-AnimationController::AnimationController(Movement* movementComponent, SpriteRenderer* spriteRenderer, GameObject* gameObject,
+AnimationController::AnimationController(SpriteRenderer& spriteRenderer,
 	string noAniRow, string upAniRow, string downAniRow, string leftAniRow, string rightAniRow)
+	:
+	spriteRenderer(spriteRenderer)
 {
-	this->movementComponent = movementComponent;
-	this->spriteRenderer = spriteRenderer;
-	this->gameObject = gameObject;
-
 	this->noAniRow = noAniRow;
 	this->upAniRow = upAniRow;
 	this->downAniRow = downAniRow;
 	this->leftAniRow = leftAniRow;
 	this->rightAniRow = rightAniRow;
+
+	isMovable = true;
 }
 
 AnimationController::~AnimationController()
 {
 }
+
 
 /// <summary>
 /// For animating objects that move in four directions, like the Player.
@@ -25,62 +26,70 @@ AnimationController::~AnimationController()
 void AnimationController::MovementAnimation()
 {
 	//TODO: OPTIMERING fix s� den ikke k�rer medmindre det er en ny animation. OPTIMERING
-	if ((*movementComponent->GetVelocity()).x == 0 && (*movementComponent->GetVelocity()).y == 0)
+
+	//No/Idle animation
+	if (*gameObject->GetDirection() == 'N')
 	{
-		if (*gameObject->GetDirection() != 'N')
-		{
-			ChangeAnimation.Notify(noAniRow, this);
-			*gameObject->GetDirection() = 'N';
-		}
+		ChangeAnimation.Notify(noAniRow, this);
 	}
 
-	else if ((*movementComponent->GetVelocity()).y < 0)
+	//Up
+	else if (*gameObject->GetDirection() == 'U')
 	{
-		if (*gameObject->GetDirection() != 'U')
-		{
-			ChangeAnimation.Notify(upAniRow, this);
-			*gameObject->GetDirection() = 'U';
-		}
+		ChangeAnimation.Notify(upAniRow, this);
 	}
 
-	else if ((*movementComponent->GetVelocity()).y > 0)
+	//Down
+	else if (*gameObject->GetDirection() == 'D')
 	{
-		if (*gameObject->GetDirection() != 'D')
-		{
-			ChangeAnimation.Notify(downAniRow, this);
-			*gameObject->GetDirection() = 'D';
-		}
+		ChangeAnimation.Notify(downAniRow, this);
 	}
 
-	else if ((*movementComponent->GetVelocity()).x < 0)
+	//Left
+	else if (*gameObject->GetDirection() == 'L')
 	{
-		if (*gameObject->GetDirection() != 'L')
+		if (!*spriteRenderer.GetFlipped())
 		{
-			if (!*spriteRenderer->GetFlipped())
-			{
-				*spriteRenderer->GetFlipped() = true;
-				ChangeAnimation.Notify("flip", this);
-			}
-			ChangeAnimation.Notify(leftAniRow, this);
-			*gameObject->GetDirection() = 'L';
+			*spriteRenderer.GetFlipped() = true;
+			ChangeAnimation.Notify("flip", this);
 		}
+
+		ChangeAnimation.Notify(leftAniRow, this);
 	}
 
-	else if ((*movementComponent->GetVelocity()).x > 0)
+	//Right
+	else if (*gameObject->GetDirection() == 'R')
 	{
-		if (*gameObject->GetDirection() != 'R')
+		if (*spriteRenderer.GetFlipped())
 		{
-			if (*spriteRenderer->GetFlipped())
-			{
-				*spriteRenderer->GetFlipped() = false;
-				ChangeAnimation.Notify("flip", this);
-			}
-			ChangeAnimation.Notify(rightAniRow, this);
-			*gameObject->GetDirection() = 'R';
+			*spriteRenderer.GetFlipped() = false;
+			ChangeAnimation.Notify("flip", this);
 		}
+		ChangeAnimation.Notify(rightAniRow, this);
 	}
 }
 
-void AnimationController::OnNotify(std::string eventName, IListener* sender)
+void AnimationController::Awake()
 {
+}
+
+void AnimationController::Start()
+{
+}
+
+void AnimationController::Update(Time* timePerFrame)
+{
+	if (isMovable)
+	{
+		MovementAnimation();
+	}
+}
+
+void AnimationController::Destroy()
+{
+}
+
+ComponentTag AnimationController::ToEnum()
+{
+	return ComponentTag::ANIMATION_CONTROLLER;
 }

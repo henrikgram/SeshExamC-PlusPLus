@@ -124,7 +124,7 @@ void Collider::Awake()
 void Collider::Start()
 {
 	unordered_map<ComponentTag, Component*>::iterator it;
-	for (it = gameObject->components.begin(); it != gameObject->components.end(); it++)
+	for (it = (*gameObject->GetComponents()).begin(); it != (*gameObject->GetComponents()).end(); it++)
 	{
 		onColliding.Attach(it->second);
 		onNoLongerColliding.Attach(it->second);

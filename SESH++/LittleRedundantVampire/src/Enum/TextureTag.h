@@ -4,7 +4,7 @@
 enum class TextureTag {
 	OZZY,
 	PLAYER_SHEET,
-	ATTACK_SHEET,
+	PLAYER_ATTACK_SHEET,
 	NPC,
 	WALL,
 	FLOOR_CARPET,

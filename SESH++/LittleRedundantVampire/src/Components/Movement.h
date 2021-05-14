@@ -9,16 +9,17 @@ public:
 
 
 	// Inherited via Component
-	void Awake();
+	void Awake() override;
 
-	void Start();
+	void Start() override;
 
-	void Update(Time* timePerFrame);
+	void Update(Time* timePerFrame) override;
 
-	void Destroy();
+	void Destroy() override;
 
-	ComponentTag ToEnum();
+	ComponentTag ToEnum() override;
 
+	//own methods
 	void Move(Vector2f velocity);
 
 	void Normalize();
@@ -27,7 +28,7 @@ public:
 
 
 private:
-	float* speed;
+	float speed;
 	Vector2f* velocity;
 };
 

@@ -21,7 +21,4 @@ public:
 	ComponentTag ToEnum() override;
 
 	void OnNotifyCollision(ObjectTag otherTag, string side) override;
-
-	//void UpdateAnimation();
-	//IGameEvent ChangeAnimation;
 };

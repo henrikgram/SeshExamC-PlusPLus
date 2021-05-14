@@ -7,7 +7,7 @@ void Asset::LoadTextures()
 	textBoxTexture->	loadFromFile("Asset/TestTextBox.png");
 
 	//OBJECTS
-	attackSheetTexture->loadFromFile("Asset/AttackSheet2.png");
+	playerAttackSheetTexture->loadFromFile("Asset/PlayerAttackSheet.png");
 	bookcaseTexture->	loadFromFile("Asset/Bookcase.png");
 	chestTexture->		loadFromFile("Asset/TreasureChest.png");
 	crateTexture->		loadFromFile("Asset/Crate.png");
@@ -27,7 +27,7 @@ void Asset::LoadTextures()
 	textures.insert(make_pair(TextureTag::TEXT_BOX,		 *textBoxTexture));
 
 	//OBJECTS
-	textures.insert(make_pair(TextureTag::ATTACK_SHEET,	 *attackSheetTexture));
+	textures.insert(make_pair(TextureTag::PLAYER_ATTACK_SHEET,	 *playerAttackSheetTexture));
 	textures.insert(make_pair(TextureTag::BOOKCASE,		 *bookcaseTexture));
 	textures.insert(make_pair(TextureTag::CHEST,		 *chestTexture));
 	textures.insert(make_pair(TextureTag::CRATE,		 *crateTexture));
