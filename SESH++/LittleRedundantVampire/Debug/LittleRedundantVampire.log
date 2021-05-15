@@ -1,23 +1,4 @@
-﻿  Main3.cpp
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\Main3.cpp(29,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\Main3.cpp(40,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\Main3.cpp(40,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\Main3.cpp(41,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\Main3.cpp(41,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
+﻿  LightSource.cpp
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\LightSource.cpp(14,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\LightSource.cpp(184,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   LittleRedundantVampire.vcxproj -> C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

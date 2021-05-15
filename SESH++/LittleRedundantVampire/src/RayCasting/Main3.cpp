@@ -15,19 +15,11 @@ int main()
 	CircleShape intersectCircle;
 	// Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
-
-	VertexArray box = VertexArray(sf::LinesStrip, 2);
-
-	box[0].position.x = 500;
-	box[0].position.y = 500;
-
-	box[1].position.x = 500;
-	box[1].position.y = 100;
-
-	vector<VertexArray> walls[5];
+	vector<VertexArray> walls;
 
 	srand(time(NULL));
 
+	//Random walls
 	for (int i = 0; i < 5; i++)
 	{
 		int x1 = rand() % 600+ 1;
@@ -38,13 +30,50 @@ int main()
 
 		VertexArray tmp = VertexArray(sf::LinesStrip, 2);
 		tmp[0].position = Vector2f(x1, y1);
+		tmp[0].color = Color::Red;
+		tmp[1].color = Color::Red;
 		tmp[1].position = Vector2f(x2, y2);
 
-		walls->push_back(tmp);
+		walls.push_back(tmp);
 	}
 
-	LightSource light(Vector2f(250,250));
-	
+
+	VertexArray tmp4 = VertexArray(sf::LinesStrip, 2);
+	tmp4[0].position = Vector2f(0, 0);
+	tmp4[0].color = Color::Red;
+	tmp4[1].color = Color::Red;
+	tmp4[1].position = Vector2f(800, 0);
+
+	walls.push_back(tmp4);
+
+	VertexArray tmp5 = VertexArray(sf::LinesStrip, 2);
+	tmp5[0].position = Vector2f(0, 595);
+	tmp5[0].color = Color::Red;
+	tmp5[1].color = Color::Red;
+	tmp5[1].position = Vector2f(800, 595);
+
+	walls.push_back(tmp5);
+
+
+	VertexArray tmp6 = VertexArray(sf::LinesStrip, 2);
+	tmp6[0].position = Vector2f(5, 0);
+	tmp6[0].color = Color::Red;
+	tmp6[1].color = Color::Red;
+	tmp6[1].position = Vector2f(5, 750);
+
+	walls.push_back(tmp6);
+
+	VertexArray tmp7 = VertexArray(sf::LinesStrip, 2);
+	tmp7[0].position = Vector2f(750, 0);
+	tmp7[0].color = Color::Red;
+	tmp7[1].color = Color::Red;
+	tmp7[1].position = Vector2f(750, 750);
+
+	walls.push_back(tmp7);
+
+
+	LightSource light(Vector2f(250, 250));
+
 	// Start the game loop
 	while (window.isOpen())
 	{
@@ -57,7 +86,9 @@ int main()
 				window.close();
 		}
 		// Clear screen
-		window.clear();
+
+		Color c(255, 255, 255);
+		window.clear(c);
 
 		sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 		sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
@@ -65,19 +96,47 @@ int main()
 		//ray.LookAt(worldPos);
 
 		//light.Move(worldPos);
-
-		window.draw(box);
 		//window.draw(*ray.GetVertexArray());
 
 		vector<Ray*>::iterator it;
-
-		vector<Vector2f> vray = light.Look(walls);
+		light.Move(worldPos);
+		vector<Vector2f> vray = light.Look(&walls);
 
 		vector<Vector2f>::iterator vrayIt;
+
+		ConvexShape lightCone;
+		lightCone.setFillColor(Color::Yellow);
+		lightCone.setPointCount(vray.size());
+
+		//A list of triangles, because sfml cant draw concave shapes
+		vector<VertexArray> lightCone2 = light.GetLightCone();
+		
+		vector<VertexArray>::iterator triIt;
+
+		for (triIt = lightCone2.begin(); triIt < lightCone2.end(); triIt++)
+		{
+			window.draw(*triIt);
+		}
+
+		for (vrayIt = vray.begin(); vrayIt < vray.end(); vrayIt++)
+		{
+			Vector2f point;
+
+			{
+				point = *vrayIt;
+			}
+			
+			lightCone.setPoint(vrayIt - vray.begin(), point);
+		}
+
+		//window.draw(lightCone);
+
 
 		for (vrayIt = vray.begin(); vrayIt < vray.end(); vrayIt++)
 		{
 			VertexArray tmp = VertexArray(sf::LinesStrip, 2);
+			tmp[0].color = Color::Black;
+			tmp[1].color = Color::Black;
 			tmp[0].position = light.GetPosition();
 			tmp[1].position = *vrayIt;
 			window.draw(tmp);
@@ -85,9 +144,20 @@ int main()
 
 		vector<VertexArray>::iterator It;
 
-		for (It = walls->begin(); It < walls->end(); It++)
+		for (It = walls.begin(); It < walls.end(); It++)
 		{
 			window.draw(*It);
+		}
+
+		for (int i = 0; i < lightCone.getPointCount(); i++)
+		{
+			CircleShape c;
+			c.setRadius(5);
+			c.setOrigin(5, 5);
+			c.setFillColor(Color::Green);
+			c.setPosition(lightCone.getPoint(i));
+			window.draw(c);
+
 		}
 
 
