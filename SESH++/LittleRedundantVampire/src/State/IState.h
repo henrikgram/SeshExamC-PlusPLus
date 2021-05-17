@@ -19,7 +19,7 @@ public:
 		this->context = context;
 	}
 
-	virtual void Enter() = 0;
+	virtual void Enter(GameObject* go) = 0;
 	virtual void Execute() = 0;
 	virtual void Exit() = 0;
 };

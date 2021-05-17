@@ -1,7 +1,8 @@
-﻿  EnemyIdleState.cpp
-  ContextState.cpp
+﻿  Attack.cpp
+  AttackSpawner.cpp
   Enemy.cpp
   Npc.cpp
+  TextMessage.cpp
   GameWorld.cpp
 C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(56,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
           with
@@ -31,7 +32,6 @@ C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
           [
               T=float
           ]
-  AttackSpawner.cpp
   LevelManager.cpp
 C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(71,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
@@ -127,8 +127,8 @@ C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
 C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(310,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(314,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(314,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Attack.cpp
+  ContextState.cpp
+  EnemyIdleState.cpp
   main.cpp
-  TextMessage.cpp
   Generating Code...
   LittleRedundantVampire.vcxproj -> C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

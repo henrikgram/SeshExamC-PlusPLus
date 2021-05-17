@@ -3,12 +3,13 @@
 void EnemyIdleState::Patrol()
 {
 	cout << " F ";
-
+	*enemy->move
 }
 
-void EnemyIdleState::Enter()
+void EnemyIdleState::Enter(GameObject* go)
 {
-	//this->en = enemy;
+	this->enemy = go;
+	Execute();
 }
 
 void EnemyIdleState::Execute()

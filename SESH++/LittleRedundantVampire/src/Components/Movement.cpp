@@ -33,7 +33,7 @@ void Movement::Destroy()
 
 ComponentTag Movement::ToEnum()
 {
-	return ComponentTag();
+	return ComponentTag::MOVEMENT;
 }
 
 void Movement::Move(Vector2f velocity)
