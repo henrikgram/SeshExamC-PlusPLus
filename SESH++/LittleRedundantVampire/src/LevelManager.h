@@ -7,6 +7,8 @@
 #include "Components/Collider.h"
 #include "Components/Npc.h"
 #include "Components/AnimationComponent.h"
+#include "Components/Enemy.h"
+#include "Components/Movement.h"
 
 using namespace std;
 

@@ -25,6 +25,9 @@
     <ClCompile Include="src\Components\TextMessage.cpp" />
     <ClCompile Include="src\Textbox.cpp" />
     <ClCompile Include="src\Command\AttackCommand.cpp" />
+    <ClCompile Include="src\Components\Enemy.cpp" />
+    <ClCompile Include="src\State\ContextState.cpp" />
+    <ClCompile Include="src\State\EnemyIdleState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameWorld.h" />
@@ -56,6 +59,10 @@
     <ClInclude Include="src\Components\TextMessage.h" />
     <ClInclude Include="src\Textbox.h" />
     <ClInclude Include="src\Command\AttackCommand.h" />
+    <ClInclude Include="src\Components\Enemy.h" />
+    <ClInclude Include="src\State\IState.h" />
+    <ClInclude Include="src\State\ContextState.h" />
+    <ClInclude Include="src\State\EnemyIdleState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />
