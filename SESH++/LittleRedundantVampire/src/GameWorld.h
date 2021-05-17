@@ -13,6 +13,7 @@
 #include "Components/Attack.h"
 #include "Enum/ObjectTag.h"
 #include "Observer/Platform.h"
+#include "Observer/IListener.h"
 #include "Components/Collider.h"
 #include "GameWorld.h"
 #include "Command/PlayerInvoker.h"
@@ -26,7 +27,7 @@ using namespace std;
 
 
 
-class GameWorld
+class GameWorld : protected IListener
 {
 public:
 	/// <summary>
@@ -36,19 +37,18 @@ public:
 
 	void Run();
 	vector<GameObject*>* GetGameObjects();
+	stack<GameObject*> const GetObjectsToBeDeleted();
 	vector<Collider*>* GetColliders();
 
 	float GetScreenWidth();
 	float GetScreenHeight();
-	
-	stack<GameObject*> const GetDeletedObjects();
 
 
 private:
 	static GameWorld* instance;
 
 	vector<GameObject*>* gameObjects;
-	stack<GameObject*> deletedObjects;
+	stack<GameObject*> objectsToBeDeleted;
 
 
 	void Initialize();
@@ -77,4 +77,7 @@ private:
 	vector<Collider*>* colliders;
 	Player* playerPointer;
 	AttackSpawner* atckSpwnPointer;
+
+	// Inherited via IListener
+	void OnNotify(std::string eventName, IListener* sender) override;
 };

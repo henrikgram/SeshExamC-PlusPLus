@@ -1,15 +1,15 @@
 ﻿  GameWorld.cpp
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(58,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(66,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(59,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(67,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(88,114): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(96,114): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -18,7 +18,7 @@ C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
           [
               T=float
           ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(88,71): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(96,71): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -27,6 +27,4 @@ C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
           [
               T=float
           ]
-  Platform.cpp
-  Generating Code...
   LittleRedundantVampire.vcxproj -> C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

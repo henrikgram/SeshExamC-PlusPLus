@@ -40,7 +40,7 @@ void Platform::Update(Time* timePerFrame)
 
 	if (*timer >= 100)
 	{
-		this->gameObject->Destroy();
+		this->gameObject->CallSelfDestruct();
 		return;
 	}
 	else

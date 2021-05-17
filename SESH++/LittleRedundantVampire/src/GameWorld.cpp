@@ -22,6 +22,15 @@ void GameWorld::ResizeView(const RenderWindow& window, View& view)
 	view.setSize(VIEW_HEIGHT * aspectRatio, VIEW_HEIGHT);
 }
 
+void GameWorld::OnNotify(std::string eventName, IListener* sender)
+{
+	if (eventName == "DeleteObject")
+	{
+		//Doesn't work with dynamic cast.
+		objectsToBeDeleted.push(dynamic_cast<GameObject*>(sender));
+	}
+}
+
 //TODO: check if this is fine, or actual factory is needed
 void GameWorld::BootlegFactory(ObjectTag tag)
 {
@@ -88,6 +97,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.0f, true);
 		go->AddComponent(col);
 		colliders->push_back(col);
+		go->AddListenerToCallSelfDestruct(GameWorld::GetInstance());
 		break;
 	default:
 		break;
@@ -103,7 +113,6 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 void GameWorld::Run()
 {
-
 	LoadContent();
 
 	LevelManager* lm = new LevelManager();
@@ -190,21 +199,32 @@ void GameWorld::LoadContent()
 
 void GameWorld::DeleteObjects()
 {
-	for (auto i = (GameWorld::GetInstance()->deletedObjects).begin(); i != (GameWorld::GetInstance()->deletedObjects).end();)
+	int stackSize = objectsToBeDeleted.size();
+
+	for (int i = 0; i < stackSize; i++)
 	{
-		GameObject* gO = find(*GameWorld::GetInstance()->GetGameObjects()->begin(), *GameWorld::GetInstance()->GetGameObjects()->end(), i);
-		gO->Destroy();
-		delete gO;
-		gO = nullptr;
+		GameObject* gO = objectsToBeDeleted.top();
+		
+		for (auto i = gameObjects->begin(); i != gameObjects->end();)
+		{
+			if (*i == gO)
+			{
+				(*i)->Destroy();
+				i = gameObjects->erase(i);
+			}
+			else
+			{
+				i++;
+			}
+		}
 
-		remove_if(*GameWorld::GetInstance()->GetGameObjects()->begin(), *GameWorld::GetInstance()->GetGameObjects()->end(), i)
+		objectsToBeDeleted.pop();
 	}
-
-
 }
 
 void GameWorld::Update(Time* timePerFrame)
 {
+	DeleteObjects();
 	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
 	//iterates through the gameObjects and calls update
 	//for (vector<GameObject*>::size_type i = 0;
@@ -360,9 +380,9 @@ float GameWorld::GetScreenHeight()
 	return view.getCenter().y - (view.getSize().y / 2);
 }
 
-stack<GameObject*> const GameWorld::GetDeletedObjects()
+stack<GameObject*> const GameWorld::GetObjectsToBeDeleted()
 {
-	return deletedObjects;
+	return objectsToBeDeleted;
 }
 
 

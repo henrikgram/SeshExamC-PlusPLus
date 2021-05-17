@@ -133,3 +133,17 @@ bool* GameObject::GetShouldDraw()
 {
 	return shouldDraw;
 }
+
+void GameObject::CallSelfDestruct()
+{
+	onCallSelfdestruct.Notify("DeleteObject", this);
+}
+
+void GameObject::AddListenerToCallSelfDestruct(IListener* listener)
+{
+	onCallSelfdestruct.Attach(listener);
+}
+
+void GameObject::OnNotify(std::string eventName, IListener* sender)
+{
+}
