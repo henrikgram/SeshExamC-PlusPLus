@@ -190,18 +190,17 @@ void GameWorld::LoadContent()
 
 void GameWorld::DeleteObjects()
 {
-
-	for (size_t i = 0; i < length; i++)
+	for (auto i = (GameWorld::GetInstance()->deletedObjects).begin(); i != (GameWorld::GetInstance()->deletedObjects).end();)
 	{
+		GameObject* gO = find(*GameWorld::GetInstance()->GetGameObjects()->begin(), *GameWorld::GetInstance()->GetGameObjects()->end(), i);
+		gO->Destroy();
+		delete gO;
+		gO = nullptr;
 
+		remove_if(*GameWorld::GetInstance()->GetGameObjects()->begin(), *GameWorld::GetInstance()->GetGameObjects()->end(), i)
 	}
 
-	for (auto i = (*GameWorld::GetInstance()->GetDeletedObjects()).begin(); i != (*GameWorld::GetInstance()->GetDeletedObjects()).end();)
-	{
-		remove_if()
-	}
 
-	
 }
 
 void GameWorld::Update(Time* timePerFrame)
@@ -361,7 +360,7 @@ float GameWorld::GetScreenHeight()
 	return view.getCenter().y - (view.getSize().y / 2);
 }
 
-vector<GameObject*>* GameWorld::GetDeletedObjects()
+stack<GameObject*> const GameWorld::GetDeletedObjects()
 {
 	return deletedObjects;
 }

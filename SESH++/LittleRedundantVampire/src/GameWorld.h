@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <vector>
+#include <stack>
 #include <SFML/graphics.hpp>
 
 #include "Components/SpriteRenderer.h"
@@ -40,14 +41,14 @@ public:
 	float GetScreenWidth();
 	float GetScreenHeight();
 	
-	vector<GameObject*>* GetDeletedObjects();
+	stack<GameObject*> const GetDeletedObjects();
 
 
 private:
 	static GameWorld* instance;
 
 	vector<GameObject*>* gameObjects;
-	vector<GameObject*>* deletedObjects;
+	stack<GameObject*> deletedObjects;
 
 
 	void Initialize();
