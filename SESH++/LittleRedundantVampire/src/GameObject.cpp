@@ -114,25 +114,25 @@ Component* GameObject::GetComponent(ComponentTag tag)
 	return components[tag];
 }
 
-Vector2f* GameObject::GetPosition()
-{
-	return position;
-}
+//Vector2f* GameObject::GetPosition()
+//{
+//	return position;
+//}
 
-ObjectTag* GameObject::GetObjectTag()
-{
-	return objectTag;
-}
+//ObjectTag* GameObject::GetObjectTag()
+//{
+//	return objectTag;
+//}
 
-string* GameObject::GetDirection()
-{
-	return direction;
-}
+//string* GameObject::GetDirection()
+//{
+//	return direction;
+//}
 
-bool* GameObject::GetShouldDraw()
-{
-	return shouldDraw;
-}
+//bool* GameObject::GetShouldDraw()
+//{
+//	return shouldDraw;
+//}
 
 void GameObject::CallSelfDestruct()
 {

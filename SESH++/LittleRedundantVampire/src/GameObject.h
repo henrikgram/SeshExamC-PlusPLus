@@ -67,20 +67,20 @@ public:
 	/// Attaching a component to the gameobject
 	/// </summary>
 	/// <param name="component">Component to be attached</param>
-	void AddComponent(Component * component);
+	void AddComponent(Component* component);
 
 	/// <summary>
 	/// Gets a component based on ComponentTag.
 	/// </summary>
 	Component* GetComponent(ComponentTag tag);
-	
-	Vector2f* GetPosition();
 
-	ObjectTag* GetObjectTag();
+	Vector2f* GetPosition() const { return position; }
 
-	string* GetDirection();
+	ObjectTag* GetObjectTag() const { return objectTag; }
 
-	bool* GetShouldDraw();
+	string* GetDirection() const { return direction; }
+
+	bool* GetShouldDraw() const { return shouldDraw; }
 
 	/// <summary>
 	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) That this GameObject is ready to be deleted. 
