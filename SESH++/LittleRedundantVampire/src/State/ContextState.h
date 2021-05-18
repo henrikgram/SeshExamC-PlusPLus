@@ -1,6 +1,10 @@
 #pragma once
 #include "IState.h"
 
+#ifndef  CONTEXTSTATE_H
+#define CONTEXTSTATE_H
+
+class Enemy;
 class ContextState
 {
 private:
@@ -11,7 +15,8 @@ public:
 	~ContextState();
 
 	void TransitionTo(IState* nextState);
-	void StartRequest();
+	void StartRequest(Enemy* enemy);
 	void ExitRequest();
 };
 
+#endif

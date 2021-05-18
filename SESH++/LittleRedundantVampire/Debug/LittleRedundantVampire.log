@@ -127,7 +127,6 @@ C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
 C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(310,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(314,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(314,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  ContextState.cpp
   EnemyIdleState.cpp
   main.cpp
   Generating Code...

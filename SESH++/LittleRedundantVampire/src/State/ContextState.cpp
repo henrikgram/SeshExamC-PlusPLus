@@ -20,9 +20,9 @@ void ContextState::TransitionTo(IState* nextState)
 	this->state->IState::SetContext(this);
 }
 
-void ContextState::StartRequest()
+void ContextState::StartRequest(Enemy* enemy)
 {
-	this->state->Execute();
+	this->state->Enter(enemy);
 }
 
 void ContextState::ExitRequest()

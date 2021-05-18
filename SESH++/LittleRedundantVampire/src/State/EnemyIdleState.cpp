@@ -3,12 +3,16 @@
 void EnemyIdleState::Patrol()
 {
 	cout << " F ";
-	*enemy->move
+
+	//while (true)
+	//{
+	//	meh->Move(Vector2f(0.0f, 0.1f));
+	//}
 }
 
-void EnemyIdleState::Enter(GameObject* go)
+void EnemyIdleState::Enter(Enemy* enemy)
 {
-	this->enemy = go;
+	this->enemy = enemy;
 	Execute();
 }
 

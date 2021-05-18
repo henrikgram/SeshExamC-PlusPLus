@@ -23,9 +23,12 @@ public:
 	Vector2f GetVelocity();
 	void SetVelocity(Vector2f newVelocity);
 
+	void Normalize();
+	void Move(Vector2f velocity);
+
 private:
-	float speed;
-	Vector2f velocity;
+	float* speed = new float();
+	Vector2f* velocity = new Vector2f();
 
 	ContextState* currentState;
 };

@@ -5,6 +5,7 @@
 #define STATE_H
 
 class ContextState;
+class Enemy;
 class IState
 {
 protected:
@@ -19,7 +20,7 @@ public:
 		this->context = context;
 	}
 
-	virtual void Enter(GameObject* go) = 0;
+	virtual void Enter(Enemy* enemy) = 0;
 	virtual void Execute() = 0;
 	virtual void Exit() = 0;
 };
