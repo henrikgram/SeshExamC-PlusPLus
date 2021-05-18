@@ -28,6 +28,8 @@
     <ClCompile Include="src\RayCasting\Main3.cpp" />
     <ClCompile Include="src\RayCasting\Ray.cpp" />
     <ClCompile Include="src\RayCasting\LightSource.cpp" />
+    <ClCompile Include="src\RayCasting\DirectionalLight.cpp" />
+    <ClCompile Include="src\RayCasting\PointLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameWorld.h" />
@@ -60,6 +62,8 @@
     <ClInclude Include="src\Components\Light.h" />
     <ClInclude Include="src\RayCasting\Ray.h" />
     <ClInclude Include="src\RayCasting\LightSource.h" />
+    <ClInclude Include="src\RayCasting\DirectionalLight.h" />
+    <ClInclude Include="src\RayCasting\PointLight.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />

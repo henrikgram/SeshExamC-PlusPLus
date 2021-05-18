@@ -37,22 +37,27 @@ public:
 	/// <param name="position"></param>
 	void Move(Vector2f position);
 
-	///// <summary>
-	///// Returns the VertexArray
-	///// </summary>
-	///// <returns></returns>
-	//VertexArray* GetVertexArray();
+	/// <summary>
+	/// Returns the VertexArray
+	/// </summary>
+	/// <returns></returns>
+	VertexArray* GetVertexArray();
 
 	/// <summary>
 	/// Returns the intersection point
 	/// </summary>
 	/// <returns></returns>
-	Vector2f* GetIntersectionPoint();
+	Vector2f GetIntersectionPoint();
+
+	Vector2f GetPosition();
+
+	void SetIntersection(Vector2f position);
 
 	
 private:
+	Vector2f position;
 	Vector2f direction;
 	VertexArray* ray = new VertexArray(sf::LinesStrip, 2);
-	Vector2f* intersection = new Vector2f;
+	Vector2f intersection;// = new Vector2f;
 };
 

@@ -3,6 +3,8 @@
 #include <iostream>
 #include "Ray.h"
 #include "LightSource.h"
+#include "PointLight.h"
+#include "DirectionalLight.h"
 
 #include <stdlib.h>
 #include <time.h>
@@ -70,9 +72,14 @@ int main()
 	tmp7[1].position = Vector2f(750, 750);
 
 	walls.push_back(tmp7);
+	
+	Ray r1(Vector2f(250, 250), Vector2f(40, 0));
+	Ray r2(Vector2f(250, 260), Vector2f(40, 0));
+	Ray r3(Vector2f(250, 270), Vector2f(40, 0));
+	Ray r4(Vector2f(250, 280), Vector2f(40, 0));
 
-
-	LightSource light(Vector2f(250, 250));
+	DirectionalLight light(Vector2f(500, 250), Vector2f(500, 450),0,5);
+	//PointLight light(Vector2f(250, 250));
 
 	// Start the game loop
 	while (window.isOpen())
@@ -87,20 +94,17 @@ int main()
 		}
 		// Clear screen
 
+		//r1.Cast(tmp4);
 		Color c(255, 255, 255);
 		window.clear(c);
 
 		sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 		sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 
-		//ray.LookAt(worldPos);
-
-		//light.Move(worldPos);
-		//window.draw(*ray.GetVertexArray());
 
 		vector<Ray*>::iterator it;
-		light.Move(worldPos);
-		vector<Vector2f> vray = light.Look(&walls);
+		//light.Move(worldPos);
+		vector<Vector2f> vray = light.CastRays(&walls);
 
 		vector<Vector2f>::iterator vrayIt;
 
@@ -118,28 +122,12 @@ int main()
 			window.draw(*triIt);
 		}
 
-		for (vrayIt = vray.begin(); vrayIt < vray.end(); vrayIt++)
+		vector<VertexArray> FUCKINGLORT = light.GetRayLines();
+		vector<VertexArray>::iterator itttt;
+
+		for (itttt = FUCKINGLORT.begin(); itttt < FUCKINGLORT.end(); itttt++)
 		{
-			Vector2f point;
-
-			{
-				point = *vrayIt;
-			}
-			
-			lightCone.setPoint(vrayIt - vray.begin(), point);
-		}
-
-		//window.draw(lightCone);
-
-
-		for (vrayIt = vray.begin(); vrayIt < vray.end(); vrayIt++)
-		{
-			VertexArray tmp = VertexArray(sf::LinesStrip, 2);
-			tmp[0].color = Color::Black;
-			tmp[1].color = Color::Black;
-			tmp[0].position = light.GetPosition();
-			tmp[1].position = *vrayIt;
-			window.draw(tmp);
+			window.draw(*itttt);
 		}
 
 		vector<VertexArray>::iterator It;
@@ -147,17 +135,6 @@ int main()
 		for (It = walls.begin(); It < walls.end(); It++)
 		{
 			window.draw(*It);
-		}
-
-		for (int i = 0; i < lightCone.getPointCount(); i++)
-		{
-			CircleShape c;
-			c.setRadius(5);
-			c.setOrigin(5, 5);
-			c.setFillColor(Color::Green);
-			c.setPosition(lightCone.getPoint(i));
-			window.draw(c);
-
 		}
 
 

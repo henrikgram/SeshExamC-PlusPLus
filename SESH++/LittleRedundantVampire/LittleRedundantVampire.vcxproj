@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\RayCasting\PointLight.cpp" />
+    <ClCompile Include="src\RayCasting\DirectionalLight.cpp" />
     <ClCompile Include="src\RayCasting\LightSource.cpp" />
     <ClCompile Include="src\RayCasting\Ray.cpp" />
     <ClCompile Include="src\Components\Light.cpp" />
@@ -174,6 +176,8 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\RayCasting\PointLight.h" />
+    <ClInclude Include="src\RayCasting\DirectionalLight.h" />
     <ClInclude Include="src\RayCasting\LightSource.h" />
     <ClInclude Include="src\RayCasting\Ray.h" />
     <ClInclude Include="src\Components\Light.h" />

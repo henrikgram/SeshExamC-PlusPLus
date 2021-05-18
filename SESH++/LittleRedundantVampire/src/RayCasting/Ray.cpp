@@ -3,6 +3,10 @@
 Ray::Ray(Vector2f position, Vector2f direction)
 {
     this->direction = direction;
+    this->position = position;
+
+    (*ray)[0].color = Color::Black;
+    (*ray)[1].color = Color::Black;
 
     (*ray)[0].position = position;
     (*ray)[1].position = Vector2f((position.x + direction.x),position.y+direction.y);
@@ -18,8 +22,8 @@ Ray::~Ray()
     delete ray;
     ray = nullptr;
 
-    delete intersection;
-    intersection = nullptr;
+   /* delete intersection;
+    intersection = nullptr;*/
 }
 
 bool Ray::Cast(VertexArray& wall)
@@ -57,8 +61,8 @@ bool Ray::Cast(VertexArray& wall)
     //and it only needs to check if it intersects with t eventually, and not only between the to given points. 
     if (t > 0 && t < 1 && u > 0)
     {
-        intersection->x = x1 + t * (x2 - x1);
-        intersection->y = y1 + t * (y2 - y1);
+        intersection.x = x1 + t * (x2 - x1);
+        intersection.y = y1 + t * (y2 - y1);
 
         return true;
     }
@@ -76,14 +80,24 @@ void Ray::LookAt(Vector2f position)
 }
 
 
-//VertexArray* Ray::GetVertexArray()
-//{
-//    return ray;
-//}
+VertexArray* Ray::GetVertexArray()
+{
+    return ray;
+}
 
-Vector2f* Ray::GetIntersectionPoint()
+Vector2f Ray::GetIntersectionPoint()
 {
     return intersection;
+}
+
+Vector2f Ray::GetPosition()
+{
+    return position;
+}
+
+void Ray::SetIntersection(Vector2f position)
+{
+    intersection = position;
 }
 
 void Ray::Move(Vector2f position)

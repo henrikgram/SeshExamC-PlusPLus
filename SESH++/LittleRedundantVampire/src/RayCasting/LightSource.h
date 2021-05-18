@@ -23,12 +23,6 @@ public:
 	/// <param name="stepSize">The amount of rays. 1 is one ray pr. degree.</param>
 	LightSource(Vector2f position, int stepSize = 5);
 
-	/// <summary>
-	/// Directional light, an Object which will beam out a number of rays in one direction on a given distance. 
-	/// </summary>
-	/// <param name="startPosition">Where the directional light should start</param>
-	/// <param name="endPosition">Where it should end</param>
-	LightSource(Vector2f startPosition, Vector2f endPosition, int angle ,int stepSize = 5);
 
 	~LightSource();
 
@@ -37,16 +31,16 @@ public:
 	/// </summary>
 	/// <param name="walls">The object to check for interseciton with</param>
 	/// <returns></returns>
-	vector<Vector2f> Look(vector<VertexArray>* walls);
+	vector<Vector2f> CastRays(vector<VertexArray>* walls);
 
 	/// <summary>
 	/// Moves the lightsource to a position
 	/// </summary>
 	/// <param name="position"></param>
-	void Move(Vector2f position);
+	virtual void Move(Vector2f position);
 
 	/// <summary>
-	/// Cast out rays and only check for collision with one object. 
+	/// Cast out rays and only check for intersection with one object. 
 	/// </summary>
 	/// <param name="object"></param>
 	void LookAtSingleObject(VertexArray& object);
@@ -55,14 +49,15 @@ public:
 	/// Constructs a lightcone out of triangles based on the intersectinng points, from the look function. 
 	/// </summary>
 	/// <returns></returns>
-	vector<VertexArray> GetLightCone();
+	virtual vector<VertexArray> GetLightCone() = 0;
 
 	/// <summary>
 	/// Returns lines from the positon of the light to the intersecting points.
 	/// Used for debug
 	/// </summary>
 	/// <returns></returns>
-	vector<VertexArray> GetRayLines();
+	virtual vector<VertexArray> GetRayLines() = 0;
+
 
 	/// <summary>
 	/// Uses pythagora to calcute the distance between to points. 
@@ -77,14 +72,15 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	vector<Ray*>* GetRays();
+
 	Vector2f GetPosition();
 
 
-private:
+protected:
 	Vector2f position;
-	Vector2f endPosition;
 
 	vector<Vector2f>* intersectingPoints = new vector<Vector2f>;
+	vector<Ray*>* intersectingRays = new vector<Ray*>;
 	vector<Ray*>* rays = new vector<Ray*>;
 };
 
