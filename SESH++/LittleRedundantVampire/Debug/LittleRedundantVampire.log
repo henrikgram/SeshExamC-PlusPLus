@@ -1,2 +1,30 @@
-﻿  Collider.cpp
+﻿  GameWorld.cpp
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(99,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(100,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(128,114): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(128,71): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
   LittleRedundantVampire.vcxproj -> C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
