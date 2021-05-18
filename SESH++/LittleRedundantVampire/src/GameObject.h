@@ -31,7 +31,7 @@ https://stackoverflow.com/questions/4964482/how-to-create-two-classes-in-c-which
 using namespace sf;
 using namespace std;
 
-class GameObject : protected IListener
+class GameObject : public IListener
 {
 public:
 	//Map for all components attached to the gameobject
@@ -82,10 +82,16 @@ public:
 
 	bool* GetShouldDraw();
 
+	/// <summary>
+	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) That this GameObject is ready to be deleted. 
+	/// Can be called from the components belonging to the gameobject.
+	/// </summary>
 	void CallSelfDestruct();
 
-	IGameEvent const GetOnCallSelfDestruct() { return onCallSelfdestruct; }
-
+	/// <summary>
+	/// Used to attach a listener (like Gameworld) to the event onCallSelfDestruct.
+	/// </summary>
+	/// <param name="listener"></param>
 	void AddListenerToCallSelfDestruct(IListener* listener);
 
 private:

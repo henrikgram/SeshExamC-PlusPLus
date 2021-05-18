@@ -26,8 +26,27 @@ void GameWorld::OnNotify(std::string eventName, IListener* sender)
 {
 	if (eventName == "DeleteObject")
 	{
-		//Doesn't work with dynamic cast.
-		objectsToBeDeleted.push(dynamic_cast<GameObject*>(sender));
+		for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
+		{
+			if (*i == sender)
+			{
+				objectsToBeDeleted.push(*i);
+			}
+		}
+	}
+	if (eventName == "ColliderDestroyed")
+	{
+		for (auto i = colliders->begin(); i != colliders->end();)
+		{
+			if (*i == sender)
+			{
+				i = colliders->erase(i);
+			}
+			else
+			{
+				i++;
+			}
+		}
 	}
 }
 
@@ -96,6 +115,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.0f, true);
 		go->AddComponent(col);
+		col->onColliderDestroyed.Attach(GameWorld::GetInstance());
 		colliders->push_back(col);
 		go->AddListenerToCallSelfDestruct(GameWorld::GetInstance());
 		break;
@@ -210,6 +230,8 @@ void GameWorld::DeleteObjects()
 			if (*i == gO)
 			{
 				(*i)->Destroy();
+				delete (*i);
+				*i = nullptr;
 				i = gameObjects->erase(i);
 			}
 			else

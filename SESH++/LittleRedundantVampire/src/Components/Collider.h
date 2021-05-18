@@ -31,6 +31,7 @@ public:
 	ComponentTag ToEnum() override;
 
 	void OnNotify(std::string eventName, IListener* sender) override;
+	IGameEvent onColliderDestroyed;
 
 private:
 	RectangleShape* collisionBox;
@@ -38,7 +39,6 @@ private:
 	bool* solid;
 	CollisionEvent onColliding;
 	IGameEvent onNoLongerColliding;
-	IGameEvent onOtherGameObjDestroyed;
 
 	std::list<Collider*> currentCollisions;
 };

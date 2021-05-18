@@ -46,7 +46,7 @@ bool Collider::CheckCollision(Collider* other)
 		if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
 		{
 			currentCollisions.push_back(other);
-			onOtherGameObjDestroyed.Attach(other);
+			onColliderDestroyed.Attach(other);
 		}
 
 		onColliding.Notify(*other->gameObject->GetObjectTag(), "NotDefined");
@@ -139,7 +139,7 @@ void Collider::Update(Time* timePerFrame)
 void Collider::Destroy()
 {
 	currentCollisions.clear();
-	onOtherGameObjDestroyed.Notify("OtherGmObjDestroyed", this);
+	onColliderDestroyed.Notify("ColliderDestroyed", this);
 	Collider::~Collider();
 }
 
@@ -153,7 +153,7 @@ void Collider::OnNotify(std::string eventName, IListener* sender)
 {
 	//TODO: Ensure that this doesn't cause issues if the list does not contain the element.
 	//This should remove all instances of the collider in question
-	if (eventName == "OtherGmObjDestroyed")
+	if (eventName == "ColliderDestroyed")
 	{
 		//cout << currentCollisions.size();
 		currentCollisions.remove(dynamic_cast<Collider*>(sender));

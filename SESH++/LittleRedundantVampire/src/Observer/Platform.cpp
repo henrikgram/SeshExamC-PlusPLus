@@ -38,7 +38,7 @@ void Platform::Update(Time* timePerFrame)
 		this->gameObject->Destroy();
 	}*/
 
-	if (*timer >= 100)
+	if (*timer >= 200)
 	{
 		this->gameObject->CallSelfDestruct();
 		return;
