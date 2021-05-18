@@ -177,6 +177,32 @@ void GameWorld::Initialize()
 {
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
+
+
+	//Test-attack. Can be deleted later.
+	GameObject* go = new GameObject();
+	SpriteRenderer* sr = new SpriteRenderer();
+
+	sr->isSpriteSheet = true;
+	sr->currentImage = new Vector2u(1, 1);
+	sr->imageCount = new Vector2u(1, 3);
+
+	sr->SetSprite(TextureTag::ENEMY_ATTACK_SHEET);
+	go->AddComponent(sr);
+
+	Collider* col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, 
+								  sr->GetSprite().getTexture()->getSize().y), 
+								 *go->GetPosition(), 0.0f, false);
+	go->AddComponent(col);
+	(*colliders).push_back(col);
+
+	go->Awake();
+	go->Start();
+
+	*go->GetPosition() = Vector2f(1200.0f, 1000.0f);
+	*go->GetObjectTag() = ObjectTag::ENEMYATTACK;
+
+	(*gameObjects).push_back(go);
 }
 
 void GameWorld::LoadContent()

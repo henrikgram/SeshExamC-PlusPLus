@@ -14,6 +14,12 @@ Player::Player()
 
 	healthBar = new GameObject();
 	srHealthBar = new SpriteRenderer();
+
+	timer = 0.0f;
+	invincibilityTimer = 0.0f;
+
+	invincible = false;
+	damageTaken = false;
 }
 
 Player::~Player()
@@ -48,25 +54,52 @@ void Player::Awake()
 	healthBar->Awake();
 	healthBar->Start();
 
+	*healthBar->GetShouldDraw() = false;
+
 	(*GameWorld::GetInstance()->GetGameObjects()).push_back(healthBar);
 }
 
 
 void Player::Start()
 {
-	timer = 0.0f;
+	
 }
 
 void Player::Update(Time* timePerFrame)
 {
 	*healthBar->GetPosition() = Vector2f((*gameObject->GetPosition()).x, (*gameObject->GetPosition()).y - 75);
 
-	//Delete later, only for testing.
-	timer += timePerFrame->asMilliseconds();
-	if (timer >= 1000.0f)
+
+	////Delete later, only for healthbar testing.
+	//timer += timePerFrame->asMilliseconds();
+	//if (timer >= 1000.0f)
+	//{
+	//	--*health;
+	//	timer = 0.0f;
+	//}
+
+
+	//Checks damage.
+	if (damageTaken)
 	{
+		invincible = true;
 		--*health;
-		timer = 0.0f;
+
+		damageTaken = false;
+		*healthBar->GetShouldDraw() = true;
+	}
+
+	if (invincible)
+	{
+		invincibilityTimer += timePerFrame->asMilliseconds();
+
+		if (invincibilityTimer >= 1000.0f)
+		{
+			invincible = false;
+			*healthBar->GetShouldDraw() = false;
+
+			invincibilityTimer = 0.0f;
+		}
 	}
 }
 
@@ -92,7 +125,10 @@ void Player::OnNotifyCollision(ObjectTag otherTag, std::string side)
 	case ObjectTag::PLAYERATTACK:
 		break;
 	case ObjectTag::ENEMYATTACK:
-		health--;
+		if (!invincible)
+		{
+			damageTaken = true;
+		}
 		break;
 	case ObjectTag::NPC:
 		//cout << "hit npc";

@@ -34,4 +34,9 @@ private:
 
 	//Delete later, only for testing.
 	float timer;
+
+	float invincibilityTimer;
+
+	bool invincible;
+	bool damageTaken;
 };

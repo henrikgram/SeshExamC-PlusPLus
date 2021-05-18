@@ -20,6 +20,7 @@ public:
 
 
 private:
+
 	float attackTimer;
 	float attackLength;
 
