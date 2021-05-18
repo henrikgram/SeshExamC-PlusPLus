@@ -9,7 +9,7 @@ using namespace sf;
 class Attack : public Component
 {
 public:
-	Attack(ObjectTag objectTag, Vector2f callerPosition, char direction, float attackLength);
+	Attack(ObjectTag objectTag, float attackLength);
 	~Attack();
 
 	void Awake() override;
@@ -23,10 +23,6 @@ private:
 	float attackTimer;
 	float attackLength;
 
-	Vector2f callerPosition;
-
 	ObjectTag objectTag;
-
-	char direction;
 };
 

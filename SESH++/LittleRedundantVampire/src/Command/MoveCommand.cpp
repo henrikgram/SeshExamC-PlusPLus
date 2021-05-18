@@ -13,5 +13,8 @@ MoveCommand::~MoveCommand()
 
 void MoveCommand::Execute()
 {
-	movementReceiver.Move(*velocity);
+	if (*movementReceiver.gameObject->GetIsMovable())
+	{
+		movementReceiver.Move(*velocity);
+	}
 }

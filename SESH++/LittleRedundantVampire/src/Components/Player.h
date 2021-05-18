@@ -5,6 +5,8 @@
 #include "AttackSpawner.h"
 #include <string>
 #include "../Observer/IGameEvent.h"
+#include "SpriteRenderer.h"
+#include "../Enum/ObjectTag.h"
 
 using namespace sf;
 
@@ -21,4 +23,15 @@ public:
 	ComponentTag ToEnum() override;
 
 	void OnNotifyCollision(ObjectTag otherTag, string side) override;
+
+
+private:
+
+	int* health;
+
+	GameObject* healthBar;
+	SpriteRenderer* srHealthBar;
+
+	//Delete later, only for testing.
+	float timer;
 };

@@ -14,6 +14,3 @@ void AttackCommand::Execute()
 {
 	attackReceiver.CreateAttack();
 }
-
-
-

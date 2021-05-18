@@ -78,6 +78,7 @@ public:
 	char* GetDirection();
 
 	bool* GetShouldDraw();
+	bool* GetIsMovable();
 
 	unordered_map<ComponentTag, Component*>* GetComponents();
 
@@ -92,6 +93,8 @@ private:
 	char* direction;
 
 	bool* shouldDraw;
+
+	bool* isMovable;
 
 	unordered_map<ComponentTag, Component*>* components;
 };

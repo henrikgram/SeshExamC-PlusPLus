@@ -16,6 +16,7 @@ public:
 	/// </summary>
 	AnimationController(SpriteRenderer& spriteRenderer, 
 		string noAniRow, string upAniRow, string downAniRow, string leftAniRow, string rightAniRow);
+	AnimationController(SpriteRenderer& spriteRenderer, int* currentRow, int firstRow);
 	~AnimationController();
 
 
@@ -26,13 +27,13 @@ public:
 	virtual void Destroy() override;
 	virtual ComponentTag ToEnum() override;
 
-
-	void MovementAnimation();
-
 	IGameEvent ChangeAnimation;
 
 
 private:
+	void MovementAnimation();
+	void DecrementingRowAnimation();
+
 	SpriteRenderer& spriteRenderer;
 
 	string noAniRow;
@@ -41,6 +42,11 @@ private:
 	string leftAniRow;
 	string rightAniRow;
 
-	bool isMovable;
+	bool movementAnimation;
+	bool decrementAnimation;
+
+	int previousRow;
+	int* currentRow;
+	int firstRow;
 };
 

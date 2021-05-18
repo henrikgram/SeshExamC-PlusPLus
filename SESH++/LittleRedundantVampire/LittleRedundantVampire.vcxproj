@@ -206,6 +206,7 @@
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />
     <Image Include="Asset\Bookcase.png" />
+    <Image Include="Asset\EnemyAttackSheet.png" />
     <Image Include="Asset\FloorCarpet.png" />
     <Image Include="Asset\Crate.png" />
     <Image Include="Asset\DoorClosed.png" />

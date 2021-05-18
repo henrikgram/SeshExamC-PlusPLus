@@ -13,9 +13,7 @@
 #include "Enum/ObjectTag.h"
 #include "Observer/Platform.h"
 #include "Components/Collider.h"
-#include "GameWorld.h"
 #include "Command/PlayerInvoker.h"
-#include "GameWorld.h"
 #include "Components/AttackSpawner.h"
 #include "BitmapImage.h"
 #include "LevelManager.h"
@@ -39,7 +37,7 @@ public:
 
 	float GetScreenWidth();
 	float GetScreenHeight();
-	
+
 	vector<GameObject*>* GetDeletedObjects();
 
 
@@ -76,3 +74,4 @@ private:
 	AttackSpawner* atckSpwnPointer;
 	Movement* movementPointer;
 };
+

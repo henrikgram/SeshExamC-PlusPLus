@@ -1,34 +1,73 @@
 
 #include "Player.h"
-#include "../Enum/ObjectTag.h"
 #include <iostream>
+#include "../GameWorld.h"
+#include "AnimationComponent.h"
+
 using namespace std;
 using namespace sf;
 
 Player::Player()
 {
+	health = new int;
+	*health = 10;
 
+	healthBar = new GameObject();
+	srHealthBar = new SpriteRenderer();
 }
 
 Player::~Player()
 {
+	delete healthBar;
+	healthBar = nullptr;
 
+	delete srHealthBar;
+	srHealthBar = nullptr;
+
+	delete health;
+	health = nullptr;
 }
 
 void Player::Awake()
 {
-	
+	srHealthBar->isSpriteSheet = true;
+	srHealthBar->currentImage = new Vector2u(1, 1);
+	srHealthBar->imageCount = new Vector2u(1, 10);
+
+	srHealthBar->SetSprite(TextureTag::PLAYER_HEALTH);
+	healthBar->AddComponent(srHealthBar);
+
+	AnimationComponent* aC = new AnimationComponent(srHealthBar, *srHealthBar->imageCount, 200.0f, 0);
+	healthBar->AddComponent(aC);
+
+	SpriteRenderer& srRef = *srHealthBar;
+	AnimationController* acController = new AnimationController(srRef, health, *health);
+	healthBar->AddComponent(acController);
+	acController->ChangeAnimation.Attach(aC);
+
+	healthBar->Awake();
+	healthBar->Start();
+
+	(*GameWorld::GetInstance()->GetGameObjects()).push_back(healthBar);
 }
 
 
 void Player::Start()
 {
-
+	timer = 0.0f;
 }
 
 void Player::Update(Time* timePerFrame)
 {
-	
+	*healthBar->GetPosition() = Vector2f((*gameObject->GetPosition()).x, (*gameObject->GetPosition()).y - 75);
+
+	//Delete later, only for testing.
+	timer += timePerFrame->asMilliseconds();
+	if (timer >= 1000.0f)
+	{
+		--*health;
+		timer = 0.0f;
+	}
 }
 
 
@@ -53,6 +92,7 @@ void Player::OnNotifyCollision(ObjectTag otherTag, std::string side)
 	case ObjectTag::PLAYERATTACK:
 		break;
 	case ObjectTag::ENEMYATTACK:
+		health--;
 		break;
 	case ObjectTag::NPC:
 		//cout << "hit npc";

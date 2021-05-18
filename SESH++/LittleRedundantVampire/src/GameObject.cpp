@@ -12,6 +12,9 @@ GameObject::GameObject()
 	direction = new char;
 	*direction = 'N';
 
+	isMovable = new bool;
+	*isMovable = false;
+
 	position = new Vector2f;
 
 	objectTag = new ObjectTag;
@@ -26,6 +29,9 @@ GameObject::GameObject(Vector2<float> position)
 
 	direction = new char;
 	*direction = 'N';
+	
+	isMovable = new bool;
+	*isMovable = false;
 
 	this->position = new Vector2f;
 	(*this->position).x = position.x;
@@ -52,6 +58,9 @@ GameObject::~GameObject()
 		
 	delete components;
 	components = nullptr;
+
+	delete isMovable;
+	isMovable = nullptr;
 }
 
 void GameObject::Update(Time* timePerFrame)
@@ -137,6 +146,11 @@ char* GameObject::GetDirection()
 bool* GameObject::GetShouldDraw()
 {
 	return shouldDraw;
+}
+
+bool* GameObject::GetIsMovable()
+{
+	return isMovable;
 }
 
 unordered_map<ComponentTag, Component*>* GameObject::GetComponents()

@@ -7,7 +7,9 @@ void Asset::LoadTextures()
 	textBoxTexture->	loadFromFile("Asset/TestTextBox.png");
 
 	//OBJECTS
+	playerHealthUI->	loadFromFile("Asset/healthUI.png");
 	playerAttackSheetTexture->loadFromFile("Asset/PlayerAttackSheet.png");
+	enemyAttackSheetTexture->loadFromFile("Asset/EnemyAttackSheet.png");
 	bookcaseTexture->	loadFromFile("Asset/Bookcase.png");
 	chestTexture->		loadFromFile("Asset/TreasureChest.png");
 	crateTexture->		loadFromFile("Asset/Crate.png");
@@ -27,7 +29,9 @@ void Asset::LoadTextures()
 	textures.insert(make_pair(TextureTag::TEXT_BOX,		 *textBoxTexture));
 
 	//OBJECTS
+	textures.insert(make_pair(TextureTag::PLAYER_HEALTH, *playerHealthUI));
 	textures.insert(make_pair(TextureTag::PLAYER_ATTACK_SHEET,	 *playerAttackSheetTexture));
+	textures.insert(make_pair(TextureTag::ENEMY_ATTACK_SHEET, *enemyAttackSheetTexture));
 	textures.insert(make_pair(TextureTag::BOOKCASE,		 *bookcaseTexture));
 	textures.insert(make_pair(TextureTag::CHEST,		 *chestTexture));
 	textures.insert(make_pair(TextureTag::CRATE,		 *crateTexture));

@@ -12,12 +12,31 @@ AnimationController::AnimationController(SpriteRenderer& spriteRenderer,
 	this->leftAniRow = leftAniRow;
 	this->rightAniRow = rightAniRow;
 
-	isMovable = true;
+	movementAnimation = true;
+	decrementAnimation = false;
+}
+
+/// <summary>
+/// For health bar animation, or other animation where the row is decrementing.
+/// </summary>
+/// <param name="spriteRenderer"></param>
+AnimationController::AnimationController(SpriteRenderer& spriteRenderer, int* currentRow, int firstRow) :
+	spriteRenderer(spriteRenderer)
+{
+	this->currentRow = currentRow;
+	previousRow = *this->currentRow;
+	this->firstRow = firstRow;
+
+	movementAnimation = false;
+	decrementAnimation = true;
 }
 
 AnimationController::~AnimationController()
 {
+	delete currentRow;
+	currentRow = nullptr;
 }
+
 
 
 /// <summary>
@@ -26,7 +45,6 @@ AnimationController::~AnimationController()
 void AnimationController::MovementAnimation()
 {
 	//TODO: OPTIMERING fix s� den ikke k�rer medmindre det er en ny animation. OPTIMERING
-
 	//No/Idle animation
 	if (*gameObject->GetDirection() == 'N')
 	{
@@ -65,9 +83,22 @@ void AnimationController::MovementAnimation()
 			*spriteRenderer.GetFlipped() = false;
 			ChangeAnimation.Notify("flip", this);
 		}
+
 		ChangeAnimation.Notify(rightAniRow, this);
 	}
 }
+
+void AnimationController::DecrementingRowAnimation()
+{
+	if (previousRow != *currentRow)
+	{
+		string newRow = to_string(firstRow - *currentRow);
+		ChangeAnimation.Notify(newRow, this);
+
+		previousRow = *currentRow;
+	}
+}
+
 
 void AnimationController::Awake()
 {
@@ -79,9 +110,13 @@ void AnimationController::Start()
 
 void AnimationController::Update(Time* timePerFrame)
 {
-	if (isMovable)
+	if (movementAnimation)
 	{
 		MovementAnimation();
+	}
+	else if (decrementAnimation)
+	{
+		DecrementingRowAnimation();
 	}
 }
 

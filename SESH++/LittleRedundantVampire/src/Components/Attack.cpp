@@ -7,12 +7,12 @@ using namespace std;
 using namespace sf;
 
 
-Attack::Attack(ObjectTag objectTag, Vector2f callerPosition, char direction, float attackLength)
+Attack::Attack(ObjectTag objectTag, float attackLength)
 {
-	this->direction = direction;
 	this->objectTag = objectTag;
-	this->callerPosition = callerPosition;
 	this->attackLength = attackLength;
+
+	attackTimer = 0.0f;
 }
 
 Attack::~Attack()
@@ -23,39 +23,31 @@ Attack::~Attack()
 
 void Attack::Awake()
 {
-	*gameObject->GetPosition() = callerPosition;
-	*gameObject->GetDirection() = direction;
-	attackTimer = 0.0f;
+	//TODO: Det her skal kunne fungere med events, der kører når spilleren bevæger sig.
+	
+	switch (*gameObject->GetDirection())
+	{
+	case 'N':
+		(*gameObject->GetPosition()).y += 80.0f;
+		break;
+	case 'L':
+		(*gameObject->GetPosition()).x -= 70.0f;
+		break;
+	case 'R':
+		(*gameObject->GetPosition()).x += 70.0f;
+		break;
+	case 'U':
+		(*gameObject->GetPosition()).y -= 80.0f;
+		break;
+	case 'D':
+		(*gameObject->GetPosition()).y += 80.0f;
+		break;
+	}
 }
 
 void Attack::Start()
 {
-	//TODO: Det her skal kunne fungere med events, der kører når spilleren bevæger sig.
-	//Nothing
-	if (*gameObject->GetDirection() == 'N')
-	{
-		*gameObject->GetPosition() = Vector2f((*gameObject->GetPosition()).x, (*gameObject->GetPosition()).y + 80.0f);
-	}
-	//Left
-	else if (*gameObject->GetDirection() == 'L')
-	{
-		*gameObject->GetPosition() = Vector2f((*gameObject->GetPosition()).x - 100.0f, (*gameObject->GetPosition()).y);
-	}
-	//Right
-	else if (*gameObject->GetDirection() == 'R')
-	{
-		*gameObject->GetPosition() = Vector2f((*gameObject->GetPosition()).x + 60.0f, (*gameObject->GetPosition()).y);
-	}
-	//Up
-	else if (*gameObject->GetDirection() == 'U')
-	{
-		*gameObject->GetPosition() = Vector2f((*gameObject->GetPosition()).x, (*gameObject->GetPosition()).y - 80.0f);
-	}
-	//Down
-	else if (*gameObject->GetDirection() == 'D')
-	{
-		*gameObject->GetPosition() = Vector2f((*gameObject->GetPosition()).x, (*gameObject->GetPosition()).y + 80.0f);
-	}
+	
 }
 
 void Attack::Update(Time* timePerFrame)

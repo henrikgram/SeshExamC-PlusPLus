@@ -12,31 +12,75 @@ void AttackSpawner::CreateAttack()
 {
 	if (canAttack)
 	{
+		*gameObject->GetIsMovable() = false;
+
 		//TODO: tjek hvis den ryger ud af scope.
 		GameObject* go = new GameObject();
 		SpriteRenderer* sr = new SpriteRenderer();
+		//Collider* col;
+
 
 		sr->isSpriteSheet = true;
 		sr->currentImage = new Vector2u(1, 1);
-		sr->imageCount = new Vector2u(2, 3);
+		sr->imageCount = new Vector2u(1, 3);
 
-		sr->SetSprite(TextureTag::PLAYER_ATTACK_SHEET);
+
+		if (*gameObject->GetObjectTag() == ObjectTag::PLAYER) 
+		{ 
+			sr->SetSprite(TextureTag::PLAYER_ATTACK_SHEET); 
+			objectTag = ObjectTag::PLAYERATTACK;
+		}
+		else if (*gameObject->GetObjectTag() == ObjectTag::ENEMY) 
+		{ 
+			sr->SetSprite(TextureTag::ENEMY_ATTACK_SHEET); 
+			objectTag = ObjectTag::ENEMYATTACK;
+		}
 		go->AddComponent(sr);
 
-		go->AddComponent(new Attack(objectTag, *gameObject->GetPosition(), *gameObject->GetDirection(), attackCooldown));
 
-		AnimationComponent* aC = new AnimationComponent(sr, *sr->imageCount, 200.0f, (*sr->currentImage).x);
+		*go->GetPosition() = *gameObject->GetPosition();
+		*go->GetDirection() = *gameObject->GetDirection();
+
+		int initialRow = 2;
+
+		switch (*go->GetDirection())
+		{
+		case 'L':
+			initialRow = 0;
+			break;
+		case 'R':
+			initialRow = 0;
+			break;
+		case 'U':
+			initialRow = 1;
+			break;
+		case 'D':
+			initialRow = 2;
+			break;
+		}
+
+		
+		go->AddComponent(new Attack(objectTag, attackCooldown));
+
+		AnimationComponent* aC = new AnimationComponent(sr, *sr->imageCount, 200.0f, initialRow);
 		go->AddComponent(aC);
 
 		SpriteRenderer& srRef = *sr;
-		AnimationController* acController = new AnimationController(srRef, "3", "2", "3", "1", "1");
+		AnimationController* acController = new AnimationController(srRef, "2", "1", "2", "0", "0");
 		go->AddComponent(acController);
 		acController->ChangeAnimation.Attach(aC);
+
+
+		//col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.0f, true);
+		//go->AddComponent(col);
+		//(*GameWorld::GetInstance()->GetColliders()).push_back(col);
 		
+
 		go->Awake();
 		go->Start();
 
 		(*GameWorld::GetInstance()->GetGameObjects()).push_back(go);
+
 
 		attackTimer = 0.0f;
 		canAttack = false;
@@ -47,6 +91,11 @@ void AttackSpawner::CreateAttack()
 AttackSpawner::AttackSpawner(ObjectTag objectTag)
 {
 	this->objectTag = objectTag;
+
+	attackCooldown = 250.0f;
+	attackTimer = 0.0f;
+
+	canAttack = true;
 }
 
 AttackSpawner::~AttackSpawner()
@@ -57,10 +106,7 @@ AttackSpawner::~AttackSpawner()
 
 void AttackSpawner::Awake()
 {
-	attackCooldown = 500.0f;
-	attackTimer = 0.0f;
 
-	canAttack = true;
 }
 
 void AttackSpawner::Start()
@@ -74,6 +120,7 @@ void AttackSpawner::Update(Time* timePerFrame)
 	if (attackTimer >= attackCooldown)
 	{
 		canAttack = true;
+		*gameObject->GetIsMovable() = true;
 	}
 }
 
