@@ -69,18 +69,16 @@ void AnimationComponent::OnNotify(string eventName, IListener* sender)
 	//convert string to int
 	//If it fails the conversion it checks for other augments
 	//TODO: tjek om det er cursed at så voldsomt udnytte en trycatch
+	//TODO: det var det
 	if (eventName != "NoLongerCollidingWith")
 	{
-		try
+		if (eventName == "flip")
+		{
+			spriteRenderer->FlipSprite();
+		}
+		else
 		{
 			row = stoi(eventName);
-		}
-		catch (const std::exception&)
-		{
-			if (eventName == "flip")
-			{
-				spriteRenderer->FlipSprite();
-			}
 		}
 	}
 }

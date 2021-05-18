@@ -61,8 +61,8 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		acController->ChangeAnimation.Attach(aC);
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
-		float x = sr->TextureRect->width;
-		float y = sr->TextureRect->height;
+		float x = (float)sr->TextureRect->width;
+		float y = (float)sr->TextureRect->height;
 
 		col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
 		go->AddComponent(col);
@@ -89,7 +89,9 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->AddComponent(sr);
 		go->AddComponent(new Platform);
 
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.0f, true);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, 
+									 sr->GetSprite().getTexture()->getSize().y), 
+									*go->GetPosition(), 0.0f, true);
 		go->AddComponent(col);
 		colliders->push_back(col);
 		break;
@@ -179,6 +181,8 @@ void GameWorld::Initialize()
 	BootlegFactory(ObjectTag::CRATE);
 
 
+#pragma region Damage test, Enemy and Enemy Attack on Player.
+
 	//Test-attack. Can be deleted later.
 	GameObject* go = new GameObject();
 	SpriteRenderer* sr = new SpriteRenderer();
@@ -203,6 +207,30 @@ void GameWorld::Initialize()
 	*go->GetObjectTag() = ObjectTag::ENEMYATTACK;
 
 	(*gameObjects).push_back(go);
+
+
+	//Test-skade af enemy
+	GameObject* go1 = new GameObject();
+	SpriteRenderer* sr1 = new SpriteRenderer();
+
+	sr1->SetSprite(TextureTag::ENEMY);
+	go1->AddComponent(sr1);
+
+	Collider* col1 = new  Collider(Vector2f(sr1->GetSprite().getTexture()->getSize().x,
+		sr1->GetSprite().getTexture()->getSize().y),
+		*go1->GetPosition(), 0.0f, false);
+	go1->AddComponent(col1);
+	(*colliders).push_back(col1);
+
+	go1->Awake();
+	go1->Start();
+
+	*go1->GetPosition() = Vector2f(1200.0f, 1200.0f);
+	*go1->GetObjectTag() = ObjectTag::ENEMY;
+
+	(*gameObjects).push_back(go1);
+
+#pragma endregion
 }
 
 void GameWorld::LoadContent()

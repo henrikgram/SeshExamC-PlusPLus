@@ -121,6 +121,10 @@ void Player::OnNotifyCollision(ObjectTag otherTag, std::string side)
 	case ObjectTag::PLAYER:
 		break;
 	case ObjectTag::ENEMY:
+		if (!invincible)
+		{
+			damageTaken = true;
+		}
 		break;
 	case ObjectTag::PLAYERATTACK:
 		break;
