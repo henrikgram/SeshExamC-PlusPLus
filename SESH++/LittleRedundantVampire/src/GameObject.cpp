@@ -4,6 +4,7 @@
 using namespace sf;
 using namespace std;
 
+
 GameObject::GameObject()
 {
 	shouldDraw = new bool;
@@ -112,8 +113,8 @@ void GameObject::Destroy()
 		delete it->second;
 		it->second = nullptr;
 	}
-	components.clear();
 
+	(*components).clear();
 }
 
 
@@ -130,25 +131,6 @@ Component* GameObject::GetComponent(ComponentTag tag)
 	return (*components)[tag];
 }
 
-//Vector2f* GameObject::GetPosition()
-//{
-//	return position;
-//}
-
-//ObjectTag* GameObject::GetObjectTag()
-//{
-//	return objectTag;
-//}
-
-//string* GameObject::GetDirection()
-//{
-//	return direction;
-//}
-
-//bool* GameObject::GetShouldDraw()
-//{
-//	return shouldDraw;
-//}
 
 void GameObject::CallSelfDestruct()
 {
@@ -162,15 +144,5 @@ void GameObject::AddListenerToCallSelfDestruct(IListener* listener)
 
 void GameObject::OnNotify(std::string eventName, IListener* sender)
 {
-	return shouldDraw;
-}
-
-bool* GameObject::GetIsMovable()
-{
-	return isMovable;
-}
-
-unordered_map<ComponentTag, Component*>* GameObject::GetComponents()
-{
-	return components;
+	
 }

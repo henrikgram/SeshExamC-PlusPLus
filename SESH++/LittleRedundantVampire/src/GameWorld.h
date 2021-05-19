@@ -27,29 +27,16 @@ using namespace std;
 
 class GameWorld : protected IListener
 {
-public:
-	/// <summary>
-	/// Returns the instance of the GameWorld class
-	/// </summary>
-	/*static GameWorld* GetInstance();
-
-	void Run();
-	vector<GameObject*>* GetGameObjects();
-	vector<Collider*>* GetColliders();
-
-	float GetScreenWidth();
-	float GetScreenHeight();
-
-	vector<GameObject*>* GetDeletedObjects();*/
-
-
 private:
 	static GameWorld* instance;
+
 	vector<GameObject*>* gameObjects;
 	stack<GameObject*> objectsToBeDeleted;
 	vector<Collider*>* colliders;
+
 	Player* playerPointer;
 	AttackSpawner* atckSpwnPointer;
+	Movement* movementPointer;
 
 private:
 	GameWorld();
@@ -98,10 +85,6 @@ public:
 	vector<GameObject*>* GetGameObjects(); //TODO: Needs to be constant otherwise we may as well make gameObjects a public.
 	vector<Collider*>* GetColliders(); //TODO: This needs to be a constant, if we want to change something outside of the class it belongs to we should make a set method or something.
 
-	/*float GetScreenWidth();
+	float GetScreenWidth();
 	float GetScreenHeight();
-	vector<Collider*>* colliders;
-	Player* playerPointer;
-	AttackSpawner* atckSpwnPointer;
-	Movement* movementPointer;*/
 };

@@ -13,7 +13,7 @@ Player::Player()
 	*health = 10;
 
 	healthBar = new GameObject();
-	srHealthBar = new SpriteRenderer();
+	srHealthBar = new SpriteRenderer(TextureTag::PLAYER_HEALTH, Vector2u(1, 1), Vector2u(1, 10));
 
 	timer = 0.0f;
 	invincibilityTimer = 0.0f;
@@ -36,11 +36,6 @@ Player::~Player()
 
 void Player::Awake()
 {
-	srHealthBar->isSpriteSheet = true;
-	srHealthBar->currentImage = new Vector2u(1, 1);
-	srHealthBar->imageCount = new Vector2u(1, 10);
-
-	srHealthBar->SetSprite(TextureTag::PLAYER_HEALTH);
 	healthBar->AddComponent(srHealthBar);
 
 	AnimationComponent* aC = new AnimationComponent(srHealthBar, *srHealthBar->imageCount, 200.0f, 0);
@@ -68,16 +63,6 @@ void Player::Start()
 void Player::Update(Time* timePerFrame)
 {
 	*healthBar->GetPosition() = Vector2f((*gameObject->GetPosition()).x, (*gameObject->GetPosition()).y - 75);
-
-
-	////Delete later, only for healthbar testing.
-	//timer += timePerFrame->asMilliseconds();
-	//if (timer >= 1000.0f)
-	//{
-	//	--*health;
-	//	timer = 0.0f;
-	//}
-
 
 	//Checks damage.
 	if (damageTaken)

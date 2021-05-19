@@ -133,8 +133,8 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->AddComponent(new Platform);
 
 		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x,
-									 sr->GetSprite().getTexture()->getSize().y),
-									*go->GetPosition(), 0.0f, true);
+			sr->GetSprite().getTexture()->getSize().y),
+			*go->GetPosition(), 0.0f, true);
 		go->AddComponent(col);
 		col->AttachToColliderDestroyedEvent(GameWorld::GetInstance());
 		colliders->push_back(col);
@@ -157,58 +157,52 @@ void GameWorld::Initialize()
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
 
+#pragma region Damage test, Enemy and Enemy Attack on Player.
 
-	#pragma region Damage test, Enemy and Enemy Attack on Player.
+	//Test-attack. Can be deleted later.
+	GameObject* go = new GameObject();
+	SpriteRenderer* sr = new SpriteRenderer(TextureTag::ENEMY_ATTACK_SHEET, Vector2u(1, 1), Vector2u(1, 3));
 
-		//Test-attack. Can be deleted later.
-		GameObject* go = new GameObject();
-		SpriteRenderer* sr = new SpriteRenderer();
+	go->AddComponent(sr);
 
-		sr->isSpriteSheet = true;
-		sr->currentImage = new Vector2u(1, 1);
-		sr->imageCount = new Vector2u(1, 3);
+	Collider* col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x,
+		sr->GetSprite().getTexture()->getSize().y),
+		*go->GetPosition(), 0.0f, false);
 
-		sr->SetSprite(TextureTag::ENEMY_ATTACK_SHEET);
-		go->AddComponent(sr);
+	go->AddComponent(col);
+	(*colliders).push_back(col);
 
-		Collider* col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x,
-									  sr->GetSprite().getTexture()->getSize().y),
-									 *go->GetPosition(), 0.0f, false);
-		go->AddComponent(col);
-		(*colliders).push_back(col);
+	go->Awake();
+	go->Start();
 
-		go->Awake();
-		go->Start();
+	*go->GetPosition() = Vector2f(1200.0f, 1000.0f);
+	*go->GetObjectTag() = ObjectTag::ENEMYATTACK;
 
-		*go->GetPosition() = Vector2f(1200.0f, 1000.0f);
-		*go->GetObjectTag() = ObjectTag::ENEMYATTACK;
-
-		(*gameObjects).push_back(go);
+	(*gameObjects).push_back(go);
 
 
-		//Test-skade af enemy
-		GameObject* go1 = new GameObject();
-		SpriteRenderer* sr1 = new SpriteRenderer();
+	//Test-skade af enemy
+	GameObject* go1 = new GameObject();
+	SpriteRenderer* sr1 = new SpriteRenderer(TextureTag::ENEMY);
 
-		sr1->SetSprite(TextureTag::ENEMY);
-		go1->AddComponent(sr1);
+	go1->AddComponent(sr1);
 
-		Collider* col1 = new  Collider(Vector2f(sr1->GetSprite().getTexture()->getSize().x,
-			sr1->GetSprite().getTexture()->getSize().y),
-			*go1->GetPosition(), 0.0f, false);
-		go1->AddComponent(col1);
-		(*colliders).push_back(col1);
+	Collider* col1 = new  Collider(Vector2f(sr1->GetSprite().getTexture()->getSize().x,
+		sr1->GetSprite().getTexture()->getSize().y),
+		*go1->GetPosition(), 0.0f, false);
 
-		go1->Awake();
-		go1->Start();
+	go1->AddComponent(col1);
+	(*colliders).push_back(col1);
 
-		*go1->GetPosition() = Vector2f(1200.0f, 1200.0f);
-		*go1->GetObjectTag() = ObjectTag::ENEMY;
+	go1->Awake();
+	go1->Start();
 
-		(*gameObjects).push_back(go1);
+	*go1->GetPosition() = Vector2f(1200.0f, 1200.0f);
+	*go1->GetObjectTag() = ObjectTag::ENEMY;
 
-	#pragma endregion
-	}
+	(*gameObjects).push_back(go1);
+
+#pragma endregion
 }
 
 void GameWorld::LoadContent()
@@ -240,6 +234,7 @@ void GameWorld::DeleteObjects()
 		}
 		objectsToBeDeleted.pop();
 	}
+}
 
 
 void GameWorld::Update(Time* timePerFrame)
@@ -399,18 +394,11 @@ void GameWorld::Run()
 		}
 
 		//Hvert gameloop korer vi Update paa vores animation.
-	   //Vi korer animationen for raekke 0 (1).
+		//Vi korer animationen for raekke 0 (1).
 
 		window.setView(view);
 
 		Draw();
-		//window.clear(Color(0, 255, 255, 255));
-		//player.Draw(window);
-		//p1.Draw(window);
-		//window.display();
-
-		//GetScreenHeight();
-		//GetScreenWidth();
 	}
 }
 

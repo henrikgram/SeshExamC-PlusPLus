@@ -15,7 +15,7 @@ public:
 	void Destroy() override;
 	ComponentTag ToEnum() override;
 
-	void CreateAttack();
+	void CreateAttack(TextureTag textureTag, ObjectTag objectTag);
 
 private:
 	ObjectTag objectTag;

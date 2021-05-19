@@ -12,5 +12,5 @@ AttackCommand::~AttackCommand()
 
 void AttackCommand::Execute()
 {
-	attackReceiver.CreateAttack();
+	attackReceiver.CreateAttack(TextureTag::PLAYER_ATTACK_SHEET, ObjectTag::PLAYERATTACK);
 }

@@ -73,17 +73,19 @@ public:
 	/// </summary>
 	Component* GetComponent(ComponentTag tag);
 
+
 	Vector2f* GetPosition() const { return position; }
 
 	ObjectTag* GetObjectTag() const { return objectTag; }
 
 	char* GetDirection() const { return direction; }
 
-	bool* GetIsMovable();
+	bool* GetIsMovable() const { return isMovable; }
 
-	unordered_map<ComponentTag, Component*>* GetComponents();
+	unordered_map<ComponentTag, Component*>* GetComponents() const { return components; }
 
 	bool* GetShouldDraw() const { return shouldDraw; }
+
 
 	/// <summary>
 	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) That this GameObject is ready to be deleted.
@@ -96,6 +98,7 @@ public:
 	/// </summary>
 	/// <param name="listener"></param>
 	void AddListenerToCallSelfDestruct(IListener* listener);
+
 
 private:
 	unordered_map<ComponentTag, Component*>::iterator it;

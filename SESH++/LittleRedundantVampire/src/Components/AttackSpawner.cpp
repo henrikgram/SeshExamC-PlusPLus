@@ -8,7 +8,7 @@
 using namespace sf;
 
 
-void AttackSpawner::CreateAttack()
+void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 {
 	if (canAttack)
 	{
@@ -16,34 +16,14 @@ void AttackSpawner::CreateAttack()
 
 		//TODO: tjek hvis den ryger ud af scope.
 		GameObject* go = new GameObject();
-		SpriteRenderer* sr = new SpriteRenderer(TextureTag::ATTACK_SHEET);
-		//sr->SetSprite(TextureTag::ATTACK_SHEET);
-		SpriteRenderer* sr = new SpriteRenderer();
-		//Collider* col;
-
-
-		sr->isSpriteSheet = true;
-		sr->currentImage = new Vector2u(1, 1);
-		sr->imageCount = new Vector2u(1, 3);
-
-
-		if (*gameObject->GetObjectTag() == ObjectTag::PLAYER)
-		{
-			sr->SetSprite(TextureTag::PLAYER_ATTACK_SHEET);
-			objectTag = ObjectTag::PLAYERATTACK;
-		}
-		else if (*gameObject->GetObjectTag() == ObjectTag::ENEMY)
-		{
-			sr->SetSprite(TextureTag::ENEMY_ATTACK_SHEET);
-			objectTag = ObjectTag::ENEMYATTACK;
-		}
-		go->AddComponent(sr);
-
+		SpriteRenderer* sr;
 
 		*go->GetPosition() = *gameObject->GetPosition();
 		*go->GetDirection() = *gameObject->GetDirection();
 
-		int initialRow = 2;
+
+		//TODO: Attack doesn't really work. You can hold down Space and keep the attack on. It also doesn't show the proper sprite image right now.
+		int initialRow = 0;
 
 		switch (*go->GetDirection())
 		{
@@ -62,9 +42,12 @@ void AttackSpawner::CreateAttack()
 		}
 
 
-		go->AddComponent(new Attack(objectTag, attackCooldown));
+		sr = new SpriteRenderer(textureTag, Vector2u(1, (initialRow) + 1), Vector2u(1, 3));
+		this->objectTag = objectTag;
 
-		AnimationComponent* aC = new AnimationComponent(sr, *sr->imageCount, 200.0f, initialRow);
+		go->AddComponent(sr);
+
+		AnimationComponent* aC = new AnimationComponent(sr, *sr->imageCount, 0.0f, initialRow);
 		go->AddComponent(aC);
 
 		SpriteRenderer& srRef = *sr;
@@ -73,10 +56,7 @@ void AttackSpawner::CreateAttack()
 		acController->ChangeAnimation.Attach(aC);
 
 
-		//col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.0f, true);
-		//go->AddComponent(col);
-		//(*GameWorld::GetInstance()->GetColliders()).push_back(col);
-
+		go->AddComponent(new Attack(this->objectTag, attackCooldown));
 
 		go->Awake();
 		go->Start();

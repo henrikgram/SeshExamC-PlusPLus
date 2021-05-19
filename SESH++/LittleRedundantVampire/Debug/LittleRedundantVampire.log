@@ -1,12 +1,2 @@
-﻿  AnimationComponent.cpp
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\AnimationComponent.cpp(18,64): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\AnimationComponent.cpp(19,65): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-  LittleRedundantVampire.vcxproj -> C:\Users\emmaj\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
+﻿  AttackSpawner.cpp
+  LittleRedundantVampire.vcxproj -> C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
