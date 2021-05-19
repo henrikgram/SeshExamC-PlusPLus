@@ -1,6 +1,8 @@
-#pragma once
+#ifndef ATTACKCOMMAND_H
+#define ATTACKCOMMAND_H
+
 #include "ICommand.h"
-#include "../Components/Player.h"
+#include "../Components/AttackSpawner.h"
 
 
 class AttackCommand : public ICommand
@@ -15,3 +17,5 @@ public:
 private:
 	AttackSpawner& attackReceiver;
 };
+
+#endif

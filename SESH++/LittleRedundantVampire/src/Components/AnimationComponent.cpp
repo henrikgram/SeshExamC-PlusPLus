@@ -1,22 +1,31 @@
 #include "AnimationComponent.h"
 
+
+/// <summary>
+/// Components that will animate by changing sprite through a spriteSheet
+/// </summary>
+/// <param name="spriteRenderer">Reference for the objects spriteRenderer</param>
+/// <param name="imageCount">How many rows of images, and how many images that is in one row</param>
+/// <param name="switchTime">How fast it should switch between frames</param>
+/// <param name="row">Default row to start the animation</param>
 AnimationComponent::AnimationComponent(SpriteRenderer* spriteRenderer, Vector2u imageCount, float switchTime, int row)
 {
-	TextureRect = new IntRect;
+	textureRect = new IntRect;
+
 	this->spriteRenderer = spriteRenderer;
-	//Vi definerer imageCount og switchTime fra header.
 	this->imageCount = imageCount;
 	this->switchTime = switchTime;
 
 	this->row = row;
 
 	totalTime = 0.0f;
-	//Hvilket image skal vi starte animationen fra i vores r�kke.
+
+	//Which image to start animating from.
 	currentImage.x = 0;
 
-	//Vi skal definere bredden og h�jden p� vores textureRectangle ift til png-filen, s� sprite for den rigtige dimension.
-	TextureRect->width = spriteRenderer->GetTexture().getSize().x / float(imageCount.x);
-	TextureRect->height = spriteRenderer->GetTexture().getSize().y / float(imageCount.y);
+	//Defines size of the texture rectangle according to the spritesheet images.
+	textureRect->width = spriteRenderer->GetTexture().getSize().x / float(imageCount.x);
+	textureRect->height = spriteRenderer->GetTexture().getSize().y / float(imageCount.y);
 }
 
 AnimationComponent::~AnimationComponent()
@@ -34,9 +43,9 @@ void AnimationComponent::Start()
 
 void AnimationComponent::Update(Time* timePerFrame)
 {
-	//Vi definerer hvilken r�kke og kolonne der skal cycles igennem.
+	//Which row to cycle through.
 	currentImage.y = row;
-	//Vi definerer vores totalTime ift. den tid der er g�et siden sidste update.
+	//We define our totalTime according to the time that's passed since last update.
 	totalTime += timePerFrame->asMilliseconds();
 
 	if (totalTime >= switchTime)
@@ -50,12 +59,13 @@ void AnimationComponent::Update(Time* timePerFrame)
 		}
 	}
 
-	TextureRect->left = currentImage.x * TextureRect->width;
-	TextureRect->top = currentImage.y * TextureRect->height;
-	TextureRect->width = abs(TextureRect->width);
+	//Find the left and top position of the current image in the spritesheet animation.
+	//This way we can know which image is the correct one.
+	textureRect->left = currentImage.x * textureRect->width;
+	textureRect->top = currentImage.y * textureRect->height;
+	textureRect->width = abs(textureRect->width);
 
-	//spriteRenderer->sprite->setTextureRect(*TextureRect);
-	spriteRenderer->SetTextureRect(*TextureRect);
+	spriteRenderer->SetTextureRect(*textureRect);
 }
 
 void AnimationComponent::Destroy()
@@ -65,11 +75,7 @@ void AnimationComponent::Destroy()
 
 void AnimationComponent::OnNotify(string eventName, IListener* sender)
 {
-
-	//convert string to int
-	//If it fails the conversion it checks for other augments
-	//TODO: tjek om det er cursed at s� voldsomt udnytte en trycatch
-	//TODO: det var det
+	//For flipping the sprite when facing left.
 	if (eventName != "NoLongerCollidingWith")
 	{
 		if (eventName == "flip")
@@ -83,8 +89,6 @@ void AnimationComponent::OnNotify(string eventName, IListener* sender)
 		}
 	}
 }
-
-
 
 ComponentTag AnimationComponent::ToEnum()
 {

@@ -14,7 +14,6 @@
     <ClCompile Include="src\Observer\CollisionEvent.cpp" />
     <ClCompile Include="src\Components\Collider.cpp" />
     <ClCompile Include="src\Components\Attack.cpp" />
-    <ClCompile Include="src\Components\Animation.cpp" />
     <ClCompile Include="src\Components\SpriteRenderer.cpp" />
     <ClCompile Include="src\Component.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
@@ -42,7 +41,6 @@
     <ClInclude Include="src\Observer\CollisionEvent.h" />
     <ClInclude Include="src\Components\Collider.h" />
     <ClInclude Include="src\Components\Attack.h" />
-    <ClInclude Include="src\Components\Animation.h" />
     <ClInclude Include="src\Enum\ObjectTag.h" />
     <ClInclude Include="src\Components\SpriteRenderer.h" />
     <ClInclude Include="src\Component.h" />

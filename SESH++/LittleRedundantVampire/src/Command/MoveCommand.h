@@ -1,6 +1,7 @@
-#pragma once
+#ifndef MOVECOMMAND_H
+#define MOVECOMMAND_H
+
 #include "ICommand.h"
-#include "../Components/Player.h"
 #include "../Components/Movement.h"
 
 class MoveCommand : public ICommand
@@ -16,3 +17,5 @@ private:
 	Movement& movementReceiver;
 	Vector2f* velocity;
 };
+
+#endif

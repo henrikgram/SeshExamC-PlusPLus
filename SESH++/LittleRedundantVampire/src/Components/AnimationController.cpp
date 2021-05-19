@@ -38,7 +38,6 @@ AnimationController::~AnimationController()
 }
 
 
-
 /// <summary>
 /// For animating objects that move in four directions, like the Player.
 /// </summary>
@@ -90,6 +89,7 @@ void AnimationController::MovementAnimation()
 
 void AnimationController::DecrementingRowAnimation()
 {
+	//If the currentRow has changed from the previous, update the animation.
 	if (previousRow != *currentRow)
 	{
 		string newRow = to_string(firstRow - *currentRow);

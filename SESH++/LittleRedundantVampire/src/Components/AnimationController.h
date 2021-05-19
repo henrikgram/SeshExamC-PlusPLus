@@ -1,9 +1,9 @@
-#pragma once
+#ifndef ANIMATIONCONTROLLER_H
+#define ANIMATIONCONTROLLER_H
+
 #include <string>
 #include "../Observer/IGameEvent.h"
-#include "../GameObject.h"
 #include "SpriteRenderer.h"
-#include "Movement.h"
 
 using namespace std;
 
@@ -27,7 +27,7 @@ public:
 	virtual void Destroy() override;
 	virtual ComponentTag ToEnum() override;
 
-	IGameEvent ChangeAnimation;
+	IGameEvent ChangeAnimation; //TODO: Make private maybe. But will require a Get method and an AttackListener method.
 
 
 private:
@@ -45,8 +45,12 @@ private:
 	bool movementAnimation;
 	bool decrementAnimation;
 
+	//Previous animated row.
 	int previousRow;
+	//Current row to animate.
 	int* currentRow;
+	//First row to animate.
 	int firstRow;
 };
 
+#endif

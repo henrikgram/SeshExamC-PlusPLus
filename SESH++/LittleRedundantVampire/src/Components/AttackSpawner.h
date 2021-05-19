@@ -1,5 +1,6 @@
 #pragma once
 #include "Attack.h"
+#include "AnimationController.h"
 
 
 class AttackSpawner : public Component
