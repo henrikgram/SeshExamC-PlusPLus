@@ -25,6 +25,7 @@
     <ClCompile Include="src\Components\TextMessage.cpp" />
     <ClCompile Include="src\Textbox.cpp" />
     <ClCompile Include="src\Command\AttackCommand.cpp" />
+    <ClCompile Include="src\Components\AnimationController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameWorld.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="src\Components\TextMessage.h" />
     <ClInclude Include="src\Textbox.h" />
     <ClInclude Include="src\Command\AttackCommand.h" />
+    <ClInclude Include="src\Components\AnimationController.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />
@@ -85,6 +87,8 @@
     <Image Include="Asset\TestTextbox.png" />
     <Image Include="Asset\GhostSheet.png" />
     <Image Include="Asset\GhostSheet2.png" />
+    <Image Include="Asset\PlayerAttackSheet.png" />
+    <Image Include="Asset\EnemyAttackSheet.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Asset\PlayfairDisplay-VariableFont_wght.ttf" />

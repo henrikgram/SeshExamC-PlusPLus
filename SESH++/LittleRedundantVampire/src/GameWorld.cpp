@@ -85,19 +85,28 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 		*go->GetPosition() = Vector2<float>(1000, 1000);
 		go->AddComponent(sr);
+
 		playerPointer = new Player();
 		go->AddComponent(playerPointer);
+
 		atckSpwnPointer = new AttackSpawner(ObjectTag::PLAYERATTACK);
 		go->AddComponent(atckSpwnPointer);
+
+		movementPointer = new Movement(5.0f, Vector2f(0.0f, 0.0f));
+		go->AddComponent(movementPointer);
 
 		AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 4), 200.0f, 1);
 		go->AddComponent(aC);
 
-		playerPointer->ChangeAnimation.Attach(aC);
+		SpriteRenderer& srRef = *sr;
+		AnimationController* acController = new AnimationController(srRef, "3", "2", "0", "1", "1");
+		go->AddComponent(acController);
+		acController->ChangeAnimation.Attach(aC);
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
-		float x = sr->TextureRect->width;
-		float y = sr->TextureRect->height;
+		float x = (float)sr->TextureRect->width;
+		float y = (float)sr->TextureRect->height;
+
 		col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
 		go->AddComponent(col);
 		colliders->push_back(col);
@@ -111,8 +120,6 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		break;
 	case ObjectTag::DOOR:
 		break;
-		//case ObjectTag::FLOOR:
-		//	break;
 	case ObjectTag::BOOKCASE:
 		break;
 	case ObjectTag::VASE:
@@ -125,7 +132,9 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->AddComponent(sr);
 		go->AddComponent(new Platform);
 
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.0f, true);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x,
+									 sr->GetSprite().getTexture()->getSize().y),
+									*go->GetPosition(), 0.0f, true);
 		go->AddComponent(col);
 		col->AttachToColliderDestroyedEvent(GameWorld::GetInstance());
 		colliders->push_back(col);
@@ -147,6 +156,59 @@ void GameWorld::Initialize()
 {
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
+
+
+	#pragma region Damage test, Enemy and Enemy Attack on Player.
+
+		//Test-attack. Can be deleted later.
+		GameObject* go = new GameObject();
+		SpriteRenderer* sr = new SpriteRenderer();
+
+		sr->isSpriteSheet = true;
+		sr->currentImage = new Vector2u(1, 1);
+		sr->imageCount = new Vector2u(1, 3);
+
+		sr->SetSprite(TextureTag::ENEMY_ATTACK_SHEET);
+		go->AddComponent(sr);
+
+		Collider* col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x,
+									  sr->GetSprite().getTexture()->getSize().y),
+									 *go->GetPosition(), 0.0f, false);
+		go->AddComponent(col);
+		(*colliders).push_back(col);
+
+		go->Awake();
+		go->Start();
+
+		*go->GetPosition() = Vector2f(1200.0f, 1000.0f);
+		*go->GetObjectTag() = ObjectTag::ENEMYATTACK;
+
+		(*gameObjects).push_back(go);
+
+
+		//Test-skade af enemy
+		GameObject* go1 = new GameObject();
+		SpriteRenderer* sr1 = new SpriteRenderer();
+
+		sr1->SetSprite(TextureTag::ENEMY);
+		go1->AddComponent(sr1);
+
+		Collider* col1 = new  Collider(Vector2f(sr1->GetSprite().getTexture()->getSize().x,
+			sr1->GetSprite().getTexture()->getSize().y),
+			*go1->GetPosition(), 0.0f, false);
+		go1->AddComponent(col1);
+		(*colliders).push_back(col1);
+
+		go1->Awake();
+		go1->Start();
+
+		*go1->GetPosition() = Vector2f(1200.0f, 1200.0f);
+		*go1->GetObjectTag() = ObjectTag::ENEMY;
+
+		(*gameObjects).push_back(go1);
+
+	#pragma endregion
+	}
 }
 
 void GameWorld::LoadContent()
@@ -176,10 +238,9 @@ void GameWorld::DeleteObjects()
 				i++;
 			}
 		}
-
 		objectsToBeDeleted.pop();
 	}
-}
+
 
 void GameWorld::Update(Time* timePerFrame)
 {
@@ -224,11 +285,12 @@ void GameWorld::Update(Time* timePerFrame)
 		//TODO: Fix så den tager imod attack også
 		Player& playerRef = *playerPointer;
 		AttackSpawner& atckSpwnPointerRef = *atckSpwnPointer;
+		Movement& movementPointerRef = *movementPointer;
 
 		//AttackSpawner* attackPointer = dynamic_cast<AttackSpawner*>(playerPointer->gameObject->GetComponent(ComponentTag::ATTACKSPAWNER));
 		//AttackSpawner& attackRef = *attackPointer;
 
-		PlayerInvoker::GetInstance(playerRef, atckSpwnPointerRef)->InvokeCommand();
+		PlayerInvoker::GetInstance(movementPointerRef, atckSpwnPointerRef)->InvokeCommand();
 	}
 }
 

@@ -1,94 +1,64 @@
 
 #include "Player.h"
-#include "../Enum/ObjectTag.h"
 #include <iostream>
+#include "../GameWorld.h"
+#include "AnimationComponent.h"
+
 using namespace std;
 using namespace sf;
 
 Player::Player()
 {
+	health = new int;
+	*health = 10;
 
+	healthBar = new GameObject();
+	srHealthBar = new SpriteRenderer();
+
+	timer = 0.0f;
+	invincibilityTimer = 0.0f;
+
+	invincible = false;
+	damageTaken = false;
 }
 
 Player::~Player()
 {
+	delete healthBar;
+	healthBar = nullptr;
 
+	delete srHealthBar;
+	srHealthBar = nullptr;
+
+	delete health;
+	health = nullptr;
 }
-
-void Player::Move(Vector2f velocity)
-{
-	//ChangeAnimation.Notify("0",this);
-	this->velocity += velocity;
-}
-
 
 void Player::Awake()
 {
-	speed = 5.0f;
-	velocity = Vector2f(0.0f, 0.0f);
+	srHealthBar->isSpriteSheet = true;
+	srHealthBar->currentImage = new Vector2u(1, 1);
+	srHealthBar->imageCount = new Vector2u(1, 10);
+
+	srHealthBar->SetSprite(TextureTag::PLAYER_HEALTH);
+	healthBar->AddComponent(srHealthBar);
+
+	AnimationComponent* aC = new AnimationComponent(srHealthBar, *srHealthBar->imageCount, 200.0f, 0);
+	healthBar->AddComponent(aC);
+
+	SpriteRenderer& srRef = *srHealthBar;
+	AnimationController* acController = new AnimationController(srRef, health, *health);
+	healthBar->AddComponent(acController);
+	acController->ChangeAnimation.Attach(aC);
+
+	healthBar->Awake();
+	healthBar->Start();
+
+	*healthBar->GetShouldDraw() = false;
+
+	(*GameWorld::GetInstance()->GetGameObjects()).push_back(healthBar);
 }
 
-void Player::UpdateAnimation()
-{
-	//TODO: OPTIMERING fix s� den ikke k�rer medmindre det er en ny animation. OPTIMERING
-	if (velocity.x == 0 && velocity.y == 0)
-	{
-		if (lastDir != 'N')
-		{
-			ChangeAnimation.Notify("3", this);
-			lastDir = 'N';
-		}
-		
-	}
-	else if (velocity.y < 0)
-	{
-		if (lastDir != 'U')
-		{
-			ChangeAnimation.Notify("2", this);
-			lastDir = 'U';
-		}
-		
-	}
-	else if (velocity.y > 0)
-	{
-		if (lastDir != 'D')
-		{
-			ChangeAnimation.Notify("0", this);
-			lastDir = 'D';
-		}
-	
-	}
-	else if (velocity.x < 0)
-	{
-		if (lastDir != 'L')
-		{
-			if (!flipped)
-			{
-				flipped = true;
-				ChangeAnimation.Notify("flip", this);
-			}
-			ChangeAnimation.Notify("1", this);
-			lastDir = 'L';
-		}
-
-	}
-
-	else if (velocity.x > 0)
-	{
-		if (lastDir != 'R')
-		{
-			if (flipped)
-			{
-				flipped = false;
-				ChangeAnimation.Notify("flip", this);
-			}
-			ChangeAnimation.Notify("1", this);
-			lastDir = 'R';
-		}
-
-	}
-
-}
 
 void Player::Start()
 {
@@ -97,37 +67,39 @@ void Player::Start()
 
 void Player::Update(Time* timePerFrame)
 {
-	UpdateAnimation();
+	*healthBar->GetPosition() = Vector2f((*gameObject->GetPosition()).x, (*gameObject->GetPosition()).y - 75);
 
-	Normalize();
 
-	if (speed < 5.0f)
+	////Delete later, only for healthbar testing.
+	//timer += timePerFrame->asMilliseconds();
+	//if (timer >= 1000.0f)
+	//{
+	//	--*health;
+	//	timer = 0.0f;
+	//}
+
+
+	//Checks damage.
+	if (damageTaken)
 	{
-		speed++;
+		invincible = true;
+		--*health;
+
+		damageTaken = false;
+		*healthBar->GetShouldDraw() = true;
 	}
-	//cout << "x: " << this->gameObject->GetPosition()->x << ". y: " << this->gameObject->GetPosition()->y;
-}
 
-void Player::Normalize()
-{
-	if (velocity != Vector2f(0.0f, 0.0f))
+	if (invincible)
 	{
+		invincibilityTimer += timePerFrame->asMilliseconds();
 
-		//Vi udregner hypotenusen af bevaegelsesretningen.
-		float movementVectorLength = sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
+		if (invincibilityTimer >= 1000.0f)
+		{
+			invincible = false;
+			*healthBar->GetShouldDraw() = false;
 
-		//Vi normaliserer retningen ift til hypotenusens laengde.
-		velocity.x /= movementVectorLength;
-		velocity.y /= movementVectorLength;
-
-		velocity.x *= speed;
-		velocity.y *= speed;
-
-		//cout << velocity.x << " : " << velocity.y << "\n";
-		*gameObject->GetPosition() += velocity;
-
-		//TODO: OPTIMERING: implementer funktioanlitet i commmand pattern s� den registrerer n�r man slipper en tast, og s�tter vector til 0 frem for her
-		velocity = Vector2f(0.0f, 0.0f);
+			invincibilityTimer = 0.0f;
+		}
 	}
 }
 
@@ -149,10 +121,18 @@ void Player::OnNotifyCollision(ObjectTag otherTag, std::string side)
 	case ObjectTag::PLAYER:
 		break;
 	case ObjectTag::ENEMY:
+		if (!invincible)
+		{
+			damageTaken = true;
+		}
 		break;
 	case ObjectTag::PLAYERATTACK:
 		break;
 	case ObjectTag::ENEMYATTACK:
+		if (!invincible)
+		{
+			damageTaken = true;
+		}
 		break;
 	case ObjectTag::NPC:
 		//cout << "hit npc";

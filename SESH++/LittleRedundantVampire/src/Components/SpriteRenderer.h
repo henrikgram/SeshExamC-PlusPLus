@@ -46,9 +46,12 @@ public:
 	Vector2u* currentImage;
 	Vector2u* imageCount;
 
+	bool* GetFlipped();
+
 
 private:
 	Sprite* sprite;
 	Texture* texture;
-};
 
+	bool* flipped;
+};

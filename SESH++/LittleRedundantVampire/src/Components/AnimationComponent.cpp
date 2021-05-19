@@ -11,10 +11,10 @@ AnimationComponent::AnimationComponent(SpriteRenderer* spriteRenderer, Vector2u 
 	this->row = row;
 
 	totalTime = 0.0f;
-	//Hvilket image skal vi starte animationen fra i vores række.
+	//Hvilket image skal vi starte animationen fra i vores rï¿½kke.
 	currentImage.x = 0;
 
-	//Vi skal definere bredden og højden på vores textureRectangle ift til png-filen, så sprite for den rigtige dimension.
+	//Vi skal definere bredden og hï¿½jden pï¿½ vores textureRectangle ift til png-filen, sï¿½ sprite for den rigtige dimension.
 	TextureRect->width = spriteRenderer->GetTexture().getSize().x / float(imageCount.x);
 	TextureRect->height = spriteRenderer->GetTexture().getSize().y / float(imageCount.y);
 }
@@ -34,9 +34,9 @@ void AnimationComponent::Start()
 
 void AnimationComponent::Update(Time* timePerFrame)
 {
-	//Vi definerer hvilken række og kolonne der skal cycles igennem.
+	//Vi definerer hvilken rï¿½kke og kolonne der skal cycles igennem.
 	currentImage.y = row;
-	//Vi definerer vores totalTime ift. den tid der er gået siden sidste update.
+	//Vi definerer vores totalTime ift. den tid der er gï¿½et siden sidste update.
 	totalTime += timePerFrame->asMilliseconds();
 
 	if (totalTime >= switchTime)
@@ -65,6 +65,11 @@ void AnimationComponent::Destroy()
 
 void AnimationComponent::OnNotify(string eventName, IListener* sender)
 {
+
+	//convert string to int
+	//If it fails the conversion it checks for other augments
+	//TODO: tjek om det er cursed at sï¿½ voldsomt udnytte en trycatch
+	//TODO: det var det
 	if (eventName != "NoLongerCollidingWith")
 	{
 		if (eventName == "flip")

@@ -1,14 +1,14 @@
 #include "PlayerInvoker.h"
 #include "../Components/AttackSpawner.h"
 
-PlayerInvoker::PlayerInvoker(Player& receiver, AttackSpawner& attackReceiver) : 
-	receiver(receiver), 
+PlayerInvoker::PlayerInvoker(Movement& movementReceiver, AttackSpawner& attackReceiver) : 
+	movementReceiver(movementReceiver), 
 	attackReceiver(attackReceiver)
 {
-	keyBinds.insert(make_pair(Keyboard::A, new MoveCommand(receiver, Vector2f(-1.0f,0.0f))));
-	keyBinds.insert(make_pair(Keyboard::D, new MoveCommand(receiver, Vector2f(1.0f, 0.0f))));
-	keyBinds.insert(make_pair(Keyboard::W, new MoveCommand(receiver, Vector2f(0.0f, -1.0f))));
-	keyBinds.insert(make_pair(Keyboard::S, new MoveCommand(receiver, Vector2f(0.0f, 1.0f))));
+	keyBinds.insert(make_pair(Keyboard::A, new MoveCommand(movementReceiver, Vector2f(-1.0f,0.0f))));
+	keyBinds.insert(make_pair(Keyboard::D, new MoveCommand(movementReceiver, Vector2f(1.0f, 0.0f))));
+	keyBinds.insert(make_pair(Keyboard::W, new MoveCommand(movementReceiver, Vector2f(0.0f, -1.0f))));
+	keyBinds.insert(make_pair(Keyboard::S, new MoveCommand(movementReceiver, Vector2f(0.0f, 1.0f))));
 	keyBinds.insert(make_pair(Keyboard::Space, new AttackCommand(attackReceiver)));
 }
 
@@ -24,11 +24,11 @@ PlayerInvoker::~PlayerInvoker()
 	keyBinds.clear();
 }
 
-PlayerInvoker* PlayerInvoker::GetInstance(Player& receiver, AttackSpawner& attackReceiver)
+PlayerInvoker* PlayerInvoker::GetInstance(Movement& movementReceiver, AttackSpawner& attackReceiver)
 {
 	if (instance == nullptr)
 	{
-		instance = new PlayerInvoker(receiver, attackReceiver);
+		instance = new PlayerInvoker(movementReceiver, attackReceiver);
 	}
 
 	return instance;

@@ -35,7 +35,6 @@ class GameObject : public IListener
 {
 public:
 	//Map for all components attached to the gameobject
-	unordered_map<ComponentTag, Component*> components;
 
 	GameObject();
 	GameObject(Vector2<float> position);
@@ -78,12 +77,16 @@ public:
 
 	ObjectTag* GetObjectTag() const { return objectTag; }
 
-	string* GetDirection() const { return direction; }
+	char* GetDirection() const { return direction; }
+
+	bool* GetIsMovable();
+
+	unordered_map<ComponentTag, Component*>* GetComponents();
 
 	bool* GetShouldDraw() const { return shouldDraw; }
 
 	/// <summary>
-	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) That this GameObject is ready to be deleted. 
+	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) That this GameObject is ready to be deleted.
 	/// Can be called from the components belonging to the gameobject.
 	/// </summary>
 	void CallSelfDestruct();
@@ -101,7 +104,7 @@ private:
 
 	ObjectTag* objectTag;
 
-	string* direction;
+	char* direction;
 
 	bool* shouldDraw;
 
@@ -109,6 +112,10 @@ private:
 
 	// Inherited via IListener
 	virtual void OnNotify(std::string eventName, IListener* sender) override;
+	
+	bool* isMovable;
+
+	unordered_map<ComponentTag, Component*>* components;
 };
 
 #endif

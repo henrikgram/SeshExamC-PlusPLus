@@ -25,7 +25,9 @@ private:
 	Texture* windowTexture = new Texture;
 
 	// OBJECTS
-	Texture* attackSheetTexture = new Texture;
+	Texture* playerHealthUI = new Texture;
+	Texture* playerAttackSheetTexture = new Texture;
+	Texture* enemyAttackSheetTexture = new Texture;
 	Texture* doorTexture = new Texture;
 	Texture* enemyTexture = new Texture;
 	Texture* keyTexture = new Texture;

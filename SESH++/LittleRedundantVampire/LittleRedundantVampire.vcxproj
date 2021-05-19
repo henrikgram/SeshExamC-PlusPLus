@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\AnimationController.cpp" />
     <ClCompile Include="src\Components\AnimationComponent.cpp" />
     <ClCompile Include="src\Components\Npc.cpp" />
     <ClCompile Include="src\Command\AttackCommand.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="src\Textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Components\AnimationController.h" />
     <ClInclude Include="src\Components\AnimationComponent.h" />
     <ClInclude Include="src\Components\Npc.h" />
     <ClInclude Include="src\Command\AttackCommand.h" />
@@ -204,6 +206,7 @@
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />
     <Image Include="Asset\Bookcase.png" />
+    <Image Include="Asset\EnemyAttackSheet.png" />
     <Image Include="Asset\FloorCarpet.png" />
     <Image Include="Asset\Crate.png" />
     <Image Include="Asset\DoorClosed.png" />
@@ -214,6 +217,7 @@
     <Image Include="Asset\healthUI.png" />
     <Image Include="Asset\Key.png" />
     <Image Include="Asset\NewVillagerDown.png" />
+    <Image Include="Asset\PlayerAttackSheet.png" />
     <Image Include="Asset\TestTextbox.png" />
     <Image Include="Asset\TextBox.png" />
     <Image Include="Asset\TextBox_V2.png" />

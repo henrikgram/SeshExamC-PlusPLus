@@ -5,6 +5,8 @@
 #include "AttackSpawner.h"
 #include <string>
 #include "../Observer/IGameEvent.h"
+#include "SpriteRenderer.h"
+#include "../Enum/ObjectTag.h"
 
 using namespace sf;
 
@@ -14,8 +16,6 @@ public:
 	Player();
 	~Player();
 
-	void Move(Vector2f velocity);
-
 	void Awake() override;
 	void Start() override;
 	void Update(Time* timePerFrame) override;
@@ -24,15 +24,19 @@ public:
 
 	void OnNotifyCollision(ObjectTag otherTag, string side) override;
 
-	void Normalize();
-	void UpdateAnimation();
-	IGameEvent ChangeAnimation;
-
 
 private:
-	bool flipped = false;
-	char lastDir;
-	float speed;
 
-	Vector2f velocity;
+	int* health;
+
+	GameObject* healthBar;
+	SpriteRenderer* srHealthBar;
+
+	//Delete later, only for testing.
+	float timer;
+
+	float invincibilityTimer;
+
+	bool invincible;
+	bool damageTaken;
 };

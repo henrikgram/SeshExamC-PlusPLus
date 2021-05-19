@@ -1,6 +1,6 @@
 #include "MoveCommand.h"
 
-MoveCommand::MoveCommand(Player& receiver, Vector2f velocity) : receiver(receiver)
+MoveCommand::MoveCommand(Movement& movementReceiver, Vector2f velocity) : movementReceiver(movementReceiver)
 {
 	this->velocity = new Vector2f(velocity);
 }
@@ -13,22 +13,8 @@ MoveCommand::~MoveCommand()
 
 void MoveCommand::Execute()
 {
-	if (*velocity == Vector2f(-1.0f, 0.0f))
+	if (*movementReceiver.gameObject->GetIsMovable())
 	{
-		*receiver.gameObject->GetDirection() = "left";
+		movementReceiver.Move(*velocity);
 	}
-	else if (*velocity == Vector2f(1.0f, 0.0f))
-	{
-		*receiver.gameObject->GetDirection() = "right";
-	}
-	else if (*velocity == Vector2f(0.0f, -1.0f))
-	{
-		*receiver.gameObject->GetDirection() = "up";
-	}
-	else if (*velocity == Vector2f(0.0f, 1.0f))
-	{
-		*receiver.gameObject->GetDirection() = "down";
-	}
-
-	receiver.Move(*velocity);
 }

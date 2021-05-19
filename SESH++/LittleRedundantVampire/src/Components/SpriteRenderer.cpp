@@ -19,6 +19,9 @@ SpriteRenderer::~SpriteRenderer()
 
 	delete imageCount;
 	imageCount = nullptr;
+
+	delete flipped;
+	flipped = nullptr;
 }
 
 //SpriteRenderer::SpriteRenderer()
@@ -57,6 +60,9 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag)
 	float heigt = texture->getSize().y;
 
 	sprite->setOrigin(Vector2f(width / 2, heigt / 2));
+
+	flipped = new bool;
+	*flipped = false;
 }
 
 /// <summary>
@@ -69,10 +75,14 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vec
 	sprite = new Sprite(*texture);
 	this->currentImage = new Vector2u(currentImage);
 	this->imageCount = new Vector2u(imageCount);
+
+	flipped = new bool;
+	*flipped = false;
+	
 	isSpriteSheet = true;
 
 	TextureRect = new IntRect();
-	//Vi skal definere bredden og højden på vores textureRectangle ift til png-filen, så sprite for den rigtige dimension.
+	//Vi skal definere bredden og hï¿½jden pï¿½ vores textureRectangle ift til png-filen, sï¿½ sprite for den rigtige dimension.
 	TextureRect->width = texture->getSize().x / float(this->imageCount->x);
 	TextureRect->height = texture->getSize().y / float(this->imageCount->y);
 
@@ -87,7 +97,7 @@ void SpriteRenderer::Awake()
 {
 	//if (isSpriteSheet)
 	//{
-	//	//Vi skal definere bredden og højden på vores textureRectangle ift til png-filen, så sprite for den rigtige dimension.
+	//	//Vi skal definere bredden og hï¿½jden pï¿½ vores textureRectangle ift til png-filen, sï¿½ sprite for den rigtige dimension.
 	//	TextureRect->width = texture->getSize().x / float(imageCount->x);
 	//	TextureRect->height = texture->getSize().y / float(imageCount->y);
 
@@ -154,15 +164,15 @@ bool SpriteRenderer::GetIsSpriteSheet()
 
 //void SpriteRenderer::SetSprite(TextureTag textureTag)
 //{
-//	//TODO: This might work better if we make a constructor for the SpriteRenderer class and pass a texturetag to this 
-//	//so we don't have to call SetSprite outside of this class. 
+//	//TODO: This might work better if we make a constructor for the SpriteRenderer class and pass a texturetag to this
+//	//so we don't have to call SetSprite outside of this class.
 //	texture = Asset::GetInstance()->GetTexture(textureTag);
 //
 //	if (isSpriteSheet)
 //	{
 //		sprite->setTexture(*texture);
 //
-//		//Vi skal definere bredden og højden på vores textureRectangle ift til png-filen, så sprite for den rigtige dimension.
+//		//Vi skal definere bredden og hï¿½jden pï¿½ vores textureRectangle ift til png-filen, sï¿½ sprite for den rigtige dimension.
 //		TextureRect->width = texture->getSize().x / float(imageCount->x);
 //		TextureRect->height = texture->getSize().y / float(imageCount->y);
 //
@@ -187,4 +197,9 @@ void SpriteRenderer::SetTextureRect(IntRect& textureRect)
 {
 	this->TextureRect = &textureRect;
 	sprite->setTextureRect(*TextureRect);
+}
+
+bool* SpriteRenderer::GetFlipped()
+{
+	return flipped;
 }
