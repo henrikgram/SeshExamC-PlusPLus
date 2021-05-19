@@ -56,7 +56,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->AddComponent(col);
 		colliders.push_back(col);
 	}
-		break;
+	break;
 	case ObjectTag::ENEMY:
 		break;
 	case ObjectTag::NPC:
@@ -75,10 +75,11 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		sr->SetSprite(TextureTag::WINDOW);
 		go->AddComponent(sr);
 		go->position = new Vector2f(1000, 800);
-		LightPointer = new Light(Vector2f(1,1));
-		go->AddComponent(LightPointer);
+		LightPointer = new DirectionalLight(Vector2f(go->position->x - sr->GetTexture().getSize().x/2, 800), Vector2f(go->position->x + sr->GetTexture().getSize().x / 2, 800),&walls,90,5);
 
-		col = new  Collider(Vector2f(1,1), *go->position, 1.0f, true);
+		//go->AddComponent(LightPointer);
+
+		col = new  Collider(Vector2f(1, 1), *go->position, 1.0f, true);
 		go->AddComponent(col);
 
 		break;
@@ -86,6 +87,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		sr->SetSprite(TextureTag::OZZY);
 		go->position = new Vector2f(150, 150);
 		go->AddComponent(sr);
+
 
 		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->position, 1.0f, true);
 		go->AddComponent(col);
@@ -172,9 +174,65 @@ void GameWorld::Run()
 
 void GameWorld::Initialize()
 {
+	VertexArray tmp4 = VertexArray(sf::LinesStrip, 2);
+	tmp4[0].position = Vector2f(0, 0);
+	tmp4[0].color = Color::Red;
+	tmp4[1].color = Color::Red;
+	tmp4[1].position = Vector2f(2000, 0);
+
+	walls.push_back(tmp4);
+
+	VertexArray tmp5 = VertexArray(sf::LinesStrip, 2);
+	tmp5[0].position = Vector2f(2000, 0);
+	tmp5[0].color = Color::Red;
+	tmp5[1].color = Color::Red;
+	tmp5[1].position = Vector2f(2000, 2000);
+
+	walls.push_back(tmp5);
+
+
+	VertexArray tmp6 = VertexArray(sf::LinesStrip, 2);
+	tmp6[0].position = Vector2f(2000, 2000);
+	tmp6[0].color = Color::Red;
+	tmp6[1].color = Color::Red;
+	tmp6[1].position = Vector2f(0, 2000);
+
+	walls.push_back(tmp6);
+
+	VertexArray tmp7 = VertexArray(sf::LinesStrip, 2);
+	tmp7[0].position = Vector2f(0, 2000);
+	tmp7[0].color = Color::Red;
+	tmp7[1].color = Color::Red;
+	tmp7[1].position = Vector2f(0, 0);
+
+	walls.push_back(tmp7);
+
+	VertexArray tmp8 = VertexArray(sf::LinesStrip, 2);
+	tmp8[0].position = Vector2f(800, 1500);
+	tmp8[0].color = Color::Red;
+	tmp8[1].color = Color::Red;
+	tmp8[1].position = Vector2f(1100, 1500);
+
+	walls.push_back(tmp8);
+
+	VertexArray cursedPlayerWall = VertexArray(sf::LinesStrip, 2);
+	cursedPlayerWall[0].position = Vector2f(900, 1500);
+	cursedPlayerWall[0].color = Color::Red;
+	cursedPlayerWall[1].color = Color::Red;
+	cursedPlayerWall[1].position = Vector2f(1000, 1500);
+
+	walls.push_back(cursedPlayerWall);
+
+
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::WINDOW);
 	BootlegFactory(ObjectTag::CRATE);
+
+	//LightPointer->CastRays(&walls);
+
+	
+		
+		
 }
 
 void GameWorld::LoadContent()
@@ -184,6 +242,12 @@ void GameWorld::LoadContent()
 
 void GameWorld::Update(Time* timePerFrame)
 {
+
+	walls[5][0].position.x = playerPointer->gameObject->position->x-30;
+	walls[5][0].position.y = playerPointer->gameObject->position->y-50;
+	walls[5][1].position.x = playerPointer->gameObject->position->x+30;
+	walls[5][1].position.y = playerPointer->gameObject->position->y-50;
+
 	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
 	//iterates through the gameObjects and calls update
 	for (vector<GameObject*>::size_type i = 0;
@@ -211,6 +275,8 @@ void GameWorld::Update(Time* timePerFrame)
 		Player& playerRef = *playerPointer;
 		PlayerInvoker::GetInstance(playerRef)->InvokeCommand();
 	}
+
+	LightPointer->Update(timePerFrame);
 }
 
 void GameWorld::Draw()
@@ -245,9 +311,34 @@ void GameWorld::Draw()
 
 	//window.draw(line);
 
+	for (size_t i = 0; i < gameObjects.size; i++)
+	{
+		for (int i = 0; i < go.draw().length; i++)
+		{
+			//tegn alle elementer i drawable vector for dette gameobjects
+		}
+	}
+
+	vector<VertexArray> FUCKINGLORT = LightPointer->GetRayLines();
+
+	vector<VertexArray>::iterator itttt;
+
+	for (itttt = FUCKINGLORT.begin(); itttt < FUCKINGLORT.end(); itttt++)
+	{
+		window.draw(*itttt);
+	}
+
+	vector<Drawable> test;
+
+	Sprite srp;
+	VertexArray vr;
+
+	test.push_back(srp);
+	test.push_back(vr);
 
 
-	window.draw((*LightPointer->GetRays()));
+
+	//window.draw((*LightPointer->GetRays()));
 
 	// Displays everything in the window.
 	window.display();

@@ -1,7 +1,8 @@
 #include "LightSource.h"
 
-LightSource::LightSource(Vector2f position, int stepSize)
+LightSource::LightSource(Vector2f position, vector<VertexArray>* walls, int stepSize)
 {
+	this->walls = walls;
 	//this->position = position;
 	//
 
@@ -46,6 +47,30 @@ vector<Ray*>* LightSource::GetRays()
 Vector2f LightSource::GetPosition()
 {
 	return position;
+}
+
+void LightSource::Awake()
+{
+}
+
+void LightSource::Start()
+{
+}
+
+void LightSource::Update(Time* timePerFrame)
+{
+	CastRays(walls);
+}
+
+void LightSource::Destroy()
+{
+	//TODO: kald destructor
+	//LightSource::~LightSource();
+}
+
+ComponentTag LightSource::ToEnum()
+{
+	return ComponentTag::LIGHT;
 }
 
 void LightSource::Move(Vector2f position)

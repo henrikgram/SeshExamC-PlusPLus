@@ -1,42 +1,30 @@
-﻿  DirectionalLight.cpp
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\DirectionalLight.cpp(24,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\DirectionalLight.cpp(123,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+﻿  GameWorld.cpp
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(53,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
           with
+          [
+              T=int
+          ]
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(54,11): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(92,114): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\DirectionalLight.cpp(124,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(92,71): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
+          [
+              T=unsigned int
+          ]
+          and
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\DirectionalLight.cpp(129,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\DirectionalLight.cpp(130,21): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
-  LightSource.cpp
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\LightSource.cpp(129,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  Main3.cpp
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\Main3.cpp(22,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\Main3.cpp(34,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\Main3.cpp(34,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\Main3.cpp(37,34): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\Main3.cpp(37,30): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-  PointLight.cpp
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\RayCasting\PointLight.cpp(14,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
   LittleRedundantVampire.vcxproj -> C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

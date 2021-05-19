@@ -69,6 +69,9 @@ public:
 	/// </summary>
 	Component * GetComponent(ComponentTag tag);
 
+
+	vector<Drawable> Draw();
+
 	/// <summary>
 	///  Calls Destroy for all components attached to the gameobject
 	/// </summary>

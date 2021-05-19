@@ -1,8 +1,10 @@
 #include "PointLight.h"
 
-PointLight::PointLight(Vector2f position, int stepSize) : LightSource(position, stepSize)
+PointLight::PointLight(Vector2f position, vector<VertexArray>* walls, int stepSize) : LightSource(position, walls, stepSize)
 {
 	this->position = position;
+
+	
 
 	vector<Ray>::iterator it;
 

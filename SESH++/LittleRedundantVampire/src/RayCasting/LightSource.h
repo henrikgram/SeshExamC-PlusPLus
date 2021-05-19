@@ -1,4 +1,5 @@
 #pragma once
+#include "../Component.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -13,7 +14,7 @@ using namespace sf;
 /// <summary>
 /// Object which will beam out a number of Rays. 
 /// </summary>
-class LightSource
+class LightSource : public Component
 {
 public:
 	/// <summary>
@@ -21,8 +22,7 @@ public:
 	/// </summary>
 	/// <param name="position"></param>
 	/// <param name="stepSize">The amount of rays. 1 is one ray pr. degree.</param>
-	LightSource(Vector2f position, int stepSize = 5);
-
+	LightSource(Vector2f position, vector<VertexArray>* walls, int stepSize = 5);
 
 	~LightSource();
 
@@ -75,10 +75,16 @@ public:
 
 	Vector2f GetPosition();
 
+	void Awake() override;
+	void Start() override;
+	void Update(Time* timePerFrame) override;
+	void Destroy() override;
+	ComponentTag ToEnum() override;
 
 protected:
 	Vector2f position;
 
+	vector<VertexArray>* walls;
 	vector<Vector2f>* intersectingPoints = new vector<Vector2f>;
 	vector<Ray*>* intersectingRays = new vector<Ray*>;
 	vector<Ray*>* rays = new vector<Ray*>;

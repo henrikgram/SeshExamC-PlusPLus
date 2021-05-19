@@ -18,7 +18,10 @@
 //#include "Headers/LevelManager.h"
 #include "BitmapImage.h"
 #include "LevelManager.h"
-#include "Components/Light.h"
+
+#include "RayCasting/DirectionalLight.h"
+#include "RayCasting/PointLight.h"
+
 
 using namespace std;
 
@@ -65,6 +68,9 @@ private:
 
 	vector<Collider*> colliders;
 	Player* playerPointer;
-	Light* LightPointer;
+	DirectionalLight* LightPointer;
+	vector<VertexArray> walls;
+	
+	
 };
 

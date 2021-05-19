@@ -23,7 +23,6 @@
     <ClCompile Include="src\Asset.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Components\AnimationComponent.cpp" />
-    <ClCompile Include="src\Components\Light.cpp" />
     <ClCompile Include="src\Main2.cpp" />
     <ClCompile Include="src\RayCasting\Main3.cpp" />
     <ClCompile Include="src\RayCasting\Ray.cpp" />
@@ -59,7 +58,6 @@
     <ClInclude Include="src\Observer\IListener.h" />
     <ClInclude Include="src\Observer\ICollisionListener.h" />
     <ClInclude Include="src\Components\AnimationComponent.h" />
-    <ClInclude Include="src\Components\Light.h" />
     <ClInclude Include="src\RayCasting\Ray.h" />
     <ClInclude Include="src\RayCasting\LightSource.h" />
     <ClInclude Include="src\RayCasting\DirectionalLight.h" />

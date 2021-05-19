@@ -1,6 +1,6 @@
 #include "DirectionalLight.h"
 
-DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition, int angle, int stepSize) : LightSource(startPosition, stepSize)
+DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition, vector<VertexArray>* walls, int angle, int stepSize) : LightSource(startPosition, walls, stepSize)
 {
 	this->position = startPosition;
 	this->endPosition = endPosition;
@@ -48,8 +48,8 @@ vector<VertexArray> DirectionalLight::GetRayLines()
 	for (it = rays->begin(); it < rays->end(); it++)
 	{
 		VertexArray tmp = VertexArray(sf::LinesStrip, 2);
-		tmp[0].color = Color::Black;
-		tmp[1].color = Color::Black;
+		tmp[0].color = Color::Yellow;
+		tmp[1].color = Color::Yellow;
 		tmp[0].position = (*it)->GetPosition();
 		tmp[1].position = (*it)->GetIntersectionPoint();
 		RayLines.push_back(tmp);
