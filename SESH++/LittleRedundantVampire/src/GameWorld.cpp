@@ -207,17 +207,23 @@ void GameWorld::Update(Time* timePerFrame)
 		}
 	}
 
+	Collider* playerCol = dynamic_cast<Collider*>(playerPointer->gameObject->GetComponent(ComponentTag::COLLIDER));
+
 	vector<Collider*>::iterator colIt;
 	vector<Collider*>::iterator colIt2;
 	for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
 	{
-		for (colIt2 = colliders->begin(); colIt2 < colliders->end(); colIt2++)
-		{
-			if (colIt != colIt2)
-			{
-				(*colIt)->CheckCollision(*colIt2);
-			}
-		}
+		playerCol->CheckCollision(*colIt);
+
+		//(*colIt)->CheckCollision(playerCol);
+
+		//for (colIt2 = colliders->begin(); colIt2 < colliders->end(); colIt2++)
+		//{
+		//	if (colIt != colIt2)
+		//	{
+		//		(*colIt)->CheckCollision(*colIt2);
+		//	}
+		//}
 	}
 
 	if (playerPointer != nullptr)

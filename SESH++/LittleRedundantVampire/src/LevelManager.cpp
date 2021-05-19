@@ -112,6 +112,9 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::WALL:
 		sr->SetSprite(TextureTag::WALL);
 		go->AddComponent(sr);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		go->AddComponent(col);
 		//go->position = new Vector2<float>(1, 1);
 		*go->GetObjectTag() = ObjectTag::WALL;
 		break;
