@@ -17,7 +17,6 @@ c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\attackcommand.obj
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\npc.obj
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\animationcomponent.obj
-c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\enemy.obj
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\contextstate.obj
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\enemyidlestate.obj
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\textbox.obj
@@ -27,6 +26,8 @@ c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\gameobject.obj
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\component.obj
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\spriterenderer.obj
+c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\enemy.obj
+c:\users\signe\documents\github\seshexamc-plusplus\sesh++\littleredundantvampire\debug\enemychasestate.obj
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\debug\littleredundantvampire.exe
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\debug\littleredundantvampire.ilk
 c:\users\signe\documents\github\seshexamc-plusplus\sesh++\debug\littleredundantvampire.pdb

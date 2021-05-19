@@ -1,32 +1,56 @@
 #include "Enemy.h"
+#include "../GameWorld.h"
 
 Enemy::Enemy()
 {
-    //*speed = 5.0f;
-    //*velocity = Vector2f(0.0f, 0.0f);
+
 }
 
 Enemy::~Enemy()
 {
-    //delete currentState;
-    //delete this;
+	targetDistance = nullptr;
+	delete targetDistance;
+	currentState = nullptr;
+    delete currentState;
+	velocity = nullptr;
+	delete velocity;
+	target = nullptr;
+	delete target;
+	speed = nullptr;
+	delete speed;
+
+
+    delete this;
 }
 
 void Enemy::Awake()
 {
-	*speed = 5.0f;
-	*velocity = Vector2f(0.0f, 0.0f);
+	*speed = 1.0f;
+	// All enemies are initialized in idle-state.
     currentState = new ContextState(new EnemyIdleState());
 }
 
 void Enemy::Start()
 {
+	// Makes sure to run Enter() on the first state.
     currentState->StartRequest(this);
 }
 
 void Enemy::Update(Time* timePerFrame)
 {
 	Normalize();
+	// This runs Execute() on the current state.
+	currentState->RunRequest();
+
+	// TODO: Change once player has been moved into LM. This is shit.
+	if (target == nullptr)
+	{
+		TempUntilPlayerIsMovedIntoLM();
+	}
+	else
+	{
+		PlayerDistance();
+	}
 }
 
 void Enemy::Destroy()
@@ -39,14 +63,34 @@ void Enemy::Move(Vector2f velocity)
 	(*this->velocity) += velocity;
 }
 
+void Enemy::TempUntilPlayerIsMovedIntoLM()
+{
+	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+
+	//iterates through the gameObjects and draws all gameobjects.
+	for (vector<GameObject*>::size_type i = 0;
+		i < gameObjectsSize;
+		++i)
+	{
+		GameObject* go = (*GameWorld::GetInstance()->GetGameObjects())[i];
+
+		if (*go->GetObjectTag() == ObjectTag::PLAYER)
+		{
+			// Once the player has been found, target becomes player.
+			target = go;
+		}
+	}
+}
+
+void Enemy::PlayerDistance()
+{
+	targetDistance->x = target->GetPosition()->x - this->gameObject->GetPosition()->x;
+	targetDistance->y = target->GetPosition()->y - this->gameObject->GetPosition()->y;
+}
+
 ComponentTag Enemy::ToEnum()
 {
     return ComponentTag::ENEMY;
-}
-
-float Enemy::GetSpeed()
-{
-    return *speed;
 }
 
 void Enemy::SetSpeed(float newSpeed)
@@ -54,14 +98,15 @@ void Enemy::SetSpeed(float newSpeed)
     *speed = newSpeed;
 }
 
-Vector2f Enemy::GetVelocity()
+void Enemy::SetContext(IState* state)
 {
-    return *velocity;
+	currentState->TransitionTo(state);
+	currentState->StartRequest(this);
 }
 
-void Enemy::SetVelocity(Vector2f newVelocity)
+ContextState Enemy::GetContext()
 {
-    *velocity = newVelocity;
+	return *currentState;
 }
 
 void Enemy::Normalize()
@@ -78,7 +123,7 @@ void Enemy::Normalize()
 
 		*gameObject->GetPosition() += *velocity;
 
-		//TODO: OPTIMERING: 
+		//TODO: OPTIMERING:
 		*velocity = Vector2f(0.0f, 0.0f);
 	}
 }

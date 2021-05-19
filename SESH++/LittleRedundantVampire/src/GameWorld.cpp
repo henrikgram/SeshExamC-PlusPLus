@@ -40,7 +40,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		sr->imageCount = new Vector2u(4, 4);
 		sr->SetSprite(TextureTag::PLAYER_SHEET);
 
-		*go->GetPosition() = Vector2<float>(1000, 1000);
+		*go->GetPosition() = Vector2<float>(3000, 1800);
 		go->AddComponent(sr);
 		playerPointer = new Player();
 		go->AddComponent(playerPointer);
@@ -274,19 +274,7 @@ void GameWorld::Draw()
 			}
 		}
 	}
-	// DU KAN IKKE TEGNE TEKST. FUCK ALT. PRØVE IGEN. ØV. F.
-	//for (vector<GameObject*>::size_type i = 0;
-	//	i < gameObjectsSize;
-	//	++i)
-	//{
-	//	//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
-	//	tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
 
-	//	if (tm != nullptr)
-	//	{
-	//		window.draw(tm->GetMessage());
-	//	}
-	//}
 	// Displays everything in the window.
 	window.display();
 }

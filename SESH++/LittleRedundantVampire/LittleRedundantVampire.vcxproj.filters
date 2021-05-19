@@ -28,6 +28,7 @@
     <ClCompile Include="src\Components\Enemy.cpp" />
     <ClCompile Include="src\State\ContextState.cpp" />
     <ClCompile Include="src\State\EnemyIdleState.cpp" />
+    <ClCompile Include="src\State\EnemyChaseState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameWorld.h" />
@@ -63,6 +64,7 @@
     <ClInclude Include="src\State\IState.h" />
     <ClInclude Include="src\State\ContextState.h" />
     <ClInclude Include="src\State\EnemyIdleState.h" />
+    <ClInclude Include="src\State\EnemyChaseState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />

@@ -17,7 +17,8 @@ void ContextState::TransitionTo(IState* nextState)
 		delete this->state;
 	}
 	this->state = nextState;
-	this->state->IState::SetContext(this);
+	// TODO: Can be deleted? The below code.. don't get it but ok.
+	//this->state->IState::SetContext(this);
 }
 
 void ContextState::StartRequest(Enemy* enemy)
@@ -25,10 +26,7 @@ void ContextState::StartRequest(Enemy* enemy)
 	this->state->Enter(enemy);
 }
 
-void ContextState::ExitRequest()
+void ContextState::RunRequest()
 {
-	this->state->Exit();
+	this->state->Execute();
 }
-
-
-

@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\State\EnemyChaseState.cpp" />
     <ClCompile Include="src\State\EnemyIdleState.cpp" />
     <ClCompile Include="src\State\ContextState.cpp" />
     <ClCompile Include="src\Components\Enemy.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="src\Textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\State\EnemyChaseState.h" />
     <ClInclude Include="src\State\EnemyIdleState.h" />
     <ClInclude Include="src\State\ContextState.h" />
     <ClInclude Include="src\Components\Enemy.h" />
