@@ -18,7 +18,7 @@ public:
 	//Collider GetCollider() { return Collider(body); }
 
 private:
-	string* something;
+	//string* something;
 
 	// Inherited via Component
 	void Awake() override;
@@ -26,5 +26,6 @@ private:
 	void Update(Time* timePerFrame) override;
 	void Destroy() override;
 	ComponentTag ToEnum() override;
+	float* timer;
 };
 

@@ -2,7 +2,8 @@
 
 Platform::Platform(/*Texture* texture, Vector2f size, Vector2f position*/)
 {
-	something = new string("Hello");
+	timer = new float(0.0f);
+	//something = new string("Hello");
 	/*body.setTexture(texture);
 	body.setOrigin(size / 2.0f);
 	body.setSize(size);
@@ -11,8 +12,10 @@ Platform::Platform(/*Texture* texture, Vector2f size, Vector2f position*/)
 
 Platform::~Platform()
 {
-	delete something;
-	something = nullptr;
+	//delete something;
+	//something = nullptr;
+	delete timer;
+	timer = nullptr;
 }
 
 //void Platform::Draw(RenderWindow& window)
@@ -30,14 +33,26 @@ void Platform::Start()
 
 void Platform::Update(Time* timePerFrame)
 {
-	/*if (Keyboard::isKeyPressed(Keyboard::L));
+	/*if (Keyboard::isKeyPressed(Keyboard::Delete));
 	{
 		this->gameObject->Destroy();
 	}*/
+
+	if (*timer >= 300)
+	{
+		this->gameObject->CallSelfDestruct();
+		return;
+	}
+	else
+	{
+		//cout << *timer;
+		(*timer) += 1;
+	}
 }
 
 void Platform::Destroy()
 {
+	Platform::~Platform();
 }
 
 ComponentTag Platform::ToEnum()

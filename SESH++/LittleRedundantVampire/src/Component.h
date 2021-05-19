@@ -8,7 +8,7 @@
 
 
 using namespace std;
-
+//TODO: Determine whether or not we need this class. It just causes problems. 
 class Component : public IListener, public ICollisionListener
 {
 public:

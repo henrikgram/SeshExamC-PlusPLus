@@ -96,6 +96,8 @@ void GameObject::Destroy()
 		delete it->second;
 		it->second = nullptr;
 	}
+	components.clear();
+
 }
 
 
@@ -112,22 +114,36 @@ Component* GameObject::GetComponent(ComponentTag tag)
 	return components[tag];
 }
 
-Vector2f* GameObject::GetPosition()
+//Vector2f* GameObject::GetPosition()
+//{
+//	return position;
+//}
+
+//ObjectTag* GameObject::GetObjectTag()
+//{
+//	return objectTag;
+//}
+
+//string* GameObject::GetDirection()
+//{
+//	return direction;
+//}
+
+//bool* GameObject::GetShouldDraw()
+//{
+//	return shouldDraw;
+//}
+
+void GameObject::CallSelfDestruct()
 {
-	return position;
+	onCallSelfdestruct.Notify("DeleteObject", this);
 }
 
-ObjectTag* GameObject::GetObjectTag()
+void GameObject::AddListenerToCallSelfDestruct(IListener* listener)
 {
-	return objectTag;
+	onCallSelfdestruct.Attach(listener);
 }
 
-string* GameObject::GetDirection()
+void GameObject::OnNotify(std::string eventName, IListener* sender)
 {
-	return direction;
-}
-
-bool* GameObject::GetShouldDraw()
-{
-	return shouldDraw;
 }

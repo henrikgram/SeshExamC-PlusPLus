@@ -7,7 +7,8 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 {
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject(Vector2<float>(posX * 96, posY * 96));
-	SpriteRenderer* sr = new SpriteRenderer();
+	//SpriteRenderer* sr = new SpriteRenderer();
+	SpriteRenderer* sr;
 	Collider* col;
 
 	//go->position = &position;
@@ -16,69 +17,80 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	{
 		//DECORATIONS
 	case ObjectTag::FLOOR_CARPET:
-		sr->SetSprite(TextureTag::FLOOR_CARPET);
+		//sr->SetSprite(TextureTag::FLOOR_CARPET);
+		sr = new SpriteRenderer(TextureTag::FLOOR_CARPET);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::FLOOR_CARPET;
 		break;
 
 	case ObjectTag::FLOOR_WOOD:
-		sr->SetSprite(TextureTag::FLOOR_WOOD);
+		//sr->SetSprite(TextureTag::FLOOR_WOOD);
+		sr = new SpriteRenderer(TextureTag::FLOOR_WOOD);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::FLOOR_WOOD;
 		break;
 
 	case ObjectTag::WALL_DECORATION:
-		sr->SetSprite(TextureTag::WALL);
+		//sr->SetSprite(TextureTag::WALL);
+		sr = new SpriteRenderer(TextureTag::WALL);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::WALL_DECORATION;
 		break;
 
 	case ObjectTag::WINDOW_DECORATION:
-		sr->SetSprite(TextureTag::WINDOW);
+		//sr->SetSprite(TextureTag::WINDOW);
+		sr = new SpriteRenderer(TextureTag::WINDOW);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::WINDOW_DECORATION;
 		break;
 
 		//OBJECTS
 	case ObjectTag::BOOKCASE:
-		sr->SetSprite(TextureTag::BOOKCASE);
+		//sr->SetSprite(TextureTag::BOOKCASE);
+		sr = new SpriteRenderer(TextureTag::BOOKCASE);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::BOOKCASE;
 		break;
 
 	case ObjectTag::CHEST:
-		sr->SetSprite(TextureTag::CHEST);
+		//sr->SetSprite(TextureTag::CHEST);
+		sr = new SpriteRenderer(TextureTag::CHEST);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::CHEST;
 		break;
 
 	case ObjectTag::CRATE:
-		sr->SetSprite(TextureTag::CRATE);
+		//sr->SetSprite(TextureTag::CRATE);
+		sr = new SpriteRenderer(TextureTag::CRATE);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::CRATE;
 		break;
 
 	case ObjectTag::DOOR:
-		sr->SetSprite(TextureTag::DOOR);
+		//sr->SetSprite(TextureTag::DOOR);
+		sr = new SpriteRenderer(TextureTag::DOOR);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::DOOR;
 		break;
 
 	case ObjectTag::ENEMY:
-		sr->SetSprite(TextureTag::ENEMY);
+		//sr->SetSprite(TextureTag::ENEMY);
+		sr = new SpriteRenderer(TextureTag::ENEMY);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::ENEMY;
 		break;
 
 	case ObjectTag::KEY:
-		sr->SetSprite(TextureTag::KEY);
+		//sr->SetSprite(TextureTag::KEY);
+		sr = new SpriteRenderer(TextureTag::KEY);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::KEY;
 		break;
 
 	case ObjectTag::NPC:
 		go->AddComponent(new Npc(new string("'V' to pick up keys!")));
-		sr->SetSprite(TextureTag::NPC);
+		//sr->SetSprite(TextureTag::NPC);
+		sr = new SpriteRenderer(TextureTag::NPC);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::NPC;
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, false);
@@ -87,25 +99,29 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		break;
 
 	case ObjectTag::PLAYER:
-		sr->SetSprite(TextureTag::OZZY);
+		//sr->SetSprite(TextureTag::OZZY);
+		sr = new SpriteRenderer(TextureTag::OZZY);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::PLAYER;
 		break;
 
 	case ObjectTag::WINDOW:
-		sr->SetSprite(TextureTag::WINDOW);
+		//sr->SetSprite(TextureTag::WINDOW);
+		sr = new SpriteRenderer(TextureTag::WINDOW);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::WINDOW;
 		break;
 
 	case ObjectTag::VASE:
-		sr->SetSprite(TextureTag::VASE);
+		//sr->SetSprite(TextureTag::VASE);
+		sr = new SpriteRenderer(TextureTag::VASE);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::VASE;
 		break;
 
 	case ObjectTag::WALL:
-		sr->SetSprite(TextureTag::WALL);
+		//sr->SetSprite(TextureTag::WALL);
+		sr = new SpriteRenderer(TextureTag::WALL);
 		go->AddComponent(sr);
 		//go->position = new Vector2<float>(1, 1);
 		*go->GetObjectTag() = ObjectTag::WALL;
@@ -134,6 +150,13 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 
 	go1->AddComponent(new Npc(new string("If you find any keys you can pick them up by pressing 'V'!")));
 	sr1->SetSprite(TextureTag::NPC);
+	//From EmmaReleaseKey
+	//GameObject* go1 = new GameObject(Vector2<float>(1000, 1300));
+	//Npc* npc1 = new Npc(new string("'V' to pick up keys!"));
+	//SpriteRenderer* sr1 = new SpriteRenderer(TextureTag::NPC);
+	//Collider* col1;
+	//go1->AddComponent(new Npc(new string("'V' to pick up keys!")));
+	//sr1->SetSprite(TextureTag::NPC);
 	go1->AddComponent(sr1);
 	AnimationComponent* ac1 = new AnimationComponent(sr1, Vector2u(6, 1), 200.0f, 0);
 	go1->AddComponent(ac1);
@@ -147,13 +170,17 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	GameObject* go2 = new GameObject(Vector2<float>(1825, 2200));
 	Npc* npc2 = new Npc(new string("If you run into any hostile humans, press 'Space' to fight back!"));
 	SpriteRenderer* sr2 = new SpriteRenderer();
+	//From EmmaReleaseKey
+	//GameObject* go2 = new GameObject(Vector2<float>(3000, 500));
+	//Npc* npc2 = new Npc(new string("Fuck you in particular."));
+	//SpriteRenderer* sr2 = new SpriteRenderer(TextureTag::NPC);
 	Collider* col2;
 	sr2->isSpriteSheet = true;
 	sr2->currentImage = new Vector2u(1, 1);
 	sr2->imageCount = new Vector2u(6, 1);
 
 	go2->AddComponent(npc2);
-	sr2->SetSprite(TextureTag::NPC);
+	//sr2->SetSprite(TextureTag::NPC);
 	go2->AddComponent(sr2);
 	AnimationComponent* ac2 = new AnimationComponent(sr2, Vector2u(6, 1), 200.0f, 0);
 	go2->AddComponent(ac2);
@@ -167,13 +194,17 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	GameObject* go3 = new GameObject(Vector2<float>(2210, 545));
 	Npc* npc3 = new Npc(new string("The sun sucks! B-)"));
 	SpriteRenderer* sr3 = new SpriteRenderer();
+	//From EmmaReleaseKey
+	//GameObject* go3 = new GameObject(Vector2<float>(1000, 1500));
+	//Npc* npc3 = new Npc(new string("Ghost boi, BOO!"));
+	//SpriteRenderer* sr3 = new SpriteRenderer(TextureTag::NPC);
 	Collider* col3;
 	sr3->isSpriteSheet = true;
 	sr3->currentImage = new Vector2u(1, 1);
 	sr3->imageCount = new Vector2u(6, 1);
 
 	go3->AddComponent(npc3);
-	sr3->SetSprite(TextureTag::NPC);
+	//sr3->SetSprite(TextureTag::NPC);
 	go3->AddComponent(sr3);
 	AnimationComponent* ac3 = new AnimationComponent(sr3, Vector2u(6, 1), 200.0f, 0);
 	go3->AddComponent(ac3);

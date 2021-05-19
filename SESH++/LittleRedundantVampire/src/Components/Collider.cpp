@@ -46,7 +46,7 @@ bool Collider::CheckCollision(Collider* other)
 		if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
 		{
 			currentCollisions.push_back(other);
-			onOtherGameObjDestroyed.Attach(other);
+			onColliderDestroyed.Attach(other);
 		}
 
 		onColliding.Notify(*other->gameObject->GetObjectTag(), "NotDefined");
@@ -139,7 +139,10 @@ void Collider::Update(Time* timePerFrame)
 void Collider::Destroy()
 {
 	currentCollisions.clear();
-	onOtherGameObjDestroyed.Notify("OtherGmObjDestroyed", this);
+	//This Notify must be called before ~Collider to ensure that anything we are colliding with gets notified 
+	// that we are about to be deleted, so they can respond to this in time. 
+	onColliderDestroyed.Notify("ColliderDestroyed", this);
+	Collider::~Collider();
 }
 
 ComponentTag Collider::ToEnum()
@@ -150,12 +153,25 @@ ComponentTag Collider::ToEnum()
 
 void Collider::OnNotify(std::string eventName, IListener* sender)
 {
-	//TODO: Ensure that this doesn't cause issues if the list does not contain the element.
-	//This should remove all instances of the collider in question
-	if (eventName == "OtherGmObjDestroyed")
+	//This is used to ensure that a collider is removed from our list of currentCollisions before the collider is completely
+	//delted from the game along with the gameObject it belongs to.
+	if (eventName == "ColliderDestroyed")
 	{
-		//cout << currentCollisions.size();
-		currentCollisions.remove(dynamic_cast<Collider*>(sender));
-		//cout << currentCollisions.size();
+		for (auto i = currentCollisions.begin(); i != currentCollisions.end();)
+		{
+			if (*i == sender)
+			{
+				i = currentCollisions.erase(i);
+			}
+			else
+			{
+				++i;
+			}
+		}
 	}
+}
+
+void Collider::AttachToColliderDestroyedEvent(IListener* listener)
+{
+	onColliderDestroyed.Attach(listener);
 }

@@ -9,6 +9,23 @@ View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
 RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 
+GameWorld::GameWorld()
+{
+	// TODO: Maybe move to initialize.
+	gameObjects = new vector<GameObject*>;
+	colliders = new vector<Collider*>;
+}
+
+GameWorld::~GameWorld()
+{
+	delete instance;
+	instance = nullptr;
+
+	delete gameObjects;
+	gameObjects = nullptr;
+}
+
+
 
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
@@ -22,23 +39,49 @@ void GameWorld::ResizeView(const RenderWindow& window, View& view)
 	view.setSize(VIEW_HEIGHT * aspectRatio, VIEW_HEIGHT);
 }
 
+void GameWorld::OnNotify(std::string eventName, IListener* sender)
+{
+	if (eventName == "DeleteObject")
+	{
+		for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
+		{
+			if (*i == sender)
+			{
+				objectsToBeDeleted.push(*i);
+			}
+		}
+	}
+	if (eventName == "ColliderDestroyed")
+	{
+		for (auto i = colliders->begin(); i != colliders->end();)
+		{
+			if (*i == sender)
+			{
+				i = colliders->erase(i);
+			}
+			else
+			{
+				i++;
+			}
+		}
+	}
+}
+
 //TODO: check if this is fine, or actual factory is needed
 void GameWorld::BootlegFactory(ObjectTag tag)
 {
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject();
 	*go->GetObjectTag() = tag;
-	SpriteRenderer* sr = new SpriteRenderer();
+	//SpriteRenderer* sr = new SpriteRenderer();
+	SpriteRenderer* sr;
 	Collider* col;
 
 	switch (tag)
 	{
 	case ObjectTag::PLAYER:
 	{
-		sr->isSpriteSheet = true;
-		sr->currentImage = new Vector2u(1, 1);
-		sr->imageCount = new Vector2u(4, 4);
-		sr->SetSprite(TextureTag::PLAYER_SHEET);
+		sr = new SpriteRenderer(TextureTag::PLAYER_SHEET, Vector2u(1, 1), Vector2u(4, 4));
 
 		*go->GetPosition() = Vector2<float>(1000, 1000);
 		go->AddComponent(sr);
@@ -77,14 +120,16 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	case ObjectTag::WINDOW:
 		break;
 	case ObjectTag::CRATE:
-		sr->SetSprite(TextureTag::OZZY);
-		*go->GetPosition() = Vector2f(150, 150);
+		sr = new SpriteRenderer(TextureTag::OZZY);
+		*go->GetPosition() = Vector2f(750, 750);
 		go->AddComponent(sr);
 		go->AddComponent(new Platform);
 
 		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.0f, true);
 		go->AddComponent(col);
+		col->AttachToColliderDestroyedEvent(GameWorld::GetInstance());
 		colliders->push_back(col);
+		go->AddListenerToCallSelfDestruct(GameWorld::GetInstance());
 		break;
 	default:
 		break;
@@ -93,12 +138,148 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	go->Awake();
 	go->Start();
 
+	//TODO: This defeats the purpose of making a Get method for the variable. Get should only be used for accessing information in a variable
+	// outside of it's class, not for altering the variable.
 	(*GameWorld::GetInstance()->GetGameObjects()).push_back(go);
+}
+
+void GameWorld::Initialize()
+{
+	BootlegFactory(ObjectTag::PLAYER);
+	BootlegFactory(ObjectTag::CRATE);
+}
+
+void GameWorld::LoadContent()
+{
+	Asset::GetInstance()->LoadTextures();
+}
+
+void GameWorld::DeleteObjects()
+{
+	int stackSize = objectsToBeDeleted.size();
+
+	for (int i = 0; i < stackSize; i++)
+	{
+		GameObject* gO = objectsToBeDeleted.top();
+
+		for (auto i = gameObjects->begin(); i != gameObjects->end();)
+		{
+			if (*i == gO)
+			{
+				(*i)->Destroy();
+				delete (*i);
+				*i = nullptr;
+				i = gameObjects->erase(i);
+			}
+			else
+			{
+				i++;
+			}
+		}
+
+		objectsToBeDeleted.pop();
+	}
+}
+
+void GameWorld::Update(Time* timePerFrame)
+{
+	DeleteObjects();
+	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+	//TODO: Delete this if unnecessary. I switched it out with the following for loop to avoid issues if a gameobject gets deleted update but that should no longer be possible.
+	//iterates through the gameObjects and calls update
+	//for (vector<GameObject*>::size_type i = 0;
+	//	i < gameObjectsSize;
+	//	++i)
+	//{
+	//	(*GameWorld::GetInstance()->GetGameObjects())[i]->Update(timePerFrame);
+	//}
+
+	for (auto i = (*GameWorld::GetInstance()->gameObjects).begin(); i != (*GameWorld::GetInstance()->gameObjects).end();)
+	{
+		vector<GameObject*>::size_type originalSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+		(*i)->Update(timePerFrame);
+		vector<GameObject*>::size_type updatedSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+
+		if (originalSize == updatedSize)
+		{
+			++i;
+		}
+	}
+
+	vector<Collider*>::iterator colIt;
+	vector<Collider*>::iterator colIt2;
+	for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
+	{
+		for (colIt2 = colliders->begin(); colIt2 < colliders->end(); colIt2++)
+		{
+			if (colIt != colIt2)
+			{
+				(*colIt)->CheckCollision(*colIt2);
+			}
+		}
+	}
+
+	if (playerPointer != nullptr)
+	{
+		//TODO: Fix så den tager imod attack også
+		Player& playerRef = *playerPointer;
+		AttackSpawner& atckSpwnPointerRef = *atckSpwnPointer;
+
+		//AttackSpawner* attackPointer = dynamic_cast<AttackSpawner*>(playerPointer->gameObject->GetComponent(ComponentTag::ATTACKSPAWNER));
+		//AttackSpawner& attackRef = *attackPointer;
+
+		PlayerInvoker::GetInstance(playerRef, atckSpwnPointerRef)->InvokeCommand();
+	}
+}
+
+void GameWorld::Draw()
+{
+	// Clears the window.
+	window.clear(Color(/*0, 255, 255, 255*/));
+
+	//it needs to point to something, otherwise it wont compile, because it cant delete an "empty pointer"
+	//TODO: this needs to be deleted somewhere, but it dosen't work here, actually, check if it matters because its on stack.
+	SpriteRenderer* sr;
+	//TextMessage* tm;
+
+	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+	//iterates through the gameObjects and draws all gameobjects.
+	for (vector<GameObject*>::size_type i = 0;
+		i < gameObjectsSize;
+		++i)
+	{
+		GameObject* go = (*GameWorld::GetInstance()->GetGameObjects())[i];
+
+		if (*go->GetShouldDraw())
+		{
+			//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
+			sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
+
+
+			window.draw(sr->GetSprite());
+
+			if (*go->GetObjectTag() == ObjectTag::TEXT_BOX)
+			{
+				TextMessage* tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
+
+				if (tm != nullptr)
+				{
+					window.draw(tm->GetMessage());
+				}
+				else
+				{
+					delete tm;
+					tm = nullptr;
+				}
+			}
+
+		}
+	}
+	window.display();
 }
 
 void GameWorld::Run()
 {
-
 	LoadContent();
 
 	LevelManager* lm = new LevelManager();
@@ -169,143 +350,6 @@ void GameWorld::Run()
 		//GetScreenHeight();
 		//GetScreenWidth();
 	}
-
-}
-
-
-void GameWorld::Initialize()
-{
-	BootlegFactory(ObjectTag::PLAYER);
-	BootlegFactory(ObjectTag::CRATE);
-}
-
-void GameWorld::LoadContent()
-{
-	Asset::GetInstance()->LoadTextures();
-}
-
-void GameWorld::Update(Time* timePerFrame)
-{
-	//vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
-	////iterates through the gameObjects and calls update
-	//for (vector<GameObject*>::size_type i = 0;
-	//	i < gameObjectsSize;
-	//	++i)
-	//{
-	//	(*GameWorld::GetInstance()->GetGameObjects())[i]->Update(timePerFrame);
-	//}
-
-	for (auto i = (*GameWorld::GetInstance()->GetGameObjects()).begin(); i != (*GameWorld::GetInstance()->GetGameObjects()).end();)
-	{
-		vector<GameObject*>::size_type originalSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
-		(*i)->Update(timePerFrame);
-		vector<GameObject*>::size_type updatedSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
-
-		if (originalSize == updatedSize)
-		{
-			++i;
-		}
-	}
-
-	vector<Collider*>::iterator colIt;
-	vector<Collider*>::iterator colIt2;
-	for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
-	{
-		for (colIt2 = colliders->begin(); colIt2 < colliders->end(); colIt2++)
-		{
-			if (colIt != colIt2)
-			{
-				(*colIt)->CheckCollision(*colIt2);
-			}
-		}
-	}
-
-	if (playerPointer != nullptr)
-	{
-		//TODO: Fix så den tager imod attack også
-		Player& playerRef = *playerPointer;
-		AttackSpawner& atckSpwnPointerRef = *atckSpwnPointer;
-
-		//AttackSpawner* attackPointer = dynamic_cast<AttackSpawner*>(playerPointer->gameObject->GetComponent(ComponentTag::ATTACKSPAWNER));
-		//AttackSpawner& attackRef = *attackPointer;
-
-		PlayerInvoker::GetInstance(playerRef, atckSpwnPointerRef)->InvokeCommand();
-
-
-
-
-	}
-}
-
-void GameWorld::Draw()
-{
-	// Clears the window.
-	window.clear(Color(/*0, 255, 255, 255*/));
-
-	//it needs to point to something, otherwise it wont compile, because it cant delete an "empty pointer"
-	//TODO: this needs to be deleted somewhere, but it dosen't work here, actually, check if it matters because its on stack.
-	SpriteRenderer* sr;
-	//TextMessage* tm;
-
-	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
-	//iterates through the gameObjects and draws all gameobjects.
-	for (vector<GameObject*>::size_type i = 0;
-		i < gameObjectsSize;
-		++i)
-	{
-		GameObject* go = (*GameWorld::GetInstance()->GetGameObjects())[i];
-
-		if (*go->GetShouldDraw())
-		{
-			//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
-			sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
-			TextMessage* tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
-
-			window.draw(sr->GetSprite());
-
-			if (tm != nullptr)
-			{
-				window.draw(tm->GetMessage());
-			}
-			else
-			{
-				delete tm;
-				tm = nullptr;
-			}
-		}
-	}
-	// DU KAN IKKE TEGNE TEKST. FUCK ALT. PRØVE IGEN. ØV. F.
-	//for (vector<GameObject*>::size_type i = 0;
-	//	i < gameObjectsSize;
-	//	++i)
-	//{
-	//	//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
-	//	tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
-
-	//	if (tm != nullptr)
-	//	{
-	//		window.draw(tm->GetMessage());
-	//	}
-	//}
-	// Displays everything in the window.
-	window.display();
-}
-
-
-GameWorld::GameWorld()
-{
-	// TODO: Maybe move to initialize.
-	gameObjects = new vector<GameObject*>;
-	colliders = new vector<Collider*>;
-}
-
-GameWorld::~GameWorld()
-{
-	delete instance;
-	instance = nullptr;
-
-	delete gameObjects;
-	gameObjects = nullptr;
 }
 
 
@@ -337,11 +381,6 @@ float GameWorld::GetScreenWidth()
 float GameWorld::GetScreenHeight()
 {
 	return view.getCenter().y - (view.getSize().y / 2);
-}
-
-vector<GameObject*>* GameWorld::GetDeletedObjects()
-{
-	return deletedObjects;
 }
 
 
