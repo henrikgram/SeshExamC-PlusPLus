@@ -142,14 +142,14 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	vector<GameObject*> gameObjects;
 
 	GameObject* go1 = new GameObject(Vector2<float>(960, 1220));
-	SpriteRenderer* sr1 = new SpriteRenderer();
+	SpriteRenderer* sr1 = new SpriteRenderer(TextureTag::NPC, Vector2u(1, 1), Vector2u(6, 1));
 	Collider* col1;
-	sr1->isSpriteSheet = true;
-	sr1->currentImage = new Vector2u(1, 1);
-	sr1->imageCount = new Vector2u(6, 1);
+	//sr1->isSpriteSheet = true;
+	//sr1->currentImage = new Vector2u(1, 1);
+	//sr1->imageCount = new Vector2u(6, 1);
 
 	go1->AddComponent(new Npc(new string("If you find any keys you can pick them up by pressing 'V'!")));
-	sr1->SetSprite(TextureTag::NPC);
+	//sr1->SetSprite(TextureTag::NPC);
 	//From EmmaReleaseKey
 	//GameObject* go1 = new GameObject(Vector2<float>(1000, 1300));
 	//Npc* npc1 = new Npc(new string("'V' to pick up keys!"));
@@ -169,15 +169,15 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 
 	GameObject* go2 = new GameObject(Vector2<float>(1825, 2200));
 	Npc* npc2 = new Npc(new string("If you run into any hostile humans, press 'Space' to fight back!"));
-	SpriteRenderer* sr2 = new SpriteRenderer();
+	SpriteRenderer* sr2 = new SpriteRenderer(TextureTag::NPC, Vector2u(1, 1), Vector2u(6, 1));
 	//From EmmaReleaseKey
 	//GameObject* go2 = new GameObject(Vector2<float>(3000, 500));
 	//Npc* npc2 = new Npc(new string("Fuck you in particular."));
 	//SpriteRenderer* sr2 = new SpriteRenderer(TextureTag::NPC);
 	Collider* col2;
-	sr2->isSpriteSheet = true;
+	/*sr2->isSpriteSheet = true;
 	sr2->currentImage = new Vector2u(1, 1);
-	sr2->imageCount = new Vector2u(6, 1);
+	sr2->imageCount = new Vector2u(6, 1);*/
 
 	go2->AddComponent(npc2);
 	//sr2->SetSprite(TextureTag::NPC);
@@ -193,15 +193,15 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 
 	GameObject* go3 = new GameObject(Vector2<float>(2210, 545));
 	Npc* npc3 = new Npc(new string("The sun sucks! B-)"));
-	SpriteRenderer* sr3 = new SpriteRenderer();
+	SpriteRenderer* sr3 = new SpriteRenderer(TextureTag::NPC, Vector2u(1, 1), Vector2u(6, 1));
 	//From EmmaReleaseKey
 	//GameObject* go3 = new GameObject(Vector2<float>(1000, 1500));
 	//Npc* npc3 = new Npc(new string("Ghost boi, BOO!"));
 	//SpriteRenderer* sr3 = new SpriteRenderer(TextureTag::NPC);
 	Collider* col3;
-	sr3->isSpriteSheet = true;
-	sr3->currentImage = new Vector2u(1, 1);
-	sr3->imageCount = new Vector2u(6, 1);
+	//sr3->isSpriteSheet = true;
+	//sr3->currentImage = new Vector2u(1, 1);
+	//sr3->imageCount = new Vector2u(6, 1);
 
 	go3->AddComponent(npc3);
 	//sr3->SetSprite(TextureTag::NPC);
