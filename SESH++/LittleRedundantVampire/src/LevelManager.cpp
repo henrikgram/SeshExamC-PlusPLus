@@ -68,8 +68,9 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		go->AddComponent(enemy = new Enemy());
 		sr->SetSprite(TextureTag::ENEMY);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, false);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
 		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		(*GameWorld::GetInstance()->GetMovableColliders()).push_back(col);
 		go->AddComponent(col);
 		//go->AddComponent(new Movement(enemy->GetSpeed(), enemy->GetVelocity()));
 		*go->GetObjectTag() = ObjectTag::ENEMY;

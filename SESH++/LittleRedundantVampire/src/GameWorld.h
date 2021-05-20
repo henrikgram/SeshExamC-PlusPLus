@@ -36,6 +36,7 @@ public:
 	void Run();
 	vector<GameObject*>* GetGameObjects();
 	vector<Collider*>* GetColliders();
+	vector<Collider*>* GetMovableColliders();
 
 	float GetScreenWidth();
 	float GetScreenHeight();
@@ -72,6 +73,7 @@ private:
 	void ResizeView(const RenderWindow& window, View& view);
 
 	vector<Collider*>* colliders;
+	vector<Collider*>* movableColliders;
 	Player* playerPointer;
 	AttackSpawner* atckSpwnPointer;
 };

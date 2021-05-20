@@ -59,6 +59,9 @@ private:
 	/// <summary>
 	/// Makes sure the enemy doesn't move faster when moving
 	/// on the x- and y-axis at the same time.
+	/// Right now the enemy can only move on the y- or x-axis and not at both.
+	/// So for the time being, this method is unnecessary.
+	/// There just wasn't time to add more movement "options" for the enemy.
 	/// </summary>
 	void Normalize();
 

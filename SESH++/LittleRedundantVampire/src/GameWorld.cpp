@@ -58,6 +58,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
 		go->AddComponent(col);
 		colliders->push_back(col);
+		movableColliders->push_back(col);
 	}
 	break;
 	case ObjectTag::ENEMY:
@@ -82,9 +83,10 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->AddComponent(sr);
 		go->AddComponent(new Platform);
 
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.0f, true);
+		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
 		go->AddComponent(col);
 		colliders->push_back(col);
+		movableColliders->push_back(col);
 		break;
 	default:
 		break;
@@ -207,23 +209,32 @@ void GameWorld::Update(Time* timePerFrame)
 		}
 	}
 
-	Collider* playerCol = dynamic_cast<Collider*>(playerPointer->gameObject->GetComponent(ComponentTag::COLLIDER));
+	//Collider* playerCol = dynamic_cast<Collider*>(playerPointer->gameObject->GetComponent(ComponentTag::COLLIDER));
 
 	vector<Collider*>::iterator colIt;
-	vector<Collider*>::iterator colIt2;
-	for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
+	vector<Collider*>::iterator movColIt;
+	for (movColIt = movableColliders->begin(); movColIt < movableColliders->end(); movColIt++)
 	{
-		playerCol->CheckCollision(*colIt);
+		for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
+		{
+			if (*colIt != *movColIt)
+			{
+				(*colIt)->CheckCollision(*movColIt);
+			}
 
-		//(*colIt)->CheckCollision(playerCol);
-
-		//for (colIt2 = colliders->begin(); colIt2 < colliders->end(); colIt2++)
-		//{
-		//	if (colIt != colIt2)
-		//	{
-		//		(*colIt)->CheckCollision(*colIt2);
-		//	}
-		//}
+			//for (colIt2 = colliders->begin(); colIt2 < colliders->end(); colIt2++)
+			//{
+				//if ((*colIt) != playerCol)
+				//{
+				//	//(*colIt)->CheckCollision(*colIt2);
+				//	playerCol->CheckCollision(*colIt2);
+				//}
+				//else if (colIt != colIt2 && (*colIt2) == playerCol)
+				//{
+				//	playerCol->CheckCollision(*colIt);
+				//}
+			//}
+		}
 	}
 
 	if (playerPointer != nullptr)
@@ -291,6 +302,7 @@ GameWorld::GameWorld()
 	// TODO: Maybe move to initialize.
 	gameObjects = new vector<GameObject*>;
 	colliders = new vector<Collider*>;
+	movableColliders = new vector<Collider*>;
 }
 
 GameWorld::~GameWorld()
@@ -321,6 +333,11 @@ vector<GameObject*>* GameWorld::GetGameObjects()
 vector<Collider*>* GameWorld::GetColliders()
 {
 	return colliders;
+}
+
+vector<Collider*>* GameWorld::GetMovableColliders()
+{
+	return movableColliders;
 }
 
 float GameWorld::GetScreenWidth()
