@@ -51,6 +51,9 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::CHEST:
 		sr->SetSprite(TextureTag::CHEST);
 		go->AddComponent(sr);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::CHEST;
 		break;
 
@@ -89,6 +92,9 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::KEY:
 		sr->SetSprite(TextureTag::KEY);
 		go->AddComponent(sr);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::KEY;
 		break;
 
@@ -99,6 +105,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		*go->GetObjectTag() = ObjectTag::NPC;
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, false);
 		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		(*GameWorld::GetInstance()->GetMovableColliders()).push_back(col);
 		go->AddComponent(col);
 		break;
 
@@ -120,6 +127,9 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::VASE:
 		sr->SetSprite(TextureTag::VASE);
 		go->AddComponent(sr);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::VASE;
 		break;
 
@@ -164,6 +174,7 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	float y1 = sr1->TextureRect->height;
 	col1 = new Collider(Vector2f(x1, y1), *go1->GetPosition(), 1.0f, false);
 	(*GameWorld::GetInstance()->GetColliders()).push_back(col1);
+	(*GameWorld::GetInstance()->GetMovableColliders()).push_back(col1);
 	go1->AddComponent(col1);
 
 	GameObject* go2 = new GameObject(Vector2<float>(1825, 2200));
@@ -184,6 +195,7 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	float y2 = sr2->TextureRect->height;
 	col2 = new Collider(Vector2f(x2, y2), *go2->GetPosition(), 1.0f, false);
 	(*GameWorld::GetInstance()->GetColliders()).push_back(col2);
+	(*GameWorld::GetInstance()->GetMovableColliders()).push_back(col2);
 	go2->AddComponent(col2);
 
 	GameObject* go3 = new GameObject(Vector2<float>(2210, 545));
@@ -204,6 +216,7 @@ vector<GameObject*> LevelManager::CreateNpcLevelOne()
 	float y3 = sr3->TextureRect->height;
 	col3 = new Collider(Vector2f(x2, y2), *go3->GetPosition(), 1.0f, false);
 	(*GameWorld::GetInstance()->GetColliders()).push_back(col3);
+	(*GameWorld::GetInstance()->GetMovableColliders()).push_back(col3);
 	go3->AddComponent(col3);
 
 	go1->Awake();
