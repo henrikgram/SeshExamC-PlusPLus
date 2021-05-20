@@ -66,6 +66,15 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 	case ObjectTag::NPC:
 		break;
 	case ObjectTag::WALL:
+		sr->SetSprite(TextureTag::WALL);
+		*go->GetPosition() = Vector2f(200, 150);
+		go->AddComponent(sr);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		go->AddComponent(col);
+		colliders->push_back(col);
+		movableColliders->push_back(col);
+
+		//go->position = new Vector2<float>(1, 1);
 		break;
 	case ObjectTag::DOOR:
 		break;
@@ -179,6 +188,7 @@ void GameWorld::Initialize()
 {
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
+	BootlegFactory(ObjectTag::WALL);
 }
 
 void GameWorld::LoadContent()
@@ -219,7 +229,7 @@ void GameWorld::Update(Time* timePerFrame)
 		{
 			if (*colIt != *movColIt)
 			{
-				(*colIt)->CheckCollision(*movColIt);
+				(*movColIt)->CheckCollision(*colIt);
 			}
 
 			//for (colIt2 = colliders->begin(); colIt2 < colliders->end(); colIt2++)

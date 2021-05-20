@@ -24,6 +24,7 @@
     <ProjectGuid>{0ed691ab-1c94-452c-9fbf-64f94cc87e8c}</ProjectGuid>
     <RootNamespace>LittleRedundantVampire</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>d</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
