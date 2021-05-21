@@ -1,6 +1,5 @@
 #include "PlayerInvoker.h"
 
-
 PlayerInvoker::PlayerInvoker(Movement& movementReceiver, AttackSpawner& attackReceiver) :
 	movementReceiver(movementReceiver),
 	attackReceiver(attackReceiver)
@@ -26,7 +25,6 @@ PlayerInvoker::~PlayerInvoker()
 	keyBinds.clear();
 }
 
-//Gets the singleton instance.
 PlayerInvoker* PlayerInvoker::GetInstance(Movement& movementReceiver, AttackSpawner& attackReceiver)
 {
 	if (instance == nullptr)
@@ -37,7 +35,7 @@ PlayerInvoker* PlayerInvoker::GetInstance(Movement& movementReceiver, AttackSpaw
 	return instance;
 }
 
-//Check for pressed keys and execute the command for the key.
+
 void PlayerInvoker::InvokeCommand()
 {
 	keyIt = keyBinds.begin();
