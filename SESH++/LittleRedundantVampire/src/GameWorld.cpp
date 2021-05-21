@@ -614,6 +614,12 @@ float GameWorld::GetScreenHeight()
 
 void GameWorld::CloseGame()
 {
+	//TODO: Doesn't work, fix it.
+	for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
+	{
+		objectsToBeDeleted.push(*i);
+	}
+	DeleteObjects();
 	window.close();
 }
 
