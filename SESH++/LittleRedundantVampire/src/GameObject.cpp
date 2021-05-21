@@ -131,6 +131,11 @@ Component* GameObject::GetComponent(ComponentTag tag)
 	return (*components)[tag];
 }
 
+void GameObject::SetPosition(Vector2f newPosition)
+{
+	*position = newPosition;
+}
+
 
 void GameObject::CallSelfDestruct()
 {

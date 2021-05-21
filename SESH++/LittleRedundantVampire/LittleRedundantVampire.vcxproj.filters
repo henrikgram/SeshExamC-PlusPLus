@@ -25,6 +25,11 @@
     <ClCompile Include="src\Textbox.cpp" />
     <ClCompile Include="src\Command\AttackCommand.cpp" />
     <ClCompile Include="src\Components\AnimationController.cpp" />
+    <ClCompile Include="src\Light\Ray.cpp" />
+    <ClCompile Include="src\Light\LightSource.cpp" />
+    <ClCompile Include="src\Light\DirectionalLight.cpp" />
+    <ClCompile Include="src\Light\PointLight.cpp" />
+    <ClCompile Include="src\Light\main3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameWorld.h" />
@@ -56,6 +61,10 @@
     <ClInclude Include="src\Textbox.h" />
     <ClInclude Include="src\Command\AttackCommand.h" />
     <ClInclude Include="src\Components\AnimationController.h" />
+    <ClInclude Include="src\Light\Ray.h" />
+    <ClInclude Include="src\Light\LightSource.h" />
+    <ClInclude Include="src\Light\DirectionalLight.h" />
+    <ClInclude Include="src\Light\PointLight.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Asset\AttackSheet2.png" />
