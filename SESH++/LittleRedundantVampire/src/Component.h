@@ -42,6 +42,7 @@ public:
 	/// </summary>
 	virtual void Destroy() = 0;
 
+
 	/// <summary>
 	/// Gets a components tag.
 	/// </summary>
@@ -53,5 +54,9 @@ public:
 
 	// Inherited via ICollisionListener
 	virtual void OnNotifyCollision(ObjectTag otherTag, std::string side) override;
+	bool drawComponent = false;
+
+protected:
+
 };
 

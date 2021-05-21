@@ -1,2 +1,56 @@
-﻿  AttackSpawner.cpp
-  LittleRedundantVampire.vcxproj -> C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
+﻿  GameWorld.cpp
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(146,43): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(145,71): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(286,42): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(285,80): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(308,43): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\GameWorld.cpp(307,82): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  LittleRedundantVampire.vcxproj -> C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe

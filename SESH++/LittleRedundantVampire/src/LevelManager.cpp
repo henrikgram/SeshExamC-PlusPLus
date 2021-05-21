@@ -60,11 +60,27 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		break;
 
 	case ObjectTag::CRATE:
+	{
 		//sr->SetSprite(TextureTag::CRATE);
 		sr = new SpriteRenderer(TextureTag::CRATE);
+
+		VertexArray* w = new VertexArray(sf::LinesStrip, 2);
+
+		(*w)[0].position = *go->GetPosition();
+		(*w)[1].position.x = go->GetPosition()->x + sr->GetTexture().getSize().x;
+		(*w)[1].position.y = go->GetPosition()->y;
+
+		GameWorld::GetInstance()->walls.push_back(*w);
+
 		go->AddComponent(sr);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.1f, true);
+		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
+		go->AddComponent(col);
+
 		*go->GetObjectTag() = ObjectTag::CRATE;
 		break;
+	}
 
 	case ObjectTag::DOOR:
 		//sr->SetSprite(TextureTag::DOOR);
@@ -110,7 +126,11 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		sr = new SpriteRenderer(TextureTag::WINDOW);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::WINDOW;
-		break;
+		go->AddComponent(new DirectionalLight(Vector2f(go->GetPosition()->x - sr->GetTexture().getSize().x / 2, 
+			go->GetPosition()->y+ sr->GetTexture().getSize().x / 2),
+			Vector2f(go->GetPosition()->x + sr->GetTexture().getSize().x / 2, 
+				go->GetPosition()->y+ sr->GetTexture().getSize().x / 2), &(GameWorld::GetInstance()->walls), 90, 10));
+				break;
 
 	case ObjectTag::VASE:
 		//sr->SetSprite(TextureTag::VASE);

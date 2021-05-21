@@ -6,6 +6,13 @@
 #include <stack>
 #include <SFML/graphics.hpp>
 
+#include <algorithm>
+#include <chrono>
+#include <iostream>
+#include<vector>
+using namespace std;
+using namespace std::chrono;
+
 #include "Components/SpriteRenderer.h"
 #include "Asset.h"
 #include "Enum/ObjectTag.h"
@@ -19,6 +26,7 @@
 #include "Components/AttackSpawner.h"
 #include "BitmapImage.h"
 #include "LevelManager.h"
+#include "Light/DirectionalLight.h"
 
 
 using namespace std;
@@ -33,6 +41,7 @@ private:
 	vector<GameObject*>* gameObjects;
 	stack<GameObject*> objectsToBeDeleted;
 	vector<Collider*>* colliders;
+	vector<Collider*>* movColliders;
 
 	Player* playerPointer;
 	AttackSpawner* atckSpwnPointer;
@@ -84,6 +93,10 @@ public:
 	static GameWorld* GetInstance();
 	vector<GameObject*>* GetGameObjects(); //TODO: Needs to be constant otherwise we may as well make gameObjects a public.
 	vector<Collider*>* GetColliders(); //TODO: This needs to be a constant, if we want to change something outside of the class it belongs to we should make a set method or something.
+	vector<Collider*>* GetMovColliders();
+
+	DirectionalLight* LightPointer;
+	vector<VertexArray> walls;
 
 	float GetScreenWidth();
 	float GetScreenHeight();

@@ -10,6 +10,8 @@ Component::~Component()
 	gameObject = nullptr;*/
 }
 
+
+
 void Component::OnNotify(std::string eventName, IListener* sender)
 {
 	if (eventName == "NoLongerCollidingWith")

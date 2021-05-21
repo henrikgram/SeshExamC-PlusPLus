@@ -28,6 +28,9 @@ https://stackoverflow.com/questions/4964482/how-to-create-two-classes-in-c-which
 #include "Observer/IGameEvent.h"
 #include "Observer/IListener.h"
 
+
+
+
 using namespace sf;
 using namespace std;
 
@@ -61,7 +64,6 @@ public:
 	/// </summary>
 	void Destroy();
 
-
 	/// <summary>
 	/// Attaching a component to the gameobject
 	/// </summary>
@@ -73,8 +75,10 @@ public:
 	/// </summary>
 	Component* GetComponent(ComponentTag tag);
 
-
+	//TODO tjek om det her er ok
 	Vector2f* GetPosition() const { return position; }
+
+	void SetPosition(Vector2f newPosition);
 
 	ObjectTag* GetObjectTag() const { return objectTag; }
 

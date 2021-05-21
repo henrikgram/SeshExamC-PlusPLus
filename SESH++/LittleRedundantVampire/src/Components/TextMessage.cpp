@@ -13,6 +13,7 @@ TextMessage::TextMessage(string* msg, Vector2f position)
 
 	text->setString(*msg);
 	text->setPosition(position.x + offset, position.y + offset);
+	drawComponent = true;
 }
 
 TextMessage::~TextMessage()
@@ -50,6 +51,7 @@ void TextMessage::Destroy()
 {
 
 }
+
 
 ComponentTag TextMessage::ToEnum()
 {

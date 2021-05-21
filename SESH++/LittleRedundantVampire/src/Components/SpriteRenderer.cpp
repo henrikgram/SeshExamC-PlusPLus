@@ -63,6 +63,7 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag)
 
 	flipped = new bool;
 	*flipped = false;
+	drawComponent = true;
 }
 
 /// <summary>
@@ -91,6 +92,7 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vec
 
 	sprite->setTextureRect(*TextureRect);
 	sprite->setOrigin(Vector2f(TextureRect->width / 2, TextureRect->height / 2));
+	drawComponent = true;
 }
 
 void SpriteRenderer::Awake()
@@ -136,6 +138,7 @@ void SpriteRenderer::Destroy()
 {
 	SpriteRenderer::~SpriteRenderer();
 }
+
 
 ComponentTag SpriteRenderer::ToEnum()
 {
