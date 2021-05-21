@@ -7,7 +7,11 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject(Vector2<float>(posX * 96, posY * 96));
 	SpriteRenderer* sr = new SpriteRenderer();
+	AnimationComponent* ac;
 	Collider* col;
+
+	float x;
+	float y;
 
 	//go->position = &position;
 
@@ -78,10 +82,18 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 
 	case ObjectTag::ENEMY:
 		Enemy* enemy;
+		sr->isSpriteSheet = true;
+		sr->currentImage = new Vector2u(1, 1);
+		sr->imageCount = new Vector2u(4, 3);
 		go->AddComponent(enemy = new Enemy());
 		sr->SetSprite(TextureTag::ENEMY);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.5f, true);
+		ac = new AnimationComponent(sr, Vector2u(4, 3), 200.0f, 1);
+		go->AddComponent(ac);
+		x = sr->TextureRect->width;
+		y = sr->TextureRect->height;
+		col = new Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
+		//col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.5f, true);
 		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
 		(*GameWorld::GetInstance()->GetMovableColliders()).push_back(col);
 		go->AddComponent(col);

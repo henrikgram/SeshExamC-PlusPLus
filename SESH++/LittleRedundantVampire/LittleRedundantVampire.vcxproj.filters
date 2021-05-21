@@ -94,6 +94,7 @@
     <Image Include="Asset\TestTextbox.png" />
     <Image Include="Asset\GhostSheet.png" />
     <Image Include="Asset\GhostSheet2.png" />
+    <Image Include="Asset\VillagerSheet.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Asset\PlayfairDisplay-VariableFont_wght.ttf" />

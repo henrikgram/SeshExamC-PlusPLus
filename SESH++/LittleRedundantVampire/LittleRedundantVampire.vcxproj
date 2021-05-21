@@ -230,6 +230,7 @@
     <Image Include="Asset\TextBox_V3.png" />
     <Image Include="Asset\TreasureChest.png" />
     <Image Include="Asset\VaseWhole.png" />
+    <Image Include="Asset\VillagerSheet.png" />
     <Image Include="Asset\Window.png" />
     <Image Include="Asset\WoodenFloor.png" />
     <Image Include="Asset\OzzySheet.png" />
