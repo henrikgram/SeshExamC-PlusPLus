@@ -109,12 +109,11 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 void GameWorld::Run()
 {
-
 	LoadContent();
 
 	LevelManager* lm = new LevelManager();
 	*GameWorld::GetInstance()->GetGameObjects() = lm->InstantiateLevel("Level1");
-
+	
 	Initialize();
 	//String* string = new String("fuck you");
 	//Npc npc(string);
@@ -137,6 +136,11 @@ void GameWorld::Run()
 
 	while (window.isOpen())
 	{
+		if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
+		{
+			CloseGame();
+		}
+
 		//Vi s�tter vores deltaTime i forhold til clock.
 		deltaTime = clock.restart().asSeconds();
 		// Shuts the game down when the window is closed.
@@ -363,6 +367,11 @@ float GameWorld::GetScreenHeight()
 vector<GameObject*>* GameWorld::GetDeletedObjects()
 {
 	return deletedObjects;
+}
+
+void GameWorld::CloseGame()
+{
+	window.close();
 }
 
 

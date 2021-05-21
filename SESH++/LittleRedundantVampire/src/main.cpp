@@ -6,8 +6,8 @@
 /// <returns></returns>
 int main()
 {
-	while (true)
-	{
+	//while (true)
+	//{
 		GameWorld::GetInstance()->Run();
-	}
+	//}
 }

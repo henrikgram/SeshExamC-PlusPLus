@@ -24,7 +24,7 @@
 using namespace std;
 
 
-
+class main;
 class GameWorld
 {
 public:
@@ -43,6 +43,7 @@ public:
 	
 	vector<GameObject*>* GetDeletedObjects();
 
+	void CloseGame();
 
 private:
 	static GameWorld* instance;
