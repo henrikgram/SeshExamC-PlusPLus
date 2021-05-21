@@ -29,7 +29,7 @@ private:
 	Texture* playerAttackSheetTexture = new Texture;
 	Texture* enemyAttackSheetTexture = new Texture;
 	Texture* doorTexture = new Texture;
-	Texture* enemyTexture = new Texture;
+	Texture* enemySheetTexture = new Texture;
 	Texture* keyTexture = new Texture;
 	Texture* npcTexture = new Texture;
 	Texture* ozzyTexture = new Texture;

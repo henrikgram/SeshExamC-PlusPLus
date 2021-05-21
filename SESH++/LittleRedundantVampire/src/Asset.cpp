@@ -14,7 +14,7 @@ void Asset::LoadTextures()
 	chestTexture->		loadFromFile("Asset/TreasureChest.png");
 	crateTexture->		loadFromFile("Asset/Crate.png");
 	doorTexture->		loadFromFile("Asset/DoorClosed.png");
-	enemyTexture->		loadFromFile("Asset/NewVillagerDown.png");
+	enemySheetTexture->	loadFromFile("Asset/VillagerSheet.png");
 	floorCarpetTexture->loadFromFile("Asset/FloorCarpet.png");
 	keyTexture->		loadFromFile("Asset/Key.png");
 	npcTexture->		loadFromFile("Asset/GhostSheet.png");
@@ -37,7 +37,7 @@ void Asset::LoadTextures()
 	textures.insert(make_pair(TextureTag::CRATE,		 *crateTexture));
 	textures.insert(make_pair(TextureTag::DOOR,			 *doorTexture));
 	textures.insert(make_pair(TextureTag::FLOOR_CARPET,  *floorCarpetTexture));
-	textures.insert(make_pair(TextureTag::ENEMY,		 *enemyTexture));
+	textures.insert(make_pair(TextureTag::ENEMY,		 *enemySheetTexture));
 	textures.insert(make_pair(TextureTag::KEY,			 *keyTexture));
 	textures.insert(make_pair(TextureTag::NPC,			 *npcTexture));
 	textures.insert(make_pair(TextureTag::OZZY,			 *ozzyTexture));

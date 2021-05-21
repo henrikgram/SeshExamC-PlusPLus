@@ -100,4 +100,6 @@ public:
 
 	float GetScreenWidth();
 	float GetScreenHeight();
+
+	void CloseGame();
 };

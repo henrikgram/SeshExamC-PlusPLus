@@ -533,6 +533,11 @@ void GameWorld::Run()
 
 	while (window.isOpen())
 	{
+		if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
+		{
+			CloseGame();
+		}
+
 		//Vi s�tter vores deltaTime i forhold til clock.
 		deltaTime = clock.restart().asSeconds();
 		// Shuts the game down when the window is closed.
@@ -607,6 +612,10 @@ float GameWorld::GetScreenHeight()
 	return view.getCenter().y - (view.getSize().y / 2);
 }
 
+void GameWorld::CloseGame()
+{
+	window.close();
+}
 
 // Sets the instance to  nullptr. Because static variables need a definition.
 // Part of what makes the class a singleton.
