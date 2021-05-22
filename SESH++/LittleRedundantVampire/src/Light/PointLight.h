@@ -9,7 +9,7 @@ class PointLight : public LightSource
 {
 public:
 
-	PointLight(Vector2f position, vector<VertexArray>* walls, int stepSize = 5);
+	PointLight(Vector2f position, vector<VertexArray*>* walls, int stepSize = 5);
 
 	/// <summary>
 	/// Returns lines from the positon of the light to the intersecting points.

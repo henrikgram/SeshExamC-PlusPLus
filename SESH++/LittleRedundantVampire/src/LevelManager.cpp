@@ -73,19 +73,21 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	{
 		sr = new SpriteRenderer(TextureTag::CRATE);
 
-		VertexArray* w = new VertexArray(sf::LinesStrip, 2);
+	/*	VertexArray* w = new VertexArray(sf::LinesStrip, 2);
 
 		(*w)[0].position = *go->GetPosition();
 		(*w)[1].position.x = go->GetPosition()->x + sr->GetTexture().getSize().x;
 		(*w)[1].position.y = go->GetPosition()->y;
 
-		GameWorld::GetInstance()->walls.push_back(*w);
+		GameWorld::GetInstance()->walls.push_back(*w);*/
 
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.1f, true);
 		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
 		(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
 		go->AddComponent(col);
+
+		GameWorld::GetInstance()->walls.push_back(col->wall);
 
 		*go->GetObjectTag() = ObjectTag::CRATE;
 		break;
@@ -114,6 +116,8 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::ENEMY;
+
+		GameWorld::GetInstance()->walls.push_back(col->wall);
 		break;
 
 	case ObjectTag::KEY:

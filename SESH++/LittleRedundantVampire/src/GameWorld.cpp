@@ -164,52 +164,52 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 void GameWorld::Initialize()
 {
-	VertexArray tmp4 = VertexArray(sf::LinesStrip, 2);
-	tmp4[0].position = Vector2f(0, 0);
-	tmp4[0].color = Color::Red;
-	tmp4[1].color = Color::Red;
-	tmp4[1].position = Vector2f(2000, 0);
+	VertexArray* tmp4 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp4)[0].position = Vector2f(0, 0);
+	(*tmp4)[0].color = Color::Red;
+	(*tmp4)[1].color = Color::Red;
+	(*tmp4)[1].position = Vector2f(2000, 0);
 
 	walls.push_back(tmp4);
 
-	VertexArray tmp5 = VertexArray(sf::LinesStrip, 2);
-	tmp5[0].position = Vector2f(2000, 0);
-	tmp5[0].color = Color::Red;
-	tmp5[1].color = Color::Red;
-	tmp5[1].position = Vector2f(2000, 2000);
+	VertexArray* tmp5 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp5)[0].position = Vector2f(2000, 0);
+	(*tmp5)[0].color = Color::Red;
+	(*tmp5)[1].color = Color::Red;
+	(*tmp5)[1].position = Vector2f(2000, 2000);
 
 	walls.push_back(tmp5);
 
 
-	VertexArray tmp6 = VertexArray(sf::LinesStrip, 2);
-	tmp6[0].position = Vector2f(2000, 2000);
-	tmp6[0].color = Color::Red;
-	tmp6[1].color = Color::Red;
-	tmp6[1].position = Vector2f(0, 2000);
+	VertexArray* tmp6 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp6)[0].position = Vector2f(2000, 2000);
+	(*tmp6)[0].color = Color::Red;
+	(*tmp6)[1].color = Color::Red;
+	(*tmp6)[1].position = Vector2f(0, 2000);
 
 	walls.push_back(tmp6);
 
-	VertexArray tmp7 = VertexArray(sf::LinesStrip, 2);
-	tmp7[0].position = Vector2f(0, 2000);
-	tmp7[0].color = Color::Red;
-	tmp7[1].color = Color::Red;
-	tmp7[1].position = Vector2f(0, 0);
+	VertexArray* tmp7 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp7)[0].position = Vector2f(0, 2000);
+	(*tmp7)[0].color = Color::Red;
+	(*tmp7)[1].color = Color::Red;
+	(*tmp7)[1].position = Vector2f(0, 0);
 
 	walls.push_back(tmp7);
 
-	VertexArray tmp8 = VertexArray(sf::LinesStrip, 2);
-	tmp8[0].position = Vector2f(800, 1500);
-	tmp8[0].color = Color::Red;
-	tmp8[1].color = Color::Red;
-	tmp8[1].position = Vector2f(1100, 1500);
+	VertexArray* tmp8 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp8)[0].position = Vector2f(800, 1500);
+	(*tmp8)[0].color = Color::Red;
+	(*tmp8)[1].color = Color::Red;
+	(*tmp8)[1].position = Vector2f(1100, 1500);
 
 	walls.push_back(tmp8);
 
-	VertexArray cursedPlayerWall = VertexArray(sf::LinesStrip, 2);
-	cursedPlayerWall[0].position = Vector2f(900, 1500);
-	cursedPlayerWall[0].color = Color::Red;
-	cursedPlayerWall[1].color = Color::Red;
-	cursedPlayerWall[1].position = Vector2f(1000, 1500);
+	VertexArray* cursedPlayerWall = new VertexArray(sf::LinesStrip, 2);
+	(*cursedPlayerWall)[0].position = Vector2f(900, 1500);
+	(*cursedPlayerWall)[0].color = Color::Red;
+	(*cursedPlayerWall)[1].color = Color::Red;
+	(*cursedPlayerWall)[1].position = Vector2f(1000, 1500);
 
 	walls.push_back(cursedPlayerWall);
 
@@ -217,60 +217,60 @@ void GameWorld::Initialize()
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
 
-	VertexArray tmp9 = VertexArray(sf::LinesStrip, 2);
-	tmp9[0].position = Vector2f(8.4f*96, 7.5f*96);
-	tmp9[0].color = Color::Red;
-	tmp9[1].color = Color::Red;
-	tmp9[1].position = Vector2f(10.5f*96, 7.5f * 96);
+	VertexArray* tmp9 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp9)[0].position = Vector2f(8.4f*96, 7.5f*96);
+	(*tmp9)[0].color = Color::Red;
+	(*tmp9)[1].color = Color::Red;
+	(*tmp9)[1].position = Vector2f(10.5f*96, 7.5f * 96);
 
 	walls.push_back(tmp9);
 
-	VertexArray tmp10 = VertexArray(sf::LinesStrip, 2);
-	tmp10[0].position = Vector2f(12.4f * 96, 13.5f * 96);
-	tmp10[0].color = Color::Red;
-	tmp10[1].color = Color::Red;
-	tmp10[1].position = Vector2f(14.5f * 96, 13.5f * 96);
+	VertexArray* tmp10 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp10)[0].position = Vector2f(12.4f * 96, 13.5f * 96);
+	(*tmp10)[0].color = Color::Red;
+	(*tmp10)[1].color = Color::Red;
+	(*tmp10)[1].position = Vector2f(14.5f * 96, 13.5f * 96);
 
 	walls.push_back(tmp10);
 
-	VertexArray tmp11 = VertexArray(sf::LinesStrip, 2);
-	tmp11[0].position = Vector2f(16.4f * 96, 10.5f * 96);
-	tmp11[0].color = Color::Red;
-	tmp11[1].color = Color::Red;
-	tmp11[1].position = Vector2f(18.5f * 96, 10.5f * 96);
+	VertexArray* tmp11 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp11)[0].position = Vector2f(16.4f * 96, 10.5f * 96);
+	(*tmp11)[0].color = Color::Red;
+	(*tmp11)[1].color = Color::Red;
+	(*tmp11)[1].position = Vector2f(18.5f * 96, 10.5f * 96);
 
 	walls.push_back(tmp11);
 
-	VertexArray tmp12 = VertexArray(sf::LinesStrip, 2);
-	tmp12[0].position = Vector2f(22 * 96, 25 * 96);
-	tmp12[0].color = Color::Red;
-	tmp12[1].color = Color::Red;
-	tmp12[1].position = Vector2f(23 * 96, 25 * 96);
+	VertexArray* tmp12 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp12)[0].position = Vector2f(22 * 96, 25 * 96);
+	(*tmp12)[0].color = Color::Red;
+	(*tmp12)[1].color = Color::Red;
+	(*tmp12)[1].position = Vector2f(23 * 96, 25 * 96);
 
 	walls.push_back(tmp12);
 
-	VertexArray tmp13 = VertexArray(sf::LinesStrip, 2);
-	tmp13[0].position = Vector2f(18.5f * 96, 24.5f * 96);
-	tmp13[0].color = Color::Red;
-	tmp13[1].color = Color::Red;
-	tmp13[1].position = Vector2f(52.5f * 96, 24.5f * 96);
+	VertexArray* tmp13 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp13)[0].position = Vector2f(18.5f * 96, 24.5f * 96);
+	(*tmp13)[0].color = Color::Red;
+	(*tmp13)[1].color = Color::Red;
+	(*tmp13)[1].position = Vector2f(52.5f * 96, 24.5f * 96);
 
 	walls.push_back(tmp13);
 
-	VertexArray tmp14 = VertexArray(sf::LinesStrip, 2);
-	tmp14[0].position = Vector2f(36.4f * 96, 16.5f * 96);
-	tmp14[0].color = Color::Red;
-	tmp14[1].color = Color::Red;
-	tmp14[1].position = Vector2f(38.6f * 96, 16.5f * 96);
+	VertexArray* tmp14 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp14)[0].position = Vector2f(36.4f * 96, 16.5f * 96);
+	(*tmp14)[0].color = Color::Red;
+	(*tmp14)[1].color = Color::Red;
+	(*tmp14)[1].position = Vector2f(38.6f * 96, 16.5f * 96);
 
 	walls.push_back(tmp14);
 
 
-	VertexArray tmp15 = VertexArray(sf::LinesStrip, 2);
-	tmp15[0].position = Vector2f(40.4f * 96, 22.5f * 96);
-	tmp15[0].color = Color::Red;
-	tmp15[1].color = Color::Red;
-	tmp15[1].position = Vector2f(42.6f * 96, 22.5f * 96);
+	VertexArray* tmp15 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp15)[0].position = Vector2f(40.4f * 96, 22.5f * 96);
+	(*tmp15)[0].color = Color::Red;
+	(*tmp15)[1].color = Color::Red;
+	(*tmp15)[1].position = Vector2f(42.6f * 96, 22.5f * 96);
 
 	walls.push_back(tmp15);
 
@@ -356,10 +356,12 @@ void GameWorld::DeleteObjects()
 
 void GameWorld::Update(Time* timePerFrame)
 {
-	walls[5][0].position.x = playerPointer->gameObject->GetPosition()->x - 30;
+	auto start = high_resolution_clock::now();
+
+	/*(walls)[5][0].position.x = playerPointer->gameObject->GetPosition()->x - 30;
 	walls[5][0].position.y = playerPointer->gameObject->GetPosition()->y - 50;
 	walls[5][1].position.x = playerPointer->gameObject->GetPosition()->x + 30;
-	walls[5][1].position.y = playerPointer->gameObject->GetPosition()->y - 50;
+	walls[5][1].position.y = playerPointer->gameObject->GetPosition()->y - 50;*/
 
 	DeleteObjects();
 	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
@@ -413,6 +415,12 @@ void GameWorld::Update(Time* timePerFrame)
 
 	//LightPointer->Update(timePerFrame);
 
+	auto stop = high_resolution_clock::now();
+
+	auto duration = duration_cast<std::chrono::microseconds>(stop - start);
+
+	cout << "Time taken by Update(): "
+		<< duration.count() << " microseconds" << endl;
 
 }
 
@@ -486,22 +494,17 @@ void GameWorld::Draw()
 
 
 
-	vector<VertexArray>::iterator itttt;
+	vector<VertexArray*>::iterator itttt;
 
 	for (itttt = walls.begin(); itttt < walls.end(); itttt++)
 	{
-		window.draw((*itttt));
+		window.draw(*(*itttt));
 	}
 
 	
 	window.display();
 
-	auto stop = high_resolution_clock::now();
-
-	auto duration = duration_cast<std::chrono::microseconds>(stop - start);
-
-	cout << "Time taken by function: "
-		<< duration.count() << " microseconds" << endl;
+	
 }
 
 void GameWorld::Run()

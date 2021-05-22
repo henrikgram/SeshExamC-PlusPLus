@@ -1,6 +1,6 @@
 #include "DirectionalLight.h"
 
-DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition, vector<VertexArray>* walls, int angle, int stepSize) : LightSource(startPosition, walls, stepSize)
+DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition, vector<VertexArray*>* walls, int angle, int stepSize) : LightSource(startPosition, walls, stepSize)
 {
 	this->position = startPosition;
 	this->endPosition = endPosition;

@@ -1,6 +1,6 @@
 #include "LightSource.h"
 
-LightSource::LightSource(Vector2f position, vector<VertexArray>* walls, int stepSize)
+LightSource::LightSource(Vector2f position, vector<VertexArray*>* walls, int stepSize)
 {
 	this->walls = walls;
 	drawComponent = true;
@@ -97,12 +97,12 @@ void LightSource::LookAtSingleObject(VertexArray& object)
 }
 
 
-vector<Vector2f> LightSource::CastRays(vector<VertexArray>* walls)
+vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 {
 	intersectingRays->clear();
 
 	vector<Ray*>::iterator rayIt;
-	vector<VertexArray>::iterator wallIt;
+	vector<VertexArray*>::iterator wallIt;
 
 	//Array to store the closest intersection point. 
 	vector<Vector2f> closestPoint;
@@ -117,7 +117,7 @@ vector<Vector2f> LightSource::CastRays(vector<VertexArray>* walls)
 		for (wallIt = walls->begin(); wallIt < walls->end(); wallIt++)
 		{
 			//If there is an interection 
-			if ((*rayIt)->Cast((*wallIt)))
+			if ((*rayIt)->Cast(*(*wallIt)))
 			{
 				//Caclulate the distance to the new point
 				float newDistance = GetDistance(position, (*rayIt)->GetIntersectionPoint());
