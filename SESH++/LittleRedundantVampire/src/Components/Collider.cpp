@@ -3,6 +3,14 @@
 
 Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool solid)
 {
+	//TODO: emma skal tjekke om mine lys løsning er ok her
+	wall =  new VertexArray(LinesStrip, 2);
+	(*wall)[0].position.x = position.x - size.x/1.8f;
+	(*wall)[0].position.y = position.y - size.y / 2;
+
+	(*wall)[1].position.y = position.y - size.y / 2;
+	(*wall)[1].position.x = position.x + size.x/1.8f;
+
 	collisionBox = new RectangleShape(size);
 	collisionBox->setPosition(position);
 	collisionBox->setOrigin(size / 2.0f);
@@ -134,6 +142,14 @@ void Collider::Start()
 void Collider::Update(Time* timePerFrame)
 {
 	UpdateListOfCurrentCollisions();
+	//(*wall)[0].position = *(gameObject->GetPosition());
+	//(*wall)[1].position = (*(gameObject->GetPosition()) + collisionBox->getSize());
+
+	(*wall)[0].position.x = (*gameObject->GetPosition()).x - collisionBox->getSize().x / 1.8f;
+	(*wall)[0].position.y = (*gameObject->GetPosition()).y - collisionBox->getSize().y / 2;
+
+	(*wall)[1].position.y = (*gameObject->GetPosition()).y - collisionBox->getSize().y / 2;
+	(*wall)[1].position.x = (*gameObject->GetPosition()).x + collisionBox->getSize().x / 1.8f;
 }
 
 void Collider::Destroy()

@@ -9,7 +9,7 @@ class DirectionalLight : public LightSource
 {
 public:
 
-	DirectionalLight(Vector2f startPosition, Vector2f endPosition, vector<VertexArray>* walls, int angle = 0, int stepSize = 5);
+	DirectionalLight(Vector2f startPosition, Vector2f endPosition, vector<VertexArray*>* walls, int angle = 0, int stepSize = 5);
 	/// <summary>
 	/// Returns lines from the positon of the light to the intersecting points.
 	/// Used for debug

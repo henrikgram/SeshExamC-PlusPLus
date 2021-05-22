@@ -96,7 +96,7 @@ public:
 	vector<Collider*>* GetMovColliders();
 
 	DirectionalLight* LightPointer;
-	vector<VertexArray> walls;
+	vector<VertexArray*> walls;
 
 	float GetScreenWidth();
 	float GetScreenHeight();

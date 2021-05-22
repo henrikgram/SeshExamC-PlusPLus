@@ -33,6 +33,8 @@ public:
 	void OnNotify(std::string eventName, IListener* sender) override;
 	void AttachToColliderDestroyedEvent(IListener* listener);
 
+	VertexArray* wall;
+
 private:
 	RectangleShape* collisionBox;
 	float* pushFactor;
@@ -40,6 +42,8 @@ private:
 	CollisionEvent onColliding;
 	IGameEvent onNoLongerColliding;
 	IGameEvent onColliderDestroyed;
+
+
 
 	std::list<Collider*> currentCollisions;
 };

@@ -22,7 +22,7 @@ public:
 	/// </summary>
 	/// <param name="position"></param>
 	/// <param name="stepSize">The amount of rays. 1 is one ray pr. degree.</param>
-	LightSource(Vector2f position, vector<VertexArray>* walls, int stepSize = 5);
+	LightSource(Vector2f position, vector<VertexArray*>* walls, int stepSize = 5);
 
 	~LightSource();
 
@@ -31,7 +31,7 @@ public:
 	/// </summary>
 	/// <param name="walls">The object to check for interseciton with</param>
 	/// <returns></returns>
-	vector<Vector2f> CastRays(vector<VertexArray>* walls);
+	vector<Vector2f> CastRays(vector<VertexArray*>* walls);
 
 	/// <summary>
 	/// Moves the lightsource to a position
@@ -84,7 +84,7 @@ public:
 protected:
 	Vector2f position;
 
-	vector<VertexArray>* walls;
+	vector<VertexArray*>* walls;
 	vector<Vector2f>* intersectingPoints = new vector<Vector2f>;
 	vector<Ray*>* intersectingRays = new vector<Ray*>;
 	vector<Ray*>* rays = new vector<Ray*>;
