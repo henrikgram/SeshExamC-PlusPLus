@@ -377,8 +377,28 @@ void GameWorld::Update(Time* timePerFrame)
 	for (auto i = (*GameWorld::GetInstance()->gameObjects).begin(); i != (*GameWorld::GetInstance()->gameObjects).end();)
 	{
 		vector<GameObject*>::size_type originalSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+		
+		//camera culling
+		if (((*i)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6*96 &&
+			(playerPointer->gameObject->GetPosition()->x - (*i)->GetPosition()->x) < 6 * 96)
+		{
+			if (*(*i)->GetObjectTag() == ObjectTag::WINDOW)
+			{
+				(*i)->Update(timePerFrame);
+			}
+			else
+			{
+				//if it isnt a window, cull the y axis as well
+				if (((*i)->GetPosition()->y - playerPointer->gameObject->GetPosition()->y) < 6 * 96 &&
+					(playerPointer->gameObject->GetPosition()->y - (*i)->GetPosition()->y) < 6 * 96)
+				{
+					(*i)->Update(timePerFrame);
+				}
+			}
+		
+		}
 
-		(*i)->Update(timePerFrame);
+		
 		vector<GameObject*>::size_type updatedSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
 
 		if (originalSize == updatedSize)
@@ -391,13 +411,22 @@ void GameWorld::Update(Time* timePerFrame)
 	vector<Collider*>::iterator movColIt;
 	for (movColIt = movColliders->begin(); movColIt < movColliders->end(); movColIt++)
 	{
-		for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
+		if (((*movColIt)->GetPosition().x - playerPointer->gameObject->GetPosition()->x) < 3 * 96 &&
+			(playerPointer->gameObject->GetPosition()->x- (*movColIt)->GetPosition().x) < 3 *96 &&
+
+			((*movColIt)->GetPosition().y - playerPointer->gameObject->GetPosition()->y) < 3 * 96 &&
+			(playerPointer->gameObject->GetPosition()->y - (*movColIt)->GetPosition().y) < 3 * 96)
 		{
-			if (*movColIt != *colIt)
+			for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
 			{
-				(*movColIt)->CheckCollision(*colIt);
+				if (*movColIt != *colIt)
+				{
+					(*movColIt)->CheckCollision(*colIt);
+				}
 			}
 		}
+
+		
 	}
 
 	if (playerPointer != nullptr)
@@ -443,50 +472,67 @@ void GameWorld::Draw()
 	{
 		GameObject* go = (*GameWorld::GetInstance()->GetGameObjects())[i];
 
-		if (*go->GetShouldDraw())
+		//camera culling
+		if (((go)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6 * 96 && //right
+			(playerPointer->gameObject->GetPosition()->x - (go)->GetPosition()->x) < 6 * 96) /*&&*/ //left
+			/*((go)->GetPosition()->y - playerPointer->gameObject->GetPosition()->y) < 3 * 96 &&
+			(playerPointer->gameObject->GetPosition()->y - (go)->GetPosition()->y) < 3 * 96)*/
 		{
-			//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
-			sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
 
-
-			window.draw(sr->GetSprite());
-
-			if (*go->GetObjectTag() == ObjectTag::TEXT_BOX)
+			if (*go->GetShouldDraw())
 			{
-				TextMessage* tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
+				//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
+				sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
 
-				if (tm != nullptr)
+				if (((go)->GetPosition()->y - playerPointer->gameObject->GetPosition()->y) < 6 * 96 &&
+					(playerPointer->gameObject->GetPosition()->y - (go)->GetPosition()->y) < 6 * 96)
 				{
-					window.draw(tm->GetMessage());
+					window.draw(sr->GetSprite());
 				}
-				else
+
+				
+
+				if (*go->GetObjectTag() == ObjectTag::TEXT_BOX)
 				{
-					delete tm;
-					tm = nullptr;
-				}
-			}
-			else if (*go->GetObjectTag() == ObjectTag::WINDOW)
-			{
-				LightSource* light = dynamic_cast<LightSource*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::LIGHT));
+					TextMessage* tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
 
-				if (light != nullptr)
-				{
-
-					vector<VertexArray> lightCone = light->GetLightCone();
-
-					vector<VertexArray>::iterator itttt;
-
-					for (itttt = lightCone.begin(); itttt < lightCone.end(); itttt++)
+					if (tm != nullptr)
 					{
-						window.draw(*itttt);
+						window.draw(tm->GetMessage());
+					}
+					else
+					{
+						delete tm;
+						tm = nullptr;
 					}
 				}
-				else
+				else if (*go->GetObjectTag() == ObjectTag::WINDOW)
 				{
-					delete light;
-					light = nullptr;
+
+					LightSource* light = dynamic_cast<LightSource*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::LIGHT));
+
+					if (light != nullptr)
+					{
+
+						vector<VertexArray> lightCone = light->GetLightCone();
+
+						vector<VertexArray>::iterator itttt;
+
+						for (itttt = lightCone.begin(); itttt < lightCone.end(); itttt++)
+						{
+							window.draw(*itttt);
+						}
+					}
+					else
+					{
+						delete light;
+						light = nullptr;
+					}
 				}
 			}
+			
+
+			
 
 		}
 
