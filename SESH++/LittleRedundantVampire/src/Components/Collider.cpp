@@ -106,7 +106,7 @@ void Collider::UpdateListOfCurrentCollisions()
 			bool isStillColliding = CheckCollision(*i);
 			if (!isStillColliding)
 			{
-				onNoLongerColliding.Notify("NoLongerCollidingWith", *i);
+				//onNoLongerColliding.Notify("NoLongerCollidingWith", *i);
 				i = currentCollisions.erase(i);
 			}
 			else

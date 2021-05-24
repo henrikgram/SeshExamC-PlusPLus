@@ -164,6 +164,9 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 void GameWorld::Initialize()
 {
+	BootlegFactory(ObjectTag::PLAYER);
+	BootlegFactory(ObjectTag::CRATE);
+
 	VertexArray tmp4 = VertexArray(sf::LinesStrip, 2);
 	tmp4[0].position = Vector2f(0, 0);
 	tmp4[0].color = Color::Red;
@@ -212,10 +215,6 @@ void GameWorld::Initialize()
 	cursedPlayerWall[1].position = Vector2f(1000, 1500);
 
 	walls.push_back(cursedPlayerWall);
-
-	//BootlegFactory(ObjectTag::WINDOW);
-	BootlegFactory(ObjectTag::PLAYER);
-	BootlegFactory(ObjectTag::CRATE);
 
 	VertexArray tmp9 = VertexArray(sf::LinesStrip, 2);
 	tmp9[0].position = Vector2f(8.4f*96, 7.5f*96);
@@ -507,11 +506,11 @@ void GameWorld::Draw()
 void GameWorld::Run()
 {
 	LoadContent();
-
+	//BootlegFactory(ObjectTag::PLAYER);
 	LevelManager* lm = new LevelManager();
 	*GameWorld::GetInstance()->GetGameObjects() = lm->InstantiateLevel("Level1");
-
 	Initialize();
+
 	//String* string = new String("fuck you");
 	//Npc npc(string);
 	////GameObject* npcBoxFuck = new GameObject(npc.TextBoxPopup(Vector2f(npc.gameObject->position->x, npc.gameObject->position->y)));
@@ -536,19 +535,11 @@ void GameWorld::Run()
 		if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
 		{
 			CloseGame();
+			break;
 		}
 
 		//Vi s�tter vores deltaTime i forhold til clock.
 		deltaTime = clock.restart().asSeconds();
-		// Shuts the game down when the window is closed.
-		Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == Event::Closed)
-				window.close();
-			if (event.type == Event::Resized)
-				ResizeView(window, view);
-		}
 
 		// For fixed update and 60 frames per second.
 		// Clock is restarted to make sure we start from 0 every time.
@@ -573,6 +564,20 @@ void GameWorld::Run()
 		window.setView(view);
 
 		Draw();
+
+		// Shuts the game down when the window is closed.
+		Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::Closed)
+			{
+				CloseGame();
+			}
+			if (event.type == Event::Resized)
+			{
+				ResizeView(window, view);
+			}
+		}
 	}
 }
 
@@ -615,6 +620,7 @@ float GameWorld::GetScreenHeight()
 void GameWorld::CloseGame()
 {
 	//TODO: Doesn't work, fix it.
+	colliders->clear();
 	for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
 	{
 		objectsToBeDeleted.push(*i);
