@@ -9,8 +9,6 @@ IGameEvent::~IGameEvent()
 {
 	/*delete eventTitle;
 	eventTitle = nullptr;*/
-
-
 }
 
 void IGameEvent::Attach(IListener* listener)

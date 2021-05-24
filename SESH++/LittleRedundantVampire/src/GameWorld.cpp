@@ -164,8 +164,8 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 void GameWorld::Initialize()
 {
-	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
+	BootlegFactory(ObjectTag::PLAYER);
 
 	VertexArray tmp4 = VertexArray(sf::LinesStrip, 2);
 	tmp4[0].position = Vector2f(0, 0);
@@ -621,10 +621,22 @@ void GameWorld::CloseGame()
 {
 	//TODO: Doesn't work, fix it.
 	colliders->clear();
+	movColliders->clear();
+
+	//Clear the stack of objectsToBeDeleted first just in case, so there are no duplicates in the next step.
+	int stackSize = objectsToBeDeleted.size();
+
+	for (int i = 0; i < stackSize; i++)
+	{
+		objectsToBeDeleted.pop();
+	}
+
+	//Add every gameobject in game to the stack of objectsToBeDeleted.
 	for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
 	{
 		objectsToBeDeleted.push(*i);
 	}
+
 	DeleteObjects();
 	window.close();
 }

@@ -46,7 +46,9 @@ bool Collider::CheckCollision(Collider* other)
 		if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
 		{
 			currentCollisions.push_back(other);
+			//other->currentCollisions.push_back(this);
 			onColliderDestroyed.Attach(other);
+			//other->onColliderDestroyed.Attach(this);
 		}
 
 		onColliding.Notify(*other->gameObject->GetObjectTag(), "NotDefined");
@@ -98,21 +100,20 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 
 void Collider::UpdateListOfCurrentCollisions()
 {
-	if (currentCollisions.size() > 0)
+	//TODO: This for loop doesn't crash the game when deleting elements from the list while iterating through it. Check other loops that they also don't crash the game.
+	for (auto i = currentCollisions.begin(); i != currentCollisions.end();)
 	{
-		//TODO: This for loop doesn't crash the game when deleting elements from the list while iterating through it. Check other loops that they also don't crash the game.
-		for (auto i = currentCollisions.begin(); i != currentCollisions.end();)
+		bool isStillColliding = CheckCollision(*i);
+		if (!isStillColliding)
 		{
-			bool isStillColliding = CheckCollision(*i);
-			if (!isStillColliding)
-			{
-				//onNoLongerColliding.Notify("NoLongerCollidingWith", *i);
-				i = currentCollisions.erase(i);
-			}
-			else
-			{
-				++i;
-			}
+			//onNoLongerColliding.Notify("NoLongerCollidingWith", *i);
+			onColliderDestroyed.Detach(*i);
+			//(*i)->onColliderDestroyed.Detach(this);
+			i = currentCollisions.erase(i);
+		}
+		else
+		{
+			++i;
 		}
 	}
 }
@@ -138,6 +139,7 @@ void Collider::Update(Time* timePerFrame)
 
 void Collider::Destroy()
 {
+	//UpdateListOfCurrentCollisions();
 	currentCollisions.clear();
 	//This Notify must be called before ~Collider to ensure that anything we are colliding with gets notified 
 	// that we are about to be deleted, so they can respond to this in time. 
@@ -155,12 +157,14 @@ void Collider::OnNotify(std::string eventName, IListener* sender)
 {
 	//This is used to ensure that a collider is removed from our list of currentCollisions before the collider is completely
 	//delted from the game along with the gameObject it belongs to.
+	gameObject;
 	if (eventName == "ColliderDestroyed")
 	{
 		for (auto i = currentCollisions.begin(); i != currentCollisions.end();)
 		{
 			if (*i == sender)
 			{
+				onColliderDestroyed.Detach(sender);
 				i = currentCollisions.erase(i);
 			}
 			else
