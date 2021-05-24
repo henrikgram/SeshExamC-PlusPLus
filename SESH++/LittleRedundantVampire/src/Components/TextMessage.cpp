@@ -18,12 +18,6 @@ TextMessage::TextMessage(string* msg, Vector2f position)
 
 TextMessage::~TextMessage()
 {
-
-}
-
-Text TextMessage::GetMessage()
-{
-	return *text;
 }
 
 void TextMessage::Awake()
@@ -47,11 +41,14 @@ void TextMessage::Update(Time* timePerFrame)
 	text->setPosition(Vector2f(GameWorld::GetInstance()->GetScreenWidth() - (text->getGlobalBounds().width / 2), GameWorld::GetInstance()->GetScreenHeight() + (text->getGlobalBounds().height *2)));
 }
 
-void TextMessage::Destroy()
+Text TextMessage::GetMessage()
 {
-
+	return *text;
 }
 
+void TextMessage::Destroy()
+{
+}
 
 ComponentTag TextMessage::ToEnum()
 {

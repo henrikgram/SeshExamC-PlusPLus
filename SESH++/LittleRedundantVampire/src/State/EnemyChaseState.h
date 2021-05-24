@@ -4,6 +4,10 @@
 #include "IState.h"
 #include "../Components/Enemy.h"
 
+
+/// <summary>
+/// IState: Enemy's chase state.
+/// </summary>
 class EnemyChaseState : public IState
 {
 private:

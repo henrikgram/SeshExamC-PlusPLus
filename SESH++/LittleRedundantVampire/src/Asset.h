@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ASSET_H
+#define ASSET_H
+
 #include <SFML/graphics.hpp>
 #include <unordered_map>
 #include <iostream>
@@ -8,6 +10,10 @@
 using namespace sf;
 using namespace std;
 
+
+/// <summary>
+/// Manages assets. Also manages loading assets.
+/// </summary>
 class Asset
 {
 private:
@@ -36,7 +42,6 @@ private:
 	Texture* playerSheetTexture = new Texture;
 	Texture* vaseTexture = new Texture;
 
-
 	// Part of what makes the class a singleton.
 	static Asset* instance;
 
@@ -48,6 +53,7 @@ public:
 
 	/// <summary>
 	/// Gets a texture based on TextureTag.
+	/// TODO: make constant
 	/// </summary>
 	Texture* GetTexture(TextureTag tag);
 
@@ -59,3 +65,5 @@ public:
 	Asset();
 	~Asset();
 };
+
+#endif

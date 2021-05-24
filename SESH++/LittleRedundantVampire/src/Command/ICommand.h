@@ -1,6 +1,10 @@
 #ifndef ICOMMAND_H
 #define ICOMMAND_H
 
+
+/// <summary>
+/// Command: Interface for commands.
+/// </summary>
 class ICommand
 {
 public:

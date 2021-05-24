@@ -11,6 +11,9 @@
 using namespace sf;
 
 
+/// <summary>
+/// Command: Manages keybinds and executes the correct commands when a key is pressed.
+/// </summary>
 class PlayerInvoker
 {
 private:

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include "../Component.h"
 #include "../Enum/TextureTag.h"
 #include "../Asset.h"
@@ -10,12 +12,16 @@
 
 using namespace sf;
 
+/// <summary>
+/// Component: The player character.
+/// </summary>
 class Player : public Component
 {
 public:
 	Player();
 	~Player();
 
+	// Inherited via Component
 	void Awake() override;
 	void Start() override;
 	void Update(Time* timePerFrame) override;
@@ -24,19 +30,17 @@ public:
 
 	void OnNotifyCollision(ObjectTag otherTag, string side) override;
 
-
 private:
-
-	int* health;
-
 	GameObject* healthBar;
 	SpriteRenderer* srHealthBar;
 
-	//Delete later, only for testing.
+	// TODO: Delete later, only for testing.
 	float timer;
 
+	int* health;
 	float invincibilityTimer;
-
 	bool invincible;
 	bool damageTaken;
 };
+
+#endif

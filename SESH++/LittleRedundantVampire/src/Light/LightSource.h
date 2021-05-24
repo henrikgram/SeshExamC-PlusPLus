@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LIGHTSOURCE_H
+#define LIGHTSOURCE_H
+
 #include "../Component.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -10,6 +12,7 @@
 #define PI 3.14159265
 
 using namespace sf;
+
 
 /// <summary>
 /// Object which will beam out a number of Rays. 
@@ -23,7 +26,6 @@ public:
 	/// <param name="position"></param>
 	/// <param name="stepSize">The amount of rays. 1 is one ray pr. degree.</param>
 	LightSource(Vector2f position, vector<VertexArray*>* walls, int stepSize = 5);
-
 	~LightSource();
 
 	/// <summary>
@@ -34,7 +36,7 @@ public:
 	vector<Vector2f> CastRays(vector<VertexArray*>* walls);
 
 	/// <summary>
-	/// Moves the lightsource to a position
+	/// Moves the lightsource to a position.
 	/// </summary>
 	/// <param name="position"></param>
 	virtual void Move(Vector2f position);
@@ -53,14 +55,14 @@ public:
 
 	/// <summary>
 	/// Returns lines from the positon of the light to the intersecting points.
-	/// Used for debug
+	/// Used for debugging.
 	/// </summary>
 	/// <returns></returns>
 	virtual vector<VertexArray> GetRayLines() = 0;
 
 
 	/// <summary>
-	/// Uses pythagora to calcute the distance between to points. 
+	/// Uses pythagora to calcute the distance between two points. 
 	/// </summary>
 	/// <param name="pos1"></param>
 	/// <param name="pos2"></param>
@@ -69,12 +71,15 @@ public:
 
 	/// <summary>
 	/// Returns all the rays in the class.
+	/// TODO: const
 	/// </summary>
 	/// <returns></returns>
 	vector<Ray*>* GetRays();
 
+	//TODO: const
 	Vector2f GetPosition();
 
+	// Inherited via Component
 	void Awake() override;
 	void Start() override;
 	void Update(Time* timePerFrame) override;
@@ -90,3 +95,4 @@ protected:
 	vector<Ray*>* rays = new vector<Ray*>;
 };
 
+#endif

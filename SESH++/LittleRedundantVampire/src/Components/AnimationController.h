@@ -8,17 +8,32 @@
 using namespace std;
 
 
+/// <summary>
+/// Component: Handles which type of animation to run. For movement or others.
+/// </summary>
 class AnimationController : public Component
 {
 public:
 	/// <summary>
 	/// For animating moving objects such as Player.
 	/// </summary>
-	AnimationController(SpriteRenderer& spriteRenderer, 
-		string noAniRow, string upAniRow, string downAniRow, string leftAniRow, string rightAniRow);
-	AnimationController(SpriteRenderer& spriteRenderer, int* currentRow, int firstRow);
-	~AnimationController();
+	/// <param name="spriteRenderer">SpriteRenderer for the object to animate.</param>
+	/// <param name="noAniRow">Default animation row.</param>
+	/// <param name="upAniRow">Up animation row.</param>
+	/// <param name="downAniRow">Down animation row.</param>
+	/// <param name="leftAniRow">Left animation row.</param>
+	/// <param name="rightAniRow">Right animation row.</param>
+	AnimationController(SpriteRenderer& spriteRenderer, string noAniRow, string upAniRow, string downAniRow, string leftAniRow, string rightAniRow);
 
+	/// <summary>
+	/// For health bar animation, or other animation where the row is decrementing.
+	/// </summary>
+	/// <param name="spriteRenderer">SpriteRenderer for the object to animate.</param>
+	/// <param name="currentRow">The current row to animate.</param>
+	/// <param name="firstRow">The first row to animate.</param>
+	AnimationController(SpriteRenderer& spriteRenderer, int* currentRow, int firstRow);
+
+	~AnimationController();
 
 	// Inherited via Component
 	virtual void Awake() override;
@@ -31,9 +46,17 @@ public:
 
 
 private:
+	/// <summary>
+	/// For animating objects that move in four directions, like the Player.
+	/// </summary>
 	void MovementAnimation();
+	/// <summary>
+	/// For running a very simple animation that doesn't change much.
+	/// </summary>
 	void DecrementingRowAnimation();
 
+
+private:
 	SpriteRenderer& spriteRenderer;
 
 	string noAniRow;

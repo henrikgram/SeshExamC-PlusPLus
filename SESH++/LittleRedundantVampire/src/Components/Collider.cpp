@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Collider.h"
 
+//TODO: Do a proper check of this class. there is some "out-commented" code that can probs be deleted, but wanna talk to Emma first.
+
 Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool solid)
 {
 	//TODO: emma skal tjekke om mine lys løsning er ok her

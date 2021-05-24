@@ -80,7 +80,7 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 
 		auto nxIt = std::next(it, 1);
 
-		//and the next intersecting points, if it havent reached the end yet. 
+		//and the next intersecting points, if it hasn't reached the end yet. 
 		if ((index + 1) != intersectingRays->size())
 		{
 			quad[3].position = (*nxIt)->GetPosition();
@@ -106,7 +106,6 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 
 	return lightCone;
 }
-
 
 //TODO: dosent work yet for directional light
 void DirectionalLight::Move(Vector2f position)

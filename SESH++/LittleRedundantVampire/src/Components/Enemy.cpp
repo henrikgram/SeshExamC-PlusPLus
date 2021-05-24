@@ -1,24 +1,33 @@
 #include "Enemy.h"
 #include "../GameWorld.h"
 
+
+//TODO: check dem som er uninitialized.
 Enemy::Enemy()
 {
-
+	speed = new float();
+	velocity = new Vector2f();
 }
 
 Enemy::~Enemy()
 {
 	targetDistance = nullptr;
 	delete targetDistance;
+
 	currentState = nullptr;
 	delete currentState;
+
 	velocity = nullptr;
 	delete velocity;
+
 	target = nullptr;
 	delete target;
+
 	speed = nullptr;
 	delete speed;
 
+	velocity = nullptr;
+	delete velocity;
 
 	delete this;
 }
@@ -55,7 +64,6 @@ void Enemy::Update(Time* timePerFrame)
 
 void Enemy::Destroy()
 {
-
 }
 
 void Enemy::Move(Vector2f velocity)
@@ -67,10 +75,8 @@ void Enemy::TempUntilPlayerIsMovedIntoLM()
 {
 	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
 
-	//iterates through the gameObjects and draws all gameobjects.
-	for (vector<GameObject*>::size_type i = 0;
-		i < gameObjectsSize;
-		++i)
+	//iterates through the gameObjects.
+	for (vector<GameObject*>::size_type i = 0; i < gameObjectsSize; ++i)
 	{
 		GameObject* go = (*GameWorld::GetInstance()->GetGameObjects())[i];
 

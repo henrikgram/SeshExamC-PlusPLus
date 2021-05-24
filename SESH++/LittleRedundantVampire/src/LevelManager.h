@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LEVELMANAGER_H
+#define LEVELMANAGER_H
+
 #include <iostream>
 #include "BitmapImage.h"
 #include "GameObject.h"
@@ -11,9 +13,13 @@
 using namespace std;
 
 
+/// <summary>
+/// Manages creation of levels.
+/// </summary>
 class LevelManager
 {
 private:
+	//Where the bitmap-images are located.
 	string filePath = "src/Levels/";
 
 public:
@@ -36,12 +42,18 @@ public:
 	/// Returns an assembled object with components based on a tag.
 	/// Called through LevelSetup().
 	/// </summary>
-	/// <param name="tag"></param>
-	/// <param name="posX"></param>
-	/// <param name="posY"></param>
+	/// <param name="tag">tag of the created object</param>
+	/// <param name="posX">x position</param>
+	/// <param name="posY">y position</param>
 	/// <returns></returns>
 	GameObject* CreateObject(ObjectTag tag, float posX, float posY);
 
+	/// <summary>
+	/// Instantiates all NPC for the first level.
+	/// This isn't the best way to do this, but we didn't have time to
+	/// implement a better solution.
+	/// </summary>
 	vector<GameObject*> CreateNpcLevelOne();
 };
 
+#endif

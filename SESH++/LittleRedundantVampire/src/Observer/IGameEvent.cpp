@@ -2,15 +2,10 @@
 
 IGameEvent::IGameEvent()
 {
-	//this->eventTitle = new string(eventTitle);
 }
 
 IGameEvent::~IGameEvent()
 {
-	/*delete eventTitle;
-	eventTitle = nullptr;*/
-
-
 }
 
 void IGameEvent::Attach(IListener* listener)

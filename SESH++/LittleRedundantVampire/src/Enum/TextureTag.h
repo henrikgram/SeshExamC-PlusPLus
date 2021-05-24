@@ -1,6 +1,9 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
+/// <summary>
+/// Enum, tag: Tags for all textures.
+/// </summary>
 enum class TextureTag {
 	OZZY,
 	PLAYER_SHEET,

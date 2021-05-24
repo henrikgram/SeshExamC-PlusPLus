@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COMPONENT_H
+#define COMPONENT_H
 
 #include "GameObject.h"
 #include "Enum/ComponentTag.h"
@@ -6,9 +7,14 @@
 #include "Observer/ICollisionListener.h"
 #include <string>
 
-
 using namespace std;
+
+
 //TODO: Determine whether or not we need this class. It just causes problems. 
+
+/// <summary>
+/// Virtual component to define component classes.
+/// </summary>
 class Component : public IListener, public ICollisionListener
 {
 public:
@@ -42,9 +48,8 @@ public:
 	/// </summary>
 	virtual void Destroy() = 0;
 
-
 	/// <summary>
-	/// Gets a components tag.
+	/// Gets a component's tag.
 	/// </summary>
 	/// <returns></returns>
 	virtual ComponentTag ToEnum() = 0;
@@ -55,8 +60,6 @@ public:
 	// Inherited via ICollisionListener
 	virtual void OnNotifyCollision(ObjectTag otherTag, std::string side) override;
 	bool drawComponent = false;
-
-protected:
-
 };
 
+#endif

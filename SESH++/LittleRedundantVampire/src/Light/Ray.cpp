@@ -12,7 +12,6 @@ Ray::Ray(Vector2f position, Vector2f direction)
     (*ray)[1].position = Vector2f((position.x + direction.x), position.y + direction.y);
 }
 
-
 Ray::Ray()
 {
 }
@@ -22,6 +21,7 @@ Ray::~Ray()
     delete ray;
     ray = nullptr;
 
+    //TODO: fix?
     /* delete intersection;
      intersection = nullptr;*/
 }
@@ -46,7 +46,7 @@ bool Ray::Cast(VertexArray& wall)
 
     float denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
 
-    //If the deniminator is 0, it meaans that the lines are parallel and will never collide. 
+    //If the deniminator is 0, it means that the lines are parallel and will never collide. 
     if (denominator == 0)
     {
         return false;
@@ -72,13 +72,10 @@ bool Ray::Cast(VertexArray& wall)
     }
 }
 
-
-
 void Ray::LookAt(Vector2f position)
 {
     (*ray)[1].position = position;
 }
-
 
 VertexArray* Ray::GetVertexArray()
 {
@@ -105,5 +102,3 @@ void Ray::Move(Vector2f position)
     (*ray)[0].position = position;
     (*ray)[1].position = Vector2f(position.x + direction.x, position.y + direction.y);
 }
-
-

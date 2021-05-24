@@ -1,6 +1,9 @@
 #ifndef OBJECTTAG_H
 #define OBJECTTAG_H
 
+/// <summary>
+/// Enum, tag: Tags for all objects.
+/// </summary>
 enum class ObjectTag {
 	PLAYER,
 	ENEMY,

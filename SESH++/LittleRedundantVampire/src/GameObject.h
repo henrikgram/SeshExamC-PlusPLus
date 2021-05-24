@@ -2,8 +2,9 @@
 #define GAMEOBJECT_H
 
 class Component;
-//forward declaration, to make sure the compiles knows that it exist
-//TWo classes cant include from each other, because that would create an infinite loop
+//TODO: what is all this text --> ANSWER: It explains why we used class Component; above.
+//forward declaration, to make sure the compiler knows that it exist.
+//Two classes can't include from each other, because that would create an infinite loop
 
 /*
 * FROM STACK OVERFLOW
@@ -20,21 +21,22 @@ https://stackoverflow.com/questions/4964482/how-to-create-two-classes-in-c-which
 #include <iostream>
 #include <unordered_map>
 
-//#include "Component.h"
 #include "Enum/ComponentTag.h"
 #include "Enum/ObjectTag.h"
 #include "Observer/IGameEvent.h"
 #include "Observer/IListener.h"
 
-
-
-
 using namespace sf;
 using namespace std;
 
+
+/// <summary>
+/// The objects in the game. You can add components to them.
+/// </summary>
 class GameObject : public IListener
 {
 public:
+	// TODO: What is the commont below for??
 	//Map for all components attached to the gameobject
 
 	GameObject();
@@ -70,6 +72,7 @@ public:
 
 	/// <summary>
 	/// Gets a component based on ComponentTag.
+	///  TODO: const
 	/// </summary>
 	Component* GetComponent(ComponentTag tag);
 
@@ -88,9 +91,8 @@ public:
 
 	bool* GetShouldDraw() const { return shouldDraw; }
 
-
 	/// <summary>
-	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) That this GameObject is ready to be deleted.
+	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) that this GameObject is ready to be deleted.
 	/// Can be called from the components belonging to the gameobject.
 	/// </summary>
 	void CallSelfDestruct();
@@ -100,7 +102,6 @@ public:
 	/// </summary>
 	/// <param name="listener"></param>
 	void AddListenerToCallSelfDestruct(IListener* listener);
-
 
 private:
 	unordered_map<ComponentTag, Component*>::iterator it;

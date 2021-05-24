@@ -1,15 +1,13 @@
 #include "CollisionEvent.h"
 #include <string>
 
+
 CollisionEvent::CollisionEvent()
 {
 }
 
 CollisionEvent::~CollisionEvent()
 {
-    /*for (auto&& listener : listeners) {
-        delete listener;
-    }*/
     listeners.clear();
 }
 

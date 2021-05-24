@@ -4,6 +4,10 @@
 #include "ICommand.h"
 #include "../Components/Movement.h"
 
+
+/// <summary>
+/// Command: The command that lets the player move.
+/// </summary>
 class MoveCommand : public ICommand
 {
 public:

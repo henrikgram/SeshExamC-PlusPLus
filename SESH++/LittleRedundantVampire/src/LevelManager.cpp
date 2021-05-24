@@ -2,13 +2,12 @@
 #include "GameWorld.h"
 #include "Components/Enemy.h"
 
-
+//TODO: maybe more commenting in this class. dunno, i guess it is pretty straight forward.
 
 GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 {
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject(Vector2<float>(posX * 96, posY * 96));
-	//SpriteRenderer* sr = new SpriteRenderer();
 	AnimationComponent* ac;
 	SpriteRenderer* sr;
 	Collider* col;
@@ -16,34 +15,29 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	float x;
 	float y;
 
-	//go->position = &position;
-
+	//Determine which object to make.
 	switch (tag)
 	{
 		//DECORATIONS
 	case ObjectTag::FLOOR_CARPET:
-		//sr->SetSprite(TextureTag::FLOOR_CARPET);
 		sr = new SpriteRenderer(TextureTag::FLOOR_CARPET);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::FLOOR_CARPET;
 		break;
 
 	case ObjectTag::FLOOR_WOOD:
-		//sr->SetSprite(TextureTag::FLOOR_WOOD);
 		sr = new SpriteRenderer(TextureTag::FLOOR_WOOD);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::FLOOR_WOOD;
 		break;
 
 	case ObjectTag::WALL_DECORATION:
-		//sr->SetSprite(TextureTag::WALL);
 		sr = new SpriteRenderer(TextureTag::WALL);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::WALL_DECORATION;
 		break;
 
 	case ObjectTag::WINDOW_DECORATION:
-		//sr->SetSprite(TextureTag::WINDOW);
 		sr = new SpriteRenderer(TextureTag::WINDOW);
 		go->AddComponent(sr);
 		*go->GetObjectTag() = ObjectTag::WINDOW_DECORATION;
@@ -51,7 +45,6 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 
 		//OBJECTS
 	case ObjectTag::BOOKCASE:
-		//sr->SetSprite(TextureTag::BOOKCASE);
 		sr = new SpriteRenderer(TextureTag::BOOKCASE);
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
@@ -72,14 +65,6 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::CRATE:
 	{
 		sr = new SpriteRenderer(TextureTag::CRATE);
-
-	/*	VertexArray* w = new VertexArray(sf::LinesStrip, 2);
-
-		(*w)[0].position = *go->GetPosition();
-		(*w)[1].position.x = go->GetPosition()->x + sr->GetTexture().getSize().x;
-		(*w)[1].position.y = go->GetPosition()->y;
-
-		GameWorld::GetInstance()->walls.push_back(*w);*/
 
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.1f, true);
@@ -272,9 +257,14 @@ vector<GameObject*> LevelManager::InstantiateLevel(string levelName)
 	objectLayer.Read(objectPath);
 	decorationLayer.Read(decorationPath);
 
+	// Runs level setup for the decoration layer first (etc. floor. Anything that has no collider).
+	// Returns a vector of gameobjects.
 	vector<GameObject*> decorations = LevelSetup(decorationLayer);
+	// Then runs level setup for the objects that can be interacted with (anything with a collider).
+	// Returns a vector of gameobjects.
 	vector<GameObject*> objects = LevelSetup(objectLayer);
 
+	// Adds all gameobjects from the decoration- and object layer to the gameobjects vector.
 	gameObjects.insert(gameObjects.end(), decorations.begin(), decorations.end());
 	gameObjects.insert(gameObjects.end(), objects.begin(), objects.end());
 
@@ -291,6 +281,8 @@ vector<GameObject*> LevelManager::LevelSetup(BitmapImage& level)
 {
 	vector<GameObject*> gameObjects = {};
 
+	// Get the size of the level and place down objects depending
+	// on the color on the loaded bitmap.
 	for (int y = 0; y < level.GetHeight(); y++)
 	{
 		for (int x = 0; x < level.GetWidth(); x++)
@@ -345,10 +337,12 @@ vector<GameObject*> LevelManager::LevelSetup(BitmapImage& level)
 			{
 				gameObjects.push_back(CreateObject(ObjectTag::KEY, x, y));
 			}
-			else if (color.r == 0 && color.g == 255 && color.b == 0)
-			{
-				//gameObjects.push_back(CreateObject(ObjectTag::NPC, x, y));
-			}
+			// TODO: Maybe delete? Or at least use the comment written below this.
+			// Since NPC's are instantiated through a different method, this isn't needed for now.
+			//else if (color.r == 0 && color.g == 255 && color.b == 0)
+			//{
+			//	gameObjects.push_back(CreateObject(ObjectTag::NPC, x, y));
+			//}
 			else if (color.r == 0 && color.g == 180 && color.b == 0)
 			{
 				gameObjects.push_back(CreateObject(ObjectTag::PLAYER, x, y));

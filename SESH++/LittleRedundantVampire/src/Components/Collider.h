@@ -1,4 +1,6 @@
-#pragma once
+#ifndef COLLIDER_H
+#define COLLIDER_H
+
 #include <SFML/Graphics.hpp>
 #include "../Observer/CollisionEvent.h"
 #include "../Observer/IGameEvent.h"
@@ -6,6 +8,10 @@
 
 using namespace sf;
 
+
+/// <summary>
+/// Component: Allows the object to handle collision in various ways.
+/// </summary>
 class Collider : public Component
 {
 public:
@@ -13,11 +19,14 @@ public:
 	~Collider();
 
 	//TODO: Move should perhaps not be in this class. Collider shouldn't be responsible for moving an object perhaps a Rigidbody class.
+	//Currently used for moving objects being pushed.
 	void Move(float deltaX, float deltaY);
 
 	//TODO: Should maybe be a void method
 	bool CheckCollision(Collider* other);
+	// TODO: const
 	Vector2f GetPosition() const { return *gameObject->GetPosition(); }
+	// TODO: const
 	Vector2f GetHalfsize() const { return collisionBox->getSize() / 2.0f; }
 
 	void Push(Vector2f delta, Vector2f intersect, Collider* other);
@@ -43,8 +52,7 @@ private:
 	IGameEvent onNoLongerColliding;
 	IGameEvent onColliderDestroyed;
 
-
-
 	std::list<Collider*> currentCollisions;
 };
 
+#endif

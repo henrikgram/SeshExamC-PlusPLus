@@ -1,9 +1,15 @@
-#pragma once
+#ifndef COLLISIONEVENT_H
+#define COLLISIONEVENT_H
+
 #include <list>
 #include <string>
 #include "ICollisionListener.h"
 #include "../Enum/ObjectTag.h"
 
+
+/// <summary>
+/// Observer: Manages collision events.
+/// </summary>
 class CollisionEvent
 {
 public:
@@ -18,3 +24,4 @@ private:
 	std::list<ICollisionListener*> listeners;
 };
 
+#endif

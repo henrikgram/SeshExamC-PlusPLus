@@ -3,9 +3,13 @@
 
 #include "../GameObject.h"
 
+
 class ContextState;
 class Enemy;
 
+/// <summary>
+/// Abstract class for all states.
+/// </summary>
 class IState
 {
 protected:
@@ -39,4 +43,4 @@ public:
 	virtual void Exit() = 0;
 };
 
-#endif // ! STATE_H
+#endif

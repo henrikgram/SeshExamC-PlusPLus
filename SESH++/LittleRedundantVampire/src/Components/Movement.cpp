@@ -27,6 +27,7 @@ void Movement::Update(Time* timePerFrame)
 		++speed;
 	}
 
+	//Manage which direction is moved towards.
 	//No walking
 	if ((*velocity).x == 0 && (*velocity).y == 0)
 	{
@@ -77,9 +78,11 @@ void Movement::Normalize()
 {
 	if (*velocity != Vector2f(0.0f, 0.0f))
 	{
-		//Vi udregner hypotenusen af bevaegelsesretningen.
+		// We calculate the hypotenuse of the movement direction.
 		float movementVectorLength = sqrt(velocity->x * velocity->x + velocity->y * velocity->y);
 
+		// TODO: translation okay??
+		// We normalize the direction compared to the length of the hypotenuse.
 		//Vi normaliserer retningen ift til hypotenusens laengde.
 		velocity->x /= movementVectorLength;
 		velocity->y /= movementVectorLength;
@@ -87,7 +90,6 @@ void Movement::Normalize()
 		velocity->x *= speed;
 		velocity->y *= speed;
 
-		//cout << velocity->x << " : " << velocity->y << "\n";
 		*gameObject->GetPosition() += *velocity;
 		*velocity = Vector2f(0.0f, 0.0f);
 	}

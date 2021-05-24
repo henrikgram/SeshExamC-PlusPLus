@@ -1,19 +1,24 @@
-#pragma once
+#ifndef SPRITERENDERER_H
+#define SPRITERENDERER_H
+
 #include "../Component.h"
 #include "../Enum/TextureTag.h"
 #include "../Asset.h"
+
 using namespace sf;
 
+
+/// <summary>
+/// Component: For managing textures/sprites and spritesheets for the object.
+/// </summary>
 class SpriteRenderer : public Component
 {
 public:
-
-	~SpriteRenderer();
-
-	//SpriteRenderer();
 	SpriteRenderer(TextureTag textureTag);
 	SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vector2u imageCount);
+	~SpriteRenderer();
 
+	// Inherited via Component
 	void Awake() override;
 	void Start() override;
 	void Update(Time* timePerFrame) override;
@@ -22,36 +27,38 @@ public:
 
 	/// <summary>
 	/// Returns a Sprite
+	///  TODO: const
 	/// </summary>
-	/// <returns></returns>
 	Sprite GetSprite();
-
-	void FlipSprite();
-
-	Texture GetTexture();
-
-	bool GetIsSpriteSheet();
-	bool isSpriteSheet = false;
-
 	/// <summary>
-	/// Sets the sprite's texture based on TextureTag.
+	/// Flips the sprite.
 	/// </summary>
-	/// <param name="textureTag">Which texture from the Asset Class </param>
-	//void SetSprite(TextureTag textureTag);
+	void FlipSprite();
+	/// <summary>
+	/// Returns the texture.
+	///  TODO: const
+	/// </summary>
+	Texture GetTexture();
+	/// <summary>
+	/// Returns the bool isSpriteSheet to determine if the texture is a spritesheet or not.
+	/// TODO: const
+	/// </summary>
+	bool GetIsSpriteSheet();
+	// TODO: const
+	bool* GetFlipped();
 
 	void SetTextureRect(IntRect& textureRect);
 
+	//TODO: make get-methods
 	IntRect* TextureRect;
-
 	Vector2u* currentImage;
 	Vector2u* imageCount;
-
-	bool* GetFlipped();
-
+	bool isSpriteSheet;
 
 private:
 	Sprite* sprite;
 	Texture* texture;
-
 	bool* flipped;
 };
+
+#endif

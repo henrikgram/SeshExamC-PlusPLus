@@ -1,6 +1,9 @@
 #ifndef COMPONENTTAG_H
 #define COMPONENTTAG_H
 
+/// <summary>
+/// Enum, tag: Tags for all Components.
+/// </summary>
 enum class ComponentTag {
 	SPRITERENDERER,
 	MOVEMENT,

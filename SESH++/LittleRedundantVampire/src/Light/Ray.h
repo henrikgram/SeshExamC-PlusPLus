@@ -1,15 +1,22 @@
-#pragma once
+#ifndef RAY_H
+#define RAY_H
+
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+
 using namespace sf;
 using namespace std;
 
+
+/// <summary>
+/// TODO: add summary
+/// </summary>
 class Ray
 {
 public:
 	/// <summary>
-	/// A line that gets shot out from a point, and then detects intersection with all lines that i collides with
+	/// A line that gets shot out from a point, and then detects intersection with all lines that it collides with.
 	/// </summary>
 	/// <param name="position">Start position</param>
 	/// <param name="direction">Direction to fire the ray</param>
@@ -39,25 +46,28 @@ public:
 
 	/// <summary>
 	/// Returns the VertexArray
+	/// TODO: const
 	/// </summary>
 	/// <returns></returns>
 	VertexArray* GetVertexArray();
 
 	/// <summary>
 	/// Returns the intersection point
+	/// TODO: const
 	/// </summary>
 	/// <returns></returns>
 	Vector2f GetIntersectionPoint();
 
+	//TODO: cosnt
 	Vector2f GetPosition();
-
 	void SetIntersection(Vector2f position);
-
 
 private:
 	Vector2f position;
 	Vector2f direction;
 	VertexArray* ray = new VertexArray(sf::LinesStrip, 2);
+	// TODO: what this?
 	Vector2f intersection;// = new Vector2f;
 };
 
+#endif

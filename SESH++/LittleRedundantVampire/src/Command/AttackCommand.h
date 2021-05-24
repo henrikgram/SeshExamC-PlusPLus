@@ -5,6 +5,9 @@
 #include "../Components/AttackSpawner.h"
 
 
+/// <summary>
+/// Command: The command that lets the player attack.
+/// </summary>
 class AttackCommand : public ICommand
 {
 public:

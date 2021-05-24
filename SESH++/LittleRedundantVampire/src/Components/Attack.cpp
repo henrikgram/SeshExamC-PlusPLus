@@ -3,6 +3,7 @@
 #include "SpriteRenderer.h"
 #include "../GameWorld.h"
 #include <iostream>
+
 using namespace std;
 using namespace sf;
 
@@ -20,11 +21,11 @@ Attack::~Attack()
 
 }
 
-
 void Attack::Awake()
 {
 	//TODO: Det her skal kunne fungere med events, der kører når spilleren bevæger sig.
 	
+	//Positions the attack according to the callers direction.
 	switch (*gameObject->GetDirection())
 	{
 	case 'N':
@@ -54,6 +55,7 @@ void Attack::Update(Time* timePerFrame)
 {
 	attackTimer += timePerFrame->asMilliseconds();
 
+	//Manages how long the attack is active for.
 	if (attackTimer >= attackLength)
 	{
 		//TODO: Make sure object gets deleted here instead.
@@ -64,7 +66,7 @@ void Attack::Update(Time* timePerFrame)
 //TODO: Find a proper way to delete objects.
 void Attack::Destroy()
 {
-	//fjern fra listen af objekter.
+	//Remove from the list of gameObjects.
 }
 
 ComponentTag Attack::ToEnum()

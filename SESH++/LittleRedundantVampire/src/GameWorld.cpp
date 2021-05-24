@@ -27,10 +27,10 @@ GameWorld::~GameWorld()
 
 /// <summary>
 /// https://www.youtube.com/watch?v=CpVbMeYryKo&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=13
-/// S�rger for at det view scaler med vinduets st�rrelse. Forhindrer stretching af sprites og lignende.
+/// Scales game window size with the screen size.
 /// </summary>
-/// <param name="window">Spilvinduet.</param>
-/// <param name="view">Det view som f�lger spilleren.</param>
+/// <param name="window">Game window</param>
+/// <param name="view">The view following the player.</param>
 void GameWorld::ResizeView(const RenderWindow& window, View& view)
 {
 	float aspectRatio = float(window.getSize().x) / float(window.getSize().y);
@@ -65,18 +65,19 @@ void GameWorld::OnNotify(std::string eventName, IListener* sender)
 	}
 }
 
-//TODO: check if this is fine, or actual factory is needed
+//TODO: check if this is fine, or actual factory is needed.
+//TODO: RENAME. ONLY INSTANTIATE PLAYER.
 void GameWorld::BootlegFactory(ObjectTag tag)
 {
 	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject();
 	*go->GetObjectTag() = tag;
-	//SpriteRenderer* sr = new SpriteRenderer();
 	SpriteRenderer* sr;
 	Collider* col;
 
 	switch (tag)
 	{
+		//TODO: why is a scope needed here? it doesn't work without it...
 	case ObjectTag::PLAYER:
 	{
 		sr = new SpriteRenderer(TextureTag::PLAYER_SHEET, Vector2u(1, 1), Vector2u(4, 4));
@@ -110,31 +111,19 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		go->AddComponent(col);
 		colliders->push_back(col);
 		movColliders->push_back(col);
+		break;
 	}
-	break;
-	case ObjectTag::ENEMY:
-		break;
-	case ObjectTag::NPC:
-		break;
-	case ObjectTag::WALL:
-		break;
-	case ObjectTag::DOOR:
-		break;
-	case ObjectTag::BOOKCASE:
-		break;
-	case ObjectTag::VASE:
-		break;
+
 	case ObjectTag::WINDOW:
 		sr = new SpriteRenderer(TextureTag::WINDOW);
-		//sr->SetSprite(TextureTag::WINDOW);
 		go->AddComponent(sr);
-		go->SetPosition(Vector2f(1000,800));
-		go->AddComponent(new DirectionalLight(Vector2f(go->GetPosition()->x - sr->GetTexture().getSize().x / 2, 800), Vector2f(go->GetPosition()->x + sr->GetTexture().getSize().x / 2, 800), &walls, 90, 10));
+		go->SetPosition(Vector2f(1000, 800));
+		go->AddComponent(new DirectionalLight(Vector2f(go->GetPosition()->x - sr->GetTexture().getSize().x / 2, 800), 
+			Vector2f(go->GetPosition()->x + sr->GetTexture().getSize().x / 2, 800), &walls, 90, 10));
 
 		col = new Collider(Vector2f(1, 1), *go->GetPosition(), 1.0f, true);
 		go->AddComponent(col);
 		break;
-
 
 	case ObjectTag::CRATE:
 		sr = new SpriteRenderer(TextureTag::OZZY);
@@ -213,15 +202,15 @@ void GameWorld::Initialize()
 
 	walls.push_back(cursedPlayerWall);
 
-	//BootlegFactory(ObjectTag::WINDOW);
+	//TODO: celete this crate
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
 
 	VertexArray* tmp9 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp9)[0].position = Vector2f(8.4f*96, 7.5f*96);
+	(*tmp9)[0].position = Vector2f(8.4f * 96, 7.5f * 96);
 	(*tmp9)[0].color = Color::Red;
 	(*tmp9)[1].color = Color::Red;
-	(*tmp9)[1].position = Vector2f(10.5f*96, 7.5f * 96);
+	(*tmp9)[1].position = Vector2f(10.5f * 96, 7.5f * 96);
 
 	walls.push_back(tmp9);
 
@@ -274,8 +263,9 @@ void GameWorld::Initialize()
 
 	walls.push_back(tmp15);
 
-#pragma region Damage test, Enemy and Enemy Attack on Player.
 
+#pragma region Damage test, Enemy and Enemy Attack on Player.
+	//TODO: delete this
 	//Test-attack. Can be deleted later.
 	GameObject* go = new GameObject();
 	SpriteRenderer* sr = new SpriteRenderer(TextureTag::ENEMY_ATTACK_SHEET, Vector2u(1, 1), Vector2u(1, 3));
@@ -297,8 +287,8 @@ void GameWorld::Initialize()
 
 	(*gameObjects).push_back(go);
 
-
-	//Test-skade af enemy
+	// TODO: Test??? Maybe delete this then!
+	//Test enemy damage
 	GameObject* go1 = new GameObject();
 	SpriteRenderer* sr1 = new SpriteRenderer(TextureTag::ENEMY);
 
@@ -319,11 +309,13 @@ void GameWorld::Initialize()
 
 	(*gameObjects).push_back(go1);
 
+	// what this? pragma region?
 #pragma endregion
 }
 
 void GameWorld::LoadContent()
 {
+	// Loads all textures into the game.
 	Asset::GetInstance()->LoadTextures();
 }
 
@@ -353,33 +345,19 @@ void GameWorld::DeleteObjects()
 	}
 }
 
-
 void GameWorld::Update(Time* timePerFrame)
 {
 	auto start = high_resolution_clock::now();
 
-	/*(walls)[5][0].position.x = playerPointer->gameObject->GetPosition()->x - 30;
-	walls[5][0].position.y = playerPointer->gameObject->GetPosition()->y - 50;
-	walls[5][1].position.x = playerPointer->gameObject->GetPosition()->x + 30;
-	walls[5][1].position.y = playerPointer->gameObject->GetPosition()->y - 50;*/
-
 	DeleteObjects();
 	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
-	//TODO: Delete this if unnecessary. I switched it out with the following for loop to avoid issues if a gameobject gets deleted update but that should no longer be possible.
-	//iterates through the gameObjects and calls update
-	//for (vector<GameObject*>::size_type i = 0;
-	//	i < gameObjectsSize;
-	//	++i)
-	//{
-	//	(*GameWorld::GetInstance()->GetGameObjects())[i]->Update(timePerFrame);
-	//}
 
 	for (auto i = (*GameWorld::GetInstance()->gameObjects).begin(); i != (*GameWorld::GetInstance()->gameObjects).end();)
 	{
 		vector<GameObject*>::size_type originalSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
-		
+
 		//camera culling
-		if (((*i)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6*96 &&
+		if (((*i)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6 * 96 &&
 			(playerPointer->gameObject->GetPosition()->x - (*i)->GetPosition()->x) < 6 * 96)
 		{
 			if (*(*i)->GetObjectTag() == ObjectTag::WINDOW)
@@ -395,10 +373,8 @@ void GameWorld::Update(Time* timePerFrame)
 					(*i)->Update(timePerFrame);
 				}
 			}
-		
 		}
 
-		
 		vector<GameObject*>::size_type updatedSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
 
 		if (originalSize == updatedSize)
@@ -412,7 +388,7 @@ void GameWorld::Update(Time* timePerFrame)
 	for (movColIt = movColliders->begin(); movColIt < movColliders->end(); movColIt++)
 	{
 		if (((*movColIt)->GetPosition().x - playerPointer->gameObject->GetPosition()->x) < 3 * 96 &&
-			(playerPointer->gameObject->GetPosition()->x- (*movColIt)->GetPosition().x) < 3 *96 &&
+			(playerPointer->gameObject->GetPosition()->x - (*movColIt)->GetPosition().x) < 3 * 96 &&
 
 			((*movColIt)->GetPosition().y - playerPointer->gameObject->GetPosition()->y) < 3 * 96 &&
 			(playerPointer->gameObject->GetPosition()->y - (*movColIt)->GetPosition().y) < 3 * 96)
@@ -425,8 +401,6 @@ void GameWorld::Update(Time* timePerFrame)
 				}
 			}
 		}
-
-		
 	}
 
 	if (playerPointer != nullptr)
@@ -436,13 +410,8 @@ void GameWorld::Update(Time* timePerFrame)
 		AttackSpawner& atckSpwnPointerRef = *atckSpwnPointer;
 		Movement& movementPointerRef = *movementPointer;
 
-		//AttackSpawner* attackPointer = dynamic_cast<AttackSpawner*>(playerPointer->gameObject->GetComponent(ComponentTag::ATTACKSPAWNER));
-		//AttackSpawner& attackRef = *attackPointer;
-
 		PlayerInvoker::GetInstance(movementPointerRef, atckSpwnPointerRef)->InvokeCommand();
 	}
-
-	//LightPointer->Update(timePerFrame);
 
 	auto stop = high_resolution_clock::now();
 
@@ -450,19 +419,17 @@ void GameWorld::Update(Time* timePerFrame)
 
 	cout << "Time taken by Update(): "
 		<< duration.count() << " microseconds" << endl;
-
 }
 
 void GameWorld::Draw()
 {
 	auto start = high_resolution_clock::now();
 	// Clears the window.
-	window.clear(Color(/*0, 255, 255, 255*/));
+	window.clear(Color());
 
 	//it needs to point to something, otherwise it wont compile, because it cant delete an "empty pointer"
 	//TODO: this needs to be deleted somewhere, but it dosen't work here, actually, check if it matters because its on stack.
 	SpriteRenderer* sr;
-	//TextMessage* tm;
 
 	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
 	//iterates through the gameObjects and draws all gameobjects.
@@ -474,11 +441,8 @@ void GameWorld::Draw()
 
 		//camera culling
 		if (((go)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6 * 96 && //right
-			(playerPointer->gameObject->GetPosition()->x - (go)->GetPosition()->x) < 6 * 96) /*&&*/ //left
-			/*((go)->GetPosition()->y - playerPointer->gameObject->GetPosition()->y) < 3 * 96 &&
-			(playerPointer->gameObject->GetPosition()->y - (go)->GetPosition()->y) < 3 * 96)*/
+			(playerPointer->gameObject->GetPosition()->x - (go)->GetPosition()->x) < 6 * 96) //left
 		{
-
 			if (*go->GetShouldDraw())
 			{
 				//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
@@ -489,8 +453,6 @@ void GameWorld::Draw()
 				{
 					window.draw(sr->GetSprite());
 				}
-
-				
 
 				if (*go->GetObjectTag() == ObjectTag::TEXT_BOX)
 				{
@@ -508,7 +470,6 @@ void GameWorld::Draw()
 				}
 				else if (*go->GetObjectTag() == ObjectTag::WINDOW)
 				{
-
 					LightSource* light = dynamic_cast<LightSource*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::LIGHT));
 
 					if (light != nullptr)
@@ -516,6 +477,7 @@ void GameWorld::Draw()
 
 						vector<VertexArray> lightCone = light->GetLightCone();
 
+						//TODO: this naming is ridicules
 						vector<VertexArray>::iterator itttt;
 
 						for (itttt = lightCone.begin(); itttt < lightCone.end(); itttt++)
@@ -530,16 +492,10 @@ void GameWorld::Draw()
 					}
 				}
 			}
-			
-
-			
-
 		}
-
 	}
 
-
-
+	//TODO: this naming is ridicules
 	vector<VertexArray*>::iterator itttt;
 
 	for (itttt = walls.begin(); itttt < walls.end(); itttt++)
@@ -547,10 +503,7 @@ void GameWorld::Draw()
 		window.draw(*(*itttt));
 	}
 
-	
 	window.display();
-
-	
 }
 
 void GameWorld::Run()
@@ -561,19 +514,11 @@ void GameWorld::Run()
 	*GameWorld::GetInstance()->GetGameObjects() = lm->InstantiateLevel("Level1");
 
 	Initialize();
-	//String* string = new String("fuck you");
-	//Npc npc(string);
-	////GameObject* npcBoxFuck = new GameObject(npc.TextBoxPopup(Vector2f(npc.gameObject->position->x, npc.gameObject->position->y)));
-	//GameObject* npcBoxFuck = new GameObject(npc.TextBoxPopup(Vector2f(100, 100)));
-	//(*GameWorld::GetInstance()->GetGameObjects()).push_back(npcBoxFuck);
 
-	//Platform p1(nullptr, Vector2f(100, 100), Vector2f(500.0f, 500.0f));
-
-	//Vores deltaTime er den tid der er g�et siden sidste update.
+	//Time since last update.
 	float deltaTime = 0.0f;
-	//Vi skal bruge clock til at regne ud hvor lang tid der er g�et.
+	//Clock to determine time.
 	Clock clock;
-
 
 	// Used for fixed update. TimePerFrame needs to be set to the amount of frames you want it to run with.
 	Time timePerFrame = sf::seconds(1.f / 60.f);
@@ -587,7 +532,7 @@ void GameWorld::Run()
 			CloseGame();
 		}
 
-		//Vi s�tter vores deltaTime i forhold til clock.
+		//deltatime set to match clock.
 		deltaTime = clock.restart().asSeconds();
 		// Shuts the game down when the window is closed.
 		Event event;
@@ -607,18 +552,15 @@ void GameWorld::Run()
 		// This is to make sure the character movement speed never changes.
 		//When the timesincelastUpdate is over the required amount, it runs the update, and subtracts the desired time pr frame.
 		//it keeps updating until it's below the required amount, means the update is "up to date" with the game logic.
-		//When it's up to date it will draw/render and refresh the display. This results in the update dosen't get behind.
+		//When it's up to date it will draw/render and refresh the display. This ensures that the update dosen't get behind.
 		while (timeSinceLastUpdate > timePerFrame)
 		{
 			timeSinceLastUpdate -= timePerFrame;
 			Update(&timePerFrame);
-			//p1.GetCollider().CheckCollision(player.GetCollider(), 0.1f);
 			view.setCenter(*playerPointer->gameObject->GetPosition());
 		}
 
-		//Hvert gameloop korer vi Update paa vores animation.
-		//Vi korer animationen for raekke 0 (1).
-
+		//The view you see in the window.
 		window.setView(view);
 
 		Draw();
@@ -666,6 +608,6 @@ void GameWorld::CloseGame()
 	window.close();
 }
 
-// Sets the instance to  nullptr. Because static variables need a definition.
+// Sets the instance to nullptr. Because static variables need a definition.
 // Part of what makes the class a singleton.
 GameWorld* GameWorld::instance = nullptr;

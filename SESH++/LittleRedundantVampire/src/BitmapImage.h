@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BITMAPCOLOR_H
+#define BITMAPCOLOR_H
+
 
 /*
 * The folowing code has been implemented by folowing "Designed by Hugo"'s tutorial on youtube
@@ -16,7 +18,10 @@ struct BitmapColor
 	~BitmapColor();
 };
 
-
+/// <summary>
+/// TODO: is this correct?
+/// For creating bitmaps.
+/// </summary>
 class BitmapImage
 {
 public:
@@ -30,6 +35,7 @@ public:
 
 	void Export(const char* path);
 
+//TODO: make constant
 	int GetHeight();
 	int GetWidth();
 
@@ -39,3 +45,4 @@ private:
 	std::vector<BitmapColor> colors;
 };
 
+#endif

@@ -1,10 +1,17 @@
-#pragma once
+#ifndef TEXTMESSAGE_H
+#define TEXTMESSAGE_H
+
 #include <string>
 #include "../Component.h"
 #include "../GameWorld.h"
 
 using namespace std;
 
+
+/// <summary>
+/// Component: A text message that comes with a text and font.
+/// Currently only used for NPC's.
+/// </summary>
 class TextMessage : public Component
 {
 private:
@@ -23,5 +30,10 @@ public:
 	TextMessage(string* msg, Vector2f position);
 	~TextMessage();
 
+	/// <summary>
+	/// Returns the text.
+	/// </summary>
 	Text GetMessage();
 };
+
+#endif

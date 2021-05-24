@@ -21,10 +21,10 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 		*go->GetPosition() = *gameObject->GetPosition();
 		*go->GetDirection() = *gameObject->GetDirection();
 
-
 		//TODO: Attack doesn't really work. You can hold down Space and keep the attack on. It also doesn't show the proper sprite image right now.
 		int initialRow = 0;
 
+		//Which animation row to go with based on the direction og the attack.
 		switch (*go->GetDirection())
 		{
 		case 'L':
@@ -41,7 +41,6 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 			break;
 		}
 
-
 		sr = new SpriteRenderer(textureTag, Vector2u(1, (initialRow) + 1), Vector2u(1, 3));
 		this->objectTag = objectTag;
 
@@ -55,7 +54,6 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 		go->AddComponent(acController);
 		acController->ChangeAnimation.Attach(aC);
 
-
 		go->AddComponent(new Attack(this->objectTag, attackCooldown));
 
 		go->Awake();
@@ -63,12 +61,10 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 
 		(*GameWorld::GetInstance()->GetGameObjects()).push_back(go);
 
-
 		attackTimer = 0.0f;
 		canAttack = false;
 	}
 }
-
 
 AttackSpawner::AttackSpawner(ObjectTag objectTag)
 {
@@ -82,13 +78,10 @@ AttackSpawner::AttackSpawner(ObjectTag objectTag)
 
 AttackSpawner::~AttackSpawner()
 {
-
 }
-
 
 void AttackSpawner::Awake()
 {
-
 }
 
 void AttackSpawner::Start()
@@ -99,6 +92,7 @@ void AttackSpawner::Update(Time* timePerFrame)
 {
 	attackTimer += timePerFrame->asMilliseconds();
 
+	//Makes it so the caller can't attack constantly.
 	if (attackTimer >= attackCooldown)
 	{
 		canAttack = true;

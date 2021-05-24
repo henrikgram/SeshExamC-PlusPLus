@@ -4,23 +4,7 @@ LightSource::LightSource(Vector2f position, vector<VertexArray*>* walls, int ste
 {
 	this->walls = walls;
 	drawComponent = true;
-	//this->position = position;
-	//
-
-	//vector<Ray>::iterator it;
-
-	////makes a ray for every stepSize amount. If stepsize is 1 then its 1 ray pr degree. 
-	////If 10 then its one ray every 10 degrees etc.
-	//for (int angle = 0; angle < 360; angle+= stepSize)
-	//{
-	//	//Calculates the angle to raidans. 
-	//	float radians = angle * (PI / 180);
-
-	//	//Makes a new ray with the same start positon as the light, and converts radians to a vector. 
-	//	rays->push_back(new Ray(position, Vector2f(cos(radians)*40, sin(radians)*40)));
-	//}
 }
-
 
 LightSource::~LightSource()
 {
@@ -38,7 +22,6 @@ LightSource::~LightSource()
 	delete rays;
 	rays = nullptr;
 }
-
 
 vector<Ray*>* LightSource::GetRays()
 {
@@ -69,7 +52,6 @@ void LightSource::Destroy()
 	//LightSource::~LightSource();
 }
 
-
 ComponentTag LightSource::ToEnum()
 {
 	return ComponentTag::LIGHT;
@@ -96,7 +78,6 @@ void LightSource::LookAtSingleObject(VertexArray& object)
 	}
 }
 
-
 vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 {
 	intersectingRays->clear();
@@ -107,11 +88,11 @@ vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 	//Array to store the closest intersection point. 
 	vector<Vector2f> closestPoint;
 
-	//Goes through every ray, and checks every wall to find the closes intersection. 
+	//Goes through every ray, and checks every wall to find the closest intersection. 
 	for (rayIt = rays->begin(); rayIt < rays->end(); rayIt++)
 	{
 		//TODO: ekstrem hotfix
-		//TO save the contender for closest point. 
+		//To save the contender for closest point. 
 		Vector2f closest = Vector2f(10000, 10000);
 
 		for (wallIt = walls->begin(); wallIt < walls->end(); wallIt++)
@@ -127,10 +108,8 @@ vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 				{
 					//the closest will then be the new intersection point
 					closest = (*rayIt)->GetIntersectionPoint();
-
 				}
 			}
-
 		}
 
 		// if it has actually found any intersection, add it to the closest intersection
@@ -140,8 +119,6 @@ vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 			intersectingRays->push_back(*rayIt);
 			closestPoint.push_back(closest);
 		}
-
-
 	}
 	//Update the list with itersecting points
 	intersectingPoints->clear();
@@ -150,10 +127,7 @@ vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 	return closestPoint;
 }
 
-
 float LightSource::GetDistance(Vector2f pos1, Vector2f pos2)
 {
 	return sqrt(pow((pos2.x - pos1.x), 2) + pow((pos2.y - pos1.y), 2));
 }
-
-

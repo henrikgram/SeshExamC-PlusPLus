@@ -3,42 +3,50 @@
 
 Npc::Npc(string* message)
 {
+	textBox = new GameObject();
+	textBoxSr = new SpriteRenderer(TextureTag::TEXT_BOX);
+	npcMessage = new string;
+	textShown = new bool;
+
 	npcMessage = message;
 	*textShown = false;
 }
 
 Npc::~Npc()
 {
+	delete textBox;
+	textBox = nullptr;
 
+	delete textBoxSr;
+	textBoxSr = nullptr;
+
+	delete npcMessage;
+	npcMessage = nullptr;
+
+	delete textShown;
+	textShown = nullptr;
 }
 
 void Npc::TextBoxPopup()
 {
 	if (!*textShown)
 	{
-		/**textBox->GetObjectTag() = ObjectTag::TEXT_BOX;
-		textBoxSr->SetSprite(TextureTag::TEXT_BOX);
-		*textBox->GetPosition() = Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2));
-		textBox->AddComponent(textBoxSr);
-		textBox->AddComponent(new TextMessage(npcMessage, Vector2f(GameWorld::GetInstance()->GetScreenWidth() - (textBoxSr->GetSprite().getLocalBounds().width / 2), GameWorld::GetInstance()->GetScreenHeight())));*/
-
-		(*GameWorld::GetInstance()->GetGameObjects()).push_back(textBox);
-		
+		(*GameWorld::GetInstance()->GetGameObjects()).push_back(textBox);	
 		*textShown = true;
 	}
 }
 
 void Npc::TextBoxRemoval()
 {
+	// If the text is supposed to be shown, which means the text is currently vissible,
+	// we remove the textbox from the list of gameObjects, then make textShown false afterwards,
+	// so the text disappears as well.
 	if (*textShown)
-	{
-		// TODO: Remove from gameObjects Vector.
-		//textBoxSr->Destroy();
-		//textBox->Destroy();
-		//*textShown = true;
-		
+	{	
+		// Goes through the list of gameObjects.
 		for (auto i = (*GameWorld::GetInstance()->GetGameObjects()).begin(); i != (*GameWorld::GetInstance()->GetGameObjects()).end();)
 		{
+			// If we found the textbox, remove it.
 			if (*(*i)->GetObjectTag() == ObjectTag::TEXT_BOX)
 			{
 				i = (*GameWorld::GetInstance()->GetGameObjects()).erase(i);
@@ -48,19 +56,7 @@ void Npc::TextBoxRemoval()
 				++i;
 			}
 		}
-		
-		//vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
-
-		//for (vector<GameObject*>::size_type i = 0;
-		//	i < gameObjectsSize;
-		//	++i)
-		//{
-		//	if (*(*GameWorld::GetInstance()->GetGameObjects())[i]->GetObjectTag() == ObjectTag::TEXT_BOX)
-		//	{
-		//		(*GameWorld::GetInstance()->GetGameObjects()).erase(*GameWorld::GetInstance()->GetGameObjects()[i]);
-		//	}
-		//}
-
+		// Makes sure the text is no longer drawn.
 		*textShown = false;
 	}
 }
@@ -68,7 +64,6 @@ void Npc::TextBoxRemoval()
 void Npc::Awake()
 {
 	*textBox->GetObjectTag() = ObjectTag::TEXT_BOX;
-	//textBoxSr->SetSprite(TextureTag::TEXT_BOX);
 	*textBox->GetPosition() = Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2));
 	textBox->AddComponent(textBoxSr);
 	textBox->AddComponent(new TextMessage(npcMessage, Vector2f(GameWorld::GetInstance()->GetScreenWidth() - (textBoxSr->GetSprite().getLocalBounds().width / 2), GameWorld::GetInstance()->GetScreenHeight())));
@@ -76,11 +71,12 @@ void Npc::Awake()
 
 void Npc::Start()
 {
-
 }
 
 void Npc::Update(Time* timePerFrame)
 {
+	// TODO: Would be better to not have this in update but I can't see where else I'd put it right now.
+	// Only draws the text if textShown is true.
 	if (*textShown)
 	{
 		*textBox->GetPosition() = Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2));	
@@ -103,7 +99,6 @@ void Npc::OnNotifyCollision(ObjectTag otherTag, string side)
 	{
 	case ObjectTag::PLAYER:
 		TextBoxPopup();
-		//cout << "Hit";
 		break;
 
 	default:
@@ -115,6 +110,7 @@ void Npc::OnNotify(std::string eventName, IListener* sender)
 {
 	if (eventName == "NoLongerCollidingWith")
 	{
+		// Remove the textbox when no longer colliding with player.
 		TextBoxRemoval();
 	}
 }

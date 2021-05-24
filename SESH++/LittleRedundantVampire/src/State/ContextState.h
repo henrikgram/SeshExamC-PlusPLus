@@ -3,6 +3,7 @@
 
 #include "IState.h"
 
+
 class Enemy;
 class ContextState
 {

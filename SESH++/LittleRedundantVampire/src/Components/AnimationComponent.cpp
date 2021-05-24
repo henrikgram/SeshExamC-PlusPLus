@@ -1,13 +1,6 @@
 #include "AnimationComponent.h"
 
 
-/// <summary>
-/// Components that will animate by changing sprite through a spriteSheet
-/// </summary>
-/// <param name="spriteRenderer">Reference for the objects spriteRenderer</param>
-/// <param name="imageCount">How many rows of images, and how many images that is in one row</param>
-/// <param name="switchTime">How fast it should switch between frames</param>
-/// <param name="row">Default row to start the animation</param>
 AnimationComponent::AnimationComponent(SpriteRenderer* spriteRenderer, Vector2u imageCount, float switchTime, int row)
 {
 	textureRect = new IntRect;

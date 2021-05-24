@@ -3,6 +3,7 @@
 #include "../Component.h"
 using namespace sf;
 
+//TODO: delete this
 class Platform : public Component
 {
 public:
@@ -14,6 +15,7 @@ public:
 /// </summary>
 /// <param name="window">Det vindue som vi skal render sprite i.</param>
 	//void Draw(RenderWindow& window);
+	//TODO: whats dis
 
 	//Collider GetCollider() { return Collider(body); }
 

@@ -5,10 +5,6 @@
 BitmapColor::BitmapColor()
 	:r(0),g(0),b(0)
 {
-	////Sets the default values to white
-	//r = 0;
-	//g = 0;
-	//b = 0;
 }
 
 BitmapColor::BitmapColor(float r, float g, float b)
@@ -240,7 +236,6 @@ void BitmapImage::Export(const char* path)
 	informationHeader[38] = 0;
 	informationHeader[39] = 0;
 
-
 	//write array to the file.
 	//Fwrite needs a char pointer, and not unsigned pointer, so it needs to be casted.
 	f.write(reinterpret_cast<char*>(fileHeader), fileHeaderSize);
@@ -266,14 +261,11 @@ void BitmapImage::Export(const char* path)
 
 		//for every row it needs padding
 		f.write(reinterpret_cast<char*>(bmpPad), paddingAmount);
-
-
 	}
 
 	f.close();
 
 	std::cout << "File created!\n";
-
 }
 
 int BitmapImage::GetHeight()

@@ -1,11 +1,18 @@
-#pragma once
+#ifndef IGAMEEVENT_H
+#define IGAMEEVENT_H
+
 #include <string>
 #include <list>
 #include "IListener.h"
 
 using namespace std;
 
+
 //TODO: Remove I since it's no longer an interface.
+//TOOD: Add summary.
+/// <summary>
+/// Observer: Interface for game events.
+/// </summary>
 class IGameEvent
 {
 public:
@@ -16,9 +23,8 @@ public:
 	void Detach(IListener* listener);
 	void Notify(string eventTitle, IListener* sender);
 
-	//string GetEventTitle() const { return *eventTitle; }
-
 private:
-	//string* eventTitle;
 	std::list<IListener*> listeners;
 };
+
+#endif

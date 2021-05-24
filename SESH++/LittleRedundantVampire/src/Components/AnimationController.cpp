@@ -1,10 +1,8 @@
 ﻿#include "AnimationController.h"
 
 
-AnimationController::AnimationController(SpriteRenderer& spriteRenderer,
-	string noAniRow, string upAniRow, string downAniRow, string leftAniRow, string rightAniRow)
-	:
-	spriteRenderer(spriteRenderer)
+AnimationController::AnimationController(SpriteRenderer& spriteRenderer, string noAniRow, string upAniRow,
+										 string downAniRow, string leftAniRow, string rightAniRow) : spriteRenderer(spriteRenderer)
 {
 	this->noAniRow = noAniRow;
 	this->upAniRow = upAniRow;
@@ -16,12 +14,7 @@ AnimationController::AnimationController(SpriteRenderer& spriteRenderer,
 	decrementAnimation = false;
 }
 
-/// <summary>
-/// For health bar animation, or other animation where the row is decrementing.
-/// </summary>
-/// <param name="spriteRenderer"></param>
-AnimationController::AnimationController(SpriteRenderer& spriteRenderer, int* currentRow, int firstRow) :
-	spriteRenderer(spriteRenderer)
+AnimationController::AnimationController(SpriteRenderer& spriteRenderer, int* currentRow, int firstRow) : spriteRenderer(spriteRenderer)
 {
 	this->currentRow = currentRow;
 	previousRow = *this->currentRow;
@@ -38,13 +31,10 @@ AnimationController::~AnimationController()
 }
 
 
-/// <summary>
-/// For animating objects that move in four directions, like the Player.
-/// </summary>
 void AnimationController::MovementAnimation()
 {
 	//TODO: OPTIMERING fix s� den ikke k�rer medmindre det er en ny animation. OPTIMERING
-	//No/Idle animation
+	//No/idle animation
 	if (*gameObject->GetDirection() == 'N')
 	{
 		ChangeAnimation.Notify(noAniRow, this);
@@ -98,7 +88,6 @@ void AnimationController::DecrementingRowAnimation()
 		previousRow = *currentRow;
 	}
 }
-
 
 void AnimationController::Awake()
 {

@@ -5,6 +5,10 @@
 #include "ContextState.h"
 #include "../Components/Enemy.h"
 
+
+/// <summary>
+/// IState: Enemy's idle state.
+/// </summary>
 class EnemyIdleState : public IState
 {
 private:

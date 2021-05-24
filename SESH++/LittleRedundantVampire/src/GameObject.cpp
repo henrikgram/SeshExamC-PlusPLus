@@ -117,7 +117,6 @@ void GameObject::Destroy()
 	(*components).clear();
 }
 
-
 void GameObject::AddComponent(Component* component)
 {
 	//adds the current gameobject as a parrent to the component
@@ -136,7 +135,6 @@ void GameObject::SetPosition(Vector2f newPosition)
 	*position = newPosition;
 }
 
-
 void GameObject::CallSelfDestruct()
 {
 	onCallSelfdestruct.Notify("DeleteObject", this);
@@ -149,5 +147,5 @@ void GameObject::AddListenerToCallSelfDestruct(IListener* listener)
 
 void GameObject::OnNotify(std::string eventName, IListener* sender)
 {
-	
+	// TODO: Why is this empty?
 }

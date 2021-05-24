@@ -4,8 +4,6 @@ PointLight::PointLight(Vector2f position, vector<VertexArray*>* walls, int stepS
 {
 	this->position = position;
 
-
-
 	vector<Ray>::iterator it;
 
 	//makes a ray for every stepSize amount. If stepsize is 1 then its 1 ray pr degree. 
