@@ -56,7 +56,9 @@ bool Collider::CheckCollision(Collider* other)
 		if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
 		{
 			currentCollisions.push_back(other);
+			other->currentCollisions.push_back(this);
 			onColliderDestroyed.Attach(other);
+			other->onColliderDestroyed.Attach(this);
 		}
 
 		onColliding.Notify(*other->gameObject->GetObjectTag(), "NotDefined");
@@ -117,6 +119,7 @@ void Collider::UpdateListOfCurrentCollisions()
 			if (!isStillColliding)
 			{
 				onNoLongerColliding.Notify("NoLongerCollidingWith", *i);
+				onColliderDestroyed.Detach(*i);
 				i = currentCollisions.erase(i);
 			}
 			else
@@ -179,6 +182,7 @@ void Collider::OnNotify(std::string eventName, IListener* sender)
 		{
 			if (*i == sender)
 			{
+				onColliderDestroyed.Detach(sender);
 				i = currentCollisions.erase(i);
 			}
 			else

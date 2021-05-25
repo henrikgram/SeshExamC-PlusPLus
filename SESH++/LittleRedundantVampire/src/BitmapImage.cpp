@@ -238,6 +238,8 @@ void BitmapImage::Export(const char* path)
 
 	//write array to the file.
 	//Fwrite needs a char pointer, and not unsigned pointer, so it needs to be casted.
+	//TODO: hvorfor bruger alle bare unsigned char, er det bare så de slipper for at defininere dem??
+	//unsigned char = byte åbenbart.
 	f.write(reinterpret_cast<char*>(fileHeader), fileHeaderSize);
 	f.write(reinterpret_cast<char*>(informationHeader), InformationHeaderSize);
 
