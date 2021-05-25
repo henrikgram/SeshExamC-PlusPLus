@@ -4,6 +4,7 @@
 //Give MoveCommand a reference to the Movement component from the Player object.
 MoveCommand::MoveCommand(Movement& movementReceiver, Vector2f velocity) : movementReceiver(movementReceiver)
 {
+	//TODO: Behøvede vi virkelig at lave vector new, eller er det bare monogame flashbacks?
 	this->velocity = new Vector2f(velocity);
 }
 

@@ -11,25 +11,29 @@ Enemy::Enemy()
 
 Enemy::~Enemy()
 {
-	targetDistance = nullptr;
-	delete targetDistance;
+
+	//TODO: vend tilbage til enemy
+	////targetDistance = nullptr;
+	//delete targetDistance;
 
 	currentState = nullptr;
 	delete currentState;
 
+	////velocity = nullptr;
+	////TODO: tjek hvor velocitry bliver slettet;
+	////delete velocity;
+
+	////target = nullptr;
+	//delete target;
+
+	////speed = nullptr;
+	//delete speed;
+
+
+
 	velocity = nullptr;
 	delete velocity;
 
-	target = nullptr;
-	delete target;
-
-	speed = nullptr;
-	delete speed;
-
-	velocity = nullptr;
-	delete velocity;
-
-	delete this;
 }
 
 void Enemy::Awake()
@@ -64,6 +68,10 @@ void Enemy::Update(Time* timePerFrame)
 
 void Enemy::Destroy()
 {
+
+	//TODO: destructor dosent work
+	Enemy::~Enemy();
+
 }
 
 void Enemy::Move(Vector2f velocity)
@@ -73,6 +81,9 @@ void Enemy::Move(Vector2f velocity)
 
 void Enemy::TempUntilPlayerIsMovedIntoLM()
 {
+
+	//TODO: det her skal nok g�res n�r objektet laves i levelmanager, s� man kan v�lge hvilke target den skal have der i stedet.
+	//Kunne g�res s�dan her Enemy.target = GameWorld::GetInstance()->PlayerPointer.GameObject
 	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
 
 	//iterates through the gameObjects.

@@ -48,6 +48,7 @@ Text TextMessage::GetMessage()
 
 void TextMessage::Destroy()
 {
+		TextMessage::~TextMessage();
 }
 
 ComponentTag TextMessage::ToEnum()

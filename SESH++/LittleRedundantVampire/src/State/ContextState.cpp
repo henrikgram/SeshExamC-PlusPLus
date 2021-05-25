@@ -7,15 +7,17 @@ ContextState::ContextState(IState* state) : state(nullptr)
 
 ContextState::~ContextState()
 {
-	delete state;
+	//delete state;
 }
 
 void ContextState::TransitionTo(IState* nextState)
 {
-	if (this->state != nullptr)
+	//TODO: man behøver vist ikke at slette her, fordi det ikke er på heap.
+	/*if (this->state != nullptr)
 	{
 		delete this->state;
-	}
+	}*/
+
 	this->state = nextState;
 	// TODO: Can be deleted? The below code.. don't get it but ok.
 	//this->state->IState::SetContext(this);

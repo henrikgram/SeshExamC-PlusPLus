@@ -21,6 +21,8 @@ private:
 	void ChasePlayer();
 
 public:
+	~EnemyChaseState();
+
 	// Inherited via IState
 	virtual void Enter(Enemy* enemy) override;
 	virtual void Execute() override;

@@ -72,6 +72,21 @@ Asset::Asset()
 Asset::~Asset()
 {
 	//TODO: tjek om man skal frig�re alle variabler inden spillet lukkes, eller det er ligegyldigt.
+	unordered_map<TextureTag, Texture>::iterator it;
+
+	it = textures.begin();
+
+	//iterates through the gameObjects and calls Destroy
+	for (it = textures.begin(); it != textures.end(); it++)
+	{
+		//TODO: unordered map skal have Texture pointers i stedet for at det her skal virke
+		delete (&it->second);
+		//(it->second) = nullptr;
+	}
+
+	delete instance;
+	instance = nullptr;
+
 }
 
 // Sets the instance to  nullptr. Because static variables need a definition.

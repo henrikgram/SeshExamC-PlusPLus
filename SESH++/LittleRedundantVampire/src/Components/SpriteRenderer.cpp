@@ -33,7 +33,10 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag)
 	//TODO: This enture constructor may be unnecessary if we put everything up in a spritesheet.
 	texture = new Texture(*Asset::GetInstance()->GetTexture(textureTag));
 	sprite = new Sprite(*texture);
+
 	//TODO: These following two are only used for spritesheets so can we avoid them taking up space in the heap memory?
+	//Ekstra kommentar ved ikke om det er dårlig stil med heap, men stakken har kun 1mb hukommelse, og heapen er resten af din pc.
+	//Nogle siger man bruger det til at allokere noget man ikke er helt sikker på størrelsen før runtime
 	this->currentImage = new Vector2u;
 	this->imageCount = new Vector2u;
 	isSpriteSheet = false;

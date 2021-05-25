@@ -23,8 +23,8 @@ Attack::~Attack()
 
 void Attack::Awake()
 {
-	//TODO: Det her skal kunne fungere med events, der kører når spilleren bevæger sig.
-	
+	//TODO: Det her skal kunne fungere med events, der kï¿½rer nï¿½r spilleren bevï¿½ger sig.
+
 	//Positions the attack according to the callers direction.
 	switch (*gameObject->GetDirection())
 	{
@@ -48,7 +48,7 @@ void Attack::Awake()
 
 void Attack::Start()
 {
-	
+
 }
 
 void Attack::Update(Time* timePerFrame)
@@ -66,7 +66,8 @@ void Attack::Update(Time* timePerFrame)
 //TODO: Find a proper way to delete objects.
 void Attack::Destroy()
 {
-	//Remove from the list of gameObjects.
+	Attack::~Attack();
+		//Remove from the list of gameObjects.
 }
 
 ComponentTag Attack::ToEnum()

@@ -49,7 +49,7 @@ void LightSource::Update(Time* timePerFrame)
 void LightSource::Destroy()
 {
 	//TODO: kald destructor
-	//LightSource::~LightSource();
+	LightSource::~LightSource();
 }
 
 ComponentTag LightSource::ToEnum()

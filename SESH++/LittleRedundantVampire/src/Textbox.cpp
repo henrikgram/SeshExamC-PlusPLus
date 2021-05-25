@@ -6,6 +6,8 @@ Textbox::Textbox()
 
 Textbox::~Textbox()
 {
+	delete textbox;
+	textbox = nullptr;
 }
 
 Textbox* Textbox::GetInstance()

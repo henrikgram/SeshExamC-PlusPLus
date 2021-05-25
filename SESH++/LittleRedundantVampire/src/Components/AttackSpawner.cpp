@@ -78,6 +78,7 @@ AttackSpawner::AttackSpawner(ObjectTag objectTag)
 
 AttackSpawner::~AttackSpawner()
 {
+	//TODO: tjek om de attacks den laver bliver rigtig slettet i gameWorld
 }
 
 void AttackSpawner::Awake()
@@ -102,6 +103,7 @@ void AttackSpawner::Update(Time* timePerFrame)
 
 void AttackSpawner::Destroy()
 {
+	AttackSpawner::~AttackSpawner();
 }
 
 ComponentTag AttackSpawner::ToEnum()

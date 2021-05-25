@@ -14,24 +14,18 @@ Npc::Npc(string* message)
 
 Npc::~Npc()
 {
-	delete textBox;
-	textBox = nullptr;
-
-	delete textBoxSr;
-	textBoxSr = nullptr;
-
 	delete npcMessage;
 	npcMessage = nullptr;
 
-	delete textShown;
-	textShown = nullptr;
+	delete npcMessage;
+	npcMessage = nullptr;
 }
 
 void Npc::TextBoxPopup()
 {
 	if (!*textShown)
 	{
-		(*GameWorld::GetInstance()->GetGameObjects()).push_back(textBox);	
+		(*GameWorld::GetInstance()->GetGameObjects()).push_back(textBox);
 		*textShown = true;
 	}
 }
@@ -42,7 +36,7 @@ void Npc::TextBoxRemoval()
 	// we remove the textbox from the list of gameObjects, then make textShown false afterwards,
 	// so the text disappears as well.
 	if (*textShown)
-	{	
+	{
 		// Goes through the list of gameObjects.
 		for (auto i = (*GameWorld::GetInstance()->GetGameObjects()).begin(); i != (*GameWorld::GetInstance()->GetGameObjects()).end();)
 		{
@@ -79,7 +73,7 @@ void Npc::Update(Time* timePerFrame)
 	// Only draws the text if textShown is true.
 	if (*textShown)
 	{
-		*textBox->GetPosition() = Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2));	
+		*textBox->GetPosition() = Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2));
 	}
 }
 

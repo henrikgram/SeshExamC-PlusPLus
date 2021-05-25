@@ -20,6 +20,21 @@ void EnemyChaseState::ChasePlayer()
 	}
 }
 
+EnemyChaseState::~EnemyChaseState()
+{
+
+	// Deletes range.
+	delete range;
+	range = nullptr;
+	
+
+	
+	//TODO: enemy is not on heap, so no need to delete
+	// Makes sure to delete the enemy.
+	/*this->enemy = nullptr;
+	delete this->enemy;*/
+}
+
 void EnemyChaseState::Enter(Enemy* enemy)
 {
 	this->enemy = enemy;
@@ -40,14 +55,9 @@ void EnemyChaseState::Execute()
 
 void EnemyChaseState::Exit()
 {
-	// Deletes range.
-	range = nullptr;
-	delete range;
-
+	//TODO: tjek om det er nok ikke at kalde destructoren
 	// Changes the state to idle.
 	this->enemy->SetContext(new EnemyIdleState());
 
-	// Makes sure to delete the enemy.
-	this->enemy = nullptr;
-	delete this->enemy;
+	EnemyChaseState::~EnemyChaseState();
 }

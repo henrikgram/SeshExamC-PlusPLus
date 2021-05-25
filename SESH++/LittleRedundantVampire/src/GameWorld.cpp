@@ -23,6 +23,12 @@ GameWorld::~GameWorld()
 
 	delete gameObjects;
 	gameObjects = nullptr;
+
+	delete movColliders;
+	movColliders = nullptr;
+
+	delete colliders;
+	colliders = nullptr;
 }
 
 /// <summary>
@@ -118,7 +124,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		sr = new SpriteRenderer(TextureTag::WINDOW);
 		go->AddComponent(sr);
 		go->SetPosition(Vector2f(1000, 800));
-		go->AddComponent(new DirectionalLight(Vector2f(go->GetPosition()->x - sr->GetTexture().getSize().x / 2, 800), 
+		go->AddComponent(new DirectionalLight(Vector2f(go->GetPosition()->x - sr->GetTexture().getSize().x / 2, 800),
 			Vector2f(go->GetPosition()->x + sr->GetTexture().getSize().x / 2, 800), &walls, 90, 10));
 
 		col = new Collider(Vector2f(1, 1), *go->GetPosition(), 1.0f, true);
@@ -153,11 +159,14 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 void GameWorld::Initialize()
 {
-	VertexArray* tmp4 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp4)[0].position = Vector2f(0, 0);
-	(*tmp4)[0].color = Color::Red;
-	(*tmp4)[1].color = Color::Red;
-	(*tmp4)[1].position = Vector2f(2000, 0);
+	BootlegFactory(ObjectTag::PLAYER);
+	BootlegFactory(ObjectTag::CRATE);
+
+	VertexArray tmp4 = VertexArray(sf::LinesStrip, 2);
+	tmp4[0].position = Vector2f(0, 0);
+	tmp4[0].color = Color::Red;
+	tmp4[1].color = Color::Red;
+	tmp4[1].position = Vector2f(2000, 0);
 
 	walls.push_back(tmp4);
 
@@ -202,15 +211,11 @@ void GameWorld::Initialize()
 
 	walls.push_back(cursedPlayerWall);
 
-	//TODO: celete this crate
-	BootlegFactory(ObjectTag::PLAYER);
-	BootlegFactory(ObjectTag::CRATE);
-
-	VertexArray* tmp9 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp9)[0].position = Vector2f(8.4f * 96, 7.5f * 96);
-	(*tmp9)[0].color = Color::Red;
-	(*tmp9)[1].color = Color::Red;
-	(*tmp9)[1].position = Vector2f(10.5f * 96, 7.5f * 96);
+	VertexArray tmp9 = VertexArray(sf::LinesStrip, 2);
+	tmp9[0].position = Vector2f(8.4f*96, 7.5f*96);
+	tmp9[0].color = Color::Red;
+	tmp9[1].color = Color::Red;
+	tmp9[1].position = Vector2f(10.5f*96, 7.5f * 96);
 
 	walls.push_back(tmp9);
 
@@ -509,10 +514,9 @@ void GameWorld::Draw()
 void GameWorld::Run()
 {
 	LoadContent();
-
+	//BootlegFactory(ObjectTag::PLAYER);
 	LevelManager* lm = new LevelManager();
 	*GameWorld::GetInstance()->GetGameObjects() = lm->InstantiateLevel("Level1");
-
 	Initialize();
 
 	//Time since last update.
@@ -530,19 +534,11 @@ void GameWorld::Run()
 		if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
 		{
 			CloseGame();
+			break;
 		}
 
 		//deltatime set to match clock.
 		deltaTime = clock.restart().asSeconds();
-		// Shuts the game down when the window is closed.
-		Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == Event::Closed)
-				window.close();
-			if (event.type == Event::Resized)
-				ResizeView(window, view);
-		}
 
 		// For fixed update and 60 frames per second.
 		// Clock is restarted to make sure we start from 0 every time.
@@ -564,6 +560,20 @@ void GameWorld::Run()
 		window.setView(view);
 
 		Draw();
+
+		// Shuts the game down when the window is closed.
+		Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::Closed)
+			{
+				CloseGame();
+			}
+			if (event.type == Event::Resized)
+			{
+				ResizeView(window, view);
+			}
+		}
 	}
 }
 
@@ -605,6 +615,13 @@ float GameWorld::GetScreenHeight()
 
 void GameWorld::CloseGame()
 {
+	//TODO: Doesn't work, fix it.
+	colliders->clear();
+	for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
+	{
+		objectsToBeDeleted.push(*i);
+	}
+	DeleteObjects();
 	window.close();
 }
 
