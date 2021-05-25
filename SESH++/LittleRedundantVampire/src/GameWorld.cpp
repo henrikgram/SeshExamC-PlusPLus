@@ -23,6 +23,12 @@ GameWorld::~GameWorld()
 
 	delete gameObjects;
 	gameObjects = nullptr;
+
+	delete movColliders;
+	movColliders = nullptr;
+
+	delete colliders;
+	colliders = nullptr;
 }
 
 /// <summary>

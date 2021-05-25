@@ -91,7 +91,8 @@ void Player::Update(Time* timePerFrame)
 
 void Player::Destroy()
 {
-
+	//TODO: destructor dosent work
+	//Player::~Player();
 }
 
 ComponentTag Player::ToEnum()
@@ -167,4 +168,5 @@ void Player::OnNotifyCollision(ObjectTag otherTag, std::string side)
 	default:
 		break;
 	}
+	//TOOD: ryddes op her
 }

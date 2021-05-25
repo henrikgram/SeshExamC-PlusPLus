@@ -64,6 +64,7 @@ void Attack::Update(Time* timePerFrame)
 //TODO: Find a proper way to delete objects.
 void Attack::Destroy()
 {
+	Attack::~Attack();
 	//fjern fra listen af objekter.
 }
 

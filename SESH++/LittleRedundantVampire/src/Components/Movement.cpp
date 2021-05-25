@@ -61,6 +61,7 @@ void Movement::Update(Time* timePerFrame)
 
 void Movement::Destroy()
 {
+	Movement::~Movement();
 }
 
 ComponentTag Movement::ToEnum()

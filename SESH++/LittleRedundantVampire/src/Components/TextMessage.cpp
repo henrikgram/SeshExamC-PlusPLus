@@ -49,7 +49,7 @@ void TextMessage::Update(Time* timePerFrame)
 
 void TextMessage::Destroy()
 {
-
+	TextMessage::~TextMessage();
 }
 
 

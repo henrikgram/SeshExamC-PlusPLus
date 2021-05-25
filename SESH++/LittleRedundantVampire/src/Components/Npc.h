@@ -14,6 +14,7 @@ private:
 	GameObject* textBox = new GameObject();
 	SpriteRenderer* textBoxSr = new SpriteRenderer(TextureTag::TEXT_BOX);
 	string* npcMessage = new string;
+
 	int offset = 30;
 	bool* textShown = new bool;
 

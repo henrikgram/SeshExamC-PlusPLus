@@ -30,6 +30,11 @@ AnimationComponent::AnimationComponent(SpriteRenderer* spriteRenderer, Vector2u 
 
 AnimationComponent::~AnimationComponent()
 {
+	//TODO: bliver nok slettet et andet sted
+	
+	//HVORFOR VIRKER DET IKKE HER?!
+	textureRect = nullptr;
+	delete textureRect;
 }
 
 
@@ -70,7 +75,7 @@ void AnimationComponent::Update(Time* timePerFrame)
 
 void AnimationComponent::Destroy()
 {
-
+	AnimationComponent::~AnimationComponent();
 }
 
 void AnimationComponent::OnNotify(string eventName, IListener* sender)

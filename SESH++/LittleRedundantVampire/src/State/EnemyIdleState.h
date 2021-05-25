@@ -25,6 +25,9 @@ private:
 	void Patrol();
 
 public:
+
+	~EnemyIdleState();
+
 	// Inherited via IState
 	virtual void Enter(Enemy* enemy) override;
 	virtual void Execute() override;

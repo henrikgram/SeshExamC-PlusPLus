@@ -122,6 +122,7 @@ void AnimationController::Update(Time* timePerFrame)
 
 void AnimationController::Destroy()
 {
+	AnimationController::~AnimationController();
 }
 
 ComponentTag AnimationController::ToEnum()

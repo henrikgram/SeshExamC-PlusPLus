@@ -9,7 +9,11 @@ Npc::Npc(string* message)
 
 Npc::~Npc()
 {
+	delete npcMessage;
+	npcMessage = nullptr;
 
+	delete npcMessage;
+	npcMessage = nullptr;
 }
 
 void Npc::TextBoxPopup()

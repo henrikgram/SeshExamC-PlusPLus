@@ -28,6 +28,29 @@ void EnemyIdleState::Patrol()
 	}
 }
 
+EnemyIdleState::~EnemyIdleState()
+{
+	//TODO: tjek de her variabler i EnemyIdleState
+//range, walkright ikke slettet??
+
+// Removes all variables.
+
+	delete patrolDistance;
+	patrolDistance = nullptr;
+	
+
+	delete startPos;
+	startPos = nullptr;
+	
+
+	// Deletes the enemy.
+
+	//TODO: enemy er på heap så den burde ikke skulle slettes
+	/*enemy = nullptr;
+	delete enemy;*/
+
+}
+
 void EnemyIdleState::Enter(Enemy* enemy)
 {
 	this->enemy = enemy;
@@ -36,6 +59,7 @@ void EnemyIdleState::Enter(Enemy* enemy)
 	walkRight = new bool();
 	startPos = new Vector2f(*this->enemy->gameObject->GetPosition());
 }
+
 
 void EnemyIdleState::Execute()
 {
@@ -51,16 +75,8 @@ void EnemyIdleState::Execute()
 
 void EnemyIdleState::Exit()
 {
-	// Removes all variables.
-	patrolDistance = nullptr;
-	delete patrolDistance;
-	startPos = nullptr;
-	delete startPos;
-
 	// Sets the new state.
 	enemy->SetContext(new EnemyChaseState());
 
-	// Deletes the enemy.
-	enemy = nullptr;
-	delete enemy;
+	EnemyIdleState::~EnemyIdleState();
 }

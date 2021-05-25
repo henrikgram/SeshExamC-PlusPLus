@@ -12,6 +12,8 @@ class Asset
 {
 private:
 	// TODO: Bliver den gemt for evigt feat johan olsen? G�r den ud af scope? Who knows!
+	//TODO: vi laver unordered map med almindelige Textures men smider senere pointer textures ind i den derefferenced.
+	//Det funker på samme måde i Gameobject men der er unordede map fyldt med * i stedet for det her
 	unordered_map<TextureTag, Texture> textures;
 
 	// DECORATIONS

@@ -24,6 +24,9 @@ PlayerInvoker::~PlayerInvoker()
 		keyIt->second = nullptr;
 	}
 	keyBinds.clear();
+
+	delete instance;
+	instance = nullptr;
 }
 
 //Gets the singleton instance.
