@@ -144,10 +144,11 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x,
 			sr->GetSprite().getTexture()->getSize().y),
-			*go->GetPosition(), 0.0f, true);
+			*go->GetPosition(), 1.0f, true);
 		go->AddComponent(col);
 		col->AttachToColliderDestroyedEvent(GameWorld::GetInstance());
 		colliders->push_back(col);
+		movColliders->push_back(col);
 		go->AddListenerToCallSelfDestruct(GameWorld::GetInstance());
 		break;
 	default:
@@ -164,8 +165,8 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 void GameWorld::Initialize()
 {
-	BootlegFactory(ObjectTag::CRATE);
 	BootlegFactory(ObjectTag::PLAYER);
+	BootlegFactory(ObjectTag::CRATE);
 
 	VertexArray tmp4 = VertexArray(sf::LinesStrip, 2);
 	tmp4[0].position = Vector2f(0, 0);
@@ -632,7 +633,7 @@ void GameWorld::CloseGame()
 	}
 
 	//Add every gameobject in game to the stack of objectsToBeDeleted.
-	for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
+	for (auto i = gameObjects->end()-1; i != gameObjects->begin(); i--)
 	{
 		objectsToBeDeleted.push(*i);
 	}
