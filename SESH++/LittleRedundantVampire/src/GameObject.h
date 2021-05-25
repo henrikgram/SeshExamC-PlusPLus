@@ -29,6 +29,8 @@ https://stackoverflow.com/questions/4964482/how-to-create-two-classes-in-c-which
 using namespace sf;
 using namespace std;
 
+//TODO: tjek om man kan bruge den samme rectangle til både collider, sr og ac
+
 
 /// <summary>
 /// The objects in the game. You can add components to them.
@@ -87,6 +89,7 @@ public:
 
 	bool* GetIsMovable() const { return isMovable; }
 
+	//TODO: tjek om new er nødvendig når det ikke er med Asset
 	unordered_map<ComponentTag, Component*>* GetComponents() const { return components; }
 
 	bool* GetShouldDraw() const { return shouldDraw; }

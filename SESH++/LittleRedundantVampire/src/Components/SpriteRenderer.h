@@ -47,7 +47,7 @@ public:
 	// TODO: const
 	bool* GetFlipped();
 
-	void SetTextureRect(IntRect& textureRect);
+	void SetTextureRect(IntRect textureRect);
 
 	//TODO: make get-methods
 	IntRect* TextureRect;

@@ -15,7 +15,7 @@ Player::Player()
 	healthBar = new GameObject();
 	srHealthBar = new SpriteRenderer(TextureTag::PLAYER_HEALTH, Vector2u(1, 1), Vector2u(1, 10));
 
-	timer = 0.0f;
+
 	invincibilityTimer = 0.0f;
 
 	invincible = false;
@@ -24,14 +24,8 @@ Player::Player()
 
 Player::~Player()
 {
-	//delete healthBar;
-	//healthBar = nullptr;
-
-	//delete srHealthBar;
-	//srHealthBar = nullptr;
-
-	/*delete health;
-	health = nullptr;*/
+	delete health;
+	health = nullptr;
 }
 
 void Player::Awake()
@@ -45,7 +39,7 @@ void Player::Awake()
 	SpriteRenderer& srRef = *srHealthBar;
 	AnimationController* acController = new AnimationController(srRef, health, *health);
 	healthBar->AddComponent(acController);
-	acController->ChangeAnimation.Attach(aC);
+	acController->AttachListenerToChangeAnimation(aC);
 
 	healthBar->Awake();
 	healthBar->Start();
@@ -90,7 +84,6 @@ void Player::Update(Time* timePerFrame)
 
 void Player::Destroy()
 {
-	//TODO: destructor dosent work
 	Player::~Player();
 }
 

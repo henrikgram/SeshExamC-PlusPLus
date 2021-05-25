@@ -10,8 +10,7 @@ using namespace sf;
 //Guide for animating using sprite sheet.
 //https://www.youtube.com/watch?v=Aa8bXSq5LDE&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=10
 
-// TODO: Direction? TRANSLATE
-//Guide til at animere ift. bevaegelse.
+//Guide for animating according to movement
 //https://www.youtube.com/watch?v=kAZVbPF6N4Q&list=PL21OsoBLPpMOO6zyVlxZ4S4hwkY_SLRW9&index=11
 
 
@@ -46,7 +45,7 @@ private:
 	//The current image to draw.
 	Vector2u currentImage;
 	//The rectangle for the texture.
-	IntRect* textureRect;
+	IntRect textureRect;
 	//How fast it should cycle through the animation.
 	float totalTime;
 	//Time between frames

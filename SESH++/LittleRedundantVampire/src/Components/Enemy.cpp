@@ -2,38 +2,26 @@
 #include "../GameWorld.h"
 
 
-//TODO: check dem som er uninitialized.
 Enemy::Enemy()
 {
+	targetDistance = new Vector2f(0, 0);
 	speed = new float();
 	velocity = new Vector2f();
 }
 
 Enemy::~Enemy()
 {
+	delete targetDistance;
+	targetDistance = nullptr;
 
-	//TODO: vend tilbage til enemy
-	////targetDistance = nullptr;
-	//delete targetDistance;
-
-	currentState = nullptr;
 	delete currentState;
+	currentState = nullptr;
 
-	////velocity = nullptr;
-	////TODO: tjek hvor velocitry bliver slettet;
-	////delete velocity;
+	delete speed;
+	speed = nullptr;
 
-	////target = nullptr;
-	//delete target;
-
-	////speed = nullptr;
-	//delete speed;
-
-
-
-	velocity = nullptr;
 	delete velocity;
-
+	velocity = nullptr;
 }
 
 void Enemy::Awake()
@@ -55,21 +43,12 @@ void Enemy::Update(Time* timePerFrame)
 	// This runs Execute() on the current state.
 	currentState->RunRequest();
 
-	// TODO: Change once player has been moved into LM. This is shit.
-	if (target == nullptr)
-	{
-		TempUntilPlayerIsMovedIntoLM();
-	}
-	else
-	{
-		PlayerDistance();
-	}
+	PlayerDistance();
 }
 
 void Enemy::Destroy()
 {
 
-	//TODO: destructor dosent work
 	Enemy::~Enemy();
 
 }
@@ -79,25 +58,11 @@ void Enemy::Move(Vector2f velocity)
 	(*this->velocity) += velocity;
 }
 
-void Enemy::TempUntilPlayerIsMovedIntoLM()
+void Enemy::SetTarget(GameObject* target)
 {
-
-	//TODO: det her skal nok g�res n�r objektet laves i levelmanager, s� man kan v�lge hvilke target den skal have der i stedet.
-	//Kunne g�res s�dan her Enemy.target = GameWorld::GetInstance()->PlayerPointer.GameObject
-	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
-
-	//iterates through the gameObjects.
-	for (vector<GameObject*>::size_type i = 0; i < gameObjectsSize; ++i)
-	{
-		GameObject* go = (*GameWorld::GetInstance()->GetGameObjects())[i];
-
-		if (*go->GetObjectTag() == ObjectTag::PLAYER)
-		{
-			// Once the player has been found, target becomes player.
-			target = go;
-		}
-	}
+	this->target = target;
 }
+
 
 void Enemy::PlayerDistance()
 {
@@ -121,10 +86,10 @@ void Enemy::SetContext(IState* state)
 	currentState->StartRequest(this);
 }
 
-ContextState Enemy::GetContext()
-{
-	return *currentState;
-}
+//ContextState Enemy::GetContext()
+//{
+//	return *currentState;
+//}
 
 void Enemy::Normalize()
 {
@@ -140,7 +105,9 @@ void Enemy::Normalize()
 
 		*gameObject->GetPosition() += *velocity;
 
-		//TODO: OPTIMERING:
+		//TODO: OPTIMERING brug MoveCompoennt:
+
+		//Can be implemented as moveComponent later
 		*velocity = Vector2f(0.0f, 0.0f);
 	}
 }

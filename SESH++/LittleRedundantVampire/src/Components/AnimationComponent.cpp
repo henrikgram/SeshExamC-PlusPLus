@@ -3,7 +3,6 @@
 
 AnimationComponent::AnimationComponent(SpriteRenderer* spriteRenderer, Vector2u imageCount, float switchTime, int row)
 {
-	textureRect = new IntRect;
 
 	this->spriteRenderer = spriteRenderer;
 	this->imageCount = imageCount;
@@ -17,16 +16,12 @@ AnimationComponent::AnimationComponent(SpriteRenderer* spriteRenderer, Vector2u 
 	currentImage.x = 0;
 
 	//Defines size of the texture rectangle according to the spritesheet images.
-	textureRect->width = spriteRenderer->GetTexture().getSize().x / float(imageCount.x);
-	textureRect->height = spriteRenderer->GetTexture().getSize().y / float(imageCount.y);
+	textureRect.width = spriteRenderer->GetTexture().getSize().x / float(imageCount.x);
+	textureRect.height = spriteRenderer->GetTexture().getSize().y / float(imageCount.y);
 }
 
 AnimationComponent::~AnimationComponent()
 {
-	//TODO: bliver nok slettet et andet sted
-	
-	/*delete textureRect;
-	textureRect = nullptr;*/
 
 }
 
@@ -59,11 +54,11 @@ void AnimationComponent::Update(Time* timePerFrame)
 
 	//Find the left and top position of the current image in the spritesheet animation.
 	//This way we can know which image is the correct one.
-	textureRect->left = currentImage.x * textureRect->width;
-	textureRect->top = currentImage.y * textureRect->height;
-	textureRect->width = abs(textureRect->width);
+	textureRect.left = currentImage.x * textureRect.width;
+	textureRect.top = currentImage.y * textureRect.height;
+	textureRect.width = abs(textureRect.width);
 
-	spriteRenderer->SetTextureRect(*textureRect);
+	spriteRenderer->SetTextureRect(textureRect);
 }
 
 void AnimationComponent::Destroy()

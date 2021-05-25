@@ -27,6 +27,7 @@
 #include "BitmapImage.h"
 #include "LevelManager.h"
 #include "Light/DirectionalLight.h"
+#include "Components/Enemy.h"
 
 using namespace std;
 using namespace std;
@@ -95,7 +96,10 @@ public:
 	/// </summary>
 	static GameWorld* GetInstance();
 	// TODO: const
-	vector<GameObject*>* GetGameObjects(); //TODO: Needs to be constant otherwise we may as well make gameObjects a public.
+	vector<GameObject*>* GetGameObjects() const { return gameObjects; } //TODO: Needs to be constant otherwise we may as well make gameObjects a public.
+
+	void AddToGameObjects(GameObject* go);
+
 	// TODO: const
 	vector<Collider*>* GetColliders(); //TODO: This needs to be a constant, if we want to change something outside of the class it belongs to we should make a set method or something.
 	// TODO: const
@@ -110,6 +114,8 @@ public:
 	float GetScreenWidth();
 	// TODO: const
 	float GetScreenHeight();
+
+	Player* GetPlayerPointer() const { return playerPointer; }
 
 	void CloseGame();
 };

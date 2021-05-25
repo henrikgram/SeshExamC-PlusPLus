@@ -88,9 +88,14 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		break;
 
 	case ObjectTag::ENEMY:
+		//TODO: kan glitche ud af væg med kasse lol
 		Enemy* enemy;
+		
+
 		sr = new SpriteRenderer(TextureTag::ENEMY, Vector2u(1, 1), Vector2u(4, 3));
 		go->AddComponent(enemy = new Enemy());
+
+		//enemy->SetTarget(GameWorld::GetInstance()->GetPlayerPointer()->gameObject);
 		go->AddComponent(sr);
 		ac = new AnimationComponent(sr, Vector2u(4, 3), 200.0f, 1);
 		go->AddComponent(ac);

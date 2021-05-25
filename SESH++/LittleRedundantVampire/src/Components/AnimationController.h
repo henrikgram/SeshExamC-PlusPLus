@@ -41,9 +41,8 @@ public:
 	virtual void Update(Time* timePerFrame) override;
 	virtual void Destroy() override;
 	virtual ComponentTag ToEnum() override;
-
-	IGameEvent ChangeAnimation; //TODO: Make private maybe. But will require a Get method and an AttackListener method.
-
+	
+	void AttachListenerToChangeAnimation(IListener* listener);
 
 private:
 	/// <summary>
@@ -57,6 +56,8 @@ private:
 
 
 private:
+	IGameEvent changeAnimation;
+
 	SpriteRenderer& spriteRenderer;
 
 	string noAniRow;

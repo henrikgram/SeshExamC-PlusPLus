@@ -12,7 +12,6 @@ AttackCommand::~AttackCommand()
 
 void AttackCommand::Execute()
 {
-// TODO: Comment sounds a bit weird but I might just be too tired to get it.
-	//PlayerAttack because only the commands are only used by the player. 
+	//Creates a player attack when the player executes the attack command
 	attackReceiver.CreateAttack(TextureTag::PLAYER_ATTACK_SHEET, ObjectTag::PLAYERATTACK);
 }

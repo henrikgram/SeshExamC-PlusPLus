@@ -1,17 +1,15 @@
 #include <iostream>
 #include "Collider.h"
 
-//TODO: Do a proper check of this class. there is some "out-commented" code that can probs be deleted, but wanna talk to Emma first.
 
 Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool solid)
 {
-	//TODO: emma skal tjekke om mine lys løsning er ok her
-	wall =  new VertexArray(LinesStrip, 2);
-	(*wall)[0].position.x = position.x - size.x/1.8f;
+	wall = new VertexArray(LinesStrip, 2);
+	(*wall)[0].position.x = position.x - size.x / 1.8f;
 	(*wall)[0].position.y = position.y - size.y / 2;
 
 	(*wall)[1].position.y = position.y - size.y / 2;
-	(*wall)[1].position.x = position.x + size.x/1.8f;
+	(*wall)[1].position.x = position.x + size.x / 1.8f;
 
 	collisionBox = new RectangleShape(size);
 	collisionBox->setPosition(position);
@@ -110,24 +108,21 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 
 void Collider::UpdateListOfCurrentCollisions()
 {
-	if (currentCollisions.size() > 0)
+	for (auto i = currentCollisions.begin(); i != currentCollisions.end();)
 	{
-		//TODO: This for loop doesn't crash the game when deleting elements from the list while iterating through it. Check other loops that they also don't crash the game.
-		for (auto i = currentCollisions.begin(); i != currentCollisions.end();)
+		bool isStillColliding = CheckCollision(*i);
+		if (!isStillColliding)
 		{
-			bool isStillColliding = CheckCollision(*i);
-			if (!isStillColliding)
-			{
-				onNoLongerColliding.Notify("NoLongerCollidingWith", *i);
-				onColliderDestroyed.Detach(*i);
-				i = currentCollisions.erase(i);
-			}
-			else
-			{
-				++i;
-			}
+			onNoLongerColliding.Notify("NoLongerCollidingWith", *i);
+			onColliderDestroyed.Detach(*i);
+			i = currentCollisions.erase(i);
+		}
+		else
+		{
+			++i;
 		}
 	}
+
 }
 
 void Collider::Awake()
@@ -147,8 +142,6 @@ void Collider::Start()
 void Collider::Update(Time* timePerFrame)
 {
 	UpdateListOfCurrentCollisions();
-	//(*wall)[0].position = *(gameObject->GetPosition());
-	//(*wall)[1].position = (*(gameObject->GetPosition()) + collisionBox->getSize());
 
 	(*wall)[0].position.x = (*gameObject->GetPosition()).x - collisionBox->getSize().x / 1.8f;
 	(*wall)[0].position.y = (*gameObject->GetPosition()).y - collisionBox->getSize().y / 2;

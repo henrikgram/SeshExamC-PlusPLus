@@ -14,7 +14,6 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 	{
 		*gameObject->GetIsMovable() = false;
 
-		//TODO: tjek hvis den ryger ud af scope.
 		GameObject* go = new GameObject();
 		SpriteRenderer* sr;
 
@@ -52,14 +51,14 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 		SpriteRenderer& srRef = *sr;
 		AnimationController* acController = new AnimationController(srRef, "2", "1", "2", "0", "0");
 		go->AddComponent(acController);
-		acController->ChangeAnimation.Attach(aC);
+		acController->AttachListenerToChangeAnimation(aC);
 
 		go->AddComponent(new Attack(this->objectTag, attackCooldown));
 
 		go->Awake();
 		go->Start();
 
-		(*GameWorld::GetInstance()->GetGameObjects()).push_back(go);
+		GameWorld::GetInstance()->AddToGameObjects(go);
 
 		attackTimer = 0.0f;
 		canAttack = false;

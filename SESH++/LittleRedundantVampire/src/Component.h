@@ -10,25 +10,19 @@
 using namespace std;
 
 
-//TODO: Determine whether or not we need this class. It just causes problems. 
-
 /// <summary>
 /// Virtual component to define component classes.
 /// </summary>
 class Component : public IListener, public ICollisionListener
 {
 public:
+	//TODO: make this an interface
 	GameObject* gameObject;
-
-	// If true, use methods. If false, put on pause.
-	bool isEnabled;
 
 	~Component();
 
-	//TODO: Add more info on awake and start once we know what we run in them.
-
 	/// <summary>
-	/// Runs first once an object has been instantiated.
+	/// Setup code that is the first thing to run once an object has been instantiated.
 	/// </summary>
 	virtual void Awake() = 0;
 

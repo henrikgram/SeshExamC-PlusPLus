@@ -82,9 +82,7 @@ void Movement::Normalize()
 		// We calculate the hypotenuse of the movement direction.
 		float movementVectorLength = sqrt(velocity->x * velocity->x + velocity->y * velocity->y);
 
-		// TODO: translation okay??
-		// We normalize the direction compared to the length of the hypotenuse.
-		//Vi normaliserer retningen ift til hypotenusens laengde.
+		// We normalize the direction in regards to the length of the hypotenuse.
 		velocity->x /= movementVectorLength;
 		velocity->y /= movementVectorLength;
 

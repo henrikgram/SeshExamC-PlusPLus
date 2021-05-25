@@ -19,7 +19,7 @@ public:
 
 private:
 	Movement& movementReceiver;
-	Vector2f* velocity;
+	Vector2f velocity;
 };
 
 #endif

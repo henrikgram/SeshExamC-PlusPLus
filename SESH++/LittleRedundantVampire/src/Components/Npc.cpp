@@ -69,7 +69,6 @@ void Npc::Start()
 
 void Npc::Update(Time* timePerFrame)
 {
-	// TODO: Would be better to not have this in update but I can't see where else I'd put it right now.
 	// Only draws the text if textShown is true.
 	if (*textShown)
 	{

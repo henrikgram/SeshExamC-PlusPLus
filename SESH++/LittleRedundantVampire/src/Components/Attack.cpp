@@ -23,7 +23,6 @@ Attack::~Attack()
 
 void Attack::Awake()
 {
-	//TODO: Det her skal kunne fungere med events, der k�rer n�r spilleren bev�ger sig.
 
 	//Positions the attack according to the callers direction.
 	switch (*gameObject->GetDirection())
@@ -60,10 +59,11 @@ void Attack::Update(Time* timePerFrame)
 	{
 		//TODO: Make sure object gets deleted here instead.
 		*gameObject->GetShouldDraw() = false;
+		//GameWorld::GetInstance().
 	}
 }
 
-//TODO: Find a proper way to delete objects.
+
 void Attack::Destroy()
 {
 	Attack::~Attack();

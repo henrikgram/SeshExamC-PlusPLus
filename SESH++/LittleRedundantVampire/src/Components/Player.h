@@ -34,9 +34,6 @@ private:
 	GameObject* healthBar;
 	SpriteRenderer* srHealthBar;
 
-	// TODO: Delete later, only for testing.
-	float timer;
-
 	int* health;
 	float invincibilityTimer;
 	bool invincible;

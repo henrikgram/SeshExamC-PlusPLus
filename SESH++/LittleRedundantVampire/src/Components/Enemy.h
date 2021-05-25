@@ -15,7 +15,7 @@ class Enemy : public Component
 {
 public:
 	// Distance between the enemy and target (player).
-	Vector2f* targetDistance = new Vector2f(0, 0);
+	Vector2f* targetDistance; 
 	// Player will become target.
 	GameObject* target;
 
@@ -35,22 +35,26 @@ public:
 	/// </summary>
 	/// <param name="newSpeed"></param>
 	void SetSpeed(float newSpeed);
+
 	/// <summary>
 	/// Sets the current context.
 	/// </summary>
 	/// <param name="state"></param>
 	void SetContext(IState* state);
+
 	/// <summary>
 	/// Gets the current context.
-	///  TODO: const
 	/// </summary>
 	/// <returns></returns>
-	ContextState GetContext();
+	ContextState GetContext() const { return *currentState; }
+
 	/// <summary>
 	/// Method to make the enemy move.
 	/// </summary>
 	/// <param name="velocity"></param>
 	void Move(Vector2f velocity);
+
+	void SetTarget(GameObject* target);
 
 private:
 	float* speed;
@@ -70,12 +74,6 @@ private:
 	/// There just wasn't time to add more movement "options" for the enemy.
 	/// </summary>
 	void Normalize();
-
-	/// <summary>
-	/// TODO: needs to be changed or at least need a new name.
-	/// It finds the player from the gameObjects vector in GameWorld so we can use the player's position.
-	/// </summary>
-	void TempUntilPlayerIsMovedIntoLM();
 };
 
 #endif;

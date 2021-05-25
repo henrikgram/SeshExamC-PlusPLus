@@ -26,31 +26,31 @@ AnimationController::AnimationController(SpriteRenderer& spriteRenderer, int* cu
 
 AnimationController::~AnimationController()
 {
-	//TODO: et eller andet problem med deletion her
-	delete currentRow;
-	currentRow = nullptr;
+
 }
 
 
 void AnimationController::MovementAnimation()
 {
 	//TODO: OPTIMERING fix s� den ikke k�rer medmindre det er en ny animation. OPTIMERING
+
+
 	//No/idle animation
 	if (*gameObject->GetDirection() == 'N')
 	{
-		ChangeAnimation.Notify(noAniRow, this);
+		changeAnimation.Notify(noAniRow, this);
 	}
 
 	//Up
 	else if (*gameObject->GetDirection() == 'U')
 	{
-		ChangeAnimation.Notify(upAniRow, this);
+		changeAnimation.Notify(upAniRow, this);
 	}
 
 	//Down
 	else if (*gameObject->GetDirection() == 'D')
 	{
-		ChangeAnimation.Notify(downAniRow, this);
+		changeAnimation.Notify(downAniRow, this);
 	}
 
 	//Left
@@ -59,10 +59,10 @@ void AnimationController::MovementAnimation()
 		if (!*spriteRenderer.GetFlipped())
 		{
 			*spriteRenderer.GetFlipped() = true;
-			ChangeAnimation.Notify("flip", this);
+			changeAnimation.Notify("flip", this);
 		}
 
-		ChangeAnimation.Notify(leftAniRow, this);
+		changeAnimation.Notify(leftAniRow, this);
 	}
 
 	//Right
@@ -71,10 +71,10 @@ void AnimationController::MovementAnimation()
 		if (*spriteRenderer.GetFlipped())
 		{
 			*spriteRenderer.GetFlipped() = false;
-			ChangeAnimation.Notify("flip", this);
+			changeAnimation.Notify("flip", this);
 		}
 
-		ChangeAnimation.Notify(rightAniRow, this);
+		changeAnimation.Notify(rightAniRow, this);
 	}
 }
 
@@ -84,7 +84,7 @@ void AnimationController::DecrementingRowAnimation()
 	if (previousRow != *currentRow)
 	{
 		string newRow = to_string(firstRow - *currentRow);
-		ChangeAnimation.Notify(newRow, this);
+		changeAnimation.Notify(newRow, this);
 
 		previousRow = *currentRow;
 	}
@@ -118,4 +118,9 @@ void AnimationController::Destroy()
 ComponentTag AnimationController::ToEnum()
 {
 	return ComponentTag::ANIMATION_CONTROLLER;
+}
+
+void AnimationController::AttachListenerToChangeAnimation(IListener* listener)
+{
+	changeAnimation.Attach(listener);
 }

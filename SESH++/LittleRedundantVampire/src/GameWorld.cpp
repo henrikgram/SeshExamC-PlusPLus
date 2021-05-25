@@ -107,7 +107,7 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 		SpriteRenderer& srRef = *sr;
 		AnimationController* acController = new AnimationController(srRef, "3", "2", "0", "1", "1");
 		go->AddComponent(acController);
-		acController->ChangeAnimation.Attach(aC);
+		acController->AttachListenerToChangeAnimation(aC);
 
 		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
 		float x = (float)sr->TextureRect->width;
@@ -141,9 +141,9 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 			sr->GetSprite().getTexture()->getSize().y),
 			*go->GetPosition(), 0.0f, true);
 		go->AddComponent(col);
-		col->AttachToColliderDestroyedEvent(GameWorld::GetInstance());
+		col->AttachToColliderDestroyedEvent(this);
 		colliders->push_back(col);
-		go->AddListenerToCallSelfDestruct(GameWorld::GetInstance());
+		go->AddListenerToCallSelfDestruct(this);
 		break;
 	default:
 		break;
@@ -154,13 +154,29 @@ void GameWorld::BootlegFactory(ObjectTag tag)
 
 	//TODO: This defeats the purpose of making a Get method for the variable. Get should only be used for accessing information in a variable
 	// outside of it's class, not for altering the variable.
-	(*GameWorld::GetInstance()->GetGameObjects()).push_back(go);
+	gameObjects->push_back(go);
 }
 
 void GameWorld::Initialize()
 {
+	LevelManager* lm = new LevelManager();
+	*gameObjects = lm->InstantiateLevel("Level1");
+
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
+
+	vector<GameObject*>::iterator it;
+
+	for (it = gameObjects->begin(); it < gameObjects->end(); it++)
+	{
+		if (*(*it)->GetObjectTag() == ObjectTag::ENEMY)
+		{
+			Enemy* e;
+			e = dynamic_cast<Enemy*>((*it)->GetComponent(ComponentTag::ENEMY));
+
+			e->SetTarget(playerPointer->gameObject);
+		}
+	}
 
 	VertexArray* tmp4 = new VertexArray(sf::LinesStrip, 2);
 	(*tmp4)[0].position = Vector2f(0, 0);
@@ -269,53 +285,7 @@ void GameWorld::Initialize()
 	walls.push_back(tmp15);
 
 
-#pragma region Damage test, Enemy and Enemy Attack on Player.
-	//TODO: delete this
-	//Test-attack. Can be deleted later.
-	GameObject* go = new GameObject();
-	SpriteRenderer* sr = new SpriteRenderer(TextureTag::ENEMY_ATTACK_SHEET, Vector2u(1, 1), Vector2u(1, 3));
 
-	go->AddComponent(sr);
-
-	Collider* col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x,
-		sr->GetSprite().getTexture()->getSize().y),
-		*go->GetPosition(), 0.0f, false);
-
-	go->AddComponent(col);
-	(*colliders).push_back(col);
-
-	go->Awake();
-	go->Start();
-
-	*go->GetPosition() = Vector2f(1200.0f, 1000.0f);
-	*go->GetObjectTag() = ObjectTag::ENEMYATTACK;
-
-	(*gameObjects).push_back(go);
-
-	// TODO: Test??? Maybe delete this then!
-	//Test enemy damage
-	GameObject* go1 = new GameObject();
-	SpriteRenderer* sr1 = new SpriteRenderer(TextureTag::ENEMY);
-
-	go1->AddComponent(sr1);
-
-	Collider* col1 = new  Collider(Vector2f(sr1->GetSprite().getTexture()->getSize().x,
-		sr1->GetSprite().getTexture()->getSize().y),
-		*go1->GetPosition(), 0.0f, false);
-
-	go1->AddComponent(col1);
-	(*colliders).push_back(col1);
-
-	go1->Awake();
-	go1->Start();
-
-	*go1->GetPosition() = Vector2f(1200.0f, 1200.0f);
-	*go1->GetObjectTag() = ObjectTag::ENEMY;
-
-	(*gameObjects).push_back(go1);
-
-	// what this? pragma region?
-#pragma endregion
 }
 
 void GameWorld::LoadContent()
@@ -355,11 +325,11 @@ void GameWorld::Update(Time* timePerFrame)
 	auto start = high_resolution_clock::now();
 
 	DeleteObjects();
-	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+	vector<GameObject*>::size_type gameObjectsSize = gameObjects->size();
 
-	for (auto i = (*GameWorld::GetInstance()->gameObjects).begin(); i != (*GameWorld::GetInstance()->gameObjects).end();)
+	for (auto i = gameObjects->begin(); i != gameObjects->end();)
 	{
-		vector<GameObject*>::size_type originalSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+		vector<GameObject*>::size_type originalSize = gameObjects->size();
 
 		//camera culling
 		if (((*i)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6 * 96 &&
@@ -380,7 +350,7 @@ void GameWorld::Update(Time* timePerFrame)
 			}
 		}
 
-		vector<GameObject*>::size_type updatedSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+		vector<GameObject*>::size_type updatedSize = gameObjects->size();
 
 		if (originalSize == updatedSize)
 		{
@@ -422,7 +392,7 @@ void GameWorld::Update(Time* timePerFrame)
 
 	auto duration = duration_cast<std::chrono::microseconds>(stop - start);
 
-	cout << "Time taken by Update(): "
+	std::cout << "Time taken by Update(): "
 		<< duration.count() << " microseconds" << endl;
 }
 
@@ -436,13 +406,13 @@ void GameWorld::Draw()
 	//TODO: this needs to be deleted somewhere, but it dosen't work here, actually, check if it matters because its on stack.
 	SpriteRenderer* sr;
 
-	vector<GameObject*>::size_type gameObjectsSize = (*GameWorld::GetInstance()->GetGameObjects()).size();
+	vector<GameObject*>::size_type gameObjectsSize = gameObjects->size();
 	//iterates through the gameObjects and draws all gameobjects.
 	for (vector<GameObject*>::size_type i = 0;
 		i < gameObjectsSize;
 		++i)
 	{
-		GameObject* go = (*GameWorld::GetInstance()->GetGameObjects())[i];
+		GameObject* go = gameObjects->at(i);
 
 		//camera culling
 		if (((go)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6 * 96 && //right
@@ -451,7 +421,7 @@ void GameWorld::Draw()
 			if (*go->GetShouldDraw())
 			{
 				//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
-				sr = dynamic_cast<SpriteRenderer*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::SPRITERENDERER));
+				sr = dynamic_cast<SpriteRenderer*>(gameObjects->at(i)->GetComponent(ComponentTag::SPRITERENDERER));
 
 				if (((go)->GetPosition()->y - playerPointer->gameObject->GetPosition()->y) < 6 * 96 &&
 					(playerPointer->gameObject->GetPosition()->y - (go)->GetPosition()->y) < 6 * 96)
@@ -461,7 +431,7 @@ void GameWorld::Draw()
 
 				if (*go->GetObjectTag() == ObjectTag::TEXT_BOX)
 				{
-					TextMessage* tm = dynamic_cast<TextMessage*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::TEXT_MESSAGE));
+					TextMessage* tm = dynamic_cast<TextMessage*>(gameObjects->at(i)->GetComponent(ComponentTag::TEXT_MESSAGE));
 
 					if (tm != nullptr)
 					{
@@ -475,7 +445,7 @@ void GameWorld::Draw()
 				}
 				else if (*go->GetObjectTag() == ObjectTag::WINDOW)
 				{
-					LightSource* light = dynamic_cast<LightSource*>((*GameWorld::GetInstance()->GetGameObjects())[i]->GetComponent(ComponentTag::LIGHT));
+					LightSource* light = dynamic_cast<LightSource*>(gameObjects->at(i)->GetComponent(ComponentTag::LIGHT));
 
 					if (light != nullptr)
 					{
@@ -515,8 +485,7 @@ void GameWorld::Run()
 {
 	LoadContent();
 	//BootlegFactory(ObjectTag::PLAYER);
-	LevelManager* lm = new LevelManager();
-	*GameWorld::GetInstance()->GetGameObjects() = lm->InstantiateLevel("Level1");
+
 	Initialize();
 
 	//Time since last update.
@@ -588,9 +557,14 @@ GameWorld* GameWorld::GetInstance()
 	return instance;
 }
 
-vector<GameObject*>* GameWorld::GetGameObjects()
+//vector<GameObject*>* GameWorld::GetGameObjects()
+//{
+//	return gameObjects;
+//}
+
+void GameWorld::AddToGameObjects(GameObject* go)
 {
-	return gameObjects;
+	gameObjects->push_back(go);
 }
 
 vector<Collider*>* GameWorld::GetColliders()
@@ -632,9 +606,20 @@ void GameWorld::CloseGame()
 		objectsToBeDeleted.push(*i);
 	}
 
+	//TODO: delete all walls
+
 	DeleteObjects();
 
 	gameObjects->clear();
+
+
+	//TODO: Ryd op i Asset klassen
+	//TODO: spørg kenneth om scope med heap osv
+	//delete Asset::GetInstance();
+
+	//TODO: spørg kenneth
+	//TODO: lav den om til en ikke singleton tm
+	//delete PlayerInvoker::GetInstance();
 
 	window.close();
 }

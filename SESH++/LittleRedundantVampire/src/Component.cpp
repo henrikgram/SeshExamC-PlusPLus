@@ -4,14 +4,13 @@
 
 Component::~Component()
 {
-	//TODO: check if destructor is called automatically, through subclasses destructor
 }
 
 void Component::OnNotify(std::string eventName, IListener* sender)
 {
 	if (eventName == "NoLongerCollidingWith")
 	{
-		// TODO: uuuh, nani the fuck?
+		// TODO: SIGNE: uuuh, nani the fuck?
 	}
 }
 

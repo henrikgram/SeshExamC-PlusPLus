@@ -39,8 +39,6 @@ public:
 
 
 private:
-	//TODO: We have to stop declaring pointers as new in the header files because it appears that it gives us problems down the line with meory management.
-	//TODO: Change these so new keyword is called somewhere else in the cpp file. Prefereably the constructor.
 
 	GameObject* textBox;
 	SpriteRenderer* textBoxSr;

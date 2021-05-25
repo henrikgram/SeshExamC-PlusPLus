@@ -14,11 +14,17 @@ SpriteRenderer::~SpriteRenderer()
 	delete TextureRect;
 	TextureRect = nullptr;
 
-	delete currentImage;
-	currentImage = nullptr;
+	if (currentImage != nullptr)
+	{
+		delete currentImage;
+		currentImage = nullptr;
+	}
 
-	delete imageCount;
-	imageCount = nullptr;
+	if (imageCount != nullptr)
+	{
+		delete imageCount;
+		imageCount = nullptr;
+	}
 
 	delete flipped;
 	flipped = nullptr;
@@ -31,14 +37,9 @@ SpriteRenderer::~SpriteRenderer()
 SpriteRenderer::SpriteRenderer(TextureTag textureTag)
 {
 	//TODO: This enture constructor may be unnecessary if we put everything up in a spritesheet.
-	texture = new Texture(*Asset::GetInstance()->GetTexture(textureTag));
+	texture = new Texture(*Asset::GetInstance()->FetchTexture(textureTag));
 	sprite = new Sprite(*texture);
 
-	//TODO: These following two are only used for spritesheets so can we avoid them taking up space in the heap memory?
-	//Ekstra kommentar ved ikke om det er dårlig stil med heap, men stakken har kun 1mb hukommelse, og heapen er resten af din pc.
-	//Nogle siger man bruger det til at allokere noget man ikke er helt sikker på størrelsen før runtime
-	this->currentImage = new Vector2u;
-	this->imageCount = new Vector2u;
 	isSpriteSheet = false;
 
 	TextureRect = new IntRect();
@@ -60,18 +61,19 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag)
 /// <param name="textureTag"></param>
 SpriteRenderer::SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vector2u imageCount)
 {
-	texture = new Texture(*Asset::GetInstance()->GetTexture(textureTag));
+	texture = new Texture(*Asset::GetInstance()->FetchTexture(textureTag));
 	sprite = new Sprite(*texture);
 	this->currentImage = new Vector2u(currentImage);
 	this->imageCount = new Vector2u(imageCount);
 
 	flipped = new bool;
 	*flipped = false;
-	
+
 	isSpriteSheet = true;
 
 	TextureRect = new IntRect();
 	// We define the width and height on our textureRectangle compared to the png-file, so the sprite gets the right size.
+
 	TextureRect->width = texture->getSize().x / float(this->imageCount->x);
 	TextureRect->height = texture->getSize().y / float(this->imageCount->y);
 
@@ -131,9 +133,9 @@ bool SpriteRenderer::GetIsSpriteSheet()
 	return isSpriteSheet;
 }
 
-void SpriteRenderer::SetTextureRect(IntRect& textureRect)
+void SpriteRenderer::SetTextureRect(IntRect textureRect)
 {
-	this->TextureRect = &textureRect;
+	*this->TextureRect = textureRect;
 	sprite->setTextureRect(*TextureRect);
 }
 

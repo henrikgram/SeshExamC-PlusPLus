@@ -19,8 +19,7 @@ struct BitmapColor
 };
 
 /// <summary>
-/// TODO: is this correct?
-/// For creating bitmaps.
+/// Class that can read/create bitmaps
 /// </summary>
 class BitmapImage
 {
@@ -35,9 +34,8 @@ public:
 
 	void Export(const char* path);
 
-//TODO: make constant
-	int GetHeight();
-	int GetWidth();
+	int GetHeight() const { return height; }
+	int GetWidth() const { return width; }
 
 private:
 	int width;
