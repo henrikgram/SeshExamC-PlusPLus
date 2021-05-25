@@ -162,11 +162,11 @@ void GameWorld::Initialize()
 	BootlegFactory(ObjectTag::PLAYER);
 	BootlegFactory(ObjectTag::CRATE);
 
-	VertexArray tmp4 = VertexArray(sf::LinesStrip, 2);
-	tmp4[0].position = Vector2f(0, 0);
-	tmp4[0].color = Color::Red;
-	tmp4[1].color = Color::Red;
-	tmp4[1].position = Vector2f(2000, 0);
+	VertexArray* tmp4 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp4)[0].position = Vector2f(0, 0);
+	(*tmp4)[0].color = Color::Red;
+	(*tmp4)[1].color = Color::Red;
+	(*tmp4)[1].position = Vector2f(2000, 0);
 
 	walls.push_back(tmp4);
 
@@ -211,11 +211,11 @@ void GameWorld::Initialize()
 
 	walls.push_back(cursedPlayerWall);
 
-	VertexArray tmp9 = VertexArray(sf::LinesStrip, 2);
-	tmp9[0].position = Vector2f(8.4f*96, 7.5f*96);
-	tmp9[0].color = Color::Red;
-	tmp9[1].color = Color::Red;
-	tmp9[1].position = Vector2f(10.5f*96, 7.5f * 96);
+	VertexArray* tmp9 = new VertexArray(sf::LinesStrip, 2);
+	(*tmp9)[0].position = Vector2f(8.4f*96, 7.5f*96);
+	(*tmp9)[0].color = Color::Red;
+	(*tmp9)[1].color = Color::Red;
+	(*tmp9)[1].position = Vector2f(10.5f*96, 7.5f * 96);
 
 	walls.push_back(tmp9);
 

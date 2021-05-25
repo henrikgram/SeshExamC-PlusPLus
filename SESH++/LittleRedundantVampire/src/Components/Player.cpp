@@ -24,14 +24,14 @@ Player::Player()
 
 Player::~Player()
 {
-	delete healthBar;
-	healthBar = nullptr;
+	//delete healthBar;
+	//healthBar = nullptr;
 
-	delete srHealthBar;
-	srHealthBar = nullptr;
+	//delete srHealthBar;
+	//srHealthBar = nullptr;
 
-	delete health;
-	health = nullptr;
+	/*delete health;
+	health = nullptr;*/
 }
 
 void Player::Awake()
@@ -91,7 +91,7 @@ void Player::Update(Time* timePerFrame)
 void Player::Destroy()
 {
 	//TODO: destructor dosent work
-	//Player::~Player();
+	Player::~Player();
 }
 
 ComponentTag Player::ToEnum()

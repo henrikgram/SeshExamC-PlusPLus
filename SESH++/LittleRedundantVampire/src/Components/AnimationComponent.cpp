@@ -25,9 +25,9 @@ AnimationComponent::~AnimationComponent()
 {
 	//TODO: bliver nok slettet et andet sted
 	
-	//HVORFOR VIRKER DET IKKE HER?!
-	textureRect = nullptr;
-	delete textureRect;
+	/*delete textureRect;
+	textureRect = nullptr;*/
+
 }
 
 

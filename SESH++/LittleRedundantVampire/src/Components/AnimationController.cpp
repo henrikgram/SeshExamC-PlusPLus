@@ -26,6 +26,7 @@ AnimationController::AnimationController(SpriteRenderer& spriteRenderer, int* cu
 
 AnimationController::~AnimationController()
 {
+	//TODO: et eller andet problem med deletion her
 	delete currentRow;
 	currentRow = nullptr;
 }
