@@ -9,11 +9,19 @@
 
 
 /// <summary>
-/// TODO: Add summary.
+/// Lightsource where all lightrays points in one direction from mulitple points on a line.
 /// </summary>
 class DirectionalLight : public LightSource
 {
 public:
+	/// <summary>
+	/// Lightsource where all lightrays points in one direction from mulitple points on a line.
+	/// </summary>
+	/// <param name="startPosition">Where the line, which the rays is casted from starts</param>
+	/// <param name="endPosition">Where the line, which the rays is casted from ends. Make sure the line is either perfectly horisontal or vertical, because of missing functionality regarding skewed lightsource</param>
+	/// <param name="walls">Which walls that it has to check for intersection</param>
+	/// <param name="angle">The angle that the rays will cast</param>
+	/// <param name="stepSize">Bigger = less rays</param>
 	DirectionalLight(Vector2f startPosition, Vector2f endPosition, vector<VertexArray*>* walls, int angle = 0, int stepSize = 5);
 
 	/// <summary>

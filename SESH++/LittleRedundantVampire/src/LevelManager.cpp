@@ -2,11 +2,8 @@
 #include "GameWorld.h"
 #include "Components/Enemy.h"
 
-//TODO: maybe more commenting in this class. dunno, i guess it is pretty straight forward.
-
 GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 {
-	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject(Vector2<float>(posX * 96, posY * 96));
 	AnimationComponent* ac;
 	SpriteRenderer* sr;
@@ -65,7 +62,6 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::CRATE:
 	{
 		sr = new SpriteRenderer(TextureTag::CRATE);
-
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.1f, true);
 		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
@@ -90,8 +86,6 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::ENEMY:
 		//TODO: kan glitche ud af væg med kasse lol
 		Enemy* enemy;
-		
-
 		sr = new SpriteRenderer(TextureTag::ENEMY, Vector2u(1, 1), Vector2u(4, 3));
 		go->AddComponent(enemy = new Enemy());
 
@@ -99,8 +93,8 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		go->AddComponent(sr);
 		ac = new AnimationComponent(sr, Vector2u(4, 3), 200.0f, 1);
 		go->AddComponent(ac);
-		x = sr->TextureRect->width;
-		y = sr->TextureRect->height;
+		x = sr->GetTextureRect().width;
+		y = sr->GetTextureRect().height;
 		col = new Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
 		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
 		(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
@@ -117,17 +111,6 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::KEY;
-		break;
-
-	case ObjectTag::NPC:
-		go->AddComponent(new Npc(new string("'V' to pick up keys!")));
-		sr = new SpriteRenderer(TextureTag::NPC);
-		go->AddComponent(sr);
-		*go->GetObjectTag() = ObjectTag::NPC;
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, false);
-		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
-		(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
-		go->AddComponent(col);
 		break;
 
 	case ObjectTag::PLAYER:
@@ -171,78 +154,28 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		break;
 	}
 
-	go->Awake();
-	go->Start();
-
 	return go;
 }
 
-vector<GameObject*> LevelManager::CreateNpcLevelOne()
+GameObject* LevelManager::CreateNpcLevelOne(string msg, Vector2f position)
 {
-	vector<GameObject*> gameObjects;
+	GameObject* go = new GameObject(position);
+	SpriteRenderer* sr = new SpriteRenderer(TextureTag::NPC, Vector2u(1, 1), Vector2u(6, 1));
+	Collider* col;
 
-	GameObject* go1 = new GameObject(Vector2<float>(960, 1220));
-	SpriteRenderer* sr1 = new SpriteRenderer(TextureTag::NPC, Vector2u(1, 1), Vector2u(6, 1));
-	Collider* col1;
+	go->AddComponent(new Npc(msg));
+	go->AddComponent(sr);
+	AnimationComponent* ac = new AnimationComponent(sr, Vector2u(6, 1), 200.0f, 0);
+	go->AddComponent(ac);
+	*go->GetObjectTag() = ObjectTag::NPC;
+	float x = sr->GetTextureRect().width;
+	float y = sr->GetTextureRect().height;
+	col = new Collider(Vector2f(x, y), *go->GetPosition(), 1.0f, false);
+	(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+	(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
+	go->AddComponent(col);
 
-	go1->AddComponent(new Npc(new string("If you find any keys you can pick them up by pressing 'V'!")));
-	go1->AddComponent(sr1);
-	AnimationComponent* ac1 = new AnimationComponent(sr1, Vector2u(6, 1), 200.0f, 0);
-	go1->AddComponent(ac1);
-	*go1->GetObjectTag() = ObjectTag::NPC;
-	float x1 = sr1->TextureRect->width;
-	float y1 = sr1->TextureRect->height;
-	col1 = new Collider(Vector2f(x1, y1), *go1->GetPosition(), 1.0f, false);
-	(*GameWorld::GetInstance()->GetColliders()).push_back(col1);
-	(*GameWorld::GetInstance()->GetMovColliders()).push_back(col1);
-	go1->AddComponent(col1);
-
-	GameObject* go2 = new GameObject(Vector2<float>(1825, 2200));
-	Npc* npc2 = new Npc(new string("If you run into any hostile humans, press 'Space' to fight back!"));
-	SpriteRenderer* sr2 = new SpriteRenderer(TextureTag::NPC, Vector2u(1, 1), Vector2u(6, 1));
-	Collider* col2;
-
-	go2->AddComponent(npc2);
-	go2->AddComponent(sr2);
-	AnimationComponent* ac2 = new AnimationComponent(sr2, Vector2u(6, 1), 200.0f, 0);
-	go2->AddComponent(ac2);
-	*go2->GetObjectTag() = ObjectTag::NPC;
-	float x2 = sr2->TextureRect->width;
-	float y2 = sr2->TextureRect->height;
-	col2 = new Collider(Vector2f(x2, y2), *go2->GetPosition(), 1.0f, false);
-	(*GameWorld::GetInstance()->GetColliders()).push_back(col2);
-	(*GameWorld::GetInstance()->GetMovColliders()).push_back(col2);
-	go2->AddComponent(col2);
-
-	GameObject* go3 = new GameObject(Vector2<float>(2210, 545));
-	Npc* npc3 = new Npc(new string("The sun sucks! B-)"));
-	SpriteRenderer* sr3 = new SpriteRenderer(TextureTag::NPC, Vector2u(1,1), Vector2u(6,1));
-	Collider* col3;
-
-	go3->AddComponent(npc3);
-	go3->AddComponent(sr3);
-	AnimationComponent* ac3 = new AnimationComponent(sr3, Vector2u(6, 1), 200.0f, 0);
-	go3->AddComponent(ac3);
-	*go3->GetObjectTag() = ObjectTag::NPC;
-	float x3 = sr3->TextureRect->width;
-	float y3 = sr3->TextureRect->height;
-	col3 = new Collider(Vector2f(x2, y2), *go3->GetPosition(), 1.0f, false);
-	(*GameWorld::GetInstance()->GetColliders()).push_back(col3);
-	(*GameWorld::GetInstance()->GetMovColliders()).push_back(col3);
-	go3->AddComponent(col3);
-
-	go1->Awake();
-	go1->Start();
-	go2->Awake();
-	go2->Start();
-	go3->Awake();
-	go3->Start();
-
-	gameObjects.push_back(go1);
-	gameObjects.push_back(go2);
-	gameObjects.push_back(go3);
-
-	return gameObjects;
+	return go;
 }
 
 vector<GameObject*> LevelManager::InstantiateLevel(string levelName)
@@ -275,7 +208,10 @@ vector<GameObject*> LevelManager::InstantiateLevel(string levelName)
 
 	if (levelName == "Level1")
 	{
-		vector<GameObject*> npcs = CreateNpcLevelOne();
+		vector<GameObject*> npcs;
+		npcs.push_back(CreateNpcLevelOne("If you find any keys you can pick them up by pressing 'V'!", Vector2f(960, 1220)));
+		npcs.push_back(CreateNpcLevelOne("If you run into any hostile humans, press 'Space' to fight back!", Vector2f(1825, 2200)));
+		npcs.push_back(CreateNpcLevelOne("The sun sucks! B-)", Vector2f(2210, 545)));
 		gameObjects.insert(gameObjects.end(), npcs.begin(), npcs.end());
 	}
 
@@ -342,12 +278,6 @@ vector<GameObject*> LevelManager::LevelSetup(BitmapImage& level)
 			{
 				gameObjects.push_back(CreateObject(ObjectTag::KEY, x, y));
 			}
-			// TODO: Maybe delete? Or at least use the comment written below this.
-			// Since NPC's are instantiated through a different method, this isn't needed for now.
-			//else if (color.r == 0 && color.g == 255 && color.b == 0)
-			//{
-			//	gameObjects.push_back(CreateObject(ObjectTag::NPC, x, y));
-			//}
 			else if (color.r == 0 && color.g == 180 && color.b == 0)
 			{
 				gameObjects.push_back(CreateObject(ObjectTag::PLAYER, x, y));

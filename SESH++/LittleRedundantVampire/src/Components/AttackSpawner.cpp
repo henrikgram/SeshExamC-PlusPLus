@@ -45,7 +45,7 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 
 		go->AddComponent(sr);
 
-		AnimationComponent* aC = new AnimationComponent(sr, *sr->imageCount, 0.0f, initialRow);
+		AnimationComponent* aC = new AnimationComponent(sr, sr->GetImageCount(), 0.0f, initialRow);
 		go->AddComponent(aC);
 
 		SpriteRenderer& srRef = *sr;

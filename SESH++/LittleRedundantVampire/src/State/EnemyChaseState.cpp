@@ -55,9 +55,9 @@ void EnemyChaseState::Execute()
 
 void EnemyChaseState::Exit()
 {
-	//TODO: tjek om det er nok ikke at kalde destructoren
+	//TODO: tjek om det er nok ikke at kalde destructoren -> Kenneth: Sletter destructoren EnemyChaseState selv eller er den stadig på heapen??
 	// Changes the state to idle.
 	this->enemy->SetContext(new EnemyIdleState());
 
-	EnemyChaseState::~EnemyChaseState();
+	delete this;
 }

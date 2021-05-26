@@ -2,15 +2,14 @@
 #include "Components/AnimationComponent.h"
 #include "Components/Npc.h"
 
-//TODO: tjek om det her er fybabab
-static const float VIEW_HEIGHT = 1024.0f;
+// Camera code.
+const float VIEW_HEIGHT = 1024.0f;
 View view(Vector2f(0.0f, 0.0f), Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
 RenderWindow window(VideoMode(800, 800), "Little Redundant Vampire 2.0");
 
 GameWorld::GameWorld()
 {
-	// TODO: Maybe move to initialize.
 	movColliders = new vector<Collider*>;
 	gameObjects = new vector<GameObject*>;
 	colliders = new vector<Collider*>;
@@ -71,89 +70,43 @@ void GameWorld::OnNotify(std::string eventName, IListener* sender)
 	}
 }
 
-//TODO: check if this is fine, or actual factory is needed.
-//TODO: RENAME. ONLY INSTANTIATE PLAYER.
-void GameWorld::BootlegFactory(ObjectTag tag)
+void GameWorld::CreatePlayer()
 {
-	//TODO: tjek hvis den ryger ud af scope.
 	GameObject* go = new GameObject();
-	*go->GetObjectTag() = tag;
+	*go->GetObjectTag() = ObjectTag::PLAYER;
 	SpriteRenderer* sr;
 	Collider* col;
 
-	switch (tag)
-	{
-		//TODO: why is a scope needed here? it doesn't work without it...
-	case ObjectTag::PLAYER:
-	{
-		sr = new SpriteRenderer(TextureTag::PLAYER_SHEET, Vector2u(1, 1), Vector2u(4, 4));
+	sr = new SpriteRenderer(TextureTag::PLAYER_SHEET, Vector2u(1, 1), Vector2u(4, 4));
 
-		//TODO: det her er cursed
-		*go->GetPosition() = Vector2<float>(1000, 1000);
-		go->AddComponent(sr);
+	*go->GetPosition() = Vector2<float>(1000, 1000);
+	go->AddComponent(sr);
 
-		playerPointer = new Player();
-		go->AddComponent(playerPointer);
+	playerPointer = new Player();
+	go->AddComponent(playerPointer);
 
-		atckSpwnPointer = new AttackSpawner(ObjectTag::PLAYERATTACK);
-		go->AddComponent(atckSpwnPointer);
+	atckSpwnPointer = new AttackSpawner(ObjectTag::PLAYERATTACK);
+	go->AddComponent(atckSpwnPointer);
 
-		movementPointer = new Movement(5.0f, Vector2f(0.0f, 0.0f));
-		go->AddComponent(movementPointer);
+	movementPointer = new Movement(5.0f, Vector2f(0.0f, 0.0f));
+	go->AddComponent(movementPointer);
 
-		AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 4), 200.0f, 1);
-		go->AddComponent(aC);
+	AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 4), 200.0f, 1);
+	go->AddComponent(aC);
 
-		SpriteRenderer& srRef = *sr;
-		AnimationController* acController = new AnimationController(srRef, "3", "2", "0", "1", "1");
-		go->AddComponent(acController);
-		acController->AttachListenerToChangeAnimation(aC);
+	SpriteRenderer& srRef = *sr;
+	AnimationController* acController = new AnimationController(srRef, "3", "2", "0", "1", "1");
+	go->AddComponent(acController);
+	acController->AttachListenerToChangeAnimation(aC);
 
-		//TODO: Perhaps give gameobject a size variable to make it easier to get size for the collider.
-		float x = (float)sr->TextureRect->width;
-		float y = (float)sr->TextureRect->height;
+	float x = (float)sr->GetTextureRect().width;
+	float y = (float)sr->GetTextureRect().width;
 
-		col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
-		go->AddComponent(col);
-		colliders->push_back(col);
-		movColliders->push_back(col);
-		break;
-	}
+	col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
+	go->AddComponent(col);
+	colliders->push_back(col);
+	movColliders->push_back(col);
 
-	case ObjectTag::WINDOW:
-		sr = new SpriteRenderer(TextureTag::WINDOW);
-		go->AddComponent(sr);
-		go->SetPosition(Vector2f(1000, 800));
-		go->AddComponent(new DirectionalLight(Vector2f(go->GetPosition()->x - sr->GetTexture().getSize().x / 2, 800),
-			Vector2f(go->GetPosition()->x + sr->GetTexture().getSize().x / 2, 800), &walls, 90, 10));
-
-		col = new Collider(Vector2f(1, 1), *go->GetPosition(), 1.0f, true);
-		go->AddComponent(col);
-		break;
-
-	case ObjectTag::CRATE:
-		sr = new SpriteRenderer(TextureTag::OZZY);
-		*go->GetPosition() = Vector2f(750, 750);
-		go->AddComponent(sr);
-		go->AddComponent(new Platform);
-
-		col = new  Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x,
-			sr->GetSprite().getTexture()->getSize().y),
-			*go->GetPosition(), 0.0f, true);
-		go->AddComponent(col);
-		col->AttachToColliderDestroyedEvent(this);
-		colliders->push_back(col);
-		go->AddListenerToCallSelfDestruct(this);
-		break;
-	default:
-		break;
-	}
-
-	go->Awake();
-	go->Start();
-
-	//TODO: This defeats the purpose of making a Get method for the variable. Get should only be used for accessing information in a variable
-	// outside of it's class, not for altering the variable.
 	gameObjects->push_back(go);
 }
 
@@ -162,8 +115,7 @@ void GameWorld::Initialize()
 	LevelManager* lm = new LevelManager();
 	*gameObjects = lm->InstantiateLevel("Level1");
 
-	BootlegFactory(ObjectTag::PLAYER);
-	BootlegFactory(ObjectTag::CRATE);
+	CreatePlayer();
 
 	vector<GameObject*>::iterator it;
 
@@ -176,6 +128,16 @@ void GameWorld::Initialize()
 
 			e->SetTarget(playerPointer->gameObject);
 		}
+	}
+
+	for (it = gameObjects->begin(); it < gameObjects->end(); it++)
+	{
+		(*it)->Awake();
+	}
+
+	for (it = gameObjects->begin(); it < gameObjects->end(); it++)
+	{
+		(*it)->Start();
 	}
 
 	VertexArray* tmp4 = new VertexArray(sf::LinesStrip, 2);
@@ -228,10 +190,10 @@ void GameWorld::Initialize()
 	walls.push_back(cursedPlayerWall);
 
 	VertexArray* tmp9 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp9)[0].position = Vector2f(8.4f*96, 7.5f*96);
+	(*tmp9)[0].position = Vector2f(8.4f * 96, 7.5f * 96);
 	(*tmp9)[0].color = Color::Red;
 	(*tmp9)[1].color = Color::Red;
-	(*tmp9)[1].position = Vector2f(10.5f*96, 7.5f * 96);
+	(*tmp9)[1].position = Vector2f(10.5f * 96, 7.5f * 96);
 
 	walls.push_back(tmp9);
 
@@ -380,7 +342,6 @@ void GameWorld::Update(Time* timePerFrame)
 
 	if (playerPointer != nullptr)
 	{
-		//TODO: Fix så den tager imod attack også
 		Player& playerRef = *playerPointer;
 		AttackSpawner& atckSpwnPointerRef = *atckSpwnPointer;
 		Movement& movementPointerRef = *movementPointer;
@@ -402,8 +363,6 @@ void GameWorld::Draw()
 	// Clears the window.
 	window.clear(Color());
 
-	//it needs to point to something, otherwise it wont compile, because it cant delete an "empty pointer"
-	//TODO: this needs to be deleted somewhere, but it dosen't work here, actually, check if it matters because its on stack.
 	SpriteRenderer* sr;
 
 	vector<GameObject*>::size_type gameObjectsSize = gameObjects->size();
@@ -420,7 +379,6 @@ void GameWorld::Draw()
 		{
 			if (*go->GetShouldDraw())
 			{
-				//TODO: downcasting is considered bad practice and dynamic casting is slow, check this for performance issues.
 				sr = dynamic_cast<SpriteRenderer*>(gameObjects->at(i)->GetComponent(ComponentTag::SPRITERENDERER));
 
 				if (((go)->GetPosition()->y - playerPointer->gameObject->GetPosition()->y) < 6 * 96 &&
@@ -449,15 +407,13 @@ void GameWorld::Draw()
 
 					if (light != nullptr)
 					{
-
 						vector<VertexArray> lightCone = light->GetLightCone();
 
-						//TODO: this naming is ridicules
-						vector<VertexArray>::iterator itttt;
+						vector<VertexArray>::iterator it;
 
-						for (itttt = lightCone.begin(); itttt < lightCone.end(); itttt++)
+						for (it = lightCone.begin(); it < lightCone.end(); it++)
 						{
-							window.draw(*itttt);
+							window.draw(*it);
 						}
 					}
 					else
@@ -470,12 +426,12 @@ void GameWorld::Draw()
 		}
 	}
 
-	//TODO: this naming is ridicules
-	vector<VertexArray*>::iterator itttt;
+	//TODO: For debugging.
+	vector<VertexArray*>::iterator it;
 
-	for (itttt = walls.begin(); itttt < walls.end(); itttt++)
+	for (it = walls.begin(); it < walls.end(); it++)
 	{
-		window.draw(*(*itttt));
+		window.draw(*(*it));
 	}
 
 	window.display();
@@ -484,8 +440,6 @@ void GameWorld::Draw()
 void GameWorld::Run()
 {
 	LoadContent();
-	//BootlegFactory(ObjectTag::PLAYER);
-
 	Initialize();
 
 	//Time since last update.
@@ -601,7 +555,7 @@ void GameWorld::CloseGame()
 	}
 
 	//Add every gameobject in game to the stack of objectsToBeDeleted.
-	for (auto i = gameObjects->end()-1; i != gameObjects->begin(); i--)
+	for (auto i = gameObjects->end() - 1; i != gameObjects->begin(); i--)
 	{
 		objectsToBeDeleted.push(*i);
 	}
@@ -611,7 +565,6 @@ void GameWorld::CloseGame()
 	DeleteObjects();
 
 	gameObjects->clear();
-
 
 	//TODO: Ryd op i Asset klassen
 	//TODO: spørg kenneth om scope med heap osv

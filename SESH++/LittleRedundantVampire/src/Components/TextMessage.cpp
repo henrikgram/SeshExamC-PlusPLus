@@ -2,18 +2,15 @@
 
 TextMessage::TextMessage(string* msg, Vector2f position)
 {
-	// TODO: Dunno if it's good that awake and start is run here, but I feel like it makes
-	// sense since this object is never instantiated through the LevelManager? And why have
-	// awake and start if we never use them?
-	// Either way, I think it's much nicer to have code in awake and start to avoid
-	// filling up TextMessage's constructor with a bunch of code.
-	// Man, what a long-ass comment, huh.
-	Awake();
-	Start();
+	// TODO: FIX THIS. NEEDS TO BE A COMPONENT ADDED FROM LEVELMANAGER.
 
+	text = new Text();
 	text->setString(*msg);
 	text->setPosition(position.x + offset, position.y + offset);
 	drawComponent = true;
+
+	Awake();
+	Start();
 }
 
 TextMessage::~TextMessage()
@@ -28,7 +25,6 @@ void TextMessage::Awake()
 
 void TextMessage::Start()
 {
-	text = new Text();
 	text->setFont(*font);
 	text->setCharacterSize(32);
 	text->setFillColor(sf::Color::White);

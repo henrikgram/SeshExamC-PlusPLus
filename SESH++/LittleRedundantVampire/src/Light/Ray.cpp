@@ -20,10 +20,6 @@ Ray::~Ray()
 {
     delete ray;
     ray = nullptr;
-
-    //TODO: fix?
-    /* delete intersection;
-     intersection = nullptr;*/
 }
 
 bool Ray::Cast(VertexArray& wall)

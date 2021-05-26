@@ -15,7 +15,7 @@ using namespace sf;
 class Npc : public Component
 {
 public:
-	Npc(string* message);
+	Npc(string message);
 	~Npc();
 
 	/// <summary>

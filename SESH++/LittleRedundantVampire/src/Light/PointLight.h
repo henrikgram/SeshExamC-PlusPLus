@@ -9,11 +9,17 @@
 
 
 /// <summary>
-/// TODO: add summary
+/// Lightsource where all rays cast 360 degrees from a single point
 /// </summary>
 class PointLight : public LightSource
 {
 public:
+	/// <summary>
+	/// Lightsource where all rays cast 360 degrees from a single point
+	/// </summary>
+	/// <param name="position">The point where the rays will be casted from</param>
+	/// <param name="walls">Which walls that it has to check for intersection</param>
+	/// <param name="stepSize">bigger = less rays. If 1, then one ray pr. degree.</param>
 	PointLight(Vector2f position, vector<VertexArray*>* walls, int stepSize = 5);
 
 	/// <summary>

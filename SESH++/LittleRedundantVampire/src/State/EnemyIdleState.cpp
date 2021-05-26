@@ -76,7 +76,8 @@ void EnemyIdleState::Execute()
 void EnemyIdleState::Exit()
 {
 	// Sets the new state.
+	// TODO: Kenneth: samme problem som i chase state.
 	enemy->SetContext(new EnemyChaseState());
 
-	EnemyIdleState::~EnemyIdleState();
+	delete this;
 }

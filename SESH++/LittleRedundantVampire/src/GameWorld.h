@@ -19,7 +19,6 @@
 #include "Components/Player.h"
 #include "Components/Attack.h"
 #include "Enum/ObjectTag.h"
-#include "Observer/Platform.h"
 #include "Observer/IListener.h"
 #include "Components/Collider.h"
 #include "Command/PlayerInvoker.h"
@@ -29,7 +28,7 @@
 #include "Light/DirectionalLight.h"
 #include "Components/Enemy.h"
 
-using namespace std;
+using namespace sf;
 using namespace std;
 using namespace std::chrono;
 
@@ -66,7 +65,7 @@ private:
 	/// <param name="sender">The sender of the event.</param>
 	void OnNotify(std::string eventName, IListener* sender) override;
 
-	void BootlegFactory(ObjectTag tag);
+	void CreatePlayer();
 
 	void Initialize();
 	void LoadContent();
@@ -104,8 +103,6 @@ public:
 	vector<Collider*>* GetColliders(); //TODO: This needs to be a constant, if we want to change something outside of the class it belongs to we should make a set method or something.
 	// TODO: const
 	vector<Collider*>* GetMovColliders();
-
-	// TODO: -> Won't it be impossible to change the listss once they become const tho?
 
 	DirectionalLight* LightPointer;
 	vector<VertexArray*> walls;

@@ -8,6 +8,7 @@
 
 using namespace sf;
 
+//TODO: Colliders are fucked again.
 
 /// <summary>
 /// Component: Allows the object to handle collision in various ways.

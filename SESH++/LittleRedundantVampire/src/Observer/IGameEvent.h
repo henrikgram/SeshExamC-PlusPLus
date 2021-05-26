@@ -9,9 +9,8 @@ using namespace std;
 
 
 //TODO: Remove I since it's no longer an interface.
-//TOOD: Add summary.
 /// <summary>
-/// Observer: Interface for game events.
+/// Observer: Game events.
 /// </summary>
 class IGameEvent
 {

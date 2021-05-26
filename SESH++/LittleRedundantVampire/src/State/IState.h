@@ -16,8 +16,8 @@ protected:
 	ContextState* context;
 
 public:
-	IState() {};
-	~IState() {};
+	//IState() {};
+	//~IState() {};
 
 	// TODO: Can be deleted? I'm not sure why...
 	//void SetContext(ContextState* context)

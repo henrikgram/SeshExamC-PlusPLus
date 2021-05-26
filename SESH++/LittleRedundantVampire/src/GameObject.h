@@ -2,8 +2,7 @@
 #define GAMEOBJECT_H
 
 class Component;
-//TODO: what is all this text --> ANSWER: It explains why we used class Component; above.
-//forward declaration, to make sure the compiler knows that it exist.
+//Forward declaration, to make sure the compiler knows that it exist.
 //Two classes can't include from each other, because that would create an infinite loop
 
 /*
@@ -38,9 +37,6 @@ using namespace std;
 class GameObject : public IListener
 {
 public:
-	// TODO: What is the commont below for??
-	//Map for all components attached to the gameobject
-
 	GameObject();
 	GameObject(Vector2<float> position);
 	~GameObject();
@@ -89,7 +85,6 @@ public:
 
 	bool* GetIsMovable() const { return isMovable; }
 
-	//TODO: tjek om new er nødvendig når det ikke er med Asset
 	unordered_map<ComponentTag, Component*>* GetComponents() const { return components; }
 
 	bool* GetShouldDraw() const { return shouldDraw; }
@@ -107,24 +102,19 @@ public:
 	void AddListenerToCallSelfDestruct(IListener* listener);
 
 private:
-	unordered_map<ComponentTag, Component*>::iterator it;
-
 	Vector2f* position;
-
 	ObjectTag* objectTag;
-
 	char* direction;
-
 	bool* shouldDraw;
-
 	IGameEvent onCallSelfdestruct;
+	bool* isMovable;
+	//Map for all components attached to the gameobject
+	unordered_map<ComponentTag, Component*>* components;
 
 	// Inherited via IListener
 	virtual void OnNotify(std::string eventName, IListener* sender) override;
 	
-	bool* isMovable;
 
-	unordered_map<ComponentTag, Component*>* components;
 };
 
 #endif

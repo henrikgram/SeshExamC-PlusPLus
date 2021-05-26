@@ -63,7 +63,6 @@ void Enemy::SetTarget(GameObject* target)
 	this->target = target;
 }
 
-
 void Enemy::PlayerDistance()
 {
 	targetDistance->x = target->GetPosition()->x - this->gameObject->GetPosition()->x;
@@ -85,11 +84,6 @@ void Enemy::SetContext(IState* state)
 	currentState->TransitionTo(state);
 	currentState->StartRequest(this);
 }
-
-//ContextState Enemy::GetContext()
-//{
-//	return *currentState;
-//}
 
 void Enemy::Normalize()
 {

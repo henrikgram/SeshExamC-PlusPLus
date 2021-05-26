@@ -48,7 +48,6 @@ void LightSource::Update(Time* timePerFrame)
 
 void LightSource::Destroy()
 {
-	//TODO: kald destructor
 	LightSource::~LightSource();
 }
 
@@ -91,7 +90,7 @@ vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 	//Goes through every ray, and checks every wall to find the closest intersection. 
 	for (rayIt = rays->begin(); rayIt < rays->end(); rayIt++)
 	{
-		//TODO: ekstrem hotfix
+		//TODO: Extreme hotfix
 		//To save the contender for closest point. 
 		Vector2f closest = Vector2f(10000, 10000);
 

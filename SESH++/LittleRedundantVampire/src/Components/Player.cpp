@@ -33,7 +33,7 @@ void Player::Awake()
 	//Creates the healthbar.
 	healthBar->AddComponent(srHealthBar);
 
-	AnimationComponent* aC = new AnimationComponent(srHealthBar, *srHealthBar->imageCount, 200.0f, 0);
+	AnimationComponent* aC = new AnimationComponent(srHealthBar, srHealthBar->GetImageCount(), 200.0f, 0);
 	healthBar->AddComponent(aC);
 
 	SpriteRenderer& srRef = *srHealthBar;

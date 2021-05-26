@@ -1,15 +1,12 @@
 #include "Npc.h"
 
 
-Npc::Npc(string* message)
+Npc::Npc(string message)
 {
 	textBox = new GameObject();
+	textShown = new bool(false);
+	npcMessage = new string(message);
 	textBoxSr = new SpriteRenderer(TextureTag::TEXT_BOX);
-	npcMessage = new string;
-	textShown = new bool;
-
-	npcMessage = message;
-	*textShown = false;
 }
 
 Npc::~Npc()

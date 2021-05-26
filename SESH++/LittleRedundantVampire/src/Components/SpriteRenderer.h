@@ -46,19 +46,28 @@ public:
 	bool GetIsSpriteSheet();
 	// TODO: const
 	bool* GetFlipped();
+	/// <summary>
+	/// Returns the textureRect.
+	/// </summary>
+	/// <returns></returns>
+	IntRect GetTextureRect();
+	/// <summary>
+	/// Returns the imageCount.
+	/// </summary>
+	/// <returns></returns>
+	Vector2u GetImageCount();
 
 	void SetTextureRect(IntRect textureRect);
-
-	//TODO: make get-methods
-	IntRect* TextureRect;
-	Vector2u* currentImage;
-	Vector2u* imageCount;
-	bool isSpriteSheet;
 
 private:
 	Sprite* sprite;
 	Texture* texture;
 	bool* flipped;
+
+	IntRect* textureRect;
+	Vector2u* currentImage;
+	Vector2u* imageCount;
+	bool isSpriteSheet;
 };
 
 #endif

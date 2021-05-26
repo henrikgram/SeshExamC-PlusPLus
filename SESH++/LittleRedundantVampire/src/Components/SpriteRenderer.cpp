@@ -11,8 +11,8 @@ SpriteRenderer::~SpriteRenderer()
 	delete texture;
 	texture = nullptr;
 
-	delete TextureRect;
-	TextureRect = nullptr;
+	delete textureRect;
+	textureRect = nullptr;
 
 	if (currentImage != nullptr)
 	{
@@ -36,15 +36,15 @@ SpriteRenderer::~SpriteRenderer()
 /// <param name="textureTag"></param>
 SpriteRenderer::SpriteRenderer(TextureTag textureTag)
 {
-	//TODO: This enture constructor may be unnecessary if we put everything up in a spritesheet.
+	//TODO: This entire constructor may be unnecessary if we put everything up in a spritesheet.
 	texture = new Texture(*Asset::GetInstance()->FetchTexture(textureTag));
 	sprite = new Sprite(*texture);
 
 	isSpriteSheet = false;
 
-	TextureRect = new IntRect();
-	TextureRect->width = texture->getSize().x;
-	TextureRect->height = texture->getSize().y;
+	textureRect = new IntRect();
+	textureRect->width = texture->getSize().x;
+	textureRect->height = texture->getSize().y;
 	float width = texture->getSize().x;
 	float heigt = texture->getSize().y;
 
@@ -71,17 +71,17 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vec
 
 	isSpriteSheet = true;
 
-	TextureRect = new IntRect();
+	textureRect = new IntRect();
 	// We define the width and height on our textureRectangle compared to the png-file, so the sprite gets the right size.
 
-	TextureRect->width = texture->getSize().x / float(this->imageCount->x);
-	TextureRect->height = texture->getSize().y / float(this->imageCount->y);
+	textureRect->width = texture->getSize().x / float(this->imageCount->x);
+	textureRect->height = texture->getSize().y / float(this->imageCount->y);
 
 	// The standard width is always equal to the normal width.
-	TextureRect->width = abs(TextureRect->width);
+	textureRect->width = abs(textureRect->width);
 
-	sprite->setTextureRect(*TextureRect);
-	sprite->setOrigin(Vector2f(TextureRect->width / 2, TextureRect->height / 2));
+	sprite->setTextureRect(*textureRect);
+	sprite->setOrigin(Vector2f(textureRect->width / 2, textureRect->height / 2));
 	drawComponent = true;
 }
 
@@ -133,10 +133,20 @@ bool SpriteRenderer::GetIsSpriteSheet()
 	return isSpriteSheet;
 }
 
+IntRect SpriteRenderer::GetTextureRect()
+{
+	return *textureRect;
+}
+
+Vector2u SpriteRenderer::GetImageCount()
+{
+	return *imageCount;
+}
+
 void SpriteRenderer::SetTextureRect(IntRect textureRect)
 {
-	*this->TextureRect = textureRect;
-	sprite->setTextureRect(*TextureRect);
+	*this->textureRect = textureRect;
+	sprite->setTextureRect(textureRect);
 }
 
 bool* SpriteRenderer::GetFlipped()

@@ -53,7 +53,7 @@ public:
 	/// This isn't the best way to do this, but we didn't have time to
 	/// implement a better solution.
 	/// </summary>
-	vector<GameObject*> CreateNpcLevelOne();
+	GameObject* CreateNpcLevelOne(string msg, Vector2f position);
 };
 
 #endif
