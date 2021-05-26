@@ -36,11 +36,8 @@ SpriteRenderer::~SpriteRenderer()
 /// <param name="textureTag"></param>
 SpriteRenderer::SpriteRenderer(TextureTag textureTag)
 {
-	//TODO: This entire constructor may be unnecessary if we put everything up in a spritesheet.
 	texture = new Texture(*Asset::GetInstance()->FetchTexture(textureTag));
 	sprite = new Sprite(*texture);
-
-	isSpriteSheet = false;
 
 	textureRect = new IntRect();
 	textureRect->width = texture->getSize().x;
@@ -68,8 +65,6 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vec
 
 	flipped = new bool;
 	*flipped = false;
-
-	isSpriteSheet = true;
 
 	textureRect = new IntRect();
 	// We define the width and height on our textureRectangle compared to the png-file, so the sprite gets the right size.
@@ -113,7 +108,7 @@ ComponentTag SpriteRenderer::ToEnum()
 	return ComponentTag::SPRITERENDERER;
 }
 
-Sprite SpriteRenderer::GetSprite()
+Sprite SpriteRenderer::GetSprite() const
 {
 	return *sprite;
 }
@@ -123,22 +118,17 @@ void SpriteRenderer::FlipSprite()
 	sprite->scale(-1, 1);
 }
 
-Texture SpriteRenderer::GetTexture()
+Texture SpriteRenderer::GetTexture() const
 {
 	return *texture;
 }
 
-bool SpriteRenderer::GetIsSpriteSheet()
-{
-	return isSpriteSheet;
-}
-
-IntRect SpriteRenderer::GetTextureRect()
+IntRect SpriteRenderer::GetTextureRect() const
 {
 	return *textureRect;
 }
 
-Vector2u SpriteRenderer::GetImageCount()
+Vector2u SpriteRenderer::GetImageCount() const
 {
 	return *imageCount;
 }
@@ -149,7 +139,7 @@ void SpriteRenderer::SetTextureRect(IntRect textureRect)
 	sprite->setTextureRect(textureRect);
 }
 
-bool* SpriteRenderer::GetFlipped()
+bool* SpriteRenderer::GetFlipped() const
 {
 	return flipped;
 }

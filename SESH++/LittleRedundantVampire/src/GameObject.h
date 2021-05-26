@@ -28,7 +28,7 @@ https://stackoverflow.com/questions/4964482/how-to-create-two-classes-in-c-which
 using namespace sf;
 using namespace std;
 
-//TODO: tjek om man kan bruge den samme rectangle til både collider, sr og ac
+//TODO: LAST tjek om man kan bruge den samme rectangle til både collider, sr og ac
 
 
 /// <summary>

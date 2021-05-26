@@ -16,28 +16,15 @@ using namespace sf;
 /// </summary>
 class PlayerInvoker
 {
-private:
+public:
+
 	/// <summary>
 	/// Give a reference to the AttackSpawner and Movement component from the Player object.
 	/// </summary>
 	/// <param name="movementReceiver"></param>
 	/// <param name="attackReciever"></param>
 	PlayerInvoker(Movement& movementReceiver, AttackSpawner& attackReciever);
-
-public:
 	~PlayerInvoker();
-
-	PlayerInvoker(PlayerInvoker& other) = delete; //TODO: Explain in detail. Part of singleton
-
-	void operator=(const PlayerInvoker&) = delete; //Part of singleton
-
-	/// <summary>
-	/// Gets the singleton instance.
-	/// </summary>
-	/// <param name="movementReceiver"></param>
-	/// <param name="attackReceiver"></param>
-	/// <returns></returns>
-	static PlayerInvoker* GetInstance(Movement& movementReceiver, AttackSpawner& attackReceiver); //Part of singleton
 
 	/// <summary>
 	/// Check for pressed keys and execute the command for the key.
@@ -45,7 +32,6 @@ public:
 	void InvokeCommand();
 
 private:
-	static PlayerInvoker* instance;
 
 	Movement& movementReceiver;
 	AttackSpawner& attackReceiver;

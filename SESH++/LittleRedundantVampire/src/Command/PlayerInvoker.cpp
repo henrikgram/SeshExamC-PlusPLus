@@ -23,21 +23,7 @@ PlayerInvoker::~PlayerInvoker()
 		keyIt->second = nullptr;
 	}
 	keyBinds.clear();
-
-	delete instance;
-	instance = nullptr;
 }
-
-PlayerInvoker* PlayerInvoker::GetInstance(Movement& movementReceiver, AttackSpawner& attackReceiver)
-{
-	if (instance == nullptr)
-	{
-		instance = new PlayerInvoker(movementReceiver, attackReceiver);
-	}
-
-	return instance;
-}
-
 
 void PlayerInvoker::InvokeCommand()
 {
@@ -51,5 +37,3 @@ void PlayerInvoker::InvokeCommand()
 		}
 	}
 }
-
-PlayerInvoker* PlayerInvoker::instance = nullptr; //Part of the singleton

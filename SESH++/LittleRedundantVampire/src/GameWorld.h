@@ -49,6 +49,7 @@ private:
 	Player* playerPointer;
 	AttackSpawner* atckSpwnPointer;
 	Movement* movementPointer;
+	PlayerInvoker* playerInvoker;
 
 private:
 	GameWorld();
@@ -95,12 +96,12 @@ public:
 	/// </summary>
 	static GameWorld* GetInstance();
 	// TODO: const
-	vector<GameObject*>* GetGameObjects() const { return gameObjects; } //TODO: Needs to be constant otherwise we may as well make gameObjects a public.
+	vector<GameObject*>* GetGameObjects() const { return gameObjects; } //TODO: KENNETH!
 
 	void AddToGameObjects(GameObject* go);
 
 	// TODO: const
-	vector<Collider*>* GetColliders(); //TODO: This needs to be a constant, if we want to change something outside of the class it belongs to we should make a set method or something.
+	vector<Collider*>* GetColliders(); //TODO: KENNETH! This needs to be a constant, if we want to change something outside of the class it belongs to we should make a set method or something.
 	// TODO: const
 	vector<Collider*>* GetMovColliders();
 

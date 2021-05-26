@@ -57,7 +57,7 @@ void Attack::Update(Time* timePerFrame)
 	//Manages how long the attack is active for.
 	if (attackTimer >= attackLength)
 	{
-		//TODO: Make sure object gets deleted here instead.
+		//TODO: EMMA Make sure object gets deleted here instead.
 		*gameObject->GetShouldDraw() = false;
 		//GameWorld::GetInstance().
 	}

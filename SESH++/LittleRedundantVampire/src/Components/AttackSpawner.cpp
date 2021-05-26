@@ -77,7 +77,7 @@ AttackSpawner::AttackSpawner(ObjectTag objectTag)
 
 AttackSpawner::~AttackSpawner()
 {
-	//TODO: tjek om de attacks den laver bliver rigtig slettet i gameWorld
+
 }
 
 void AttackSpawner::Awake()

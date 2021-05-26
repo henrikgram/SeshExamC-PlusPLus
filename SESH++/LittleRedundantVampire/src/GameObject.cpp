@@ -111,6 +111,7 @@ void GameObject::Destroy()
 
 		delete it->second;
 		it->second = nullptr;
+		//TODO: Tjek om vi bare kan kalde delete inde fra components (suicide)
 	}
 
 	components->clear();

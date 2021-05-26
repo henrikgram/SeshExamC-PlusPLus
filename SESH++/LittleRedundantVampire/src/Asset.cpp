@@ -102,9 +102,9 @@ Asset::~Asset()
 		(it->second) = nullptr;
 	}
 
-	delete instance;
-	instance = nullptr;
+	textures.clear();
 
+	instance = nullptr;
 }
 
 // Sets the instance to  nullptr. Because static variables need a definition.

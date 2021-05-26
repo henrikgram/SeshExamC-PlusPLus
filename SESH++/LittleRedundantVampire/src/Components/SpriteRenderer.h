@@ -29,7 +29,7 @@ public:
 	/// Returns a Sprite
 	///  TODO: const
 	/// </summary>
-	Sprite GetSprite();
+	Sprite GetSprite() const;
 	/// <summary>
 	/// Flips the sprite.
 	/// </summary>
@@ -38,24 +38,19 @@ public:
 	/// Returns the texture.
 	///  TODO: const
 	/// </summary>
-	Texture GetTexture();
-	/// <summary>
-	/// Returns the bool isSpriteSheet to determine if the texture is a spritesheet or not.
-	/// TODO: const
-	/// </summary>
-	bool GetIsSpriteSheet();
+	Texture GetTexture() const;
 	// TODO: const
-	bool* GetFlipped();
+	bool* GetFlipped() const;
 	/// <summary>
 	/// Returns the textureRect.
 	/// </summary>
 	/// <returns></returns>
-	IntRect GetTextureRect();
+	IntRect GetTextureRect() const;
 	/// <summary>
 	/// Returns the imageCount.
 	/// </summary>
 	/// <returns></returns>
-	Vector2u GetImageCount();
+	Vector2u GetImageCount() const;
 
 	void SetTextureRect(IntRect textureRect);
 
@@ -67,7 +62,6 @@ private:
 	IntRect* textureRect;
 	Vector2u* currentImage;
 	Vector2u* imageCount;
-	bool isSpriteSheet;
 };
 
 #endif

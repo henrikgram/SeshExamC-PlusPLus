@@ -30,25 +30,19 @@ void EnemyIdleState::Patrol()
 
 EnemyIdleState::~EnemyIdleState()
 {
-	//TODO: tjek de her variabler i EnemyIdleState
-//range, walkright ikke slettet??
-
 // Removes all variables.
+
+	delete range;
+	range = nullptr;
+
+	delete walkRight;
+	walkRight = nullptr;
 
 	delete patrolDistance;
 	patrolDistance = nullptr;
-	
 
 	delete startPos;
 	startPos = nullptr;
-	
-
-	// Deletes the enemy.
-
-	//TODO: enemy er på heap så den burde ikke skulle slettes
-	/*enemy = nullptr;
-	delete enemy;*/
-
 }
 
 void EnemyIdleState::Enter(Enemy* enemy)

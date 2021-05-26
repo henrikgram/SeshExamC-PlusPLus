@@ -91,6 +91,11 @@ void GameWorld::CreatePlayer()
 	movementPointer = new Movement(5.0f, Vector2f(0.0f, 0.0f));
 	go->AddComponent(movementPointer);
 
+	AttackSpawner& atckSpwnPointerRef = *atckSpwnPointer;
+	Movement& movementPointerRef = *movementPointer;
+
+	playerInvoker = new PlayerInvoker(movementPointerRef, atckSpwnPointerRef);
+
 	AnimationComponent* aC = new AnimationComponent(sr, Vector2u(4, 4), 200.0f, 1);
 	go->AddComponent(aC);
 
@@ -340,14 +345,7 @@ void GameWorld::Update(Time* timePerFrame)
 		}
 	}
 
-	if (playerPointer != nullptr)
-	{
-		Player& playerRef = *playerPointer;
-		AttackSpawner& atckSpwnPointerRef = *atckSpwnPointer;
-		Movement& movementPointerRef = *movementPointer;
-
-		PlayerInvoker::GetInstance(movementPointerRef, atckSpwnPointerRef)->InvokeCommand();
-	}
+	playerInvoker->InvokeCommand();
 
 	auto stop = high_resolution_clock::now();
 
@@ -566,13 +564,11 @@ void GameWorld::CloseGame()
 
 	gameObjects->clear();
 
-	//TODO: Ryd op i Asset klassen
-	//TODO: spørg kenneth om scope med heap osv
-	//delete Asset::GetInstance();
+	//TODO: KENNETH! hvordan sletter vi singletons??
+	delete Asset::GetInstance();
 
-	//TODO: spørg kenneth
-	//TODO: lav den om til en ikke singleton tm
-	//delete PlayerInvoker::GetInstance();
+	delete playerInvoker;
+	playerInvoker = nullptr;
 
 	window.close();
 }

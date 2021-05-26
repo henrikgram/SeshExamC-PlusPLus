@@ -16,15 +16,6 @@ protected:
 	ContextState* context;
 
 public:
-	//IState() {};
-	//~IState() {};
-
-	// TODO: Can be deleted? I'm not sure why...
-	//void SetContext(ContextState* context)
-	//{
-	//	this->context = context;
-	//}
-
 	/// <summary>
 	/// Initial setup that needs to be done before the state can run.
 	/// Enemy is set here, so the state knows which enemy it's working with.
