@@ -21,7 +21,7 @@ DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition,
 	float length = GetDistance(startPosition, endPosition);
 
 	//TODO: The angle is not relative to the line where the light emmits. So its counterintutitive to adjust the angle.
-	//Calculates the angle to raidans. 
+	//Calculates the angle to raidans.
 	float radians = angle * (PI / 180);
 
 	Vector2f vectorAngle = Vector2f(cos(radians), sin(radians));
@@ -83,7 +83,7 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 
 		auto nxIt = std::next(it, 1);
 
-		//and the next intersecting points, if it hasn't reached the end yet. 
+		//and the next intersecting points, if it hasn't reached the end yet.
 		if ((index + 1) != intersectingRays.size())
 		{
 			//If it isn't the last. The line connects to the next ray in the vector, and then back to the rays origin point.
@@ -106,7 +106,7 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 	return lightCone;
 }
 
-//TODO: dosent work yet for directional light. 
+//TODO: dosent work yet for directional light.
 void DirectionalLight::Move(Vector2f position)
 {
 	int newXDif = this->position.x - position.x;

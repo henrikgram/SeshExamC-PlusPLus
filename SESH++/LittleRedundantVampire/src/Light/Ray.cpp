@@ -78,12 +78,12 @@ VertexArray* Ray::GetVertexArray()
     return ray;
 }
 
-Vector2f Ray::GetIntersectionPoint()
+Vector2f Ray::GetIntersectionPoint() const
 {
     return intersection;
 }
 
-Vector2f Ray::GetPosition()
+Vector2f Ray::GetPosition() const
 {
     return position;
 }

@@ -28,7 +28,7 @@ https://stackoverflow.com/questions/4964482/how-to-create-two-classes-in-c-which
 using namespace sf;
 using namespace std;
 
-//TODO: LAST tjek om man kan bruge den samme rectangle til både collider, sr og ac
+//TODO:* Maybe we can use the same rectangle for collider, sr and ac.
 
 
 /// <summary>
@@ -70,24 +70,27 @@ public:
 
 	/// <summary>
 	/// Gets a component based on ComponentTag.
-	///  TODO: const
 	/// </summary>
-	Component* GetComponent(ComponentTag tag);
+	Component* GetComponent(ComponentTag tag) const;
 
-	//TODO tjek om det her er ok
-	Vector2f* GetPosition() const { return position; }
-
+	//TODO:* It doesn't make sense to have a constant Get for a pointer. Might as well just make a public const pointer instead and skip the Get.
+	//It's also completely pointless to have a Get that returns the pointers, which allows you to change the value but not the address,
+	//and then a Set for just returning the value.
+	//Either do a Get that only returns the value and a Set that only alters the value,
+	//or just make a constant public pointer.
+	//This is true for many cases where we have a Get-method for returning a pointer.
+	Vector2f* GetPosition() const;
 	void SetPosition(Vector2f newPosition);
 
-	ObjectTag* GetObjectTag() const { return objectTag; }
+	ObjectTag* GetObjectTag() const;
 
-	char* GetDirection() const { return direction; }
+	char* GetDirection() const;
 
-	bool* GetIsMovable() const { return isMovable; }
+	bool* GetIsMovable() const;
 
-	unordered_map<ComponentTag, Component*>* GetComponents() const { return components; }
+	unordered_map<ComponentTag, Component*>* GetComponents() const;
 
-	bool* GetShouldDraw() const { return shouldDraw; }
+	bool* GetShouldDraw() const;
 
 	/// <summary>
 	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) that this GameObject is ready to be deleted.
@@ -113,8 +116,6 @@ private:
 
 	// Inherited via IListener
 	virtual void OnNotify(std::string eventName, IListener* sender) override;
-	
-
 };
 
 #endif

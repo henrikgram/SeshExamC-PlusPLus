@@ -32,7 +32,7 @@ AnimationController::~AnimationController()
 
 void AnimationController::MovementAnimation()
 {
-	//TODO: OPTIMERING fix s� den ikke k�rer medmindre det er en ny animation. OPTIMERING
+	//TODO:* OPTIMIZE Make it so this doesn't run notify unless there's a new animation update.
 
 
 	//No/idle animation

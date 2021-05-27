@@ -26,7 +26,7 @@ vector<Ray*>* LightSource::GetRays() const
 	return rays;
 }
 
-Vector2f LightSource::GetPosition()
+Vector2f LightSource::GetPosition() const
 {
 	return position;
 }
@@ -82,20 +82,20 @@ vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 	vector<Ray*>::iterator rayIt;
 	vector<VertexArray*>::iterator wallIt;
 
-	//Array to store the closest intersection point. 
+	//Array to store the closest intersection point.
 	vector<Vector2f> closestPoint;
 
-	//Goes through every ray, and checks every wall to find the closest intersection. 
+	//Goes through every ray, and checks every wall to find the closest intersection.
 	for (rayIt = rays->begin(); rayIt < rays->end(); rayIt++)
 	{
-	
-		//To save the contender for closest point. 
+
+		//To save the contender for closest point.
 		Vector2f closest;
 		bool intersected;
 
 		for (wallIt = walls->begin(); wallIt < walls->end(); wallIt++)
 		{
-			//If there is an interection 
+			//If there is an interection
 			if ((*rayIt)->Cast(*(*wallIt)))
 			{
 				intersected = true;

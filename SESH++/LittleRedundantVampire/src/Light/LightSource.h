@@ -8,20 +8,20 @@
 #include "Ray.h"
 #include <math.h>
 
-//Prededefined definition of pi for maths. 
+//Prededefined definition of pi for maths.
 #define PI 3.14159265
 
 using namespace sf;
 
 
 /// <summary>
-/// Object which will beam out a number of Rays. 
+/// Object which will beam out a number of Rays.
 /// </summary>
 class LightSource : public Component
 {
 public:
 	/// <summary>
-	///  pointlight, an Object which will beam out a number of Rays in every direction. 
+	///  pointlight, an Object which will beam out a number of Rays in every direction.
 	/// </summary>
 	/// <param name="position"></param>
 	/// <param name="stepSize">The amount of rays. 1 is one ray pr. degree.</param>
@@ -42,13 +42,13 @@ public:
 	virtual void Move(Vector2f position);
 
 	/// <summary>
-	/// Cast out rays and only check for intersection with one object. 
+	/// Cast out rays and only check for intersection with one object.
 	/// </summary>
 	/// <param name="object"></param>
 	void LookAtSingleObject(VertexArray& object);
 
 	/// <summary>
-	/// Constructs a lightcone out of triangles based on the intersectinng points, from the look function. 
+	/// Constructs a lightcone out of triangles based on the intersectinng points, from the look function.
 	/// </summary>
 	/// <returns></returns>
 	virtual vector<VertexArray> GetLightCone() = 0;
@@ -62,7 +62,7 @@ public:
 
 
 	/// <summary>
-	/// Uses pythagora to calcute the distance between two points. 
+	/// Uses pythagora to calcute the distance between two points.
 	/// </summary>
 	/// <param name="pos1"></param>
 	/// <param name="pos2"></param>
@@ -75,8 +75,7 @@ public:
 	/// <returns></returns>
 	vector<Ray*>* GetRays() const;
 
-	//TODO: const
-	Vector2f GetPosition();
+	Vector2f GetPosition() const;
 
 	// Inherited via Component
 	void Awake() override;

@@ -16,7 +16,7 @@ using namespace std;
 class Component : public IListener, public ICollisionListener
 {
 public:
-	//TODO: make this an interface
+	//TODO:* Maybe this should be an interface.
 	GameObject* gameObject;
 
 	~Component();

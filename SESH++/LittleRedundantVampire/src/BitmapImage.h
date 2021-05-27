@@ -38,8 +38,8 @@ public:
 
 	void Export(const char* path);
 
-	int GetHeight() const { return height; }
-	int GetWidth() const { return width; }
+	int GetHeight() const;
+	int GetWidth() const;
 
 private:
 	int width;

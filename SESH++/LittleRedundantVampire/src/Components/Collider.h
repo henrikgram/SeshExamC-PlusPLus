@@ -8,7 +8,6 @@
 
 using namespace sf;
 
-//TODO: Colliders are fucked again.
 
 /// <summary>
 /// Component: Allows the object to handle collision in various ways.
@@ -42,8 +41,8 @@ public:
 	/// <param name="other"></param>
 	/// <returns></returns>
 	bool CheckCollision(Collider* other);
-	Vector2f GetPosition() const { return *gameObject->GetPosition(); }
-	Vector2f GetHalfsize() const { return collisionBox->getSize() / 2.0f; }
+	Vector2f GetPosition() const;
+	Vector2f GetHalfsize() const;
 
 	/// <summary>
 	/// TODO: SUMMARY

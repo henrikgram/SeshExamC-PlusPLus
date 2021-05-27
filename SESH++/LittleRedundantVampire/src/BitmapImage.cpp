@@ -35,7 +35,7 @@ BitmapColor BitmapImage::GetColor(int x, int y) const
 
 void BitmapImage::SetColor(const BitmapColor& color, int x, int y)
 {
-	//Sets the color 
+	//Sets the color
 	colors[y * width + x].r = color.r;
 	colors[y * width + x].g = color.g;
 	colors[y * width + x].b = color.b;
@@ -71,7 +71,7 @@ void BitmapImage::Read(const char* path)
 		f.close();
 		return;
 	}
-	
+
 	unsigned char informationHeader[informationHeaderSize];
 
 	//file header is what it is reading, and the size is the amount it's reading
@@ -121,8 +121,8 @@ void BitmapImage::Export(const char* path)
 	{
 		std::cout << "Couldn't open file\n";
 		return;
-	} 
-	
+	}
+
 	//Padding for bitmap. Each colorchanel has 3 bytes for storing data.
 	//The color array should have a row, which has an amount of memory thats divideable by 4.
 	//To make sure that is possible, it needs some padding.
@@ -151,13 +151,13 @@ void BitmapImage::Export(const char* path)
 	fileHeader[0] = 'B';
 	fileHeader[1] = 'M';
 
-	//File size - split int up into char by using bit shifting by 8. 
+	//File size - split int up into char by using bit shifting by 8.
 	fileHeader[2] = fileSize;
 	fileHeader[3] = fileSize >> 8;
 	fileHeader[4] = fileSize >> 16;
 	fileHeader[5] = fileSize >> 24;
 
-	//Reserved 1 (not used) 
+	//Reserved 1 (not used)
 	fileHeader[6] = 0;
 	fileHeader[7] = 0;
 
@@ -172,7 +172,7 @@ void BitmapImage::Export(const char* path)
 	fileHeader[13] = 0;
 
 	unsigned char informationHeader[InformationHeaderSize];
-	//Headersize 
+	//Headersize
 	informationHeader[0] = InformationHeaderSize;
 	informationHeader[1] = 0;
 	informationHeader[2] = 0;
@@ -210,13 +210,13 @@ void BitmapImage::Export(const char* path)
 	informationHeader[22] = 0;
 	informationHeader[23] = 0;
 
-	//X pixels per meter (not specified) 
+	//X pixels per meter (not specified)
 	informationHeader[24] = 0;
 	informationHeader[25] = 0;
 	informationHeader[26] = 0;
 	informationHeader[27] = 0;
 
-	//Y pixels per meter (not specified) 
+	//Y pixels per meter (not specified)
 	informationHeader[28] = 0;
 	informationHeader[29] = 0;
 	informationHeader[30] = 0;
@@ -265,3 +265,12 @@ void BitmapImage::Export(const char* path)
 	std::cout << "File created!\n";
 }
 
+int BitmapImage::GetHeight() const
+{
+	return height;
+}
+
+int BitmapImage::GetWidth() const
+{
+	return width;
+}
