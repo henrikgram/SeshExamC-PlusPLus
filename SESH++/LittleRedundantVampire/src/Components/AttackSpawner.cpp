@@ -50,7 +50,7 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, false);
 		go->AddComponent(col);
 
-		GameWorld::GetInstance()->GetColliders()->push_back(col);
+		GameWorld::GetInstance()->AddToColliders(col);
 
 		AnimationComponent* aC = new AnimationComponent(sr, sr->GetImageCount(), 0.0f, initialRow);
 		go->AddComponent(aC);
