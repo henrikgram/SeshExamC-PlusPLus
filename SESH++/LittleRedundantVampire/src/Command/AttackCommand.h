@@ -11,6 +11,10 @@
 class AttackCommand : public ICommand
 {
 public:
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="attackReceiver"></param>
 	AttackCommand(AttackSpawner& attackReceiver);
 	~AttackCommand();
 

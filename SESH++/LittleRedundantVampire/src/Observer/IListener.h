@@ -10,6 +10,11 @@
 class IListener
 {
 public:
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="eventName"></param>
+	/// <param name="sender"></param>
 	virtual void OnNotify(std::string eventName, IListener* sender) = 0;
 };
 

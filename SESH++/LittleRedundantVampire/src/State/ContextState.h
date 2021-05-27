@@ -11,6 +11,10 @@ private:
 	IState* state;
 
 public:
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="state"></param>
 	ContextState(IState* state);
 	~ContextState();
 

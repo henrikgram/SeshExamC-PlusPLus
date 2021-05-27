@@ -27,6 +27,11 @@ private:
 	virtual ComponentTag ToEnum() override;
 
 public:
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="msg"></param>
+	/// <param name="position"></param>
 	TextMessage(string* msg, Vector2f position);
 	~TextMessage();
 

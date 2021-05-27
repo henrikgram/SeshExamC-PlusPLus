@@ -15,9 +15,21 @@ class CollisionEvent
 public:
 	CollisionEvent();
 	~CollisionEvent();
-
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="listener"></param>
 	void Attach(ICollisionListener* listener);
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="listener"></param>
 	void Detach(ICollisionListener* listener);
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="otherTag"></param>
+	/// <param name="side"></param>
 	void Notify(ObjectTag otherTag, std::string side);
 
 private:

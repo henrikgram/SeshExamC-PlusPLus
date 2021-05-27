@@ -11,6 +11,11 @@
 class MoveCommand : public ICommand
 {
 public:
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="movementReceiver"></param>
+	/// <param name="velocity"></param>
 	MoveCommand(Movement& movementReceiver, Vector2f velocity);
 	~MoveCommand();
 

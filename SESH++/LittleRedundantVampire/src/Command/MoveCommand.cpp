@@ -9,8 +9,7 @@ MoveCommand::MoveCommand(Movement& movementReceiver, Vector2f velocity) : moveme
 
 MoveCommand::~MoveCommand()
 {
-	/*delete velocity;
-	velocity = nullptr;*/
+
 }
 
 void MoveCommand::Execute()

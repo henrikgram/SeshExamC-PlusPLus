@@ -53,8 +53,8 @@ bool Ray::Cast(VertexArray& wall)
 
     //if there is intersection point return true
     //"The intersection point falls within the first line segment if 0.0 ≤ t ≤ 1.0,"
-    //The reason u is only check for > 0 is that they ray is thought of an endless line. 
-    //and it only needs to check if it intersects with t eventually, and not only between the to given points. 
+    //The reason u is only check for > 0 is that they ray is thought of as an endless line. 
+    //and it only needs to check if it intersects with t eventually, and not only between the two given points. 
     if (t > 0 && t < 1 && u > 0)
     {
         intersection.x = x1 + t * (x2 - x1);

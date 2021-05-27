@@ -17,9 +17,21 @@ class IGameEvent
 public:
 	IGameEvent();
 	~IGameEvent();
-
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="listener"></param>
 	void Attach(IListener* listener);
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="listener"></param>
 	void Detach(IListener* listener);
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="eventTitle"></param>
+	/// <param name="sender"></param>
 	void Notify(string eventTitle, IListener* sender);
 
 private:

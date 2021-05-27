@@ -54,6 +54,10 @@ public:
 	/// <param name="velocity"></param>
 	void Move(Vector2f velocity);
 
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="target"></param>
 	void SetTarget(GameObject* target);
 
 private:

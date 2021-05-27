@@ -14,7 +14,17 @@ using namespace sf;
 class SpriteRenderer : public Component
 {
 public:
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="textureTag"></param>
 	SpriteRenderer(TextureTag textureTag);
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="textureTag"></param>
+	/// <param name="currentImage"></param>
+	/// <param name="imageCount"></param>
 	SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vector2u imageCount);
 	~SpriteRenderer();
 

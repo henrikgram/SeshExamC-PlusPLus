@@ -15,6 +15,10 @@ using namespace sf;
 class Npc : public Component
 {
 public:
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="message"></param>
 	Npc(string message);
 	~Npc();
 

@@ -7,6 +7,11 @@
 class Movement : public Component
 {
 public:
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
+	/// <param name="speed"></param>
+	/// <param name="velocity"></param>
 	Movement(float speed, Vector2f velocity);
 	~Movement();
 

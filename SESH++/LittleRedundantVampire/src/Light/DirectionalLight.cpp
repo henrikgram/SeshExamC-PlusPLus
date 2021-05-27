@@ -8,6 +8,7 @@ DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition,
 
 	bool horisontal;
 
+	//If the y positions is the same, then the line is horisontal
 	if (startPosition.y == endPosition.y)
 	{
 		horisontal = true;
@@ -30,6 +31,7 @@ DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition,
 		//For now only vertical or horisontal is allowed
 		if (horisontal)
 		{
+			//offsets the position of the rays origin, so its evenly distributed on the line
 			rays->push_back(new Ray(Vector2f(position.x + i, position.y), vectorAngle));
 		}
 		else
@@ -69,7 +71,7 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 	for (it = intersectingRays.begin(); it < intersectingRays.end(); it++)
 	{
 		VertexArray quad(Quads, 4);
-		//every triangle starts at the lights position
+		//One side of the quad is the current rays origin point, and a line to the intersecting point.
 		quad[0].position = (*it)->GetPosition();
 		quad[0].color = coneColor;
 
@@ -84,6 +86,8 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 		//and the next intersecting points, if it hasn't reached the end yet. 
 		if ((index + 1) != intersectingRays.size())
 		{
+			//If it isn't the last. The line connects to the next ray in the vector, and then back to the rays origin point.
+			//and thus making a square
 			quad[3].position = (*nxIt)->GetPosition();
 			quad[3].color = coneColor;
 
