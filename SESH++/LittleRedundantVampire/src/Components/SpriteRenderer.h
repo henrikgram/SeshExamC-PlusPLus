@@ -15,16 +15,18 @@ class SpriteRenderer : public Component
 {
 public:
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Constructor for SpriteRenderer.
+	/// Takes a texture tag so it knows which texture the object uses/needs.
 	/// </summary>
-	/// <param name="textureTag"></param>
+	/// <param name="textureTag"> The asset the object uses/needs </param>
 	SpriteRenderer(TextureTag textureTag);
+
 	/// <summary>
-	/// TODO: SUMMARY
+	/// For managing textures/sprites and spritesheets for the object.
 	/// </summary>
-	/// <param name="textureTag"></param>
-	/// <param name="currentImage"></param>
-	/// <param name="imageCount"></param>
+	/// <param name="textureTag">What texture(spritesheet) the sprite will load from the asset class</param>
+	/// <param name="currentImage">Which image position will be the current image</param>
+	/// <param name="imageCount">How many images and rows the spritesheet has</param>
 	SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vector2u imageCount);
 	~SpriteRenderer();
 

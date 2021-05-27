@@ -16,9 +16,9 @@ class Npc : public Component
 {
 public:
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Constructor for the NPC. The message is a string of what needs to pop-up in the NPC's textbox.
 	/// </summary>
-	/// <param name="message"></param>
+	/// <param name="message"> What the NPC "says" in their textbox </param>
 	Npc(string message);
 	~Npc();
 

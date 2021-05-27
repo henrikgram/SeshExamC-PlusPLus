@@ -28,10 +28,11 @@ private:
 
 public:
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Constructor for TextMessage. Takes a msg (message) and a position so it knows what to write in the message
+	/// and a position to determine where to place the text.
 	/// </summary>
-	/// <param name="msg"></param>
-	/// <param name="position"></param>
+	/// <param name="msg"> The message it needs to write out </param>
+	/// <param name="position"> Position to place the text at </param>
 	TextMessage(string* msg, Vector2f position);
 	~TextMessage();
 

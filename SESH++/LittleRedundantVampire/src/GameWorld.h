@@ -66,9 +66,19 @@ private:
 	/// <param name="sender">The sender of the event.</param>
 	void OnNotify(std::string eventName, IListener* sender) override;
 
+	/// <summary>
+	/// Instantiates/creates the player character.
+	/// </summary>
 	void CreatePlayer();
 
+	/// <summary>
+	/// Sets up all variables/object before runtime
+	/// </summary>
 	void Initialize();
+
+	/// <summary>
+	/// Loads all the assets/textures in the game.
+	/// </summary>
 	void LoadContent();
 
 	/// <summary>
@@ -88,6 +98,9 @@ private:
 	void Draw();
 
 public:
+	/// <summary>
+	/// TODO: SUMMARY
+	/// </summary>
 	void Run();
 
 	/// <summary>

@@ -16,12 +16,12 @@ class Collider : public Component
 {
 public:
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Collider Constructor
 	/// </summary>
-	/// <param name="size"></param>
-	/// <param name="position"></param>
-	/// <param name="pushFactor"></param>
-	/// <param name="solid"></param>
+	/// <param name="size"> The size of the collisionBox i.e. the rectangle surrounding the object </param>
+	/// <param name="position"> Used to set the position of the collisionBox </param>
+	/// <param name="pushFactor"> A float number between 0.0f and 1.0, where the lower the number the "lighter" the object seems. 1.0 means the object cannot be pushed.</param>
+	/// <param name="solid"> Refers to whether or not the collider belongs to a solid object. Some objects are not solid and can be passed through such as ghosts.</param>
 	Collider(Vector2f size, Vector2f position, float pushFactor, bool solid);
 	~Collider();
 
@@ -29,16 +29,17 @@ public:
 	//Currently used for moving objects being pushed.
 	
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Moves the gameobject that the collider belongs to according to the a vector2f based on the parameters deltaX and deltaY. 
+	/// Is normally called from the Push method to Move the gameobject by how much it is being "pushed".
 	/// </summary>
 	/// <param name="deltaX"></param>
 	/// <param name="deltaY"></param>
 	void Move(float deltaX, float deltaY);
 
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Checks if this collider intersects with a different collider.
 	/// </summary>
-	/// <param name="other"></param>
+	/// <param name="other"> The collider we want to see if we're intersecting with </param>
 	/// <returns></returns>
 	bool CheckCollision(Collider* other);
 	Vector2f GetPosition() const;
@@ -70,7 +71,8 @@ public:
 	VertexArray* wall;
 
 private:
-	RectangleShape* collisionBox;
+	//RectangleShape* collisionBox;
+	Vector2f* size;
 	float* pushFactor;
 	bool* solid;
 	CollisionEvent onColliding;

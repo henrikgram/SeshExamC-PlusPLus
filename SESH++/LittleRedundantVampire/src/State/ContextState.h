@@ -12,9 +12,10 @@ private:
 
 public:
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Constructor for ContextState. State is the state the object starts in.
+	/// Fx. in this case either idle- or chase-state.
 	/// </summary>
-	/// <param name="state"></param>
+	/// <param name="state"> The state the object starts in </param>
 	ContextState(IState* state);
 	~ContextState();
 

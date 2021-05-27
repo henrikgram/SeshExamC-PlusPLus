@@ -24,10 +24,29 @@ struct BitmapColor
 class BitmapImage
 {
 public:
+	/// <summary>
+	/// Represents a bitmap image
+	/// </summary>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
 	BitmapImage(int width, int height);
+
 	~BitmapImage();
 
+	/// <summary>
+	/// Returns a color from a specific position in the image
+	/// </summary>
+	/// <param name="x"></param>
+	/// <param name="y"></param>
+	/// <returns></returns>
 	BitmapColor GetColor(int x, int y) const;
+
+	/// <summary>
+	/// Changes the color of a pixel
+	/// </summary>
+	/// <param name="color">Which color</param>
+	/// <param name="x">Position X</param>
+	/// <param name="y">position Y</param>
 	void SetColor(const BitmapColor& color, int x, int y);
 
 	/// <summary>
@@ -36,6 +55,10 @@ public:
 	/// <param name="path">The specified path, has to be const char * because of ifstream</param>
 	void Read(const char* path);
 
+	/// <summary>
+	/// Exports the bitmap image to the path
+	/// </summary>
+	/// <param name="path"></param>
 	void Export(const char* path);
 
 	int GetHeight() const;

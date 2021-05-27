@@ -12,17 +12,15 @@ Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool soli
 	(*wall)[1].position.y = position.y - size.y / 2;
 	(*wall)[1].position.x = position.x + size.x / 1.8f;
 
-	collisionBox = new RectangleShape(size);
-	collisionBox->setPosition(position);
-	collisionBox->setOrigin(size / 2.0f);
+	this->size = new Vector2f(size);
 	this->pushFactor = new float(std::min(std::max(pushFactor, 0.0f), 1.0f)); //Clamps the pushfactor betwwen 0 and 1.
 	this->solid = new bool(solid);
 }
 
 Collider::~Collider()
 {
-	delete collisionBox;
-	collisionBox = nullptr;
+	delete size;
+	size = nullptr;
 
 	delete pushFactor;
 	pushFactor = nullptr;
@@ -48,11 +46,11 @@ bool Collider::CheckCollision(Collider* other)
 	Vector2f otherPosition = other->GetPosition();
 	Vector2f otherHalfSize = other->GetHalfsize();
 
-	float deltaX = otherPosition.x - position.x;
-	float deltaY = otherPosition.y - position.y;
+	float difX = otherPosition.x - position.x;
+	float difY = otherPosition.y - position.y;
 
-	float intersectX = abs(deltaX) - (otherHalfSize.x + halfSize.x);
-	float intersectY = abs(deltaY) - (otherHalfSize.y + halfSize.y);
+	float intersectX = abs(difX) - (otherHalfSize.x + halfSize.x);
+	float intersectY = abs(difY) - (otherHalfSize.y + halfSize.y);
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
@@ -66,7 +64,7 @@ bool Collider::CheckCollision(Collider* other)
 
 		onColliding.Notify(*other->gameObject->GetObjectTag(), "NotDefined");
 
-		Push(Vector2f(deltaX, deltaY), Vector2f(intersectX, intersectY), other);
+		Push(Vector2f(difX, difY), Vector2f(intersectX, intersectY), other);
 
 		return true; //The objects are intersecting = We are colliding)
 	}
@@ -81,7 +79,8 @@ Vector2f Collider::GetPosition() const
 
 Vector2f Collider::GetHalfsize() const
 {
-	return collisionBox->getSize() / 2.0f;
+	Vector2f tmp(size->x / 2, size->y / 2);
+	return tmp;
 }
 
 void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
@@ -92,14 +91,14 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 		{
 			if (delta.x > 0.0f)
 			{
+				//Colliding left
 				Move(intersect.x * (1.0f - *pushFactor), 0.0f);
-				//cout << "You're colliding with the left side\n";
 				onColliding.Notify(*other->gameObject->GetObjectTag(), "Left");
 			}
 			else
 			{
+				//Colliding right
 				Move(-intersect.x * (1.0f - *pushFactor), 0.0f);
-				//cout << "You're colliding with the right side\n";
 				onColliding.Notify(*other->gameObject->GetObjectTag(), "Right");
 			}
 		}
@@ -107,14 +106,14 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 		{
 			if (delta.y > 0.0f)
 			{
+				//Colliding top
 				Move(0.0f, intersect.y * (1.0f - *pushFactor));
-				//cout << "You're colliding with the top\n";
 				onColliding.Notify(*other->gameObject->GetObjectTag(), "Top");
 			}
 			else
 			{
+				//Colliding bottom
 				Move(0.0f, -intersect.y * (1.0f - *pushFactor));
-				//cout << "You're colliding with the bottom\n";
 				onColliding.Notify(*other->gameObject->GetObjectTag(), "Bottom");
 			}
 		}
@@ -160,11 +159,11 @@ void Collider::Update(Time* timePerFrame)
 {
 	UpdateListOfCurrentCollisions();
 
-	(*wall)[0].position.x = (*gameObject->GetPosition()).x - collisionBox->getSize().x / 1.8f;
-	(*wall)[0].position.y = (*gameObject->GetPosition()).y - collisionBox->getSize().y / 2;
+	(*wall)[0].position.x = (*gameObject->GetPosition()).x - size->x / 1.8f;
+	(*wall)[0].position.y = (*gameObject->GetPosition()).y - size->y / 2;
 
-	(*wall)[1].position.y = (*gameObject->GetPosition()).y - collisionBox->getSize().y / 2;
-	(*wall)[1].position.x = (*gameObject->GetPosition()).x + collisionBox->getSize().x / 1.8f;
+	(*wall)[1].position.y = (*gameObject->GetPosition()).y - size->y / 2;
+	(*wall)[1].position.x = (*gameObject->GetPosition()).x + size->x / 1.8f;
 }
 
 void Collider::Destroy()

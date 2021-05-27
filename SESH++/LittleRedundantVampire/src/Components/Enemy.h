@@ -55,9 +55,11 @@ public:
 	void Move(Vector2f velocity);
 
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Sets enemy's target. This will always be the player.
+	/// This is so the enemy can find the player's position
+	/// and determine which state it needs to be in and whether it needs to switch state or not.
 	/// </summary>
-	/// <param name="target"></param>
+	/// <param name="target"> Player will always be set as target </param>
 	void SetTarget(GameObject* target);
 
 	void OnNotifyCollision(ObjectTag otherTag, std::string side) override;
