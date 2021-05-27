@@ -125,14 +125,44 @@ void GameObject::AddComponent(Component* component)
 	components->insert(make_pair(component->ToEnum(), component));
 }
 
-Component* GameObject::GetComponent(ComponentTag tag)
+Component* GameObject::GetComponent(ComponentTag tag) const
 {
 	return (*components)[tag];
+}
+
+Vector2f* GameObject::GetPosition() const
+{
+	return position;
 }
 
 void GameObject::SetPosition(Vector2f newPosition)
 {
 	*position = newPosition;
+}
+
+ObjectTag* GameObject::GetObjectTag() const
+{
+	return objectTag;
+}
+
+char* GameObject::GetDirection() const
+{
+	return direction;
+}
+
+bool* GameObject::GetIsMovable() const
+{
+	return isMovable;
+}
+
+unordered_map<ComponentTag, Component*>* GameObject::GetComponents() const
+{
+	return components;
+}
+
+bool* GameObject::GetShouldDraw() const
+{
+	return shouldDraw;
 }
 
 void GameObject::CallSelfDestruct()

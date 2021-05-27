@@ -71,13 +71,12 @@ public:
 
 	/// <summary>
 	/// Returns all the rays in the class.
-	/// TODO: const
+	/// TODO: const HENRIK?
 	/// </summary>
 	/// <returns></returns>
 	vector<Ray*>* GetRays();
 
-	//TODO: const
-	Vector2f GetPosition();
+	Vector2f GetPosition() const;
 
 	// Inherited via Component
 	void Awake() override;

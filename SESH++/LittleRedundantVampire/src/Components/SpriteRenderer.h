@@ -27,7 +27,6 @@ public:
 
 	/// <summary>
 	/// Returns a Sprite
-	///  TODO: const
 	/// </summary>
 	Sprite GetSprite() const;
 	/// <summary>
@@ -36,10 +35,8 @@ public:
 	void FlipSprite();
 	/// <summary>
 	/// Returns the texture.
-	///  TODO: const
 	/// </summary>
 	Texture GetTexture() const;
-	// TODO: const
 	bool* GetFlipped() const;
 	/// <summary>
 	/// Returns the textureRect.

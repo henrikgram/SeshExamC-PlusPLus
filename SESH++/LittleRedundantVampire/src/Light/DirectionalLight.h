@@ -27,13 +27,11 @@ public:
 	/// <summary>
 	/// Returns lines from the positon of the light to the intersecting points.
 	/// Used for debugging.
-	/// TODO:const
 	/// </summary>
 	/// <returns></returns>
 	vector<VertexArray> GetRayLines() override;
 	/// <summary>
 	/// Constructs a lightcone out of triangles based on the intersectinng points, from the look function. 
-	/// TODO: const
 	/// </summary>
 	/// <returns></returns>
 	vector<VertexArray> GetLightCone() override;

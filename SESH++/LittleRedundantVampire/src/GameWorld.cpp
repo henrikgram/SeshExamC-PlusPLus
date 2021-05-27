@@ -105,7 +105,7 @@ void GameWorld::CreatePlayer()
 	acController->AttachListenerToChangeAnimation(aC);
 
 	float x = (float)sr->GetTextureRect().width;
-	float y = (float)sr->GetTextureRect().width;
+	float y = (float)sr->GetTextureRect().height;
 
 	col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
 	go->AddComponent(col);
@@ -509,6 +509,11 @@ GameWorld* GameWorld::GetInstance()
 	return instance;
 }
 
+vector<GameObject*>* GameWorld::GetGameObjects() const
+{
+	return gameObjects;
+}
+
 //vector<GameObject*>* GameWorld::GetGameObjects()
 //{
 //	return gameObjects;
@@ -519,24 +524,39 @@ void GameWorld::AddToGameObjects(GameObject* go)
 	gameObjects->push_back(go);
 }
 
-vector<Collider*>* GameWorld::GetColliders()
+vector<Collider*> GameWorld::GetColliders() const
 {
-	return colliders;
+	return *colliders;
 }
 
-vector<Collider*>* GameWorld::GetMovColliders()
+void GameWorld::AddToColliders(Collider* collider)
 {
-	return movColliders;
+	colliders->push_back(collider);
 }
 
-float GameWorld::GetScreenWidth()
+vector<Collider*> GameWorld::GetMovColliders() const
+{
+	return *movColliders;
+}
+
+void GameWorld::AddToMovColliders(Collider* collider)
+{
+	movColliders->push_back(collider);
+}
+
+float GameWorld::GetScreenWidth() const
 {
 	return view.getCenter().x;
 }
 
-float GameWorld::GetScreenHeight()
+float GameWorld::GetScreenHeight() const
 {
 	return view.getCenter().y - (view.getSize().y / 2);
+}
+
+Player* GameWorld::GetPlayerPointer() const
+{
+	return playerPointer;
 }
 
 void GameWorld::CloseGame()

@@ -22,17 +22,9 @@ void EnemyChaseState::ChasePlayer()
 
 EnemyChaseState::~EnemyChaseState()
 {
-
 	// Deletes range.
 	delete range;
 	range = nullptr;
-	
-
-	
-	//TODO: enemy is not on heap, so no need to delete
-	// Makes sure to delete the enemy.
-	/*this->enemy = nullptr;
-	delete this->enemy;*/
 }
 
 void EnemyChaseState::Enter(Enemy* enemy)

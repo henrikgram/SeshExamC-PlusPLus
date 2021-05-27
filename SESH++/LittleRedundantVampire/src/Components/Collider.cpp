@@ -69,6 +69,16 @@ bool Collider::CheckCollision(Collider* other)
 	return false; //The objects are not intersecting = We are not colliding
 }
 
+Vector2f Collider::GetPosition() const
+{
+	return *gameObject->GetPosition();
+}
+
+Vector2f Collider::GetHalfsize() const
+{
+	return collisionBox->getSize() / 2.0f;
+}
+
 void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 {
 	if (*solid && *other->solid)

@@ -42,7 +42,7 @@ void BitmapImage::SetColor(const BitmapColor& color, int x, int y)
 }
 
 
-//TODO: find ud af hvorfor pointer her
+//TODO: HENRIKfind ud af hvorfor pointer her
 void BitmapImage::Read(const char* path)
 {
 	std::ifstream f;
@@ -79,7 +79,7 @@ void BitmapImage::Read(const char* path)
 
 	//file size is stored in byte num 2
 	//bit shifting 
-	//TODO: find ud af hvad bit shifting er, når han ikke gider at snakke om det
+	//TODO: HENRIK find ud af hvad bit shifting er, når han ikke gider at snakke om det
 	//To combine the 4 byte to an integer.
 	int fileSize = fileHeader[2] + (fileHeader[3] << 8) + (fileHeader[4] << 16) + (fileHeader[5] << 24);
 
@@ -151,7 +151,7 @@ void BitmapImage::Export(const char* path)
 	fileHeader[0] = 'B';
 	fileHeader[1] = 'M';
 
-	//TODO: find ud af hvad >> helt præcist gør her
+	//TODO: HENRIK find ud af hvad >> helt præcist gør her
 	//File size - split int up into char
 	fileHeader[2] = fileSize;
 	fileHeader[3] = fileSize >> 8;
@@ -192,7 +192,7 @@ void BitmapImage::Export(const char* path)
 	informationHeader[11] = height >> 24;
 
 	//planes 
-	//TODO: find ud af hvad planes er, så der kan skrive en god kommentar
+	//TODO: HENRIK find ud af hvad planes er, så der kan skrive en god kommentar
 	informationHeader[12] = 1;
 	informationHeader[13] = 0;
 
@@ -238,7 +238,7 @@ void BitmapImage::Export(const char* path)
 
 	//write array to the file.
 	//Fwrite needs a char pointer, and not unsigned pointer, so it needs to be casted.
-	//TODO: hvorfor bruger alle bare unsigned char, er det bare så de slipper for at defininere dem??
+	//TODO: HENRIK hvorfor bruger alle bare unsigned char, er det bare så de slipper for at defininere dem??
 	//unsigned char = byte åbenbart.
 	f.write(reinterpret_cast<char*>(fileHeader), fileHeaderSize);
 	f.write(reinterpret_cast<char*>(informationHeader), InformationHeaderSize);
@@ -256,7 +256,7 @@ void BitmapImage::Export(const char* path)
 			//for some reason bitmaps starts with the blue value
 			unsigned char color[] = { b, g, r };
 
-			//TODO: find ud af hvorfor han får stiv dolk over char og casting
+			//TODO: HENRIK find ud af hvorfor han får stiv dolk over char og casting
 			//Writes the color to the file for every pixel
 			f.write(reinterpret_cast<char*>(color), 3);
 		}

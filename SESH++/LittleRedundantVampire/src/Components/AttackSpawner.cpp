@@ -20,7 +20,7 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 		*go->GetPosition() = *gameObject->GetPosition();
 		*go->GetDirection() = *gameObject->GetDirection();
 
-		//TODO: Attack doesn't really work. You can hold down Space and keep the attack on. It also doesn't show the proper sprite image right now.
+		//TODO:* Attack doesn't really work. You can hold down Space and keep the attack on. It also doesn't show the proper sprite image right now.
 		int initialRow = 0;
 
 		//Which animation row to go with based on the direction og the attack.

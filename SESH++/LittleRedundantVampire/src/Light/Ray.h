@@ -46,20 +46,18 @@ public:
 
 	/// <summary>
 	/// Returns the VertexArray
-	/// TODO: const
+	/// TODO: const HENRIK?
 	/// </summary>
 	/// <returns></returns>
 	VertexArray* GetVertexArray();
 
 	/// <summary>
 	/// Returns the intersection point
-	/// TODO: const
 	/// </summary>
 	/// <returns></returns>
-	Vector2f GetIntersectionPoint();
+	Vector2f GetIntersectionPoint() const;
 
-	//TODO: cosnt
-	Vector2f GetPosition();
+	Vector2f GetPosition() const;
 	void SetIntersection(Vector2f position);
 
 private:

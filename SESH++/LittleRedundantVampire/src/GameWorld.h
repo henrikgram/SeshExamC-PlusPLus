@@ -92,28 +92,27 @@ public:
 
 	/// <summary>
 	/// Returns the instance of the GameWorld class
-	/// TODO: const
+	/// TODO: const MAYBE
 	/// </summary>
 	static GameWorld* GetInstance();
-	// TODO: const
-	vector<GameObject*>* GetGameObjects() const { return gameObjects; } //TODO: KENNETH!
+
+	vector<GameObject*>* GetGameObjects() const;
 
 	void AddToGameObjects(GameObject* go);
 
-	// TODO: const
-	vector<Collider*>* GetColliders(); //TODO: KENNETH! This needs to be a constant, if we want to change something outside of the class it belongs to we should make a set method or something.
-	// TODO: const
-	vector<Collider*>* GetMovColliders();
+	vector<Collider*> GetColliders() const;
+	void AddToColliders(Collider* collider);
+
+	vector<Collider*> GetMovColliders() const;
+	void AddToMovColliders(Collider* collider);
 
 	DirectionalLight* LightPointer;
 	vector<VertexArray*> walls;
 
-	// TODO: const
-	float GetScreenWidth();
-	// TODO: const
-	float GetScreenHeight();
+	float GetScreenWidth() const;
+	float GetScreenHeight() const;
 
-	Player* GetPlayerPointer() const { return playerPointer; }
+	Player* GetPlayerPointer() const;
 
 	void CloseGame();
 };

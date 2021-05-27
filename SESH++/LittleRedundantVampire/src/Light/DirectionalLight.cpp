@@ -19,7 +19,7 @@ DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition,
 
 	float length = GetDistance(startPosition, endPosition);
 
-	//TODO: ikke den bedste sammenhæng med vinkler og retning, men kan fikses senere, virker nu. 
+	//TODO: HENRIK ikke den bedste sammenhæng med vinkler og retning, men kan fikses senere, virker nu. 
 	//Calculates the angle to raidans. 
 	float radians = angle * (PI / 180);
 
@@ -107,7 +107,7 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 	return lightCone;
 }
 
-//TODO: dosent work yet for directional light
+//TODO: HENRIK dosent work yet for directional light
 void DirectionalLight::Move(Vector2f position)
 {
 	int newXDif = this->position.x - position.x;

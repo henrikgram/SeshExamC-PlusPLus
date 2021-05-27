@@ -70,24 +70,22 @@ public:
 
 	/// <summary>
 	/// Gets a component based on ComponentTag.
-	///  TODO: const
 	/// </summary>
-	Component* GetComponent(ComponentTag tag);
+	Component* GetComponent(ComponentTag tag) const;
 
-	//TODO tjek om det her er ok
-	Vector2f* GetPosition() const { return position; }
-
+	//TODO:* tjek om det her er ok SIGNE STINNA
+	Vector2f* GetPosition() const;
 	void SetPosition(Vector2f newPosition);
 
-	ObjectTag* GetObjectTag() const { return objectTag; }
+	ObjectTag* GetObjectTag() const;
 
-	char* GetDirection() const { return direction; }
+	char* GetDirection() const;
 
-	bool* GetIsMovable() const { return isMovable; }
+	bool* GetIsMovable() const;
 
-	unordered_map<ComponentTag, Component*>* GetComponents() const { return components; }
+	unordered_map<ComponentTag, Component*>* GetComponents() const;
 
-	bool* GetShouldDraw() const { return shouldDraw; }
+	bool* GetShouldDraw() const;
 
 	/// <summary>
 	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) that this GameObject is ready to be deleted.

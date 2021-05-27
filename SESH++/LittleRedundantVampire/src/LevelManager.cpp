@@ -45,7 +45,8 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		sr = new SpriteRenderer(TextureTag::BOOKCASE);
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
-		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		//(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::BOOKCASE;
 		break;
@@ -54,7 +55,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		sr = new SpriteRenderer(TextureTag::CHEST);
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.2f, true);
-		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::CHEST;
 		break;
@@ -64,8 +65,9 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		sr = new SpriteRenderer(TextureTag::CRATE);
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.1f, true);
-		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
-		(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
+		GameWorld::GetInstance()->AddToColliders(col);
+		GameWorld::GetInstance()->AddToMovColliders(col);
+		//(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
 		go->AddComponent(col);
 
 		GameWorld::GetInstance()->walls.push_back(col->wall);
@@ -78,7 +80,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		sr = new SpriteRenderer(TextureTag::DOOR);
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
-		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::DOOR;
 		break;
@@ -96,8 +98,8 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		x = sr->GetTextureRect().width;
 		y = sr->GetTextureRect().height;
 		col = new Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
-		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
-		(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
+		GameWorld::GetInstance()->AddToColliders(col);
+		GameWorld::GetInstance()->AddToMovColliders(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::ENEMY;
 
@@ -108,7 +110,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		sr = new SpriteRenderer(TextureTag::KEY);
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
-		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::KEY;
 		break;
@@ -123,7 +125,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		sr = new SpriteRenderer(TextureTag::WINDOW);
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
-		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::WINDOW;
 		go->AddComponent(new DirectionalLight(Vector2f(go->GetPosition()->x - sr->GetTexture().getSize().x / 2,
@@ -136,7 +138,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		sr = new SpriteRenderer(TextureTag::VASE);
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
-		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::VASE;
 		break;
@@ -145,7 +147,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		sr = new SpriteRenderer(TextureTag::WALL);
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
-		(*GameWorld::GetInstance()->GetColliders()).push_back(col);
+		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::WALL;
 		break;
@@ -171,8 +173,8 @@ GameObject* LevelManager::CreateNpcLevelOne(string msg, Vector2f position)
 	float x = sr->GetTextureRect().width;
 	float y = sr->GetTextureRect().height;
 	col = new Collider(Vector2f(x, y), *go->GetPosition(), 1.0f, false);
-	(*GameWorld::GetInstance()->GetColliders()).push_back(col);
-	(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
+	GameWorld::GetInstance()->AddToColliders(col);
+	GameWorld::GetInstance()->AddToMovColliders(col);
 	go->AddComponent(col);
 
 	return go;
