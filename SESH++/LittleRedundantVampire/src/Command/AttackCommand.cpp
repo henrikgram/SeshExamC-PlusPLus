@@ -4,7 +4,7 @@
 //Give AttackCommand a reference to the AttackSpawner component from the Player object.
 AttackCommand::AttackCommand(AttackSpawner& attackReceiver) : attackReceiver(attackReceiver)
 {
-	//TODO: forstår ikke helt hvad der sker her
+	
 }
 
 AttackCommand::~AttackCommand()

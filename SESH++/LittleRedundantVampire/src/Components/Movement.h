@@ -8,10 +8,10 @@ class Movement : public Component
 {
 public:
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Constructor for movement component.
 	/// </summary>
-	/// <param name="speed"></param>
-	/// <param name="velocity"></param>
+	/// <param name="speed">The movement speed.</param>
+	/// <param name="velocity">The direction.</param>
 	Movement(float speed, Vector2f velocity);
 	~Movement();
 

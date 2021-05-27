@@ -92,7 +92,6 @@ public:
 
 	/// <summary>
 	/// Returns the instance of the GameWorld class
-	/// TODO: const MAYBE
 	/// </summary>
 	static GameWorld* GetInstance();
 

@@ -20,7 +20,7 @@ DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition,
 
 	float length = GetDistance(startPosition, endPosition);
 
-	//TODO: The angle is not relative to the line where the light emmits. So its counterintutitive to adjust the angle.
+	//TODO:* The angle is not relative to the line where the light emmits. So its counterintutitive to adjust the angle.
 	//Calculates the angle to raidans.
 	float radians = angle * (PI / 180);
 
@@ -106,7 +106,7 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 	return lightCone;
 }
 
-//TODO: dosent work yet for directional light.
+//TODO:* Dosen't work yet for directional light.
 void DirectionalLight::Move(Vector2f position)
 {
 	int newXDif = this->position.x - position.x;

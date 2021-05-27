@@ -46,7 +46,7 @@ public:
 
 	/// <summary>
 	/// Returns the VertexArray
-	/// TODO: const HENRIK?
+	/// For debugging
 	/// </summary>
 	/// <returns></returns>
 	VertexArray* GetVertexArray();

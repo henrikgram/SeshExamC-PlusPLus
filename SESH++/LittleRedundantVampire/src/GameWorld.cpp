@@ -421,7 +421,7 @@ void GameWorld::Draw()
 		}
 	}
 
-	//TODO:* For debugging.
+	//TODO: For debugging. Remove before release
 	vector<VertexArray*>::iterator it;
 
 	for (it = walls.begin(); it < walls.end(); it++)
@@ -570,7 +570,7 @@ void GameWorld::CloseGame()
 		objectsToBeDeleted.push(*i);
 	}
 
-	//TODO:* EMMA delete all walls
+	//TODO: EMMA delete all walls
 
 	DeleteObjects();
 

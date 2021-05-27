@@ -12,9 +12,9 @@ class AttackCommand : public ICommand
 {
 public:
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Constructor the attack command.
 	/// </summary>
-	/// <param name="attackReceiver"></param>
+	/// <param name="attackReceiver">Reference to an attackspawner component.</param>
 	AttackCommand(AttackSpawner& attackReceiver);
 	~AttackCommand();
 

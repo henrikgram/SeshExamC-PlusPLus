@@ -1,17 +1,47 @@
-﻿  AttackCommand.cpp
-  MoveCommand.cpp
-  PlayerInvoker.cpp
-  AnimationController.cpp
-  Attack.cpp
-  AttackSpawner.cpp
-  Collider.cpp
+﻿  EnemyIdleState.cpp
+  EnemyChaseState.cpp
+  ContextState.cpp
   Enemy.cpp
+  PointLight.cpp
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Light\PointLight.cpp(14,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  DirectionalLight.cpp
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Light\DirectionalLight.cpp(25,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Light\DirectionalLight.cpp(112,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Light\DirectionalLight.cpp(113,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Light\DirectionalLight.cpp(118,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Light\DirectionalLight.cpp(119,21): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+  LightSource.cpp
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Light\LightSource.cpp(131,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Ray.cpp
+  AnimationController.cpp
+  AnimationComponent.cpp
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\AnimationComponent.cpp(19,63): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\AnimationComponent.cpp(20,64): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
   Npc.cpp
-  Player.cpp
-  TextMessage.cpp
+  AttackCommand.cpp
   GameWorld.cpp
+  AttackSpawner.cpp
+  Movement.cpp
+  PlayerInvoker.cpp
+  BitmapImage.cpp
   LevelManager.cpp
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(47,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(47,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -20,7 +50,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(47,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(47,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -29,7 +59,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(56,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(57,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -38,7 +68,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(56,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(57,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -47,7 +77,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(66,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(67,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -56,7 +86,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(66,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(67,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -65,7 +95,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(80,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(82,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -74,7 +104,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(80,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(82,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -83,17 +113,17 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(96,27): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(97,27): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(97,27): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(98,27): warning C4244: '=': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(110,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(111,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -102,7 +132,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(110,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(111,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -111,7 +141,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(125,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(126,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -120,7 +150,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(125,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(126,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -129,7 +159,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(138,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(139,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -138,7 +168,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(138,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(139,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -147,7 +177,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(147,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(148,113): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -156,7 +186,7 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(147,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(148,70): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -165,45 +195,87 @@ C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampir
           [
               T=float
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(171,10): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(172,10): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(172,10): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(173,10): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
           with
           [
               T=int
           ]
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(241,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(241,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(245,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(245,63): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(249,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(249,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(253,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(253,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(259,64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(259,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(263,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(263,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(267,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(267,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(271,60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(271,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(275,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(275,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(279,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(279,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(283,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(283,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(287,60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(287,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(291,60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(291,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(295,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(295,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  EnemyIdleState.cpp
-  main.cpp
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(242,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(242,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(246,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(246,63): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(250,71): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(250,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(254,73): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(254,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(260,64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(260,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(264,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(264,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(268,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(268,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(272,60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(272,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(276,61): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(276,58): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(280,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(280,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(284,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(284,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(288,60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(288,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(292,60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(292,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(296,62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\LevelManager.cpp(296,59): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Player.cpp
+  MoveCommand.cpp
   Generating Code...
-  LittleRedundantVampire.vcxproj -> C:\Users\Henrik\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
+  Compiling...
+  IGameEvent.cpp
+  CollisionEvent.cpp
+  Collider.cpp
+  Attack.cpp
+  SpriteRenderer.cpp
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\SpriteRenderer.cpp(45,14): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\SpriteRenderer.cpp(46,14): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\SpriteRenderer.cpp(72,44): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\SpriteRenderer.cpp(73,45): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\SpriteRenderer.cpp(79,73): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire\src\Components\SpriteRenderer.cpp(79,48): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Component.cpp
+  GameObject.cpp
+  Asset.cpp
+  main.cpp
+  TextMessage.cpp
+  Generating Code...
+  LittleRedundantVampire.vcxproj -> C:\Users\Stinn\Documents\GitHub\SeshExamC-PlusPLus\SESH++\Debug\LittleRedundantVampire.exe
