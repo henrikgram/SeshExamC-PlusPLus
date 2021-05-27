@@ -36,13 +36,13 @@ using namespace std::chrono;
 /// <summary>
 /// Manages everything related to running the game.
 /// </summary>
-class GameWorld : protected IListener
+class GameWorld : public IListener
 {
 private:
 	static GameWorld* instance;
 
 	vector<GameObject*>* gameObjects;
-	stack<GameObject*> objectsToBeDeleted;
+	stack<GameObject*>* objectsToBeDeleted;
 	vector<Collider*>* colliders;
 	vector<Collider*>* movColliders;
 
@@ -99,6 +99,8 @@ public:
 	vector<GameObject*>* GetGameObjects() const { return gameObjects; } //TODO: KENNETH!
 
 	void AddToGameObjects(GameObject* go);
+
+	stack<GameObject*>* GetObjectsToBeDeleted() const { return objectsToBeDeleted; }
 
 	// TODO: const
 	vector<Collider*>* GetColliders(); //TODO: KENNETH! This needs to be a constant, if we want to change something outside of the class it belongs to we should make a set method or something.

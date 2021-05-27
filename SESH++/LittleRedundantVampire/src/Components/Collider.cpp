@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Collider.h"
+#include "../GameWorld.h"
 
 
 Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool solid)
@@ -28,6 +29,10 @@ Collider::~Collider()
 
 	delete solid;
 	solid = nullptr;
+	
+	//TODO: Delete walls right now program crashes if I do the following.
+	delete wall;
+	wall = nullptr;
 }
 
 void Collider::Move(float deltaX, float deltaY)
@@ -137,6 +142,8 @@ void Collider::Start()
 		onColliding.Attach(it->second);
 		onNoLongerColliding.Attach(it->second);
 	}
+
+	onColliderDestroyed.Attach(GameWorld::GetInstance());
 }
 
 void Collider::Update(Time* timePerFrame)

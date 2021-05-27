@@ -60,7 +60,8 @@ void Attack::Update(Time* timePerFrame)
 		//TODO: EMMA Make sure object gets deleted here instead.
 		//*gameObject->GetShouldDraw() = false;
 		//GameWorld::GetInstance().
-		delete this;
+		//delete this;
+		gameObject->CallSelfDestruct();
 	}
 }
 

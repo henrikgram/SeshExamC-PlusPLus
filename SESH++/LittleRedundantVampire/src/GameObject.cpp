@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Component.h"
+#include "GameWorld.h"
 
 using namespace sf;
 using namespace std;
@@ -98,6 +99,8 @@ void GameObject::Start()
 	{
 		it->second->Start();
 	}
+
+	onCallSelfdestruct.Attach(GameWorld::GetInstance());
 }
 
 void GameObject::Destroy()
@@ -138,12 +141,13 @@ void GameObject::SetPosition(Vector2f newPosition)
 void GameObject::CallSelfDestruct()
 {
 	onCallSelfdestruct.Notify("DeleteObject", this);
+	//GameWorld::GetInstance()->GetObjectsToBeDeleted()->push(this);
 }
 
-void GameObject::AddListenerToCallSelfDestruct(IListener* listener)
-{
-	onCallSelfdestruct.Attach(listener);
-}
+//void GameObject::AddListenerToCallSelfDestruct(IListener* listener)
+//{
+//	onCallSelfdestruct.Attach(listener);
+//}
 
 void GameObject::OnNotify(std::string eventName, IListener* sender)
 {

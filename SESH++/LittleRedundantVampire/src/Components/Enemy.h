@@ -56,6 +56,8 @@ public:
 
 	void SetTarget(GameObject* target);
 
+	void OnNotifyCollision(ObjectTag otherTag, std::string side) override;
+
 private:
 	float* speed;
 	Vector2f* velocity;
