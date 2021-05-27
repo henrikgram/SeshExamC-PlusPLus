@@ -63,6 +63,14 @@ void Enemy::SetTarget(GameObject* target)
 	this->target = target;
 }
 
+void Enemy::OnNotifyCollision(ObjectTag otherTag, std::string side)
+{
+	if (otherTag == ObjectTag::PLAYERATTACK)
+	{
+		gameObject->CallSelfDestruct();
+	}
+}
+
 void Enemy::PlayerDistance()
 {
 	targetDistance->x = target->GetPosition()->x - this->gameObject->GetPosition()->x;

@@ -98,11 +98,11 @@ public:
 	/// </summary>
 	void CallSelfDestruct();
 
-	/// <summary>
-	/// Used to attach a listener (like Gameworld) to the event onCallSelfDestruct.
-	/// </summary>
-	/// <param name="listener"></param>
-	void AddListenerToCallSelfDestruct(IListener* listener);
+	///// <summary>
+	///// Used to attach a listener (like Gameworld) to the event onCallSelfDestruct.
+	///// </summary>
+	///// <param name="listener"></param>
+	//void AddListenerToCallSelfDestruct(IListener* listener);
 
 private:
 	Vector2f* position;

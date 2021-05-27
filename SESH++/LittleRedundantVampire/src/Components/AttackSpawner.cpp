@@ -16,6 +16,7 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 
 		GameObject* go = new GameObject();
 		SpriteRenderer* sr;
+		Collider* col;
 
 		*go->GetPosition() = *gameObject->GetPosition();
 		*go->GetDirection() = *gameObject->GetDirection();
@@ -42,8 +43,14 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 
 		sr = new SpriteRenderer(textureTag, Vector2u(1, (initialRow) + 1), Vector2u(1, 3));
 		this->objectTag = objectTag;
+		*go->GetObjectTag() = objectTag;
 
 		go->AddComponent(sr);
+
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, false);
+		go->AddComponent(col);
+
+		GameWorld::GetInstance()->GetColliders()->push_back(col);
 
 		AnimationComponent* aC = new AnimationComponent(sr, sr->GetImageCount(), 0.0f, initialRow);
 		go->AddComponent(aC);

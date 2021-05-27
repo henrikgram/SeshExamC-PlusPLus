@@ -36,13 +36,13 @@ using namespace std::chrono;
 /// <summary>
 /// Manages everything related to running the game.
 /// </summary>
-class GameWorld : protected IListener
+class GameWorld : public IListener
 {
 private:
 	static GameWorld* instance;
 
 	vector<GameObject*>* gameObjects;
-	stack<GameObject*> objectsToBeDeleted;
+	stack<GameObject*>* objectsToBeDeleted;
 	vector<Collider*>* colliders;
 	vector<Collider*>* movColliders;
 
@@ -99,6 +99,7 @@ public:
 
 	void AddToGameObjects(GameObject* go);
 
+	stack<GameObject*>* GetObjectsToBeDeleted() const { return objectsToBeDeleted; }
 	vector<Collider*> GetColliders() const;
 	void AddToColliders(Collider* collider);
 

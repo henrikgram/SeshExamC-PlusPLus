@@ -13,6 +13,7 @@ GameWorld::GameWorld()
 	movColliders = new vector<Collider*>;
 	gameObjects = new vector<GameObject*>;
 	colliders = new vector<Collider*>;
+	objectsToBeDeleted = new stack<GameObject*>;
 }
 
 GameWorld::~GameWorld()
@@ -46,27 +47,64 @@ void GameWorld::OnNotify(std::string eventName, IListener* sender)
 {
 	if (eventName == "DeleteObject")
 	{
-		for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
+		/*for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
 		{
 			if (*i == sender)
 			{
-				objectsToBeDeleted.push(*i);
+				objectsToBeDeleted->push(*i);
 			}
+		}*/
+		GameObject* go = *find(gameObjects->begin(), gameObjects->end(), sender);
+		if (go != nullptr)
+		{
+			objectsToBeDeleted->push(go);
 		}
 	}
 	if (eventName == "ColliderDestroyed")
 	{
-		for (auto i = colliders->begin(); i != colliders->end();)
+		//for (auto i = colliders->begin(); i != colliders->end();)
+		//{
+		//	if (*i == sender)
+		//	{
+		//		i = colliders->erase(i);
+		//	}
+		//	else
+		//	{
+		//		i++;
+		//	}
+		//}
+
+		vector<Collider*>::iterator it;
+		it = find(colliders->begin(), colliders->end(), sender);
+		if (it != colliders->end())
+		{
+			vector<VertexArray*>::iterator wallIt;
+			wallIt = find(walls.begin(), walls.end(), (*it)->wall);
+			if (wallIt != walls.end())
+			{
+				walls.erase(wallIt);
+			}
+			colliders->erase(it);
+		}
+
+		it = find(movColliders->begin(), movColliders->end(), sender);
+		if (it != movColliders->end())
+		{
+			movColliders->erase(it);
+		}
+
+
+		/*for (auto i = movColliders->begin(); i != movColliders->end();)
 		{
 			if (*i == sender)
 			{
-				i = colliders->erase(i);
+				i = movColliders->erase(i);
 			}
 			else
 			{
 				i++;
 			}
-		}
+		}*/
 	}
 }
 
@@ -260,11 +298,11 @@ void GameWorld::LoadContent()
 
 void GameWorld::DeleteObjects()
 {
-	int stackSize = objectsToBeDeleted.size();
+	int stackSize = objectsToBeDeleted->size();
 
 	for (int i = 0; i < stackSize; i++)
 	{
-		GameObject* gO = objectsToBeDeleted.top();
+		GameObject* gO = objectsToBeDeleted->top();
 
 		for (auto i = gameObjects->begin(); i != gameObjects->end();)
 		{
@@ -280,7 +318,7 @@ void GameWorld::DeleteObjects()
 				i++;
 			}
 		}
-		objectsToBeDeleted.pop();
+		objectsToBeDeleted->pop();
 	}
 }
 
@@ -289,6 +327,26 @@ void GameWorld::Update(Time* timePerFrame)
 	auto start = high_resolution_clock::now();
 
 	DeleteObjects();
+
+	vector<Collider*>::iterator colIt;
+	vector<Collider*>::iterator movColIt;
+	for (movColIt = movColliders->begin(); movColIt < movColliders->end(); movColIt++)
+	{
+		if (((*movColIt)->GetPosition().x - playerPointer->gameObject->GetPosition()->x) < 3 * 96 &&
+			(playerPointer->gameObject->GetPosition()->x - (*movColIt)->GetPosition().x) < 3 * 96 &&
+
+			((*movColIt)->GetPosition().y - playerPointer->gameObject->GetPosition()->y) < 3 * 96 &&
+			(playerPointer->gameObject->GetPosition()->y - (*movColIt)->GetPosition().y) < 3 * 96)
+		{
+			for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
+			{
+				if (*movColIt != *colIt)
+				{
+					(*movColIt)->CheckCollision(*colIt);
+				}
+			}
+		}
+	}
 	vector<GameObject*>::size_type gameObjectsSize = gameObjects->size();
 
 	for (auto i = gameObjects->begin(); i != gameObjects->end();)
@@ -319,26 +377,6 @@ void GameWorld::Update(Time* timePerFrame)
 		if (originalSize == updatedSize)
 		{
 			++i;
-		}
-	}
-
-	vector<Collider*>::iterator colIt;
-	vector<Collider*>::iterator movColIt;
-	for (movColIt = movColliders->begin(); movColIt < movColliders->end(); movColIt++)
-	{
-		if (((*movColIt)->GetPosition().x - playerPointer->gameObject->GetPosition()->x) < 3 * 96 &&
-			(playerPointer->gameObject->GetPosition()->x - (*movColIt)->GetPosition().x) < 3 * 96 &&
-
-			((*movColIt)->GetPosition().y - playerPointer->gameObject->GetPosition()->y) < 3 * 96 &&
-			(playerPointer->gameObject->GetPosition()->y - (*movColIt)->GetPosition().y) < 3 * 96)
-		{
-			for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
-			{
-				if (*movColIt != *colIt)
-				{
-					(*movColIt)->CheckCollision(*colIt);
-				}
-			}
 		}
 	}
 
@@ -553,33 +591,39 @@ Player* GameWorld::GetPlayerPointer() const
 
 void GameWorld::CloseGame()
 {
-	colliders->clear();
-	movColliders->clear();
-
 	//Clear the stack of objectsToBeDeleted first just in case, so there are no duplicates in the next step.
-	int stackSize = objectsToBeDeleted.size();
+	int stackSize = objectsToBeDeleted->size();
 
 	for (int i = 0; i < stackSize; i++)
 	{
-		objectsToBeDeleted.pop();
+		objectsToBeDeleted->pop();
 	}
 
 	//Add every gameobject in game to the stack of objectsToBeDeleted.
-	for (auto i = gameObjects->end() - 1; i != gameObjects->begin(); i--)
+	for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
 	{
-		objectsToBeDeleted.push(*i);
+		objectsToBeDeleted->push(*i);
 	}
-
-	//TODO: EMMA delete all walls
 
 	DeleteObjects();
 
 	gameObjects->clear();
+	colliders->clear();
+	movColliders->clear();
 
 	delete Asset::GetInstance();
 
 	delete playerInvoker;
 	playerInvoker = nullptr;
+
+	int wallAmount = walls.size();
+	for (int i = 0; i < wallAmount; i++)
+	{
+		delete walls.at(i);
+		walls.at(i) = nullptr;
+	}
+
+	walls.clear();
 
 	window.close();
 }
