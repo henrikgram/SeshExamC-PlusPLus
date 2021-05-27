@@ -46,7 +46,7 @@ public:
 	/// Gets the current context.
 	/// </summary>
 	/// <returns></returns>
-	ContextState GetContext() const { return *currentState; }
+	ContextState GetContext() const;
 
 	/// <summary>
 	/// Method to make the enemy move.

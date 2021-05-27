@@ -111,5 +111,4 @@ void Player::OnNotifyCollision(ObjectTag otherTag, std::string side)
 	default:
 		break;
 	}
-	//TOOD: ryddes op her
 }

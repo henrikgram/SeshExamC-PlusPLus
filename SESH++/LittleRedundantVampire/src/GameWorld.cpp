@@ -250,9 +250,6 @@ void GameWorld::Initialize()
 	(*tmp15)[1].position = Vector2f(42.6f * 96, 22.5f * 96);
 
 	walls.push_back(tmp15);
-
-
-
 }
 
 void GameWorld::LoadContent()
@@ -424,7 +421,7 @@ void GameWorld::Draw()
 		}
 	}
 
-	//TODO: For debugging.
+	//TODO:* For debugging.
 	vector<VertexArray*>::iterator it;
 
 	for (it = walls.begin(); it < walls.end(); it++)
@@ -514,11 +511,6 @@ vector<GameObject*>* GameWorld::GetGameObjects() const
 	return gameObjects;
 }
 
-//vector<GameObject*>* GameWorld::GetGameObjects()
-//{
-//	return gameObjects;
-//}
-
 void GameWorld::AddToGameObjects(GameObject* go)
 {
 	gameObjects->push_back(go);
@@ -578,13 +570,12 @@ void GameWorld::CloseGame()
 		objectsToBeDeleted.push(*i);
 	}
 
-	//TODO: delete all walls
+	//TODO:* EMMA delete all walls
 
 	DeleteObjects();
 
 	gameObjects->clear();
 
-	//TODO: KENNETH! hvordan sletter vi singletons??
 	delete Asset::GetInstance();
 
 	delete playerInvoker;

@@ -47,9 +47,7 @@ void EnemyChaseState::Execute()
 
 void EnemyChaseState::Exit()
 {
-	//TODO: tjek om det er nok ikke at kalde destructoren -> Kenneth: Sletter destructoren EnemyChaseState selv eller er den stadig på heapen??
 	// Changes the state to idle.
 	this->enemy->SetContext(new EnemyIdleState());
-	//TODO: Will this delete work? does it self-destroy and release the memory properly. 
 	delete this;
 }

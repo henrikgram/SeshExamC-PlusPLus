@@ -270,3 +270,13 @@ void BitmapImage::Export(const char* path)
 	std::cout << "File created!\n";
 }
 
+int BitmapImage::GetHeight() const
+{
+	return height;
+}
+
+int BitmapImage::GetWidth() const
+{
+	return width;
+}
+

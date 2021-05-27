@@ -85,6 +85,11 @@ void Enemy::SetContext(IState* state)
 	currentState->StartRequest(this);
 }
 
+ContextState Enemy::GetContext() const
+{
+	return *currentState;
+}
+
 void Enemy::Normalize()
 {
 	if (*velocity != Vector2f(0.0f, 0.0f))
@@ -99,8 +104,7 @@ void Enemy::Normalize()
 
 		*gameObject->GetPosition() += *velocity;
 
-		//TODO: OPTIMERING brug MoveCompoennt:
-
+		//TODO:* OPTIMIZE Use MoveCompoennt here:
 		//Can be implemented as moveComponent later
 		*velocity = Vector2f(0.0f, 0.0f);
 	}

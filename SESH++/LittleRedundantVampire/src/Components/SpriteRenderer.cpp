@@ -91,7 +91,7 @@ void SpriteRenderer::Start()
 
 void SpriteRenderer::Update(Time* timePerFrame)
 {
-	//TODO: Make sure that the position is NOT OUTDATED
+	//TODO:* Make sure that the position is NOT OUTDATED
 	if (sprite->getPosition() != *gameObject->GetPosition())
 	{
 		sprite->setPosition(*gameObject->GetPosition());
