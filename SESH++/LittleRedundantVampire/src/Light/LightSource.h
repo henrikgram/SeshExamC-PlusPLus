@@ -71,10 +71,9 @@ public:
 
 	/// <summary>
 	/// Returns all the rays in the class.
-	/// TODO: const
 	/// </summary>
 	/// <returns></returns>
-	vector<Ray*>* GetRays();
+	vector<Ray*>* GetRays() const;
 
 	//TODO: const
 	Vector2f GetPosition();
@@ -89,9 +88,10 @@ public:
 protected:
 	Vector2f position;
 
+	//Pointer so the vertex array will update accordingly
 	vector<VertexArray*>* walls;
-	vector<Vector2f>* intersectingPoints = new vector<Vector2f>;
-	vector<Ray*>* intersectingRays = new vector<Ray*>;
+	vector<Vector2f> intersectingPoints;// = new vector<Vector2f>;
+	vector<Ray*> intersectingRays;
 	vector<Ray*>* rays = new vector<Ray*>;
 };
 

@@ -278,7 +278,8 @@ private:
 /// \ingroup graphics
 ///
 /// sf::Image is an abstraction to manipulate images
-/// as bidimensional arrays of pixels. The class provides
+/// as bidimensional ar
+///  of pixels. The class provides
 /// functions to load, read, write and save pixels, as well
 /// as many other useful functions.
 ///

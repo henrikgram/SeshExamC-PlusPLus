@@ -23,7 +23,7 @@ vector<VertexArray> PointLight::GetRayLines()
 	vector<Vector2f>::iterator it;
 	vector<VertexArray> RayLines;
 
-	for (it = intersectingPoints->begin(); it < intersectingPoints->end(); it++)
+	for (it = intersectingPoints.begin(); it < intersectingPoints.end(); it++)
 	{
 		VertexArray tmp = VertexArray(sf::LinesStrip, 2);
 		tmp[0].color = Color::Black;
@@ -45,7 +45,7 @@ vector<VertexArray> PointLight::GetLightCone()
 	Color coneColor = Color(255, 255, 0, 120);
 
 	//Goes through all the intersecting points
-	for (it = intersectingPoints->begin(); it < intersectingPoints->end(); it++)
+	for (it = intersectingPoints.begin(); it < intersectingPoints.end(); it++)
 	{
 
 		VertexArray triangle(sf::Triangles, 3);
@@ -58,10 +58,10 @@ vector<VertexArray> PointLight::GetLightCone()
 		triangle[1].position = *it;
 		triangle[1].color = coneColor;
 
-		int index = (it - intersectingPoints->begin());
+		int index = (it - intersectingPoints.begin());
 
 		//and the next intersecting points, if it havent reached the end yet. 
-		if ((index + 1) != intersectingPoints->size())
+		if ((index + 1) != intersectingPoints.size())
 		{
 			triangle[2].position = *(it + 1);
 			triangle[2].color = coneColor;
@@ -70,7 +70,7 @@ vector<VertexArray> PointLight::GetLightCone()
 		else
 		{
 			//if it has reached the end, then just connect it to the first intersecting point. 
-			triangle[2].position = *intersectingPoints->begin();
+			triangle[2].position = *intersectingPoints.begin();
 			triangle[2].color = coneColor;
 		}
 

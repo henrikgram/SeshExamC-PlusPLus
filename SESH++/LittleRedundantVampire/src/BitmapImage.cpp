@@ -42,7 +42,7 @@ void BitmapImage::SetColor(const BitmapColor& color, int x, int y)
 }
 
 
-//TODO: find ud af hvorfor pointer her
+
 void BitmapImage::Read(const char* path)
 {
 	std::ifstream f;
@@ -77,10 +77,8 @@ void BitmapImage::Read(const char* path)
 	//file header is what it is reading, and the size is the amount it's reading
 	f.read(reinterpret_cast<char*>(informationHeader), informationHeaderSize);
 
-	//file size is stored in byte num 2
-	//bit shifting 
-	//TODO: find ud af hvad bit shifting er, når han ikke gider at snakke om det
-	//To combine the 4 byte to an integer.
+	//file size is stored in byte num 2,3,4,5
+	//Bit shifts all the 4 bytes (4) by 8, so it can be combined into one 32bit integer.
 	int fileSize = fileHeader[2] + (fileHeader[3] << 8) + (fileHeader[4] << 16) + (fileHeader[5] << 24);
 
 	width = informationHeader[4] + (informationHeader[5] << 8) + (informationHeader[6] << 16) + (informationHeader[7] << 24);
@@ -125,10 +123,12 @@ void BitmapImage::Export(const char* path)
 		return;
 	} 
 	
-	//Padding for bitmap. Each colorchangel has 3 bytes for storing data.
+	//Padding for bitmap. Each colorchanel has 3 bytes for storing data.
 	//The color array should have a row, which has an amount of memory thats divideable by 4.
 	//To make sure that is possible, it needs some padding.
 	// look up 8:50 in video for further explanation
+
+	//unsigned char is the C version of a byte.
 
 	//Can never have more padding than 3
 	unsigned char bmpPad[3] = { 0,0,0 };
@@ -151,8 +151,7 @@ void BitmapImage::Export(const char* path)
 	fileHeader[0] = 'B';
 	fileHeader[1] = 'M';
 
-	//TODO: find ud af hvad >> helt præcist gør her
-	//File size - split int up into char
+	//File size - split int up into char by using bit shifting by 8. 
 	fileHeader[2] = fileSize;
 	fileHeader[3] = fileSize >> 8;
 	fileHeader[4] = fileSize >> 16;
@@ -191,8 +190,7 @@ void BitmapImage::Export(const char* path)
 	informationHeader[10] = height >> 16;
 	informationHeader[11] = height >> 24;
 
-	//planes 
-	//TODO: find ud af hvad planes er, så der kan skrive en god kommentar
+	//The number of color planes. BMP files only contains one
 	informationHeader[12] = 1;
 	informationHeader[13] = 0;
 
@@ -238,8 +236,6 @@ void BitmapImage::Export(const char* path)
 
 	//write array to the file.
 	//Fwrite needs a char pointer, and not unsigned pointer, so it needs to be casted.
-	//TODO: hvorfor bruger alle bare unsigned char, er det bare så de slipper for at defininere dem??
-	//unsigned char = byte åbenbart.
 	f.write(reinterpret_cast<char*>(fileHeader), fileHeaderSize);
 	f.write(reinterpret_cast<char*>(informationHeader), InformationHeaderSize);
 
@@ -256,7 +252,6 @@ void BitmapImage::Export(const char* path)
 			//for some reason bitmaps starts with the blue value
 			unsigned char color[] = { b, g, r };
 
-			//TODO: find ud af hvorfor han får stiv dolk over char og casting
 			//Writes the color to the file for every pixel
 			f.write(reinterpret_cast<char*>(color), 3);
 		}

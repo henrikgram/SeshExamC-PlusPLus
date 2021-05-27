@@ -8,8 +8,6 @@ LightSource::LightSource(Vector2f position, vector<VertexArray*>* walls, int ste
 
 LightSource::~LightSource()
 {
-	delete intersectingPoints;
-	intersectingPoints = nullptr;
 
 	vector<Ray*>::iterator it;
 
@@ -23,7 +21,7 @@ LightSource::~LightSource()
 	rays = nullptr;
 }
 
-vector<Ray*>* LightSource::GetRays()
+vector<Ray*>* LightSource::GetRays() const
 {
 	return rays;
 }
@@ -79,7 +77,7 @@ void LightSource::LookAtSingleObject(VertexArray& object)
 
 vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 {
-	intersectingRays->clear();
+	intersectingRays.clear();
 
 	vector<Ray*>::iterator rayIt;
 	vector<VertexArray*>::iterator wallIt;
@@ -90,15 +88,17 @@ vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 	//Goes through every ray, and checks every wall to find the closest intersection. 
 	for (rayIt = rays->begin(); rayIt < rays->end(); rayIt++)
 	{
-		//TODO: Extreme hotfix
+	
 		//To save the contender for closest point. 
-		Vector2f closest = Vector2f(10000, 10000);
+		Vector2f closest;
+		bool intersected;
 
 		for (wallIt = walls->begin(); wallIt < walls->end(); wallIt++)
 		{
 			//If there is an interection 
 			if ((*rayIt)->Cast(*(*wallIt)))
 			{
+				intersected = true;
 				//Caclulate the distance to the new point
 				float newDistance = GetDistance(position, (*rayIt)->GetIntersectionPoint());
 
@@ -112,16 +112,16 @@ vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 		}
 
 		// if it has actually found any intersection, add it to the closest intersection
-		if (closest.x != 10000 && closest.y != 10000)
+		if (intersected)
 		{
 			(*rayIt)->SetIntersection(closest);
-			intersectingRays->push_back(*rayIt);
+			intersectingRays.push_back(*rayIt);
 			closestPoint.push_back(closest);
 		}
 	}
 	//Update the list with itersecting points
-	intersectingPoints->clear();
-	intersectingPoints->insert(intersectingPoints->begin(), closestPoint.begin(), closestPoint.end());
+	intersectingPoints.clear();
+	intersectingPoints.insert(intersectingPoints.begin(), closestPoint.begin(), closestPoint.end());
 
 	return closestPoint;
 }

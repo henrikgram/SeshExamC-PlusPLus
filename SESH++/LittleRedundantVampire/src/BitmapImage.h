@@ -30,6 +30,10 @@ public:
 	BitmapColor GetColor(int x, int y) const;
 	void SetColor(const BitmapColor& color, int x, int y);
 
+	/// <summary>
+	/// Reads a BMP image file
+	/// </summary>
+	/// <param name="path">The specified path, has to be const char * because of ifstream</param>
 	void Read(const char* path);
 
 	void Export(const char* path);

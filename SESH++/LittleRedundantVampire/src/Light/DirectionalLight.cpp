@@ -19,7 +19,7 @@ DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition,
 
 	float length = GetDistance(startPosition, endPosition);
 
-	//TODO: ikke den bedste sammenhæng med vinkler og retning, men kan fikses senere, virker nu. 
+	//TODO: The angle is not relative to the line where the light emmits. So its counterintutitive to adjust the angle.
 	//Calculates the angle to raidans. 
 	float radians = angle * (PI / 180);
 
@@ -27,6 +27,7 @@ DirectionalLight::DirectionalLight(Vector2f startPosition, Vector2f endPosition,
 
 	for (int i = 0; i < length; i += stepSize)
 	{
+		//For now only vertical or horisontal is allowed
 		if (horisontal)
 		{
 			rays->push_back(new Ray(Vector2f(position.x + i, position.y), vectorAngle));
@@ -65,7 +66,7 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 	Color coneColor = Color(255, 255, 0, 120);
 
 	//Goes through all the intersecting points
-	for (it = intersectingRays->begin(); it < intersectingRays->end(); it++)
+	for (it = intersectingRays.begin(); it < intersectingRays.end(); it++)
 	{
 		VertexArray quad(Quads, 4);
 		//every triangle starts at the lights position
@@ -76,12 +77,12 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 		quad[1].position = (*it)->GetIntersectionPoint();
 		quad[1].color = coneColor;
 
-		int index = (it - intersectingRays->begin());
+		int index = (it - intersectingRays.begin());
 
 		auto nxIt = std::next(it, 1);
 
 		//and the next intersecting points, if it hasn't reached the end yet. 
-		if ((index + 1) != intersectingRays->size())
+		if ((index + 1) != intersectingRays.size())
 		{
 			quad[3].position = (*nxIt)->GetPosition();
 			quad[3].color = coneColor;
@@ -91,13 +92,7 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 		}
 		else
 		{
-			auto prvIt = std::prev(it, 1);
-			//if it has reached the end, then just connect it to the first intersecting point. 
-			quad[3].position = (*prvIt)->GetPosition();
-			quad[3].color = Color::Yellow;
-
-			quad[2].position = (*prvIt)->GetIntersectionPoint();
-			quad[2].color = Color::Yellow;
+			break;
 		}
 
 		lightCone.push_back(quad);
@@ -107,7 +102,7 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 	return lightCone;
 }
 
-//TODO: dosent work yet for directional light
+//TODO: dosent work yet for directional light. 
 void DirectionalLight::Move(Vector2f position)
 {
 	int newXDif = this->position.x - position.x;
