@@ -25,7 +25,7 @@ public:
 	Collider(Vector2f size, Vector2f position, float pushFactor, bool solid);
 	~Collider();
 
-	//TODO: Move should perhaps not be in this class. Collider shouldn't be responsible for moving an object perhaps a Rigidbody class.
+	//TODO:* Move should perhaps not be in this class. Collider shouldn't be responsible for moving an object perhaps a Rigidbody class.
 	//Currently used for moving objects being pushed.
 	
 	/// <summary>
@@ -34,7 +34,7 @@ public:
 	/// </summary>
 	/// <param name="deltaX"></param>
 	/// <param name="deltaY"></param>
-	void Move(float deltaX, float deltaY);
+	void Move(float difX, float difY);
 
 	/// <summary>
 	/// Checks if this collider intersects with a different collider.
@@ -69,10 +69,8 @@ public:
 	ComponentTag ToEnum() override;
 
 	void OnNotify(std::string eventName, IListener* sender) override;
-	void AttachToColliderDestroyedEvent(IListener* listener);
 
-	//TODO: Should this still be public? If yes then big W.
-	VertexArray* wall;
+	VertexArray* Wall;
 
 private:
 	Vector2f* size;

@@ -96,8 +96,3 @@ void Movement::Normalize()
 		*velocity = Vector2f(0.0f, 0.0f);
 	}
 }
-
-Vector2f* Movement::GetVelocity()
-{
-	return velocity;
-}

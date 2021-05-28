@@ -34,7 +34,6 @@ void AnimationController::MovementAnimation()
 {
 	//TODO:* OPTIMIZE Make it so this doesn't run notify unless there's a new animation update.
 
-
 	//No/idle animation
 	if (gameObject->GetDirection() == 'N')
 	{

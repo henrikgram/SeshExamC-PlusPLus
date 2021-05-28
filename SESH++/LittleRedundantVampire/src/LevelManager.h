@@ -20,7 +20,7 @@ class LevelManager
 {
 private:
 	//Where the bitmap-images are located.
-	string filePath = "src/Levels/";
+	string filePath = "Levels/";
 
 public:
 	/// <summary>
@@ -50,8 +50,7 @@ public:
 
 	/// <summary>
 	/// Instantiates all NPC for the first level.
-	/// TODO:*This isn't the best way to do this, but we didn't have time to
-	/// implement a better solution.
+	/// TODO:*This isn't the best way to do this, but we didn't have time to implement a better solution.
 	/// </summary>
 	GameObject* CreateNpcLevelOne(string msg, Vector2f position);
 };

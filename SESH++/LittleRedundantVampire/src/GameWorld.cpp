@@ -47,13 +47,6 @@ void GameWorld::OnNotify(std::string eventName, IListener* sender)
 {
 	if (eventName == "DeleteObject")
 	{
-		/*for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
-		{
-			if (*i == sender)
-			{
-				objectsToBeDeleted->push(*i);
-			}
-		}*/
 		GameObject* go = *find(gameObjects->begin(), gameObjects->end(), sender);
 		if (go != nullptr)
 		{
@@ -62,24 +55,12 @@ void GameWorld::OnNotify(std::string eventName, IListener* sender)
 	}
 	if (eventName == "ColliderDestroyed")
 	{
-		//for (auto i = colliders->begin(); i != colliders->end();)
-		//{
-		//	if (*i == sender)
-		//	{
-		//		i = colliders->erase(i);
-		//	}
-		//	else
-		//	{
-		//		i++;
-		//	}
-		//}
-
 		vector<Collider*>::iterator it;
 		it = find(colliders->begin(), colliders->end(), sender);
 		if (it != colliders->end())
 		{
 			vector<VertexArray*>::iterator wallIt;
-			wallIt = find(walls.begin(), walls.end(), (*it)->wall);
+			wallIt = find(walls.begin(), walls.end(), (*it)->Wall);
 			if (wallIt != walls.end())
 			{
 				walls.erase(wallIt);
@@ -87,26 +68,17 @@ void GameWorld::OnNotify(std::string eventName, IListener* sender)
 			colliders->erase(it);
 		}
 
-		/*it = find(movColliders->begin(), movColliders->end(), sender);
+		// Earases the first thing it finds on the list. If there are duplicates, it won't find them and delete them.
+		// We don't have duplicates at the time, so this would be okay to use too.
+		it = find(movColliders->begin(), movColliders->end(), sender);
 		if (it != movColliders->end())
 		{
 			movColliders->erase(it);
-		}*/
+		}
 
-		movColliders->erase(std::remove(movColliders->begin(), movColliders->end(), sender), movColliders->end());
-
-
-		/*for (auto i = movColliders->begin(); i != movColliders->end();)
-		{
-			if (*i == sender)
-			{
-				i = movColliders->erase(i);
-			}
-			else
-			{
-				i++;
-			}
-		}*/
+		// Below line of code erases every instance that matches the sender.
+		// We currently don't have duplicates, but this might be nice if we are ever unsure whether or not there will be duplicates.
+		//movColliders->erase(std::remove(movColliders->begin(), movColliders->end(), sender), movColliders->end());
 	}
 }
 
@@ -187,7 +159,7 @@ void GameWorld::Initialize()
 
 
 	//Hardcoded walls so light intersects with the objects
-	//TODO*: this should be calculated dynamically.
+	//TODO:* this should be calculated dynamically.
 	VertexArray* bookCaseWall1 = new VertexArray(sf::LinesStrip, 2);
 	(*bookCaseWall1)[0].position = Vector2f(8.4f * 96, 7.5f * 96);
 	(*bookCaseWall1)[0].color = Color::Red;
@@ -256,7 +228,7 @@ void GameWorld::DeleteObjects()
 	for (int i = 0; i < stackSize; i++)
 	{
 		GameObject* gO = objectsToBeDeleted->top();
-		//TODO: Maybe use find or remove_if instead. 
+		//TODO:* Maybe use find or remove_if instead.
 		for (auto i = gameObjects->begin(); i != gameObjects->end();)
 		{
 			if (*i == gO)
@@ -338,9 +310,9 @@ void GameWorld::Update(Time* timePerFrame)
 	auto stop = high_resolution_clock::now();
 
 	auto duration = duration_cast<std::chrono::microseconds>(stop - start);
-
-	std::cout << "Time taken by Update(): "
-		<< duration.count() << " microseconds" << endl;
+	 // For debugging.
+	//std::cout << "Time taken by Update(): "
+	//	<< duration.count() << " microseconds" << endl;
 }
 
 void GameWorld::Draw()
@@ -412,7 +384,7 @@ void GameWorld::Draw()
 		}
 	}
 
-	//TODO: For debugging. Remove before release
+	//TODO:* For debugging. Remove before release
 	//vector<VertexArray*>::iterator it;
 
 	//for (it = walls.begin(); it < walls.end(); it++)
@@ -502,16 +474,6 @@ vector<GameObject*>* GameWorld::GetGameObjects() const
 	return gameObjects;
 }
 
-stack<GameObject*> GameWorld::GetObjectsToBeDeleted() const
-{
-	return *objectsToBeDeleted;
-}
-
-void GameWorld::AddToObjectsToBeDeleted(GameObject* newObject)
-{
-	objectsToBeDeleted->push(newObject);
-}
-
 vector<Collider*> GameWorld::GetColliders() const
 {
 	return *colliders;
@@ -542,11 +504,6 @@ float GameWorld::GetScreenHeight() const
 	return view.getCenter().y - (view.getSize().y / 2);
 }
 
-Player* GameWorld::GetPlayerPointer() const
-{
-	return playerPointer;
-}
-
 void GameWorld::CloseGame()
 {
 	//Clear the stack of objectsToBeDeleted.
@@ -557,12 +514,6 @@ void GameWorld::CloseGame()
 		objectsToBeDeleted->pop();
 	}
 
-	//Add every gameobject in game to the stack of objectsToBeDeleted.
-	//for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
-	//{
-	//	objectsToBeDeleted->push(*i);
-	//}
-
 	//Call Destroy on and delete every gameObject.
 	int gameObjectsAmount = gameObjects->size();
 	for (int i = 0; i < gameObjectsAmount; i++)
@@ -571,8 +522,6 @@ void GameWorld::CloseGame()
 		delete gameObjects->at(i);
 		gameObjects->at(i) = nullptr;
 	}
-
-	//DeleteObjects();
 
 	gameObjects->clear();
 	colliders->clear();

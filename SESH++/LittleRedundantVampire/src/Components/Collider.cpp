@@ -2,16 +2,18 @@
 #include "Collider.h"
 #include "../GameWorld.h"
 
+// Tutorial followed for collision detection and pushing objects:
+// https://www.youtube.com/watch?v=l2iCYCLi6MU&t=1023s
 
 Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool solid)
 {
 	//So a object that contains a collider will be able to cast a shadow
-	wall = new VertexArray(LinesStrip, 2);
-	(*wall)[0].position.x = position.x - size.x / 1.8f;
-	(*wall)[0].position.y = position.y - size.y / 2;
+	Wall = new VertexArray(LinesStrip, 2);
+	(*Wall)[0].position.x = position.x - size.x / 1.8f;
+	(*Wall)[0].position.y = position.y - size.y / 2;
 
-	(*wall)[1].position.y = position.y - size.y / 2;
-	(*wall)[1].position.x = position.x + size.x / 1.8f;
+	(*Wall)[1].position.y = position.y - size.y / 2;
+	(*Wall)[1].position.x = position.x + size.x / 1.8f;
 
 	this->size = new Vector2f(size);
 	this->pushFactor = new float(std::min(std::max(pushFactor, 0.0f), 1.0f)); //Clamps the pushfactor betwwen 0 and 1.
@@ -29,14 +31,13 @@ Collider::~Collider()
 	delete solid;
 	solid = nullptr;
 
-	delete wall;
-	wall = nullptr;
+	delete Wall;
+	Wall = nullptr;
 }
 
-//TODO: �ndre delta til dif. find ud af om der er andre steder vi bruger delta.
-void Collider::Move(float deltaX, float deltaY)
+void Collider::Move(float difX, float difY)
 {
-	this->gameObject->SetPosition(this->gameObject->GetPosition() + Vector2f(deltaX, deltaY));
+	this->gameObject->SetPosition(this->gameObject->GetPosition() + Vector2f(difX, difY));
 }
 
 bool Collider::CheckCollision(Collider* other)
@@ -73,7 +74,8 @@ bool Collider::CheckCollision(Collider* other)
 			onColliderDestroyed.Attach(other);
 			other->onColliderDestroyed.Attach(this);
 		}
-    //TODO: Seems like side is not used at all  since it's NotDefined. Maybe delete it as a parameter.
+	    //TODO:* Seems like the "side" parameter of this is not used at all since it's NotDefined.
+		// Maybe delete it as a parameter from the method.
 		onColliding.Notify(other->gameObject->GetObjectTag(), "NotDefined");
 
 		Push(Vector2f(difX, difY), Vector2f(intersectX, intersectY), other);
@@ -174,11 +176,11 @@ void Collider::Update(Time* timePerFrame)
 {
 	UpdateListOfCurrentCollisions();
 
-	(*wall)[0].position.x = gameObject->GetPosition().x - size->x / 1.8f;
-	(*wall)[0].position.y = gameObject->GetPosition().y - size->y / 2;
+	(*Wall)[0].position.x = gameObject->GetPosition().x - size->x / 1.8f;
+	(*Wall)[0].position.y = gameObject->GetPosition().y - size->y / 2;
 
-	(*wall)[1].position.y = gameObject->GetPosition().y - size->y / 2;
-	(*wall)[1].position.x = gameObject->GetPosition().x + size->x / 1.8f;
+	(*Wall)[1].position.y = gameObject->GetPosition().y - size->y / 2;
+	(*Wall)[1].position.x = gameObject->GetPosition().x + size->x / 1.8f;
 }
 
 void Collider::Destroy()
@@ -215,10 +217,4 @@ void Collider::OnNotify(std::string eventName, IListener* sender)
 			}
 		}
 	}
-}
-
-//TODO: Do we use this?
-void Collider::AttachToColliderDestroyedEvent(IListener* listener)
-{
-	onColliderDestroyed.Attach(listener);
 }

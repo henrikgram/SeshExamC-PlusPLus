@@ -100,7 +100,9 @@ void GameObject::Start()
 		it->second->Start();
 	}
 
-	//TODO: måske en kommentar til dette?
+	//TODO:* Optimize this so only objects that need to be destroyed during runtime can do the following.
+	// GameWorld::Instance is attached so that when an object calls the selfdestruct method,
+	// GameWorld is notified that the object is ready to be deleted.
 	onCallSelfdestruct.Attach(GameWorld::GetInstance());
 }
 

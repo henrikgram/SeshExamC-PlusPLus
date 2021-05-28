@@ -68,7 +68,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		GameWorld::GetInstance()->AddToMovColliders(col);
 		go->AddComponent(col);
 
-		GameWorld::GetInstance()->walls.push_back(col->wall);
+		GameWorld::GetInstance()->walls.push_back(col->Wall);
 
 		go->SetObjectTag(ObjectTag::CRATE);
 		break;
@@ -101,7 +101,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		go->AddComponent(col);
 		go->SetObjectTag(ObjectTag::ENEMY);
 
-		GameWorld::GetInstance()->walls.push_back(col->wall);
+		GameWorld::GetInstance()->walls.push_back(col->Wall);
 		break;
 
 	case ObjectTag::KEY:

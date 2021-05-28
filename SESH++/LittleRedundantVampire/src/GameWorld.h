@@ -102,7 +102,7 @@ private:
 
 public:
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Main program is run here.
 	/// </summary>
 	void Run();
 
@@ -113,10 +113,6 @@ public:
 
 	//TODO:* Should not return a pointer, but we don't have time to fix it now.
 	vector<GameObject*>* GetGameObjects() const;
-
-	//TODO: EMMA Should lists be returned as pointers or as values? ALSO this is never used???
-	stack<GameObject*> GetObjectsToBeDeleted() const;
-	void AddToObjectsToBeDeleted(GameObject* newObject);
 
 	vector<Collider*> GetColliders() const;
 	void AddToColliders(Collider* collider);
@@ -129,9 +125,6 @@ public:
 
 	float GetScreenWidth() const;
 	float GetScreenHeight() const;
-
-	//TODO: EMMA -> Bruger vi den?
-	Player* GetPlayerPointer() const;
 
 	void CloseGame();
 };

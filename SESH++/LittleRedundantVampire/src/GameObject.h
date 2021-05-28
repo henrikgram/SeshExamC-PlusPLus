@@ -30,7 +30,6 @@ using namespace std;
 
 //TODO:* Maybe we can use the same rectangle for collider, sr and ac.
 
-
 /// <summary>
 /// The objects in the game. You can add components to them.
 /// </summary>
@@ -114,13 +113,6 @@ public:
 	/// Can be called from the components belonging to the gameobject.
 	/// </summary>
 	void CallSelfDestruct();
-
-	//TODO: EMMA Delete this?
-	///// <summary>
-	///// Used to attach a listener (like Gameworld) to the event onCallSelfDestruct.
-	///// </summary>
-	///// <param name="listener"></param>
-	//void AddListenerToCallSelfDestruct(IListener* listener);
 
 private:
 	Vector2f* position;
