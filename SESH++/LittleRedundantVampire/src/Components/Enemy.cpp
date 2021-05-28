@@ -73,8 +73,8 @@ void Enemy::OnNotifyCollision(ObjectTag otherTag, std::string side)
 
 void Enemy::PlayerDistance()
 {
-	targetDistance->x = target->GetPosition()->x - this->gameObject->GetPosition()->x;
-	targetDistance->y = target->GetPosition()->y - this->gameObject->GetPosition()->y;
+	targetDistance->x = target->GetPosition().x - this->gameObject->GetPosition().x;
+	targetDistance->y = target->GetPosition().y - this->gameObject->GetPosition().y;
 }
 
 ComponentTag Enemy::ToEnum()
@@ -110,7 +110,7 @@ void Enemy::Normalize()
 		velocity->x *= *speed;
 		velocity->y *= *speed;
 
-		*gameObject->GetPosition() += *velocity;
+		gameObject->SetPosition(gameObject->GetPosition() + *velocity);
 
 		//TODO:* OPTIMIZE Use MoveComponent here:
 		//Can be implemented as moveComponent later

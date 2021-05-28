@@ -36,29 +36,29 @@ void AnimationController::MovementAnimation()
 
 
 	//No/idle animation
-	if (*gameObject->GetDirection() == 'N')
+	if (gameObject->GetDirection() == 'N')
 	{
 		changeAnimation.Notify(noAniRow, this);
 	}
 
 	//Up
-	else if (*gameObject->GetDirection() == 'U')
+	else if (gameObject->GetDirection() == 'U')
 	{
 		changeAnimation.Notify(upAniRow, this);
 	}
 
 	//Down
-	else if (*gameObject->GetDirection() == 'D')
+	else if (gameObject->GetDirection() == 'D')
 	{
 		changeAnimation.Notify(downAniRow, this);
 	}
 
 	//Left
-	else if (*gameObject->GetDirection() == 'L')
+	else if (gameObject->GetDirection() == 'L')
 	{
-		if (!*spriteRenderer.GetFlipped())
+		if (!spriteRenderer.GetFlipped())
 		{
-			*spriteRenderer.GetFlipped() = true;
+			spriteRenderer.SetFlipped(true);
 			changeAnimation.Notify("flip", this);
 		}
 
@@ -66,11 +66,11 @@ void AnimationController::MovementAnimation()
 	}
 
 	//Right
-	else if (*gameObject->GetDirection() == 'R')
+	else if (gameObject->GetDirection() == 'R')
 	{
-		if (*spriteRenderer.GetFlipped())
+		if (spriteRenderer.GetFlipped())
 		{
-			*spriteRenderer.GetFlipped() = false;
+			spriteRenderer.SetFlipped(false);
 			changeAnimation.Notify("flip", this);
 		}
 

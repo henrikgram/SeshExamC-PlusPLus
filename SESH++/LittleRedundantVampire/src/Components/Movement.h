@@ -31,6 +31,7 @@ public:
 	/// <param name="velocity"></param>
 	void Move(Vector2f velocity);
 
+	//TODO: EMMA -> Bliver ikke brugt?
 	Vector2f* GetVelocity();
 
 private:

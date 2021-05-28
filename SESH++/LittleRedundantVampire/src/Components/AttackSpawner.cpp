@@ -12,20 +12,20 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 {
 	if (canAttack)
 	{
-		*gameObject->GetIsMovable() = false;
+		gameObject->SetIsMovable(false);
 
 		GameObject* go = new GameObject();
 		SpriteRenderer* sr;
 		Collider* col;
 
-		*go->GetPosition() = *gameObject->GetPosition();
-		*go->GetDirection() = *gameObject->GetDirection();
+		go->SetPosition(gameObject->GetPosition());
+		go->SetDirection(gameObject->GetDirection());
 
 		//TODO:* Attack doesn't really work. You can hold down Space and keep the attack on. It also doesn't show the proper sprite image right now.
 		int initialRow = 0;
 
 		//Which animation row to go with based on the direction og the attack.
-		switch (*go->GetDirection())
+		switch (go->GetDirection())
 		{
 		case 'L':
 			initialRow = 0;
@@ -43,11 +43,11 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 
 		sr = new SpriteRenderer(textureTag, Vector2u(1, (initialRow) + 1), Vector2u(1, 3));
 		this->objectTag = objectTag;
-		*go->GetObjectTag() = objectTag;
+		go->SetObjectTag(objectTag);
 
 		go->AddComponent(sr);
 
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, false);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 1.0f, false);
 		go->AddComponent(col);
 
 		GameWorld::GetInstance()->AddToColliders(col);
@@ -65,7 +65,7 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 		go->Awake();
 		go->Start();
 
-		GameWorld::GetInstance()->AddToGameObjects(go);
+		GameWorld::GetInstance()->GetGameObjects()->push_back(go);
 
 		attackTimer = 0.0f;
 		canAttack = false;
@@ -103,7 +103,7 @@ void AttackSpawner::Update(Time* timePerFrame)
 	if (attackTimer >= attackCooldown)
 	{
 		canAttack = true;
-		*gameObject->GetIsMovable() = true;
+		gameObject->SetIsMovable(true);
 	}
 }
 

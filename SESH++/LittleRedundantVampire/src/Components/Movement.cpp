@@ -31,30 +31,30 @@ void Movement::Update(Time* timePerFrame)
 	//No walking
 	if ((*velocity).x == 0 && (*velocity).y == 0)
 	{
-		*gameObject->GetDirection() = 'N';
+		gameObject->SetDirection('N');
 	}
 	//Up
 	if ((*velocity).y < 0)
 	{
-		*gameObject->GetDirection() = 'U';
+		gameObject->SetDirection('U');
 	}
 
 	//Down
 	if ((*velocity).y > 0)
 	{
-		*gameObject->GetDirection() = 'D';
+		gameObject->SetDirection('D');
 	}
 
 	//Left
 	if ((*velocity).x < 0)
 	{
-		*gameObject->GetDirection() = 'L';
+		gameObject->SetDirection('L');
 	}
 
 	//Right
 	if ((*velocity).x > 0)
 	{
-		*gameObject->GetDirection() = 'R';
+		gameObject->SetDirection('R');
 	}
 
 	Normalize();
@@ -90,7 +90,7 @@ void Movement::Normalize()
 		velocity->x *= speed;
 		velocity->y *= speed;
 
-		*gameObject->GetPosition() += *velocity;
+		gameObject->SetPosition(gameObject->GetPosition() + *velocity);
 		//After updating the gameObjects position we set the velocity to 0 again so the gameObject doesn't keep travelling in the same direction indefinately,
 		//since this method is called in Update.
 		*velocity = Vector2f(0.0f, 0.0f);

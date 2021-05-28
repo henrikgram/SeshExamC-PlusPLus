@@ -6,12 +6,12 @@ void EnemyIdleState::Patrol()
 {
 	// If the enemy has passed their original position since entering this state,
 	// they need to start walking left.
-	if (enemy->gameObject->GetPosition()->x > startPos->x)
+	if (enemy->gameObject->GetPosition().x > startPos->x)
 	{
 		*walkRight = false;
 	}
 	// If the enemy has passed the patrol distance, they need to start walking right.
-	if (enemy->gameObject->GetPosition()->x < (startPos->x - *patrolDistance))
+	if (enemy->gameObject->GetPosition().x < (startPos->x - *patrolDistance))
 	{
 		*walkRight = true;
 	}
@@ -20,15 +20,11 @@ void EnemyIdleState::Patrol()
 	{
 		// Patrol right.
 		enemy->Move(Vector2f(0.1f, 0.0f));
-		// TODO: ENEMY
-		//*enemy->gameObject->GetDirection() = 'R';
 	}
 	else
 	{
 		// Patrol left.
 		enemy->Move(Vector2f(-0.1f, 0.0f));
-		// TODO: ENEMY
-		//*enemy->gameObject->GetDirection() = 'L';
 	}
 }
 
@@ -54,7 +50,7 @@ void EnemyIdleState::Enter(Enemy* enemy)
 	patrolDistance = new float(300);
 	range = new int(300);
 	walkRight = new bool();
-	startPos = new Vector2f(*this->enemy->gameObject->GetPosition());
+	startPos = new Vector2f(this->enemy->gameObject->GetPosition());
 }
 
 

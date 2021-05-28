@@ -36,7 +36,7 @@ Collider::~Collider()
 //TODO: �ndre delta til dif. find ud af om der er andre steder vi bruger delta.
 void Collider::Move(float deltaX, float deltaY)
 {
-	*this->gameObject->GetPosition() += Vector2f(deltaX, deltaY);
+	this->gameObject->SetPosition(this->gameObject->GetPosition() + Vector2f(deltaX, deltaY));
 }
 
 bool Collider::CheckCollision(Collider* other)
@@ -73,9 +73,8 @@ bool Collider::CheckCollision(Collider* other)
 			onColliderDestroyed.Attach(other);
 			other->onColliderDestroyed.Attach(this);
 		}
-
-		//TODO: Seems like side is not used at all  since it's NotDefined. Maybe delete it as a parameter.
-		onColliding.Notify(*other->gameObject->GetObjectTag(), "NotDefined");
+    //TODO: Seems like side is not used at all  since it's NotDefined. Maybe delete it as a parameter.
+		onColliding.Notify(other->gameObject->GetObjectTag(), "NotDefined");
 
 		Push(Vector2f(difX, difY), Vector2f(intersectX, intersectY), other);
 
@@ -87,7 +86,7 @@ bool Collider::CheckCollision(Collider* other)
 
 Vector2f Collider::GetPosition() const
 {
-	return *gameObject->GetPosition();
+	return gameObject->GetPosition();
 }
 
 Vector2f Collider::GetHalfsize() const
@@ -106,13 +105,13 @@ void Collider::Push(Vector2f dif, Vector2f intersect, Collider* other)
 			{
 				//Colliding left
 				Move(intersect.x * (1.0f - *pushFactor), 0.0f);
-				onColliding.Notify(*other->gameObject->GetObjectTag(), "Left");
+				onColliding.Notify(other->gameObject->GetObjectTag(), "Left");
 			}
 			else
 			{
 				//Colliding right
 				Move(-intersect.x * (1.0f - *pushFactor), 0.0f);
-				onColliding.Notify(*other->gameObject->GetObjectTag(), "Right");
+				onColliding.Notify(other->gameObject->GetObjectTag(), "Right");
 			}
 		}
 		else
@@ -121,13 +120,13 @@ void Collider::Push(Vector2f dif, Vector2f intersect, Collider* other)
 			{
 				//Colliding top
 				Move(0.0f, intersect.y * (1.0f - *pushFactor));
-				onColliding.Notify(*other->gameObject->GetObjectTag(), "Top");
+				onColliding.Notify(other->gameObject->GetObjectTag(), "Top");
 			}
 			else
 			{
 				//Colliding bottom
 				Move(0.0f, -intersect.y * (1.0f - *pushFactor));
-				onColliding.Notify(*other->gameObject->GetObjectTag(), "Bottom");
+				onColliding.Notify(other->gameObject->GetObjectTag(), "Bottom");
 			}
 		}
 	}
@@ -175,11 +174,11 @@ void Collider::Update(Time* timePerFrame)
 {
 	UpdateListOfCurrentCollisions();
 
-	(*wall)[0].position.x = (*gameObject->GetPosition()).x - size->x / 1.8f;
-	(*wall)[0].position.y = (*gameObject->GetPosition()).y - size->y / 2;
+	(*wall)[0].position.x = gameObject->GetPosition().x - size->x / 1.8f;
+	(*wall)[0].position.y = gameObject->GetPosition().y - size->y / 2;
 
-	(*wall)[1].position.y = (*gameObject->GetPosition()).y - size->y / 2;
-	(*wall)[1].position.x = (*gameObject->GetPosition()).x + size->x / 1.8f;
+	(*wall)[1].position.y = gameObject->GetPosition().y - size->y / 2;
+	(*wall)[1].position.x = gameObject->GetPosition().x + size->x / 1.8f;
 }
 
 void Collider::Destroy()

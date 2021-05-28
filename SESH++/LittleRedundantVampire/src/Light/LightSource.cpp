@@ -21,9 +21,9 @@ LightSource::~LightSource()
 	rays = nullptr;
 }
 
-vector<Ray*>* LightSource::GetRays() const
+vector<Ray*> LightSource::GetRays() const
 {
-	return rays;
+	return *rays;
 }
 
 Vector2f LightSource::GetPosition() const
