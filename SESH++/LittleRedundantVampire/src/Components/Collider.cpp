@@ -5,7 +5,7 @@
 
 Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool solid)
 {
-	//TODO: Henrik tjek The wall that stops the light. 
+	//So a object that contains a collider will be able to cast a shadow
 	wall = new VertexArray(LinesStrip, 2);
 	(*wall)[0].position.x = position.x - size.x / 1.8f;
 	(*wall)[0].position.y = position.y - size.y / 2;
@@ -28,12 +28,12 @@ Collider::~Collider()
 
 	delete solid;
 	solid = nullptr;
-	
+
 	delete wall;
 	wall = nullptr;
 }
 
-//TODO: Ændre delta til dif. find ud af om der er andre steder vi bruger delta.
+//TODO: ï¿½ndre delta til dif. find ud af om der er andre steder vi bruger delta.
 void Collider::Move(float deltaX, float deltaY)
 {
 	*this->gameObject->GetPosition() += Vector2f(deltaX, deltaY);
@@ -54,14 +54,14 @@ bool Collider::CheckCollision(Collider* other)
 
 	//Then we find the intersecting values which are absolute value of the difference in position minus the sum of our halfSize and the other colliders halfSize.
 	//Using absolute values for the difference means that no matter if the difference is a negative number we will view it as a positive because the difference
-	//between them should always be a positive. It doesn't make sense to have a negative difference. Either there is no différence or there is a (positive) difference. 
+	//between them should always be a positive. It doesn't make sense to have a negative difference. Either there is no diffï¿½rence or there is a (positive) difference.
 	float intersectX = abs(difX) - (otherHalfSize.x + halfSize.x);
 	float intersectY = abs(difY) - (otherHalfSize.y + halfSize.y);
 
-	//If the intersecting values are below zero that means we're intersecting/colliding with an object. 
+	//If the intersecting values are below zero that means we're intersecting/colliding with an object.
 	if (intersectX < 0.0f && intersectY < 0.0f)
 	{
-		//We check to see íf the object we are colliding with is already on our list of currentCollisions, i.e. if it's one we're already aware of.
+		//We check to see ï¿½f the object we are colliding with is already on our list of currentCollisions, i.e. if it's one we're already aware of.
 		if (std::find(currentCollisions.begin(), currentCollisions.end(), other) == currentCollisions.end())
 		{
 			//We push the other onto our list of currentCollisions and we push ourselves onto the others list of currentCollisions. This is because not all
@@ -158,7 +158,7 @@ void Collider::Awake()
 
 void Collider::Start()
 {
-	//We attach every component of the gameObject this Collider belongs to, to the list of listeners in onColliding and onNoLongerColliding. 
+	//We attach every component of the gameObject this Collider belongs to, to the list of listeners in onColliding and onNoLongerColliding.
 	unordered_map<ComponentTag, Component*>::iterator it;
 	for (it = (*gameObject->GetComponents()).begin(); it != (*gameObject->GetComponents()).end(); it++)
 	{
@@ -167,7 +167,7 @@ void Collider::Start()
 	}
 
 	//We attach the GameWorld::Instance to onColliderDestroyed, so we can tell the GameWorld when this collider is about to be destroyed and should be
-	//removed from the vectors of colliders and movable colliders in gameworld. 
+	//removed from the vectors of colliders and movable colliders in gameworld.
 	onColliderDestroyed.Attach(GameWorld::GetInstance());
 }
 
@@ -185,8 +185,8 @@ void Collider::Update(Time* timePerFrame)
 void Collider::Destroy()
 {
 	currentCollisions.clear();
-	//This Notify must be called before ~Collider to ensure that anything we are colliding with gets notified 
-	// that we are about to be deleted, so they can respond to this in time. Same with the GameWorld instance that is also a listener subscriebd to this event.  
+	//This Notify must be called before ~Collider to ensure that anything we are colliding with gets notified
+	// that we are about to be deleted, so they can respond to this in time. Same with the GameWorld instance that is also a listener subscriebd to this event.
 	onColliderDestroyed.Notify("ColliderDestroyed", this);
 	Collider::~Collider();
 }

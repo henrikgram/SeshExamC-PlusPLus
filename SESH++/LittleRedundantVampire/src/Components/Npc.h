@@ -44,6 +44,7 @@ public:
 
 private:
 
+	//Textbox that the npc can add to the gameworld
 	GameObject* textBox;
 	SpriteRenderer* textBoxSr;
 	// The text used for the NPC textbox.

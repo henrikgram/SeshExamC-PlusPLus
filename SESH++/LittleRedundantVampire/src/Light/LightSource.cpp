@@ -91,7 +91,7 @@ vector<Vector2f> LightSource::CastRays(vector<VertexArray*>* walls)
 
 		//To save the contender for closest point.
 		Vector2f closest;
-		bool intersected;
+		bool intersected = false;
 
 		for (wallIt = walls->begin(); wallIt < walls->end(); wallIt++)
 		{

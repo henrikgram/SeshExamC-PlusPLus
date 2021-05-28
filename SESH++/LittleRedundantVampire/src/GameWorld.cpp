@@ -183,111 +183,57 @@ void GameWorld::Initialize()
 		(*it)->Start();
 	}
 
-	VertexArray* tmp4 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp4)[0].position = Vector2f(0, 0);
-	(*tmp4)[0].color = Color::Red;
-	(*tmp4)[1].color = Color::Red;
-	(*tmp4)[1].position = Vector2f(2000, 0);
 
-	walls.push_back(tmp4);
+	//Hardcoded walls so light intersects with the objects
+	//TODO*: this should be calculated dynamically.
+	VertexArray* bookCaseWall1 = new VertexArray(sf::LinesStrip, 2);
+	(*bookCaseWall1)[0].position = Vector2f(8.4f * 96, 7.5f * 96);
+	(*bookCaseWall1)[0].color = Color::Red;
+	(*bookCaseWall1)[1].color = Color::Red;
+	(*bookCaseWall1)[1].position = Vector2f(10.5f * 96, 7.5f * 96);
 
-	VertexArray* tmp5 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp5)[0].position = Vector2f(2000, 0);
-	(*tmp5)[0].color = Color::Red;
-	(*tmp5)[1].color = Color::Red;
-	(*tmp5)[1].position = Vector2f(2000, 2000);
+	walls.push_back(bookCaseWall1);
 
-	walls.push_back(tmp5);
+	VertexArray* bookCaseWall2 = new VertexArray(sf::LinesStrip, 2);
+	(*bookCaseWall2)[0].position = Vector2f(12.4f * 96, 13.5f * 96);
+	(*bookCaseWall2)[0].color = Color::Red;
+	(*bookCaseWall2)[1].color = Color::Red;
+	(*bookCaseWall2)[1].position = Vector2f(14.5f * 96, 13.5f * 96);
 
+	walls.push_back(bookCaseWall2);
 
-	VertexArray* tmp6 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp6)[0].position = Vector2f(2000, 2000);
-	(*tmp6)[0].color = Color::Red;
-	(*tmp6)[1].color = Color::Red;
-	(*tmp6)[1].position = Vector2f(0, 2000);
+	VertexArray* bookCaseWall3 = new VertexArray(sf::LinesStrip, 2);
+	(*bookCaseWall3)[0].position = Vector2f(16.4f * 96, 10.5f * 96);
+	(*bookCaseWall3)[0].color = Color::Red;
+	(*bookCaseWall3)[1].color = Color::Red;
+	(*bookCaseWall3)[1].position = Vector2f(18.5f * 96, 10.5f * 96);
 
-	walls.push_back(tmp6);
+	walls.push_back(bookCaseWall3);
 
-	VertexArray* tmp7 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp7)[0].position = Vector2f(0, 2000);
-	(*tmp7)[0].color = Color::Red;
-	(*tmp7)[1].color = Color::Red;
-	(*tmp7)[1].position = Vector2f(0, 0);
+	VertexArray* longWallPuzzleSection = new VertexArray(sf::LinesStrip, 2);
+	(*longWallPuzzleSection)[0].position = Vector2f(16.5f * 96, 24.5f * 96);
+	(*longWallPuzzleSection)[0].color = Color::Red;
+	(*longWallPuzzleSection)[1].color = Color::Red;
+	(*longWallPuzzleSection)[1].position = Vector2f(45.5f * 96, 24.5f * 96);
 
-	walls.push_back(tmp7);
+	walls.push_back(longWallPuzzleSection);
 
-	VertexArray* tmp8 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp8)[0].position = Vector2f(800, 1500);
-	(*tmp8)[0].color = Color::Red;
-	(*tmp8)[1].color = Color::Red;
-	(*tmp8)[1].position = Vector2f(1100, 1500);
+	VertexArray* EnemyAreaWall1 = new VertexArray(sf::LinesStrip, 2);
+	(*EnemyAreaWall1)[0].position = Vector2f(36.4f * 96, 16.5f * 96);
+	(*EnemyAreaWall1)[0].color = Color::Red;
+	(*EnemyAreaWall1)[1].color = Color::Red;
+	(*EnemyAreaWall1)[1].position = Vector2f(38.6f * 96, 16.5f * 96);
 
-	walls.push_back(tmp8);
-
-	VertexArray* cursedPlayerWall = new VertexArray(sf::LinesStrip, 2);
-	(*cursedPlayerWall)[0].position = Vector2f(900, 1500);
-	(*cursedPlayerWall)[0].color = Color::Red;
-	(*cursedPlayerWall)[1].color = Color::Red;
-	(*cursedPlayerWall)[1].position = Vector2f(1000, 1500);
-
-	walls.push_back(cursedPlayerWall);
-
-	VertexArray* tmp9 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp9)[0].position = Vector2f(8.4f * 96, 7.5f * 96);
-	(*tmp9)[0].color = Color::Red;
-	(*tmp9)[1].color = Color::Red;
-	(*tmp9)[1].position = Vector2f(10.5f * 96, 7.5f * 96);
-
-	walls.push_back(tmp9);
-
-	VertexArray* tmp10 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp10)[0].position = Vector2f(12.4f * 96, 13.5f * 96);
-	(*tmp10)[0].color = Color::Red;
-	(*tmp10)[1].color = Color::Red;
-	(*tmp10)[1].position = Vector2f(14.5f * 96, 13.5f * 96);
-
-	walls.push_back(tmp10);
-
-	VertexArray* tmp11 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp11)[0].position = Vector2f(16.4f * 96, 10.5f * 96);
-	(*tmp11)[0].color = Color::Red;
-	(*tmp11)[1].color = Color::Red;
-	(*tmp11)[1].position = Vector2f(18.5f * 96, 10.5f * 96);
-
-	walls.push_back(tmp11);
-
-	VertexArray* tmp12 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp12)[0].position = Vector2f(22 * 96, 25 * 96);
-	(*tmp12)[0].color = Color::Red;
-	(*tmp12)[1].color = Color::Red;
-	(*tmp12)[1].position = Vector2f(23 * 96, 25 * 96);
-
-	walls.push_back(tmp12);
-
-	VertexArray* tmp13 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp13)[0].position = Vector2f(18.5f * 96, 24.5f * 96);
-	(*tmp13)[0].color = Color::Red;
-	(*tmp13)[1].color = Color::Red;
-	(*tmp13)[1].position = Vector2f(52.5f * 96, 24.5f * 96);
-
-	walls.push_back(tmp13);
-
-	VertexArray* tmp14 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp14)[0].position = Vector2f(36.4f * 96, 16.5f * 96);
-	(*tmp14)[0].color = Color::Red;
-	(*tmp14)[1].color = Color::Red;
-	(*tmp14)[1].position = Vector2f(38.6f * 96, 16.5f * 96);
-
-	walls.push_back(tmp14);
+	walls.push_back(EnemyAreaWall1);
 
 
-	VertexArray* tmp15 = new VertexArray(sf::LinesStrip, 2);
-	(*tmp15)[0].position = Vector2f(40.4f * 96, 22.5f * 96);
-	(*tmp15)[0].color = Color::Red;
-	(*tmp15)[1].color = Color::Red;
-	(*tmp15)[1].position = Vector2f(42.6f * 96, 22.5f * 96);
+	VertexArray* EnemyAreaWall2 = new VertexArray(sf::LinesStrip, 2);
+	(*EnemyAreaWall2)[0].position = Vector2f(40.4f * 96, 22.5f * 96);
+	(*EnemyAreaWall2)[0].color = Color::Red;
+	(*EnemyAreaWall2)[1].color = Color::Red;
+	(*EnemyAreaWall2)[1].position = Vector2f(42.6f * 96, 22.5f * 96);
 
-	walls.push_back(tmp15);
+	walls.push_back(EnemyAreaWall2);
 
 	sound.setBuffer(buffer);
 	sound.setLoop(true);
@@ -465,12 +411,12 @@ void GameWorld::Draw()
 	}
 
 	//TODO: For debugging. Remove before release
-	vector<VertexArray*>::iterator it;
+	//vector<VertexArray*>::iterator it;
 
-	for (it = walls.begin(); it < walls.end(); it++)
-	{
-		window.draw(*(*it));
-	}
+	//for (it = walls.begin(); it < walls.end(); it++)
+	//{
+	//	window.draw(*(*it));
+	//}
 
 	window.display();
 }

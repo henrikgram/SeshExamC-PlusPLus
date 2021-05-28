@@ -25,7 +25,7 @@ public:
 	/// <param name="nextState"> The new state that enemy needs to change to </param>
 	void TransitionTo(IState* nextState);
 	/// <summary>
-	/// We run all Enter() methods from here.
+	/// All Enter() methods run from here.
 	/// Initial code that needs to run before the "real" state code can start.
 	/// </summary>
 	/// <param name="enemy"></param>
