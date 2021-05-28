@@ -256,7 +256,7 @@ C:\Users\Signe\Documents\GitHub\SeshExamC-PlusPLus\SESH++\LittleRedundantVampire
   MoveCommand.cpp
   Generating Code...
   Compiling...
-  IGameEvent.cpp
+  GameEvent.cpp
   CollisionEvent.cpp
   Collider.cpp
   Attack.cpp

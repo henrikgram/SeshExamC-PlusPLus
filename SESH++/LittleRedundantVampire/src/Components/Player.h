@@ -6,7 +6,7 @@
 #include "../Asset.h"
 #include "AttackSpawner.h"
 #include <string>
-#include "../Observer/IGameEvent.h"
+#include "../Observer/GameEvent.h"
 #include "SpriteRenderer.h"
 #include "../Enum/ObjectTag.h"
 

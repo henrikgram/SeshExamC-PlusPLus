@@ -9,7 +9,7 @@
     <ClCompile Include="src\LevelManager.cpp" />
     <ClCompile Include="src\Components\Player.cpp" />
     <ClCompile Include="src\Command\MoveCommand.cpp" />
-    <ClCompile Include="src\Observer\IGameEvent.cpp" />
+    <ClCompile Include="src\Observer\GameEvent.cpp" />
     <ClCompile Include="src\Observer\CollisionEvent.cpp" />
     <ClCompile Include="src\Components\Collider.cpp" />
     <ClCompile Include="src\Components\Attack.cpp" />
@@ -42,7 +42,7 @@
     <ClInclude Include="src\BitmapImage.h" />
     <ClInclude Include="src\LevelManager.h" />
     <ClInclude Include="src\Components\Player.h" />
-    <ClInclude Include="src\Observer\IGameEvent.h" />
+    <ClInclude Include="src\Observer\GameEvent.h" />
     <ClInclude Include="src\Observer\CollisionEvent.h" />
     <ClInclude Include="src\Components\Collider.h" />
     <ClInclude Include="src\Components\Attack.h" />

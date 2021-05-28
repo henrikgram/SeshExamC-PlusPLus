@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "../Observer/CollisionEvent.h"
-#include "../Observer/IGameEvent.h"
+#include "../Observer/GameEvent.h"
 #include "../Component.h"
 
 using namespace sf;
@@ -77,8 +77,8 @@ private:
 	float* pushFactor;
 	bool* solid;
 	CollisionEvent onColliding;
-	IGameEvent onNoLongerColliding;
-	IGameEvent onColliderDestroyed;
+	GameEvent onNoLongerColliding;
+	GameEvent onColliderDestroyed;
 
 	std::list<Collider*> currentCollisions;
 };

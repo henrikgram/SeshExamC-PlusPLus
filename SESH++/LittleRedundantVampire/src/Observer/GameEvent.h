@@ -1,5 +1,5 @@
-#ifndef IGAMEEVENT_H
-#define IGAMEEVENT_H
+#ifndef GAMEEVENT_H
+#define GAMEEVENT_H
 
 #include <string>
 #include <list>
@@ -8,15 +8,14 @@
 using namespace std;
 
 
-//TODO: Remove I since it's no longer an interface.
 /// <summary>
 /// Observer: Game events.
 /// </summary>
-class IGameEvent
+class GameEvent
 {
 public:
-	IGameEvent();
-	~IGameEvent();
+	GameEvent();
+	~GameEvent();
 	/// <summary>
 	/// Attaches a listener to the event. 
 	/// </summary>

@@ -22,7 +22,7 @@ https://stackoverflow.com/questions/4964482/how-to-create-two-classes-in-c-which
 
 #include "Enum/ComponentTag.h"
 #include "Enum/ObjectTag.h"
-#include "Observer/IGameEvent.h"
+#include "Observer/GameEvent.h"
 #include "Observer/IListener.h"
 
 using namespace sf;
@@ -119,7 +119,7 @@ private:
 	ObjectTag* objectTag;
 	char* direction;
 	bool* shouldDraw;
-	IGameEvent onCallSelfdestruct;
+	GameEvent onCallSelfdestruct;
 	bool* isMovable;
 	//Map for all components attached to the gameobject
 	unordered_map<ComponentTag, Component*>* components;

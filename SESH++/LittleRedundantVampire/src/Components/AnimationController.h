@@ -2,7 +2,7 @@
 #define ANIMATIONCONTROLLER_H
 
 #include <string>
-#include "../Observer/IGameEvent.h"
+#include "../Observer/GameEvent.h"
 #include "SpriteRenderer.h"
 
 using namespace std;
@@ -56,7 +56,7 @@ private:
 
 
 private:
-	IGameEvent changeAnimation;
+	GameEvent changeAnimation;
 
 	SpriteRenderer& spriteRenderer;
 
