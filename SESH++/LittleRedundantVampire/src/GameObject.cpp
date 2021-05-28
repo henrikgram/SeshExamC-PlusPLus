@@ -132,9 +132,9 @@ Component* GameObject::GetComponent(ComponentTag tag) const
 	return (*components)[tag];
 }
 
-Vector2f* GameObject::GetPosition() const
+Vector2f GameObject::GetPosition() const
 {
-	return position;
+	return *position;
 }
 
 void GameObject::SetPosition(Vector2f newPosition)

@@ -79,7 +79,7 @@ public:
 	//Either do a Get that only returns the value and a Set that only alters the value,
 	//or just make a constant public pointer.
 	//This is true for many cases where we have a Get-method for returning a pointer.
-	Vector2f* GetPosition() const;
+	Vector2f GetPosition() const;
 	void SetPosition(Vector2f newPosition);
 
 	//See these following Get and Set for examples of how we should have done it with Position also.

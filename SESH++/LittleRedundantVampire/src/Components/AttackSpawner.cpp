@@ -18,7 +18,7 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 		SpriteRenderer* sr;
 		Collider* col;
 
-		*go->GetPosition() = *gameObject->GetPosition();
+		go->SetPosition(gameObject->GetPosition());
 		go->SetDirection(gameObject->GetDirection());
 
 		//TODO:* Attack doesn't really work. You can hold down Space and keep the attack on. It also doesn't show the proper sprite image right now.
@@ -47,7 +47,7 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 
 		go->AddComponent(sr);
 
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, false);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 1.0f, false);
 		go->AddComponent(col);
 
 		GameWorld::GetInstance()->AddToColliders(col);

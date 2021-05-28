@@ -86,15 +86,15 @@ void SpriteRenderer::Awake()
 
 void SpriteRenderer::Start()
 {
-	sprite->setPosition(*gameObject->GetPosition());
+	sprite->setPosition(gameObject->GetPosition());
 }
 
 void SpriteRenderer::Update(Time* timePerFrame)
 {
 	//TODO:* Make sure that the position is NOT OUTDATED
-	if (sprite->getPosition() != *gameObject->GetPosition())
+	if (sprite->getPosition() != gameObject->GetPosition())
 	{
-		sprite->setPosition(*gameObject->GetPosition());
+		sprite->setPosition(gameObject->GetPosition());
 	}
 }
 

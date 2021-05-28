@@ -117,7 +117,7 @@ void GameWorld::CreatePlayer()
 
 	sr = new SpriteRenderer(TextureTag::PLAYER_SHEET, Vector2u(1, 1), Vector2u(4, 4));
 
-	*go->GetPosition() = Vector2<float>(1000, 1000);
+	go->SetPosition(Vector2<float>(1000, 1000));
 	go->AddComponent(sr);
 
 	playerPointer = new Player();
@@ -145,7 +145,7 @@ void GameWorld::CreatePlayer()
 	float x = (float)sr->GetTextureRect().width;
 	float y = (float)sr->GetTextureRect().height;
 
-	col = new  Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
+	col = new  Collider(Vector2f(x, y), go->GetPosition(), 0.5f, true);
 	go->AddComponent(col);
 	colliders->push_back(col);
 	movColliders->push_back(col);
@@ -337,11 +337,11 @@ void GameWorld::Update(Time* timePerFrame)
 	vector<Collider*>::iterator movColIt;
 	for (movColIt = movColliders->begin(); movColIt < movColliders->end(); movColIt++)
 	{
-		if (((*movColIt)->GetPosition().x - playerPointer->gameObject->GetPosition()->x) < 3 * 96 &&
-			(playerPointer->gameObject->GetPosition()->x - (*movColIt)->GetPosition().x) < 3 * 96 &&
+		if (((*movColIt)->GetPosition().x - playerPointer->gameObject->GetPosition().x) < 3 * 96 &&
+			(playerPointer->gameObject->GetPosition().x - (*movColIt)->GetPosition().x) < 3 * 96 &&
 
-			((*movColIt)->GetPosition().y - playerPointer->gameObject->GetPosition()->y) < 3 * 96 &&
-			(playerPointer->gameObject->GetPosition()->y - (*movColIt)->GetPosition().y) < 3 * 96)
+			((*movColIt)->GetPosition().y - playerPointer->gameObject->GetPosition().y) < 3 * 96 &&
+			(playerPointer->gameObject->GetPosition().y - (*movColIt)->GetPosition().y) < 3 * 96)
 		{
 			for (colIt = colliders->begin(); colIt < colliders->end(); colIt++)
 			{
@@ -359,8 +359,8 @@ void GameWorld::Update(Time* timePerFrame)
 		vector<GameObject*>::size_type originalSize = gameObjects->size();
 
 		//camera culling
-		if (((*i)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6 * 96 &&
-			(playerPointer->gameObject->GetPosition()->x - (*i)->GetPosition()->x) < 6 * 96)
+		if (((*i)->GetPosition().x - playerPointer->gameObject->GetPosition().x) < 6 * 96 &&
+			(playerPointer->gameObject->GetPosition().x - (*i)->GetPosition().x) < 6 * 96)
 		{
 			if ((*i)->GetObjectTag() == ObjectTag::WINDOW)
 			{
@@ -369,8 +369,8 @@ void GameWorld::Update(Time* timePerFrame)
 			else
 			{
 				//if it isnt a window, cull the y axis as well
-				if (((*i)->GetPosition()->y - playerPointer->gameObject->GetPosition()->y) < 6 * 96 &&
-					(playerPointer->gameObject->GetPosition()->y - (*i)->GetPosition()->y) < 6 * 96)
+				if (((*i)->GetPosition().y - playerPointer->gameObject->GetPosition().y) < 6 * 96 &&
+					(playerPointer->gameObject->GetPosition().y - (*i)->GetPosition().y) < 6 * 96)
 				{
 					(*i)->Update(timePerFrame);
 				}
@@ -412,15 +412,15 @@ void GameWorld::Draw()
 		GameObject* go = gameObjects->at(i);
 
 		//camera culling
-		if (((go)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6 * 96 && //right
-			(playerPointer->gameObject->GetPosition()->x - (go)->GetPosition()->x) < 6 * 96) //left
+		if (((go)->GetPosition().x - playerPointer->gameObject->GetPosition().x) < 6 * 96 && //right
+			(playerPointer->gameObject->GetPosition().x - (go)->GetPosition().x) < 6 * 96) //left
 		{
 			if (go->GetShouldDraw())
 			{
 				sr = dynamic_cast<SpriteRenderer*>(gameObjects->at(i)->GetComponent(ComponentTag::SPRITERENDERER));
 
-				if (((go)->GetPosition()->y - playerPointer->gameObject->GetPosition()->y) < 6 * 96 &&
-					(playerPointer->gameObject->GetPosition()->y - (go)->GetPosition()->y) < 6 * 96)
+				if (((go)->GetPosition().y - playerPointer->gameObject->GetPosition().y) < 6 * 96 &&
+					(playerPointer->gameObject->GetPosition().y - (go)->GetPosition().y) < 6 * 96)
 				{
 					window.draw(sr->GetSprite());
 				}
@@ -514,7 +514,7 @@ void GameWorld::Run()
 		{
 			timeSinceLastUpdate -= timePerFrame;
 			Update(&timePerFrame);
-			view.setCenter(*playerPointer->gameObject->GetPosition());
+			view.setCenter(playerPointer->gameObject->GetPosition());
 		}
 
 		//The view you see in the window.

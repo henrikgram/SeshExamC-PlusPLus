@@ -55,7 +55,7 @@ void Player::Start()
 void Player::Update(Time* timePerFrame)
 {
 	//Manages the health bar.
-	*healthBar->GetPosition() = Vector2f((*gameObject->GetPosition()).x, (*gameObject->GetPosition()).y - 75);
+	healthBar->SetPosition(Vector2f((gameObject->GetPosition()).x, (gameObject->GetPosition()).y - 75));
 
 	//Checks damage.
 	if (damageTaken)

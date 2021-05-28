@@ -28,19 +28,24 @@ void Attack::Awake()
 	switch (gameObject->GetDirection())
 	{
 	case 'N':
-		(*gameObject->GetPosition()).y += 80.0f;
+		//(*gameObject->GetPosition()).y += 80.0f;
+		gameObject->SetPosition(Vector2f(gameObject->GetPosition().x, gameObject->GetPosition().y + 80.0f));
 		break;
 	case 'L':
-		(*gameObject->GetPosition()).x -= 70.0f;
+		//(*gameObject->GetPosition()).x -= 70.0f;
+		gameObject->SetPosition(Vector2f(gameObject->GetPosition().x, gameObject->GetPosition().y - 70.0f));
 		break;
 	case 'R':
-		(*gameObject->GetPosition()).x += 70.0f;
+		gameObject->SetPosition(Vector2f(gameObject->GetPosition().x + 70.0f, gameObject->GetPosition().y));
+		//(*gameObject->GetPosition()).x += 70.0f;
 		break;
 	case 'U':
-		(*gameObject->GetPosition()).y -= 80.0f;
+		gameObject->SetPosition(Vector2f(gameObject->GetPosition().x, gameObject->GetPosition().y - 80.0f));
+		//(*gameObject->GetPosition()).y -= 80.0f;
 		break;
 	case 'D':
-		(*gameObject->GetPosition()).y += 80.0f;
+		gameObject->SetPosition(Vector2f(gameObject->GetPosition().x, gameObject->GetPosition().y + 80.0f));
+		//(*gameObject->GetPosition()).y += 80.0f;
 		break;
 	}
 }

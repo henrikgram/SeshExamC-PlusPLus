@@ -34,7 +34,8 @@ Collider::~Collider()
 
 void Collider::Move(float deltaX, float deltaY)
 {
-	*this->gameObject->GetPosition() += Vector2f(deltaX, deltaY);
+	// TODO: Stinna signe, this might be a problem
+	this->gameObject->SetPosition(this->gameObject->GetPosition() + Vector2f(deltaX, deltaY));
 }
 
 bool Collider::CheckCollision(Collider* other)
@@ -73,7 +74,7 @@ bool Collider::CheckCollision(Collider* other)
 
 Vector2f Collider::GetPosition() const
 {
-	return *gameObject->GetPosition();
+	return gameObject->GetPosition();
 }
 
 Vector2f Collider::GetHalfsize() const
@@ -158,11 +159,11 @@ void Collider::Update(Time* timePerFrame)
 {
 	UpdateListOfCurrentCollisions();
 
-	(*wall)[0].position.x = (*gameObject->GetPosition()).x - size->x / 1.8f;
-	(*wall)[0].position.y = (*gameObject->GetPosition()).y - size->y / 2;
+	(*wall)[0].position.x = gameObject->GetPosition().x - size->x / 1.8f;
+	(*wall)[0].position.y = gameObject->GetPosition().y - size->y / 2;
 
-	(*wall)[1].position.y = (*gameObject->GetPosition()).y - size->y / 2;
-	(*wall)[1].position.x = (*gameObject->GetPosition()).x + size->x / 1.8f;
+	(*wall)[1].position.y = gameObject->GetPosition().y - size->y / 2;
+	(*wall)[1].position.x = gameObject->GetPosition().x + size->x / 1.8f;
 }
 
 void Collider::Destroy()

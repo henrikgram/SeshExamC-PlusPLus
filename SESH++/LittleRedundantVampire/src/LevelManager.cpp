@@ -44,7 +44,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::BOOKCASE:
 		sr = new SpriteRenderer(TextureTag::BOOKCASE);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 1.0f, true);
 		// TODO: Delete below line of code. No longer used and we won't need it either.
 		//(*GameWorld::GetInstance()->GetColliders()).push_back(col);
 		GameWorld::GetInstance()->AddToColliders(col);
@@ -55,7 +55,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::CHEST:
 		sr = new SpriteRenderer(TextureTag::CHEST);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 1.0f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		go->SetObjectTag(ObjectTag::CHEST);
@@ -65,7 +65,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	{
 		sr = new SpriteRenderer(TextureTag::CRATE);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.2f, true);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 0.2f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		GameWorld::GetInstance()->AddToMovColliders(col);
 		// TODO: Delete below line of code. No longer needed and we won't be needing it again.
@@ -81,7 +81,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::DOOR:
 		sr = new SpriteRenderer(TextureTag::DOOR);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 1.0f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		go->SetObjectTag(ObjectTag::DOOR);
@@ -107,7 +107,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 
 		x = sr->GetTextureRect().width;
 		y = sr->GetTextureRect().height;
-		col = new Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);
+		col = new Collider(Vector2f(x, y), go->GetPosition(), 0.5f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		GameWorld::GetInstance()->AddToMovColliders(col);
 		go->AddComponent(col);
@@ -119,7 +119,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::KEY:
 		sr = new SpriteRenderer(TextureTag::KEY);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 1.0f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		go->SetObjectTag(ObjectTag::KEY);
@@ -134,20 +134,20 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::WINDOW:
 		sr = new SpriteRenderer(TextureTag::WINDOW);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 1.0f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		go->SetObjectTag(ObjectTag::WINDOW);
-		go->AddComponent(new DirectionalLight(Vector2f(go->GetPosition()->x - sr->GetTexture().getSize().x / 2,
-			go->GetPosition()->y + sr->GetTexture().getSize().x / 2),
-			Vector2f(go->GetPosition()->x + sr->GetTexture().getSize().x / 2,
-			go->GetPosition()->y + sr->GetTexture().getSize().x / 2), &(GameWorld::GetInstance()->walls), 90, 10));
+		go->AddComponent(new DirectionalLight(Vector2f(go->GetPosition().x - sr->GetTexture().getSize().x / 2,
+			go->GetPosition().y + sr->GetTexture().getSize().x / 2),
+			Vector2f(go->GetPosition().x + sr->GetTexture().getSize().x / 2,
+			go->GetPosition().y + sr->GetTexture().getSize().x / 2), &(GameWorld::GetInstance()->walls), 90, 10));
 		break;
 
 	case ObjectTag::VASE:
 		sr = new SpriteRenderer(TextureTag::VASE);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 1.0f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		go->SetObjectTag(ObjectTag::VASE);
@@ -156,7 +156,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::WALL:
 		sr = new SpriteRenderer(TextureTag::WALL);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 1.0f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		go->SetObjectTag(ObjectTag::WALL);
@@ -182,7 +182,7 @@ GameObject* LevelManager::CreateNpcLevelOne(string msg, Vector2f position)
 	go->SetObjectTag(ObjectTag::NPC);
 	float x = sr->GetTextureRect().width;
 	float y = sr->GetTextureRect().height;
-	col = new Collider(Vector2f(x, y), *go->GetPosition(), 1.0f, false);
+	col = new Collider(Vector2f(x, y), go->GetPosition(), 1.0f, false);
 	GameWorld::GetInstance()->AddToColliders(col);
 	GameWorld::GetInstance()->AddToMovColliders(col);
 	go->AddComponent(col);

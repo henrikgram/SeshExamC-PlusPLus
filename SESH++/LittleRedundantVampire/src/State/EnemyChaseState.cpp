@@ -3,22 +3,22 @@
 void EnemyChaseState::ChasePlayer()
 {
 	// TODO: ENEMY
-	if (this->enemy->target->GetPosition()->x < this->enemy->gameObject->GetPosition()->x)
+	if (this->enemy->target->GetPosition().x < this->enemy->gameObject->GetPosition().x)
 	{
 		this->enemy->Move(Vector2f(-0.1f, 0.0f));
 		//*enemy->gameObject->GetDirection() = 'L';
 	}
-	if (this->enemy->target->GetPosition()->x > this->enemy->gameObject->GetPosition()->x)
+	if (this->enemy->target->GetPosition().x > this->enemy->gameObject->GetPosition().x)
 	{
 		this->enemy->Move(Vector2f(0.1f, 0.0f));
 		//*enemy->gameObject->GetDirection() = 'R';
 	}
-	if (this->enemy->target->GetPosition()->y < this->enemy->gameObject->GetPosition()->y)
+	if (this->enemy->target->GetPosition().y < this->enemy->gameObject->GetPosition().y)
 	{
 		this->enemy->Move(Vector2f(0.0f, -0.1f));
 		//*enemy->gameObject->GetDirection() = 'U';
 	}
-	if (this->enemy->target->GetPosition()->y > this->enemy->gameObject->GetPosition()->y)
+	if (this->enemy->target->GetPosition().y > this->enemy->gameObject->GetPosition().y)
 	{
 		this->enemy->Move(Vector2f(0.0f, 0.1f));
 		//*enemy->gameObject->GetDirection() = 'D';

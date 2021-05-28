@@ -55,7 +55,7 @@ void Npc::TextBoxRemoval()
 void Npc::Awake()
 {
 	textBox->SetObjectTag(ObjectTag::TEXT_BOX);
-	*textBox->GetPosition() = Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2));
+	textBox->SetPosition(Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2)));
 	textBox->AddComponent(textBoxSr);
 	textBox->AddComponent(new TextMessage(npcMessage, Vector2f(GameWorld::GetInstance()->GetScreenWidth() - (textBoxSr->GetSprite().getLocalBounds().width / 2), GameWorld::GetInstance()->GetScreenHeight())));
 }
@@ -69,7 +69,7 @@ void Npc::Update(Time* timePerFrame)
 	// Only draws the text if textShown is true.
 	if (*textShown)
 	{
-		*textBox->GetPosition() = Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2));
+		textBox->SetPosition(Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2)));
 	}
 }
 
