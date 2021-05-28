@@ -12,7 +12,7 @@ class AttackCommand : public ICommand
 {
 public:
 	/// <summary>
-	/// Constructor the attack command.
+	/// Constructor  for the attack command.
 	/// </summary>
 	/// <param name="attackReceiver">Reference to an attackspawner component.</param>
 	AttackCommand(AttackSpawner& attackReceiver);

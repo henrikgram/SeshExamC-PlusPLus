@@ -87,11 +87,13 @@ void GameWorld::OnNotify(std::string eventName, IListener* sender)
 			colliders->erase(it);
 		}
 
-		it = find(movColliders->begin(), movColliders->end(), sender);
+		/*it = find(movColliders->begin(), movColliders->end(), sender);
 		if (it != movColliders->end())
 		{
 			movColliders->erase(it);
-		}
+		}*/
+
+		movColliders->erase(std::remove(movColliders->begin(), movColliders->end(), sender), movColliders->end());
 
 
 		/*for (auto i = movColliders->begin(); i != movColliders->end();)
@@ -596,7 +598,7 @@ Player* GameWorld::GetPlayerPointer() const
 
 void GameWorld::CloseGame()
 {
-	//Clear the stack of objectsToBeDeleted first just in case, so there are no duplicates in the next step.
+	//Clear the stack of objectsToBeDeleted.
 	int stackSize = objectsToBeDeleted->size();
 
 	for (int i = 0; i < stackSize; i++)
@@ -605,12 +607,21 @@ void GameWorld::CloseGame()
 	}
 
 	//Add every gameobject in game to the stack of objectsToBeDeleted.
-	for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
+	//for (auto i = gameObjects->begin(); i != gameObjects->end(); i++)
+	//{
+	//	objectsToBeDeleted->push(*i);
+	//}
+
+	//Call Destroy on and delete every gameObject.
+	int gameObjectsAmount = gameObjects->size();
+	for (int i = 0; i < gameObjectsAmount; i++)
 	{
-		objectsToBeDeleted->push(*i);
+		gameObjects->at(i)->Destroy();
+		delete gameObjects->at(i);
+		gameObjects->at(i) = nullptr;
 	}
 
-	DeleteObjects();
+	//DeleteObjects();
 
 	gameObjects->clear();
 	colliders->clear();
