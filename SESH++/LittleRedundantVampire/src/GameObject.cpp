@@ -100,6 +100,7 @@ void GameObject::Start()
 		it->second->Start();
 	}
 
+	//TODO: måske en kommentar til dette?
 	onCallSelfdestruct.Attach(GameWorld::GetInstance());
 }
 

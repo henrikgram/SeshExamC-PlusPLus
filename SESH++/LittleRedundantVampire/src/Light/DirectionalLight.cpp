@@ -65,7 +65,7 @@ vector<VertexArray> DirectionalLight::GetLightCone()
 
 	vector<VertexArray> lightCone;
 
-	Color coneColor = Color(255, 255, 0, 120);
+	Color coneColor = Color(255, 255, 0, 150);
 
 	//Goes through all the intersecting points
 	for (it = intersectingRays.begin(); it < intersectingRays.end(); it++)

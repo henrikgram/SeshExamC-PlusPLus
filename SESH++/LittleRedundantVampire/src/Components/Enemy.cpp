@@ -112,7 +112,7 @@ void Enemy::Normalize()
 
 		*gameObject->GetPosition() += *velocity;
 
-		//TODO:* OPTIMIZE Use MoveCompoennt here:
+		//TODO:* OPTIMIZE Use MoveComponent here:
 		//Can be implemented as moveComponent later
 		*velocity = Vector2f(0.0f, 0.0f);
 	}

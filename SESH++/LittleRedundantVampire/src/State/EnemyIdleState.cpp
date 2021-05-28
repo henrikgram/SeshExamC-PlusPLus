@@ -34,7 +34,6 @@ void EnemyIdleState::Patrol()
 
 EnemyIdleState::~EnemyIdleState()
 {
-// Removes all variables.
 
 	delete range;
 	range = nullptr;

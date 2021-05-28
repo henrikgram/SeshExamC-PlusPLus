@@ -20,6 +20,10 @@ using namespace sf;
 class LightSource : public Component
 {
 public:
+
+	//Intersection code inspired by the folowing tutorial
+	//https://www.youtube.com/watch?v=TOEi6T2mtHo&t=1873s&ab_channel=KyleRobesKyleRobes
+
 	/// <summary>
 	///  pointlight, an Object which will beam out a number of Rays in every direction.
 	/// </summary>

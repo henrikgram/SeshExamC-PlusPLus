@@ -121,8 +121,8 @@ public:
 
 	vector<Collider*> GetMovColliders() const;
 	void AddToMovColliders(Collider* collider);
-
-	DirectionalLight* LightPointer;
+	
+	//The lines that the lights will check for intersection
 	vector<VertexArray*> walls;
 
 	float GetScreenWidth() const;

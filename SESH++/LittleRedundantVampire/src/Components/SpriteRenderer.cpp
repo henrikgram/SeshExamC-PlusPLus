@@ -73,6 +73,7 @@ SpriteRenderer::SpriteRenderer(TextureTag textureTag, Vector2u currentImage, Vec
 	textureRect->height = texture->getSize().y / float(this->imageCount->y);
 
 	// The standard width is always equal to the normal width.
+	//TODO: guys hvad gør det her lige lol???
 	textureRect->width = abs(textureRect->width);
 
 	sprite->setTextureRect(*textureRect);

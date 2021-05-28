@@ -11,8 +11,9 @@
 class MoveCommand : public ICommand
 {
 public:
+
 	/// <summary>
-	/// 
+	/// TODO: MISSING SUMMARY
 	/// </summary>
 	/// <param name="movementReceiver"></param>
 	/// <param name="velocity"></param>

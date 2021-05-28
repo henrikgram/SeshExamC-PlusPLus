@@ -50,7 +50,7 @@ public:
 
 	/// <summary>
 	/// Instantiates all NPC for the first level.
-	/// This isn't the best way to do this, but we didn't have time to
+	/// TODO:*This isn't the best way to do this, but we didn't have time to
 	/// implement a better solution.
 	/// </summary>
 	GameObject* CreateNpcLevelOne(string msg, Vector2f position);

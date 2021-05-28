@@ -5,6 +5,7 @@
 
 Collider::Collider(Vector2f size, Vector2f position, float pushFactor, bool solid)
 {
+	//So a object that contains a collider will be able to cast a shadow
 	wall = new VertexArray(LinesStrip, 2);
 	(*wall)[0].position.x = position.x - size.x / 1.8f;
 	(*wall)[0].position.y = position.y - size.y / 2;
