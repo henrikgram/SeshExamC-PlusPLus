@@ -71,9 +71,10 @@ public:
 
 	/// <summary>
 	/// Returns all the rays in the class.
+	/// Isn't used right now, but would be good for future use.
 	/// </summary>
 	/// <returns></returns>
-	vector<Ray*>* GetRays() const;
+	vector<Ray*> GetRays() const;
 
 	Vector2f GetPosition() const;
 

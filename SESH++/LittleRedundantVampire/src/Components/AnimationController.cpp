@@ -56,9 +56,9 @@ void AnimationController::MovementAnimation()
 	//Left
 	else if (gameObject->GetDirection() == 'L')
 	{
-		if (!*spriteRenderer.GetFlipped())
+		if (!spriteRenderer.GetFlipped())
 		{
-			*spriteRenderer.GetFlipped() = true;
+			spriteRenderer.SetFlipped(true);
 			changeAnimation.Notify("flip", this);
 		}
 
@@ -68,9 +68,9 @@ void AnimationController::MovementAnimation()
 	//Right
 	else if (gameObject->GetDirection() == 'R')
 	{
-		if (*spriteRenderer.GetFlipped())
+		if (spriteRenderer.GetFlipped())
 		{
-			*spriteRenderer.GetFlipped() = false;
+			spriteRenderer.SetFlipped(false);
 			changeAnimation.Notify("flip", this);
 		}
 

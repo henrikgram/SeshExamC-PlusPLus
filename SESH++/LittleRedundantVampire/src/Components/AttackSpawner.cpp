@@ -12,7 +12,7 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 {
 	if (canAttack)
 	{
-		gameObject->SetIsMovable('F');
+		gameObject->SetIsMovable(false);
 
 		GameObject* go = new GameObject();
 		SpriteRenderer* sr;
@@ -65,7 +65,7 @@ void AttackSpawner::CreateAttack(TextureTag textureTag, ObjectTag objectTag)
 		go->Awake();
 		go->Start();
 
-		GameWorld::GetInstance()->AddToGameObjects(go);
+		GameWorld::GetInstance()->GetGameObjects()->push_back(go);
 
 		attackTimer = 0.0f;
 		canAttack = false;
@@ -103,7 +103,7 @@ void AttackSpawner::Update(Time* timePerFrame)
 	if (attackTimer >= attackCooldown)
 	{
 		canAttack = true;
-		gameObject->SetIsMovable('T');
+		gameObject->SetIsMovable(true);
 	}
 }
 

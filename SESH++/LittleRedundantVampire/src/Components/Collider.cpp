@@ -34,7 +34,6 @@ Collider::~Collider()
 
 void Collider::Move(float deltaX, float deltaY)
 {
-	// TODO: Stinna signe, this might be a problem
 	this->gameObject->SetPosition(this->gameObject->GetPosition() + Vector2f(deltaX, deltaY));
 }
 

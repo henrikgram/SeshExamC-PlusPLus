@@ -554,9 +554,14 @@ vector<GameObject*>* GameWorld::GetGameObjects() const
 	return gameObjects;
 }
 
-void GameWorld::AddToGameObjects(GameObject* go)
+stack<GameObject*> GameWorld::GetObjectsToBeDeleted() const
 {
-	gameObjects->push_back(go);
+	return *objectsToBeDeleted;
+}
+
+void GameWorld::AddToObjectsToBeDeleted(GameObject* newObject)
+{
+	objectsToBeDeleted->push(newObject);
 }
 
 vector<Collider*> GameWorld::GetColliders() const

@@ -49,7 +49,9 @@ public:
 	/// Returns the texture.
 	/// </summary>
 	Texture GetTexture() const;
-	bool* GetFlipped() const;
+
+	bool GetFlipped() const;
+	void SetFlipped(bool newValue);
 	/// <summary>
 	/// Returns the textureRect.
 	/// </summary>

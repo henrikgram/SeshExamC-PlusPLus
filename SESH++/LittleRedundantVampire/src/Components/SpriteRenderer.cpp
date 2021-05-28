@@ -139,7 +139,12 @@ void SpriteRenderer::SetTextureRect(IntRect textureRect)
 	sprite->setTextureRect(textureRect);
 }
 
-bool* SpriteRenderer::GetFlipped() const
+bool SpriteRenderer::GetFlipped() const
 {
-	return flipped;
+	return *flipped;
+}
+
+void SpriteRenderer::SetFlipped(bool newValue)
+{
+	*flipped = newValue;
 }

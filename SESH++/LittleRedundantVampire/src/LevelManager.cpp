@@ -45,8 +45,6 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		sr = new SpriteRenderer(TextureTag::BOOKCASE);
 		go->AddComponent(sr);
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 1.0f, true);
-		// TODO: Delete below line of code. No longer used and we won't need it either.
-		//(*GameWorld::GetInstance()->GetColliders()).push_back(col);
 		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		go->SetObjectTag(ObjectTag::BOOKCASE);
@@ -68,8 +66,6 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), go->GetPosition(), 0.2f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		GameWorld::GetInstance()->AddToMovColliders(col);
-		// TODO: Delete below line of code. No longer needed and we won't be needing it again.
-		//(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
 		go->AddComponent(col);
 
 		GameWorld::GetInstance()->walls.push_back(col->wall);
@@ -96,14 +92,6 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		go->AddComponent(sr);
 		ac = new AnimationComponent(sr, Vector2u(4, 3), 200.0f, 1);
 		go->AddComponent(ac);
-
-		// TODO: ENEMY
-		//SpriteRenderer& srRef = *sr;
-		//AnimationController* acController;
-		//acController = new AnimationController(srRef, "3", "2", "0", "1", "1");
-		//go->AddComponent(acController);
-		//acController->AttachListenerToChangeAnimation(ac);
-		//HERE
 
 		x = sr->GetTextureRect().width;
 		y = sr->GetTextureRect().height;

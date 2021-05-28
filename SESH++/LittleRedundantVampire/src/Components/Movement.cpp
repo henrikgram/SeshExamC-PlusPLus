@@ -89,7 +89,6 @@ void Movement::Normalize()
 		velocity->x *= speed;
 		velocity->y *= speed;
 
-		//TODO: SIGNE STINNA check her
 		//*gameObject->GetPosition() += *velocity;
 		gameObject->SetPosition(gameObject->GetPosition() + *velocity);
 		*velocity = Vector2f(0.0f, 0.0f);

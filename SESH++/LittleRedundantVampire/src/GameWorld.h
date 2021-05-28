@@ -111,11 +111,13 @@ public:
 	/// </summary>
 	static GameWorld* GetInstance();
 
+	//TODO:* Should not return a pointer, but we don't have time to fix it now.
 	vector<GameObject*>* GetGameObjects() const;
 
-	void AddToGameObjects(GameObject* go);
+	//TODO: EMMA Should lists be returned as pointers or as values? ALSO this is never used???
+	stack<GameObject*> GetObjectsToBeDeleted() const;
+	void AddToObjectsToBeDeleted(GameObject* newObject);
 
-	stack<GameObject*>* GetObjectsToBeDeleted() const { return objectsToBeDeleted; }
 	vector<Collider*> GetColliders() const;
 	void AddToColliders(Collider* collider);
 
@@ -128,6 +130,7 @@ public:
 	float GetScreenWidth() const;
 	float GetScreenHeight() const;
 
+	//TODO: EMMA -> Bruger vi den?
 	Player* GetPlayerPointer() const;
 
 	void CloseGame();

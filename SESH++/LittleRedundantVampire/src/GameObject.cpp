@@ -167,16 +167,9 @@ bool GameObject::GetIsMovable() const
 	return *isMovable;
 }
 
-void GameObject::SetIsMovable(char newValue)
+void GameObject::SetIsMovable(bool newValue)
 {
-	if (newValue == 'T')
-	{
-		*isMovable = true;
-	}
-	else if (newValue == 'F')
-	{
-		*isMovable = false;
-	}
+	*isMovable = newValue;
 }
 
 unordered_map<ComponentTag, Component*>* GameObject::GetComponents() const
@@ -189,16 +182,9 @@ bool GameObject::GetShouldDraw() const
 	return *shouldDraw;
 }
 
-void GameObject::SetShouldDraw(char newValue)
+void GameObject::SetShouldDraw(bool newValue)
 {
-	if (newValue == 'T')
-	{
-		*shouldDraw = true;
-	}
-	else if (newValue == 'F')
-	{
-		*shouldDraw = false;
-	}
+	*shouldDraw = newValue;
 }
 
 void GameObject::CallSelfDestruct()

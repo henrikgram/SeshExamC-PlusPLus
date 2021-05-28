@@ -110,7 +110,6 @@ void Enemy::Normalize()
 		velocity->x *= *speed;
 		velocity->y *= *speed;
 
-		//TODO: SIGNE STINNA check her
 		gameObject->SetPosition(gameObject->GetPosition() + *velocity);
 
 		//TODO:* OPTIMIZE Use MoveCompoennt here:

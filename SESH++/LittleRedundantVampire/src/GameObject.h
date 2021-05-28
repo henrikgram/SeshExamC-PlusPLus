@@ -70,6 +70,7 @@ public:
 
 	/// <summary>
 	/// Gets a component based on ComponentTag.
+	/// Needs to return a pointer, because the Component-class is pure-virtual/an abstract class.
 	/// </summary>
 	Component* GetComponent(ComponentTag tag) const;
 
@@ -96,7 +97,7 @@ public:
 	/// Used for making the Player stand still while attack is active.
 	/// </summary>
 	/// <param name="newValue">'T' for True. 'F' for False.</param>
-	void SetIsMovable(char newValue);
+	void SetIsMovable(bool newValue);
 
 	unordered_map<ComponentTag, Component*>* GetComponents() const;
 
@@ -106,7 +107,7 @@ public:
 	/// Used for making the Player's healthbar only visible when taking damage.
 	/// </summary>
 	/// <param name="newValue">'T' for True. 'F' for False.</param>
-	void SetShouldDraw(char newValue);
+	void SetShouldDraw(bool newValue);
 
 	/// <summary>
 	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) that this GameObject is ready to be deleted.
@@ -114,6 +115,7 @@ public:
 	/// </summary>
 	void CallSelfDestruct();
 
+	//TODO: EMMA Delete this?
 	///// <summary>
 	///// Used to attach a listener (like Gameworld) to the event onCallSelfDestruct.
 	///// </summary>

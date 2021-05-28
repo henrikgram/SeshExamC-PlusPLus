@@ -20,15 +20,11 @@ void EnemyIdleState::Patrol()
 	{
 		// Patrol right.
 		enemy->Move(Vector2f(0.1f, 0.0f));
-		// TODO: ENEMY
-		//*enemy->gameObject->GetDirection() = 'R';
 	}
 	else
 	{
 		// Patrol left.
 		enemy->Move(Vector2f(-0.1f, 0.0f));
-		// TODO: ENEMY
-		//*enemy->gameObject->GetDirection() = 'L';
 	}
 }
 
