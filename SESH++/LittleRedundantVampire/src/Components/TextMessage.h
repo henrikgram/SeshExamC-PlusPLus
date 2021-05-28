@@ -39,7 +39,7 @@ public:
 	/// <summary>
 	/// Returns the text.
 	/// </summary>
-	Text GetMessage();
+	Text GetTextMessage();
 };
 
 #endif

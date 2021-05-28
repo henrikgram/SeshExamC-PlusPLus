@@ -37,7 +37,7 @@ void TextMessage::Update(Time* timePerFrame)
 	text->setPosition(Vector2f(GameWorld::GetInstance()->GetScreenWidth() - (text->getGlobalBounds().width / 2), GameWorld::GetInstance()->GetScreenHeight() + (text->getGlobalBounds().height *2)));
 }
 
-Text TextMessage::GetMessage()
+Text TextMessage::GetTextMessage()
 {
 	return *text;
 }

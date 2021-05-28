@@ -1,6 +1,7 @@
 ﻿#include "GameWorld.h"
 #include "Components/AnimationComponent.h"
 #include "Components/Npc.h"
+#include <Windows.h>
 
 // Camera code.
 const float VIEW_HEIGHT = 1024.0f;
@@ -129,6 +130,8 @@ void GameWorld::CreatePlayer()
 
 void GameWorld::Initialize()
 {
+	::ShowWindow(::GetConsoleWindow(), SW_HIDE);
+
 	LevelManager* lm = new LevelManager();
 	*gameObjects = lm->InstantiateLevel("Level1");
 
@@ -351,7 +354,7 @@ void GameWorld::Draw()
 
 					if (tm != nullptr)
 					{
-						window.draw(tm->GetMessage());
+						window.draw(tm->GetTextMessage());
 					}
 					else
 					{
