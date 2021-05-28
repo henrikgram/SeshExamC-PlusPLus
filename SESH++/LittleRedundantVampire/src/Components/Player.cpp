@@ -15,7 +15,6 @@ Player::Player()
 	healthBar = new GameObject();
 	srHealthBar = new SpriteRenderer(TextureTag::PLAYER_HEALTH, Vector2u(1, 1), Vector2u(1, 10));
 
-
 	invincibilityTimer = 0.0f;
 
 	invincible = false;

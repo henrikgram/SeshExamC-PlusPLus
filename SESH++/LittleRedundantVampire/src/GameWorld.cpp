@@ -288,12 +288,17 @@ void GameWorld::Initialize()
 	(*tmp15)[1].position = Vector2f(42.6f * 96, 22.5f * 96);
 
 	walls.push_back(tmp15);
+
+	sound.setBuffer(buffer);
+	sound.setLoop(true);
+	sound.play();
 }
 
 void GameWorld::LoadContent()
 {
 	// Loads all textures into the game.
 	Asset::GetInstance()->LoadTextures();
+	buffer.loadFromFile("Asset/Sly2OSTprague.ogg");
 }
 
 void GameWorld::DeleteObjects()

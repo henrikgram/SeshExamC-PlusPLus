@@ -54,7 +54,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	case ObjectTag::CHEST:
 		sr = new SpriteRenderer(TextureTag::CHEST);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.2f, true);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 1.0f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		go->AddComponent(col);
 		*go->GetObjectTag() = ObjectTag::CHEST;
@@ -64,7 +64,7 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 	{
 		sr = new SpriteRenderer(TextureTag::CRATE);
 		go->AddComponent(sr);
-		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.1f, true);
+		col = new Collider(Vector2f(sr->GetSprite().getTexture()->getSize().x, sr->GetSprite().getTexture()->getSize().y), *go->GetPosition(), 0.2f, true);
 		GameWorld::GetInstance()->AddToColliders(col);
 		GameWorld::GetInstance()->AddToMovColliders(col);
 		//(*GameWorld::GetInstance()->GetMovColliders()).push_back(col);
@@ -94,6 +94,15 @@ GameObject* LevelManager::CreateObject(ObjectTag tag, float posX, float posY)
 		go->AddComponent(sr);
 		ac = new AnimationComponent(sr, Vector2u(4, 3), 200.0f, 1);
 		go->AddComponent(ac);
+
+		// TODO: ENEMY
+		//SpriteRenderer& srRef = *sr;
+		//AnimationController* acController;
+		//acController = new AnimationController(srRef, "3", "2", "0", "1", "1");
+		//go->AddComponent(acController);
+		//acController->AttachListenerToChangeAnimation(ac);
+		//HERE
+
 		x = sr->GetTextureRect().width;
 		y = sr->GetTextureRect().height;
 		col = new Collider(Vector2f(x, y), *go->GetPosition(), 0.5f, true);

@@ -28,7 +28,6 @@ Collider::~Collider()
 	delete solid;
 	solid = nullptr;
 	
-	//TODO: Delete walls right now program crashes if I do the following.
 	delete wall;
 	wall = nullptr;
 }
@@ -83,13 +82,13 @@ Vector2f Collider::GetHalfsize() const
 	return tmp;
 }
 
-void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
+void Collider::Push(Vector2f dif, Vector2f intersect, Collider* other)
 {
 	if (*solid && *other->solid)
 	{
 		if (intersect.x > intersect.y)
 		{
-			if (delta.x > 0.0f)
+			if (dif.x > 0.0f)
 			{
 				//Colliding left
 				Move(intersect.x * (1.0f - *pushFactor), 0.0f);
@@ -104,7 +103,7 @@ void Collider::Push(Vector2f delta, Vector2f intersect, Collider* other)
 		}
 		else
 		{
-			if (delta.y > 0.0f)
+			if (dif.y > 0.0f)
 			{
 				//Colliding top
 				Move(0.0f, intersect.y * (1.0f - *pushFactor));

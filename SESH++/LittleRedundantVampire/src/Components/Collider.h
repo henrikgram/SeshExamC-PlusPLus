@@ -18,14 +18,14 @@ public:
 	/// <summary>
 	/// Collider Constructor
 	/// </summary>
-	/// <param name="size"> The size of the collisionBox i.e. the rectangle surrounding the object </param>
-	/// <param name="position"> Used to set the position of the collisionBox </param>
+	/// <param name="size"> The size of the collider (x = width and y = height) </param>
+	/// <param name="position"> Used to set the position of the collider </param>
 	/// <param name="pushFactor"> A float number between 0.0f and 1.0, where the lower the number the "lighter" the object seems. 1.0 means the object cannot be pushed.</param>
 	/// <param name="solid"> Refers to whether or not the collider belongs to a solid object. Some objects are not solid and can be passed through such as ghosts.</param>
 	Collider(Vector2f size, Vector2f position, float pushFactor, bool solid);
 	~Collider();
 
-	//Move should perhaps not be in this class. Collider shouldn't be responsible for moving an object perhaps a Rigidbody class.
+	//TODO: Move should perhaps not be in this class. Collider shouldn't be responsible for moving an object perhaps a Rigidbody class.
 	//Currently used for moving objects being pushed.
 	
 	/// <summary>
@@ -42,19 +42,22 @@ public:
 	/// <param name="other"> The collider we want to see if we're intersecting with </param>
 	/// <returns></returns>
 	bool CheckCollision(Collider* other);
+
 	Vector2f GetPosition() const;
 	Vector2f GetHalfsize() const;
 
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Pushes solid objects when they intersect, based on their pushfactor.
 	/// </summary>
 	/// <param name="delta"></param>
 	/// <param name="intersect"></param>
 	/// <param name="other"></param>
-	void Push(Vector2f delta, Vector2f intersect, Collider* other);
+	void Push(Vector2f dif, Vector2f intersect, Collider* other);
 
 	/// <summary>
-	/// TODO: SUMMARY
+	/// Checks if we are still intersecting with the colliders on our list of currentCollisions. 
+	/// If not the event onNoLongerColliding is called and the collider is removed from the list. The collider is also detached
+	/// from the listeners of the event onColliderDestroyed because we are no longer interested in telling this other collider if we are destroyed. 
 	/// </summary>
 	void UpdateListOfCurrentCollisions();
 
@@ -68,10 +71,10 @@ public:
 	void OnNotify(std::string eventName, IListener* sender) override;
 	void AttachToColliderDestroyedEvent(IListener* listener);
 
+	//TODO: Shoueld this still be public? If yes then big W.
 	VertexArray* wall;
 
 private:
-	//RectangleShape* collisionBox;
 	Vector2f* size;
 	float* pushFactor;
 	bool* solid;

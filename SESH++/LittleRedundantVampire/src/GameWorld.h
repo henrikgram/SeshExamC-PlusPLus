@@ -51,6 +51,9 @@ private:
 	Movement* movementPointer;
 	PlayerInvoker* playerInvoker;
 
+	SoundBuffer buffer;
+	Sound sound;
+
 private:
 	GameWorld();
 	~GameWorld();
