@@ -21,8 +21,8 @@ public:
 	/// <summary>
 	/// Give a reference to the AttackSpawner and Movement component from the Player object.
 	/// </summary>
-	/// <param name="movementReceiver"></param>
-	/// <param name="attackReciever"></param>
+	/// <param name="movementReceiver"> Receiver refers to the object/class that holds the method we want to execute, in this case a Movement Component </param>
+	/// <param name="attackReciever"> Receiver refers to the object/class that holds the method we want to execute, in this case a AttackSpawner </param>
 	PlayerInvoker(Movement& movementReceiver, AttackSpawner& attackReciever);
 	~PlayerInvoker();
 
