@@ -31,30 +31,30 @@ void Movement::Update(Time* timePerFrame)
 	//No walking
 	if ((*velocity).x == 0 && (*velocity).y == 0)
 	{
-		*gameObject->GetDirection() = 'N';
+		gameObject->SetDirection('N');
 	}
 	//Up
 	if ((*velocity).y < 0)
 	{
-		*gameObject->GetDirection() = 'U';
+		gameObject->SetDirection('U');
 	}
 
 	//Down
 	if ((*velocity).y > 0)
 	{
-		*gameObject->GetDirection() = 'D';
+		gameObject->SetDirection('D');
 	}
 
 	//Left
 	if ((*velocity).x < 0)
 	{
-		*gameObject->GetDirection() = 'L';
+		gameObject->SetDirection('L');
 	}
 
 	//Right
 	if ((*velocity).x > 0)
 	{
-		*gameObject->GetDirection() = 'R';
+		gameObject->SetDirection('R');
 	}
 
 	Normalize();

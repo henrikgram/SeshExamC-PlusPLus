@@ -142,19 +142,41 @@ void GameObject::SetPosition(Vector2f newPosition)
 	*position = newPosition;
 }
 
-ObjectTag* GameObject::GetObjectTag() const
+ObjectTag GameObject::GetObjectTag() const
 {
-	return objectTag;
+	return *objectTag;
 }
 
-char* GameObject::GetDirection() const
+void GameObject::SetObjectTag(ObjectTag newObjectTag)
 {
-	return direction;
+	*objectTag = newObjectTag;
 }
 
-bool* GameObject::GetIsMovable() const
+char GameObject::GetDirection() const
 {
-	return isMovable;
+	return *direction;
+}
+
+void GameObject::SetDirection(char newDirection)
+{
+	*direction = newDirection;
+}
+
+bool GameObject::GetIsMovable() const
+{
+	return *isMovable;
+}
+
+void GameObject::SetIsMovable(char newValue)
+{
+	if (newValue == 'T')
+	{
+		*isMovable = true;
+	}
+	else if (newValue == 'F')
+	{
+		*isMovable = false;
+	}
 }
 
 unordered_map<ComponentTag, Component*>* GameObject::GetComponents() const
@@ -162,9 +184,21 @@ unordered_map<ComponentTag, Component*>* GameObject::GetComponents() const
 	return components;
 }
 
-bool* GameObject::GetShouldDraw() const
+bool GameObject::GetShouldDraw() const
 {
-	return shouldDraw;
+	return *shouldDraw;
+}
+
+void GameObject::SetShouldDraw(char newValue)
+{
+	if (newValue == 'T')
+	{
+		*shouldDraw = true;
+	}
+	else if (newValue == 'F')
+	{
+		*shouldDraw = false;
+	}
 }
 
 void GameObject::CallSelfDestruct()

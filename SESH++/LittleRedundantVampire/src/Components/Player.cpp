@@ -43,7 +43,7 @@ void Player::Awake()
 	healthBar->Awake();
 	healthBar->Start();
 
-	*healthBar->GetShouldDraw() = false;
+	healthBar->SetShouldDraw('F');
 
 	(*GameWorld::GetInstance()->GetGameObjects()).push_back(healthBar);
 }
@@ -64,7 +64,7 @@ void Player::Update(Time* timePerFrame)
 		--*health;
 
 		damageTaken = false;
-		*healthBar->GetShouldDraw() = true;
+		healthBar->SetShouldDraw('T');
 	}
 
 	if (invincible)
@@ -74,7 +74,7 @@ void Player::Update(Time* timePerFrame)
 		if (invincibilityTimer >= 1000.0f)
 		{
 			invincible = false;
-			*healthBar->GetShouldDraw() = false;
+			healthBar->SetShouldDraw('F');
 
 			invincibilityTimer = 0.0f;
 		}

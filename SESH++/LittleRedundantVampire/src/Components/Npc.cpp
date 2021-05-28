@@ -38,7 +38,7 @@ void Npc::TextBoxRemoval()
 		for (auto i = (*GameWorld::GetInstance()->GetGameObjects()).begin(); i != (*GameWorld::GetInstance()->GetGameObjects()).end();)
 		{
 			// If we found the textbox, remove it.
-			if (*(*i)->GetObjectTag() == ObjectTag::TEXT_BOX)
+			if ((*i)->GetObjectTag() == ObjectTag::TEXT_BOX)
 			{
 				i = (*GameWorld::GetInstance()->GetGameObjects()).erase(i);
 			}
@@ -54,7 +54,7 @@ void Npc::TextBoxRemoval()
 
 void Npc::Awake()
 {
-	*textBox->GetObjectTag() = ObjectTag::TEXT_BOX;
+	textBox->SetObjectTag(ObjectTag::TEXT_BOX);
 	*textBox->GetPosition() = Vector2f(GameWorld::GetInstance()->GetScreenWidth(), GameWorld::GetInstance()->GetScreenHeight() + (textBoxSr->GetSprite().getLocalBounds().height / 2));
 	textBox->AddComponent(textBoxSr);
 	textBox->AddComponent(new TextMessage(npcMessage, Vector2f(GameWorld::GetInstance()->GetScreenWidth() - (textBoxSr->GetSprite().getLocalBounds().width / 2), GameWorld::GetInstance()->GetScreenHeight())));

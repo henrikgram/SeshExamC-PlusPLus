@@ -61,7 +61,7 @@ bool Collider::CheckCollision(Collider* other)
 			other->onColliderDestroyed.Attach(this);
 		}
 
-		onColliding.Notify(*other->gameObject->GetObjectTag(), "NotDefined");
+		onColliding.Notify(other->gameObject->GetObjectTag(), "NotDefined");
 
 		Push(Vector2f(difX, difY), Vector2f(intersectX, intersectY), other);
 
@@ -92,13 +92,13 @@ void Collider::Push(Vector2f dif, Vector2f intersect, Collider* other)
 			{
 				//Colliding left
 				Move(intersect.x * (1.0f - *pushFactor), 0.0f);
-				onColliding.Notify(*other->gameObject->GetObjectTag(), "Left");
+				onColliding.Notify(other->gameObject->GetObjectTag(), "Left");
 			}
 			else
 			{
 				//Colliding right
 				Move(-intersect.x * (1.0f - *pushFactor), 0.0f);
-				onColliding.Notify(*other->gameObject->GetObjectTag(), "Right");
+				onColliding.Notify(other->gameObject->GetObjectTag(), "Right");
 			}
 		}
 		else
@@ -107,13 +107,13 @@ void Collider::Push(Vector2f dif, Vector2f intersect, Collider* other)
 			{
 				//Colliding top
 				Move(0.0f, intersect.y * (1.0f - *pushFactor));
-				onColliding.Notify(*other->gameObject->GetObjectTag(), "Top");
+				onColliding.Notify(other->gameObject->GetObjectTag(), "Top");
 			}
 			else
 			{
 				//Colliding bottom
 				Move(0.0f, -intersect.y * (1.0f - *pushFactor));
-				onColliding.Notify(*other->gameObject->GetObjectTag(), "Bottom");
+				onColliding.Notify(other->gameObject->GetObjectTag(), "Bottom");
 			}
 		}
 	}

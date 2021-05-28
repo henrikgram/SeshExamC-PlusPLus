@@ -111,7 +111,7 @@ void GameWorld::OnNotify(std::string eventName, IListener* sender)
 void GameWorld::CreatePlayer()
 {
 	GameObject* go = new GameObject();
-	*go->GetObjectTag() = ObjectTag::PLAYER;
+	go->SetObjectTag(ObjectTag::PLAYER);
 	SpriteRenderer* sr;
 	Collider* col;
 
@@ -164,7 +164,7 @@ void GameWorld::Initialize()
 
 	for (it = gameObjects->begin(); it < gameObjects->end(); it++)
 	{
-		if (*(*it)->GetObjectTag() == ObjectTag::ENEMY)
+		if ((*it)->GetObjectTag() == ObjectTag::ENEMY)
 		{
 			Enemy* e;
 			e = dynamic_cast<Enemy*>((*it)->GetComponent(ComponentTag::ENEMY));
@@ -362,7 +362,7 @@ void GameWorld::Update(Time* timePerFrame)
 		if (((*i)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6 * 96 &&
 			(playerPointer->gameObject->GetPosition()->x - (*i)->GetPosition()->x) < 6 * 96)
 		{
-			if (*(*i)->GetObjectTag() == ObjectTag::WINDOW)
+			if ((*i)->GetObjectTag() == ObjectTag::WINDOW)
 			{
 				(*i)->Update(timePerFrame);
 			}
@@ -415,7 +415,7 @@ void GameWorld::Draw()
 		if (((go)->GetPosition()->x - playerPointer->gameObject->GetPosition()->x) < 6 * 96 && //right
 			(playerPointer->gameObject->GetPosition()->x - (go)->GetPosition()->x) < 6 * 96) //left
 		{
-			if (*go->GetShouldDraw())
+			if (go->GetShouldDraw())
 			{
 				sr = dynamic_cast<SpriteRenderer*>(gameObjects->at(i)->GetComponent(ComponentTag::SPRITERENDERER));
 
@@ -425,7 +425,7 @@ void GameWorld::Draw()
 					window.draw(sr->GetSprite());
 				}
 
-				if (*go->GetObjectTag() == ObjectTag::TEXT_BOX)
+				if (go->GetObjectTag() == ObjectTag::TEXT_BOX)
 				{
 					TextMessage* tm = dynamic_cast<TextMessage*>(gameObjects->at(i)->GetComponent(ComponentTag::TEXT_MESSAGE));
 
@@ -439,7 +439,7 @@ void GameWorld::Draw()
 						tm = nullptr;
 					}
 				}
-				else if (*go->GetObjectTag() == ObjectTag::WINDOW)
+				else if (go->GetObjectTag() == ObjectTag::WINDOW)
 				{
 					LightSource* light = dynamic_cast<LightSource*>(gameObjects->at(i)->GetComponent(ComponentTag::LIGHT));
 

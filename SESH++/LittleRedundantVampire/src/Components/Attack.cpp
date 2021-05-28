@@ -25,7 +25,7 @@ void Attack::Awake()
 {
 
 	//Positions the attack according to the callers direction.
-	switch (*gameObject->GetDirection())
+	switch (gameObject->GetDirection())
 	{
 	case 'N':
 		(*gameObject->GetPosition()).y += 80.0f;

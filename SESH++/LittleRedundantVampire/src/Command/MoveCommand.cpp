@@ -15,7 +15,7 @@ MoveCommand::~MoveCommand()
 void MoveCommand::Execute()
 {
 	//if the Player can move, run the Move method.
-	if (*movementReceiver.gameObject->GetIsMovable())
+	if (movementReceiver.gameObject->GetIsMovable())
 	{
 		movementReceiver.Move(velocity);
 	}

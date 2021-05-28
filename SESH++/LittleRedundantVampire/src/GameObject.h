@@ -82,15 +82,31 @@ public:
 	Vector2f* GetPosition() const;
 	void SetPosition(Vector2f newPosition);
 
-	ObjectTag* GetObjectTag() const;
+	//See these following Get and Set for examples of how we should have done it with Position also.
 
-	char* GetDirection() const;
+	ObjectTag GetObjectTag() const;
+	void SetObjectTag(ObjectTag newObjectTag);
 
-	bool* GetIsMovable() const;
+	char GetDirection() const;
+	void SetDirection(char newDirection);
+
+	bool GetIsMovable() const;
+	/// <summary>
+	/// Sets isMovable. Determines whether the object can move or not.
+	/// Used for making the Player stand still while attack is active.
+	/// </summary>
+	/// <param name="newValue">'T' for True. 'F' for False.</param>
+	void SetIsMovable(char newValue);
 
 	unordered_map<ComponentTag, Component*>* GetComponents() const;
 
-	bool* GetShouldDraw() const;
+	bool GetShouldDraw() const;
+	/// <summary>
+	/// Sets shouldDraw. Determines whether the object should be dawn or not.
+	/// Used for making the Player's healthbar only visible when taking damage.
+	/// </summary>
+	/// <param name="newValue">'T' for True. 'F' for False.</param>
+	void SetShouldDraw(char newValue);
 
 	/// <summary>
 	/// Method that notifies listeners of the GameEvent 'onCallSelfDestruct' (like GameWorld) that this GameObject is ready to be deleted.
