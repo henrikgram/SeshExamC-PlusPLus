@@ -71,7 +71,7 @@ public:
 	void OnNotify(std::string eventName, IListener* sender) override;
 	void AttachToColliderDestroyedEvent(IListener* listener);
 
-	//TODO: Shoueld this still be public? If yes then big W.
+	//TODO: Should this still be public? If yes then big W.
 	VertexArray* wall;
 
 private:

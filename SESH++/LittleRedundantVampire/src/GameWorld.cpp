@@ -308,7 +308,7 @@ void GameWorld::DeleteObjects()
 	for (int i = 0; i < stackSize; i++)
 	{
 		GameObject* gO = objectsToBeDeleted->top();
-
+		//TODO: Maybe use find or remove_if instead. 
 		for (auto i = gameObjects->begin(); i != gameObjects->end();)
 		{
 			if (*i == gO)

@@ -18,12 +18,12 @@ public:
 	/// <summary>
 	/// Attaches a listener to the event. 
 	/// </summary>
-	/// <param name="listener"> the listener we want to attach </param>
+	/// <param name="listener"> The listener we want to attach </param>
 	void Attach(ICollisionListener* listener);
 	/// <summary>
 	/// Detaches a listener from the event, if it is on the list of listeners. 
 	/// </summary>
-	/// <param name="listener"> the listener we want to detach </param>
+	/// <param name="listener"> The listener we want to detach </param>
 	void Detach(ICollisionListener* listener);
 	/// <summary>
 	/// Calls the OnNotify method in every listener on the list of listeners. 

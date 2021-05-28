@@ -82,7 +82,8 @@ void Movement::Normalize()
 		// We calculate the hypotenuse of the movement direction.
 		float movementVectorLength = sqrt(velocity->x * velocity->x + velocity->y * velocity->y);
 
-		// We normalize the direction in regards to the length of the hypotenuse.
+		// We normalize the direction in regards to the length of the hypotenuse, so that no matter which direction we walk in the velocity vector will
+		// always have the same length.
 		velocity->x /= movementVectorLength;
 		velocity->y /= movementVectorLength;
 
@@ -90,6 +91,8 @@ void Movement::Normalize()
 		velocity->y *= speed;
 
 		*gameObject->GetPosition() += *velocity;
+		//After updating the gameObjects position we set the velocity to 0 again so the gameObject doesn't keep travelling in the same direction indefinately,
+		//since this method is called in Update.
 		*velocity = Vector2f(0.0f, 0.0f);
 	}
 }
